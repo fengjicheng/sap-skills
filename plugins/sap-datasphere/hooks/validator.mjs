@@ -114,25 +114,36 @@ function isUi5DeployCommand(commandLower) {
 }
 
 function looksLikeHardcodedSecret(textLower) {
-  const keys = ["password", "passwd", "secret", "api_key", "apikey", "token", "client_secret", "access_token"];
-  for (const key of keys) {
-    let start = 0;
-    while (true) {
-      const idx = textLower.indexOf(key, start);
-      if (idx === -1) {
-        break;
-      }
-      const window = textLower.slice(idx, idx + 120);
-      const hasAssignment = window.includes("=") || window.includes(":");
-      const hasQuote = window.includes("\"") || window.includes("'") || window.includes("`");
-      const isPlaceholder = ["changeme", "placeholder", "example", "dummy", "your_", "your-", "xxxx", "test"].some((marker) => window.includes(marker));
-      if (hasAssignment && hasQuote && !isPlaceholder) {
-        return true;
-      }
-      start = idx + key.length;
+  const markers = ["changeme", "placeholder", "example", "dummy", "your_", "your-", "xxxx", "test"];
+  const pattern = /\b(password|passwd|secret|api[_-]?key|apikey|client[_-]?secret|clientsecret|access[_-]?token|accesstoken|token)\b\s*[:=]\s*["']([^"']{8,})["']/g;
+  for (const match of textLower.matchAll(pattern)) {
+    if (!markers.some((marker) => match[0].includes(marker))) {
+      return true;
     }
   }
   return false;
+}
+
+function stripSqlComments(textLower) {
+  return textLower.replace(/\/\*.*?\*\//gs, " ").replace(/--[^\n\r]*/g, " ");
+}
+
+function sqlStatements(textLower) {
+  return stripSqlComments(textLower).split(";").map((statement) => statement.trim()).filter(Boolean);
+}
+
+function hasDeleteWithoutWhere(textLower) {
+  return sqlStatements(textLower).some((statement) => {
+    const normalized = statement.replace(/\s+/g, " ");
+    return /\bdelete\s+from\b/.test(normalized) && !/\bwhere\b/.test(normalized);
+  });
+}
+
+function hasUpdateWithoutWhere(textLower) {
+  return sqlStatements(textLower).some((statement) => {
+    const normalized = statement.replace(/\s+/g, " ");
+    return /\bupdate\s+\S+.*\bset\b/.test(normalized) && !/\bwhere\b/.test(normalized);
+  });
 }
 
 const RISK_EXPLANATIONS = {
@@ -164,10 +175,10 @@ function detectHighRisk(pluginName, textLower, commandLower) {
   }
 
   if (["sap-sqlscript", "sap-datasphere"].includes(pluginName)) {
-    if (textLower.includes("delete from") && !/\bwhere\b/.test(textLower)) {
+    if (hasDeleteWithoutWhere(textLower)) {
       risks.push("DELETE statement appears without WHERE clause.");
     }
-    if (textLower.includes("update ") && textLower.includes(" set ") && !/\bwhere\b/.test(textLower)) {
+    if (hasUpdateWithoutWhere(textLower)) {
       risks.push("UPDATE statement appears without WHERE clause.");
     }
     if (textLower.includes("execute immediate") && (textLower.includes("||") || textLower.includes(" + "))) {

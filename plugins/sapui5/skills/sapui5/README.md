@@ -186,7 +186,8 @@ sap gateway, sap netweaver, sap s/4hana, sap btp, sap cloud platform, sap fiori 
 
 - **Skill Version**: 2.0.0
 - **Minimum UI5 Version**: 1.120.0
-- **Last Updated**: 2025-12-28
+- **Latest SAPUI5 Version Verified**: 1.148.1
+- **Last Updated**: 2026-05-31
 - **Status**: Production
 
 ### What's New in v2.0.0 (2025-12-28) - MCP Integration & Plugin-Dev Best Practices

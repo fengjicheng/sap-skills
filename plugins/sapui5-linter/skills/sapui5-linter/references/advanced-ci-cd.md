@@ -2,7 +2,7 @@
 
 **Source**: [https://github.com/UI5/linter/blob/main/.github/workflows/ci.yml](https://github.com/UI5/linter/blob/main/.github/workflows/ci.yml)
 **Last Updated**: 2025-11-21
-**UI5 Linter Version**: 1.20.5
+**UI5 Linter Version**: 1.21.1
 
 ---
 

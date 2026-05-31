@@ -107,14 +107,14 @@ All plugins include context-aware skills. Advanced features shown in table colum
 | **sap-btp-best-practices** | — | — | — | — | SAP BTP development best practices and patterns |
 | **sap-btp-build-work-zone-advanced** | — | — | — | — | SAP Build Work Zone (Advanced Edition) development |
 | **sap-btp-business-application-studio** | — | — | — | — | SAP Business Application Studio (BAS) development |
-| **sap-btp-cias** | — | — | — | — | Cloud Identity Access Service (CIAS) integration |
+| **sap-btp-cias** | — | — | — | — | Cloud Integration Automation Service (CIAS) integration |
 | **sap-btp-cloud-logging** | — | — | — | — | SAP BTP Cloud Logging service |
 | **sap-btp-cloud-platform** | — | — | — | — | SAP Business Technology Platform core services |
 | **sap-btp-cloud-transport-management** | — | — | — | — | Cloud Transport Management (CTM) service |
 | **sap-btp-connectivity** | — | — | — | — | SAP BTP Connectivity service |
 | **sap-btp-developer-guide** | — | — | — | — | Comprehensive SAP BTP developer guide |
 | **sap-btp-integration-suite** | — | — | — | — | SAP Integration Suite development |
-| **sap-btp-intelligent-situation-automation** | — | — | — | — | Intelligent Situation Automation development |
+| **sap-btp-intelligent-situation-automation** | — | — | — | — | Deprecated Intelligent Situation Automation data export, unsubscription, and legacy reference |
 | **sap-btp-job-scheduling** | — | — | — | — | SAP BTP Job Scheduling service |
 | **sap-btp-master-data-integration** | — | — | — | — | Master Data Integration service |
 | **sap-btp-service-manager** | — | — | — | — | SAP BTP Service Manager operations |
@@ -178,7 +178,7 @@ sap-skills/
 ```
 
 **Key Features**:
-- **Dual-level manifests**: Plugin-level and skill-level `plugin.json` files
+- **Single root manifests**: Each plugin has one `plugins/[name]/.claude-plugin/plugin.json`
 - **Modular organization**: Each plugin is self-contained with its own resources
 - **Advanced features**: 7 plugins include commands (29 total), 7 with agents (24 total), 6 with MCP integration, 2 with LSP support
 - **Cross-references**: 13 plugins have marketplace cross-references to related plugins

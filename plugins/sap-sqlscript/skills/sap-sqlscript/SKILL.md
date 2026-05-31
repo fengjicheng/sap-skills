@@ -7,10 +7,10 @@ description: |
 license: GPL-3.0
 metadata:
   version: "2.1.0"
-  last_verified: "2025-12-27"
+  last_verified: "2026-05-31"
   production_tested: "Yes, referenced in SAP Community projects"
-  sap_hana_version: "2.0 SPS07"
-  hana_cloud_version: "QRC 3/2025"
+  sap_hana_version: "2.0 SPS08"
+  hana_cloud_version: "QRC 1/2026"
   errors_prevented: 15
 ---
 

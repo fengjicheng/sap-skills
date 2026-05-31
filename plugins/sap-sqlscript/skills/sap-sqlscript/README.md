@@ -337,7 +337,7 @@ Templates are copied and customized:
 The skill content is derived from official SAP documentation and community resources:
 
 - **SAP HANA SQLScript Reference** (PDF)
-  - URL: `https://help.sap.com/doc/6254b3bb439c4f409a979dc407b49c9b/2.0.07/en-US/SAP_HANA_SQL_Script_Reference_en.pdf`
+  - URL: `https://help.sap.com/doc/6254b3bb439c4f409a979dc407b49c9b/2.0.08/en-US/SAP_HANA_SQL_Script_Reference_en.pdf`
 
 - **SAP HANA Cloud SQLScript Reference**
   - URL: `https://help.sap.com/docs/hana-cloud-database/sap-hana-cloud-sap-hana-sqlscript-reference/`
@@ -357,10 +357,10 @@ The skill content is derived from official SAP documentation and community resou
 ## Version Information
 
 - **Skill Version**: 2.1.0
-- **SAP HANA Platform**: 2.0 SPS07 (SPS08 available June 2025)
-- **SAP HANA Cloud**: QRC 3/2025 (latest)
+- **SAP HANA Platform**: 2.0 SPS08
+- **SAP HANA Cloud**: QRC 1/2026
 - **AMDP**: ABAP 7.40 SP05+
-- **Last Updated**: 2025-12-27
+- **Last Updated**: 2026-05-31
 
 ## License
 

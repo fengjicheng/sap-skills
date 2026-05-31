@@ -56,8 +56,11 @@ fi
 echo ""
 
 echo -e "${BLUE}Finding plugin.json files...${NC}"
-plugin_files=$(find "$REPO_ROOT/plugins" -name 'plugin.json' -path '*/.claude-plugin/plugin.json' | sort)
-plugin_count=$(echo "$plugin_files" | wc -l | tr -d ' ')
+plugin_files=()
+while IFS= read -r plugin_json; do
+    plugin_files+=("$plugin_json")
+done < <(find "$REPO_ROOT/plugins" -name 'plugin.json' -path '*/.claude-plugin/plugin.json' | sort)
+plugin_count="${#plugin_files[@]}"
 
 echo -e "Found ${BLUE}$plugin_count${NC} plugin.json files"
 echo ""
@@ -65,7 +68,7 @@ echo ""
 failed_count=0
 passed_count=0
 
-echo "$plugin_files" | while IFS= read -r plugin_json; do
+for plugin_json in "${plugin_files[@]}"; do
 
     plugin_name=$(basename "$(dirname "$(dirname "$plugin_json")")")
 

@@ -114,8 +114,8 @@ See `SKILL.md` for complete documentation and reference files for detailed topic
 ## Version
 
 - **Skill Version**: 1.0.0
-- **UI5 CLI Version**: 4.0.0+
-- **Last Updated**: 2025-11-21
+- **UI5 CLI Version**: 4.0.55+
+- **Last Updated**: 2026-05-31
 
 ## License
 

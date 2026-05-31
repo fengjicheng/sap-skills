@@ -3,8 +3,8 @@ name: sapui5-cli
 description: Manages SAPUI5/OpenUI5 projects using the UI5 Tooling CLI (@ui5/cli). Use when initializing UI5 projects, configuring ui5.yaml or ui5-workspace.yaml files, building UI5 applications or libraries, running development servers with HTTP/2 support, creating custom build tasks or server middleware, managing workspace/monorepo setups, troubleshooting UI5 CLI errors, migrating between UI5 CLI versions, or optimizing build performance. Supports both OpenUI5 and SAPUI5 frameworks with complete configuration and extensibility guidance.
 license: GPL-3.0
 metadata:
-  version: 4.0.0
-  lastUpdated: 2025-11-21
+  version: 4.0.55
+  lastUpdated: 2026-05-31
   officialDocs: "https://ui5.github.io/cli/stable/"
 ---
 
@@ -25,7 +25,7 @@ metadata:
 
 This skill provides comprehensive guidance for working with the UI5 CLI (UI5 Tooling), the official command-line interface for developing, building, and deploying SAPUI5 and OpenUI5 applications and libraries.
 
-**Current CLI Version**: 4.0.0+ (Released July 24, 2024)
+**Current CLI Version**: 4.0.55 (verified via npm on 2026-05-31)
 **Node.js Requirements**: v20.11.0+ or v22.0.0+ (v21 not supported)
 **npm Requirements**: v8.0.0+
 
@@ -112,7 +112,7 @@ Provides theming resources for libraries.
 Third-party resources with flexible path mapping.
 - Resources copied without modification
 - Custom virtual-to-physical path mappings
-- See `references/project-types.md` for module configuration
+- See `references/project-structures.md` for module configuration
 
 ## Core Commands Reference
 
@@ -375,7 +375,7 @@ This skill provides working templates for common configurations:
 ### Specification Versions
 
 UI5 CLI uses specification versions to manage features:
-- **4.0**: Current version (requires CLI v4.0.0+, Node.js v20.11.0+)
+- **4.0**: Current major version (verified CLI v4.0.55, requires Node.js v20.11.0+)
 - **3.0-3.2**: Compatible with CLI v3.0.0+
 - **2.0-2.6**: Compatible with CLI v2.0.0+
 - **0.1-1.1**: Legacy versions (automatic migration attempted)
@@ -528,13 +528,17 @@ UI5_DATA_DIR=/custom/.ui5 ui5 serve
 - `references/benchmarking.md` - Performance benchmarking
 
 ### Templates
-- `templates/package.json.template` - Package.json template
+- `templates/ui5.yaml.application` - Application configuration template
+- `templates/ui5.yaml.library` - Library configuration template
+- `templates/ui5-workspace.yaml` - Workspace configuration template
+- `templates/custom-task-template.js` - Custom task boilerplate
+- `templates/custom-middleware-template.js` - Custom middleware boilerplate
 
 ## Version Information
 
 - **Skill Version**: 1.0.0
-- **CLI Version Covered**: 4.0.0+
-- **Last Updated**: 2025-11-21
+- **CLI Version Covered**: 4.0.55+
+- **Last Updated**: 2026-05-31
 - **Next Review**: 2026-02-21 (Quarterly)
 
 ---

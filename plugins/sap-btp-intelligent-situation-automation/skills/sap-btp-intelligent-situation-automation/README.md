@@ -1,9 +1,9 @@
 # SAP BTP Intelligent Situation Automation Skill
 
-## ⚠️ SERVICE DEPRECATED
+## ⚠️ SERVICE ARCHIVED / DEPRECATED
 
-**Status**: DEPRECATED as of September 24, 2025
-**End of Service**: March 2026 (approximately)
+**Status**: Deprecated as of September 24, 2025
+**End-of-Service Window**: Reached March 24, 2026; active contract commitments may extend access
 
 This skill is now archived and maintained only for:
 - Data export guidance
@@ -157,10 +157,10 @@ sap-btp-intelligent-situation-automation/
 ## Version
 
 - **Skill Version**: 1.1.0
-- **Status**: DEPRECATED
-- **Last Updated**: 2025-11-27
+- **Status**: ARCHIVED / DEPRECATED
+- **Last Updated**: 2026-05-31
 - **Deprecation Date**: 2025-09-24
-- **End of Service**: March 2026 (estimated)
+- **End-of-Service Window**: 2026-03-24; active contract commitments may extend access
 
 ## License
 

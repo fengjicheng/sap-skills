@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Detect dependency context and enforce policy
         run: |
@@ -43,15 +45,15 @@ jobs:
           fi
 
           REQUIRED_TEMPLATES=(
-            ".agents/dependency-upgrade/templates/npmrc-security.tmpl"
-            ".agents/dependency-upgrade/templates/bunfig-security.tmpl"
-            ".agents/dependency-upgrade/templates/pnpm-workspace-security.tmpl"
-            ".agents/dependency-upgrade/templates/yarnrc-security.tmpl"
-            ".agents/dependency-upgrade/templates/dependabot-security.tmpl"
-            ".agents/dependency-upgrade/templates/renovate-security.tmpl"
-            ".agents/dependency-upgrade/templates/socket-fix-ci.tmpl"
-            ".agents/dependency-upgrade/templates/socket-scan-ci.tmpl"
-            ".agents/dependency-upgrade/templates/devcontainer-security.tmpl"
+            "plugins/dependency-upgrade/skills/dependency-upgrade/templates/npmrc-security.tmpl"
+            "plugins/dependency-upgrade/skills/dependency-upgrade/templates/bunfig-security.tmpl"
+            "plugins/dependency-upgrade/skills/dependency-upgrade/templates/pnpm-workspace-security.tmpl"
+            "plugins/dependency-upgrade/skills/dependency-upgrade/templates/yarnrc-security.tmpl"
+            "plugins/dependency-upgrade/skills/dependency-upgrade/templates/dependabot-security.tmpl"
+            "plugins/dependency-upgrade/skills/dependency-upgrade/templates/renovate-security.tmpl"
+            "plugins/dependency-upgrade/skills/dependency-upgrade/templates/socket-fix-ci.tmpl"
+            "plugins/dependency-upgrade/skills/dependency-upgrade/templates/socket-scan-ci.tmpl"
+            "plugins/dependency-upgrade/skills/dependency-upgrade/templates/devcontainer-security.tmpl"
           )
 
           DEPENDENCY_SKILL_PATHS=(
@@ -81,9 +83,11 @@ jobs:
           done
 
           if [ "$missing_templates" -ne 0 ]; then
-            echo "Dependency hardening templates are incomplete. Update .agents/dependency-upgrade/templates first."
+            echo "Dependency hardening templates are incomplete. Update plugins/dependency-upgrade/skills/dependency-upgrade/templates first."
             exit 1
           fi
+
+          ./scripts/sync-dependency-upgrade-mirror.sh --check
 
           while IFS= read -r file; do
             [ -z "$file" ] && continue

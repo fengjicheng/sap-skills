@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "validate": "./scripts/validate-json-schemas.sh",
+    "validate": "./scripts/validate-json-schemas.sh && ./scripts/validate-reserved-words.sh && ./scripts/validate-bundled-resources.mjs && ./scripts/validate-command-agent-frontmatter.mjs && ./scripts/validate-inventory.sh && ./scripts/sync-dependency-upgrade-mirror.sh --check && ./scripts/test-hooks.sh",
     "validate:marketplace": "ajv validate -s schemas/marketplace.schema.json -d .claude-plugin/marketplace.json --strict=false -c ajv-formats --all-errors",
-    "validate:plugins": "find plugins -name 'plugin.json' -path '*/.claude-plugin/plugin.json' -exec ajv validate -s schemas/plugin.schema.json -d {} --strict=false -c ajv-formats --all-errors \\;"
+    "validate:plugins": "./scripts/validate-json-schemas.sh",
+    "validate:resources": "./scripts/validate-bundled-resources.mjs",
+    "validate:frontmatter-extra": "./scripts/validate-command-agent-frontmatter.mjs",
+    "validate:inventory": "./scripts/validate-inventory.sh",
+    "test:hooks": "./scripts/test-hooks.sh"
   },
   "devDependencies": {
     "ajv-cli": "^5.0.0",

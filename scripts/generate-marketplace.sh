@@ -86,6 +86,7 @@ done
 collect_plugins() {
   local plugins="[]"
   local count=0
+  local failed=0
   local categories_str=""
 
   echo "Scanning for plugin.json files..." >&2
@@ -107,13 +108,15 @@ collect_plugins() {
     fi
 
     if [ ! -f "$plugin_json" ]; then
-      echo -e "${YELLOW}  Warning: No plugin.json found for $plugin_name, skipping${NC}" >&2
+      echo -e "${RED}  Error: No plugin.json found for $plugin_name${NC}" >&2
+      failed=$((failed + 1))
       continue
     fi
 
     # Validate JSON
     if ! jq empty "$plugin_json" 2>/dev/null; then
-      echo -e "${RED}  Error: Invalid JSON in $plugin_json, skipping${NC}" >&2
+      echo -e "${RED}  Error: Invalid JSON in $plugin_json${NC}" >&2
+      failed=$((failed + 1))
       continue
     fi
 
@@ -137,7 +140,8 @@ collect_plugins() {
 
     # Validate required fields
     if [ "$name" = "null" ] || [ "$description" = "null" ]; then
-      echo -e "${RED}  Error: Missing required fields in $plugin_json, skipping${NC}" >&2
+      echo -e "${RED}  Error: Missing required fields in $plugin_json${NC}" >&2
+      failed=$((failed + 1))
       continue
     fi
 
@@ -184,6 +188,11 @@ $category"
 
     echo -e "${GREEN}  ✓ Added: $name${NC}" >&2
   done
+
+  if [ "$failed" -gt 0 ]; then
+    echo -e "${RED}Marketplace generation failed: $failed plugin manifest issue(s) found${NC}" >&2
+    return 1
+  fi
 
   if [ "$VERBOSE" = "true" ]; then
     echo "Total collected: $count plugins" >&2

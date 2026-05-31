@@ -3,12 +3,11 @@ name: ui5-mcp-tools
 description: List all available UI5 MCP server tools and their usage
 ---
 
-## Compatibility and execution mode
+## Shell Snippet Notes
 
-- **Default execution path**: Bash (Linux/macOS), with Windows support via WSL or Git Bash.
-- **Required tooling**: Bash and the command-specific tooling shown in each section (for example `node`, `npm`, `cf`, and `curl`).
-- **Windows native shells**: Native CMD/PowerShell support is not guaranteed; use WSL2 or Git Bash for these commands.
-- If `sudo chown` is required for your environment, run these steps in a Unix shell with admin rights; skip/adjust for locked-down environments or non-privileged setups.
+- Shell snippets assume Bash on Linux/macOS, WSL2, or Git Bash.
+- Install the command-specific tooling shown near each snippet before running it.
+- Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
 
 
 # UI5 MCP Server Tools
@@ -377,10 +376,12 @@ npx -y @ui5/mcp-server --version
 
 ### Permission Errors
 ```bash
-# Fix npm permissions
-sudo chown -R $USER ~/.npm
-sudo chown -R $USER /usr/local/lib/node_modules
+# Prefer a user-local npm global directory instead of changing ownership
+mkdir -p ~/.npm-global
+npm config set prefix ~/.npm-global
 ```
+
+Avoid recursive ownership changes unless an administrator has confirmed the affected directory and impact.
 
 ### Network Issues
 ```bash

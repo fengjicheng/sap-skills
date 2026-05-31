@@ -3,8 +3,8 @@
 > **SAP-specific patterns for Claude Code skills.** For general plugin development,
 > use the official **plugin-dev skills** FIRST.
 
-**Last Updated**: 2026-02-06
-**Version**: 2.1.1
+**Last Updated**: 2026-05-31
+**Version**: 2.2.2
 **Repository**: [github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills)
 
 ---
@@ -53,7 +53,7 @@
 - Production testing requirements
 
 🔧 **SAP-specific quality assurance**
-- 14-phase review process (skill-review plugin)
+- manual quality review process
 - Version/date accuracy validation
 - Known-issues documentation patterns
 
@@ -85,7 +85,7 @@
 ./scripts/sync-plugins.sh
 
 # Step 4: Quality review
-/review-skill <skill-name>
+# Follow docs/contributor-guide/quality-assurance.md
 ```
 
 #### Workflow 2: Quarterly Maintenance
@@ -106,8 +106,8 @@ npm outdated  # Check for SAP package updates
 # Step 5: Update metadata
 # Update cap_version, last_verified date
 
-# Step 6: Re-run skill-review
-/review-skill <skill-name>
+# Step 6: Re-run manual quality review
+# Follow docs/contributor-guide/quality-assurance.md
 ```
 
 ---
@@ -116,20 +116,20 @@ npm outdated  # Check for SAP package updates
 
 ### Overview
 
-The SAP skills repository uses a **marketplace system** to manage 33+ production skills with:
-- Coordinated versioning (all at v2.1.1)
+The SAP skills repository uses a **marketplace system** to manage 33 production plugins with:
+- Coordinated versioning (all at v2.2.2)
 - Cross-references between related skills
 - Central registry (.claude-plugin/marketplace.json)
-- Dual-level manifest architecture
+- Single root manifest architecture
 
-**Scale**: 33 plugins across 5 categories (Tooling, BTP, UI, Data & Analytics, Core Technologies)
+**Scale**: 33 plugins across 8 manifest categories and 5 user-facing groups.
 
 ### Multi-Skill Portfolio Management
 
 #### Skill Families
 
-**Tooling & Development** (4 skills):
-- skill-review, sap-api-style, sap-hana-cli, sapui5-linter
+**Tooling & Development** (2 plugins):
+- sap-api-style, dependency-upgrade
 
 **SAP BTP Platform** (14 skills):
 - sap-btp-best-practices, sap-btp-build-work-zone-advanced, sap-btp-business-application-studio,
@@ -145,7 +145,7 @@ The SAP skills repository uses a **marketplace system** to manage 33+ production
 - sap-datasphere, sap-sac-custom-widget, sap-sac-planning, sap-sac-scripting,
   sap-hana-cloud-data-intelligence
 
-**Core Technologies** (6 skills):
+**Core Technologies** (7 plugins):
 - sap-abap, sap-abap-cds, sap-cap-capire, sap-sqlscript, sap-ai-core, sap-cloud-sdk-ai, sap-hana-ml
 
 #### Cross-Reference Pattern
@@ -175,12 +175,12 @@ This enables Claude to:
 3. Script propagates version to all plugin.json files
 4. Commit all changes together
 
-**Current Version**: 2.1.1
-**Last Updated**: 2026-02-06
+**Current Version**: 2.2.2
+**Last Updated**: 2026-05-31
 
-### Dual-Level Manifest Architecture
+### Single Root Manifest Architecture
 
-SAP skills use a **nested structure** with manifests at two levels:
+SAP plugins keep skill content under `skills/<name>/`, but each plugin has exactly one manifest at the plugin root:
 
 ```
 plugins/sap-cap-capire/
@@ -190,7 +190,6 @@ plugins/sap-cap-capire/
 ├── commands/                           # Optional slash commands
 ├── hooks/hooks.json                    # Optional hooks
 └── skills/sap-cap-capire/              # Skill directory
-    ├── .claude-plugin/plugin.json      # Skill-level
     ├── SKILL.md                        # Main skill content
     ├── README.md                       # Keywords for discovery
     ├── references/                     # Documentation
@@ -198,16 +197,13 @@ plugins/sap-cap-capire/
     └── scripts/                        # Executable scripts
 ```
 
-**Why Two Levels?**
+**Why One Root Manifest?**
 
-- **Plugin-level** (`plugins/sap-cap-capire/.claude-plugin/plugin.json`):
-  - References the entire plugin (skills + agents + commands + hooks)
+- The installable unit is the plugin directory, including skills, agents, commands, hooks, MCP configs, templates, and references.
+- The marketplace points to `plugins/[name]`, so nested skill-level manifests are redundant and must not be restored.
+- `scripts/validate-inventory.sh` enforces root manifest count and rejects nested skill-level manifests.
 
-- **Skill-level** (`plugins/sap-cap-capire/skills/sap-cap-capire/.claude-plugin/plugin.json`):
-  - References just the skill content
-  - Used by marketplace.json for skill discovery
-
-**Auto-Generation**: Both are generated from SKILL.md YAML frontmatter by `generate-plugin-manifests.sh`
+**Auto-Generation**: Root manifests are generated from SKILL.md YAML frontmatter by `generate-plugin-manifests.sh`.
 
 ### Central Registry System
 
@@ -221,10 +217,10 @@ plugins/sap-cap-capire/
 ```json
 {
   "name": "sap-skills",
-  "version": "2.1.1",
+  "version": "2.2.2",
   "metadata": {
-    "version": "2.1.1",
-    "last_updated": "2026-02-06",
+    "version": "2.2.2",
+    "last_updated": "2026-05-31",
     "total_skills": 33,
     "categories": [
       "abap", "ai", "btp", "cap",
@@ -236,7 +232,7 @@ plugins/sap-cap-capire/
     {
       "name": "sap-cap-capire",
       "description": "...",
-      "version": "2.1.1",
+      "version": "2.2.2",
       "source": "plugins/sap-cap-capire",
       "license": "GPL-3.0",
       "keywords": [...],
@@ -282,13 +278,13 @@ This enables portfolio-wide skill discovery.
 
 ## Quality Assurance for Technical Skills
 
-### The 14-Phase Review Process
+### Manual Quality Review Process
 
-**Tool**: skill-review plugin
-**Location**: `plugins/skill-review/`
-**Usage**: `/review-skill <skill-name>`
+**Tool**: manual quality review process
+**Location**: `docs/contributor-guide/quality-assurance.md`
+**Usage**: Follow the checklist in `quality-assurance.md`
 
-#### Overview of 14 Phases
+#### Overview of Review Areas
 
 1. **Pre-review setup** (5-10 min)
    - Installation verification
@@ -322,7 +318,7 @@ This enables portfolio-wide skill discovery.
    - Breaking changes documented
    - No conflicting dependencies
 
-7-14. **Additional phases** (see skill-review SKILL.md for complete list)
+7. **Additional review areas** (see quality-assurance.md for complete list)
 
 #### Severity Classifications
 
@@ -331,7 +327,7 @@ This enables portfolio-wide skill discovery.
 - 🟠 **Medium**: Nice to have (documentation improvements, style issues)
 - 🟢 **Low**: Optional (minor optimizations, suggestions)
 
-#### When to Use skill-review
+#### When to Use Manual Quality Review
 
 **Required**:
 - Before committing new skills
@@ -345,7 +341,7 @@ This enables portfolio-wide skill discovery.
 vim plugins/sap-cap-capire/skills/sap-cap-capire/SKILL.md
 
 # Run review
-/review-skill sap-cap-capire
+# Follow docs/contributor-guide/quality-assurance.md
 
 # Fix all 🔴 Critical and 🟡 High issues
 # Optional: Fix 🟠 Medium issues
@@ -367,7 +363,7 @@ description: |
   Use when building CAP services, defining CDS models, or implementing
   CAP best practices.
 metadata:
-  version: "2.1.1"
+  version: "2.2.2"
   cap_version: "@sap/cds 9.4.x"
   last_verified: "2025-12-28"
   sap_btp_compatible: true
@@ -410,10 +406,7 @@ metadata:
    - Test all templates
    - Verify error messages still accurate
 
-5. **Run skill-review**:
-   ```bash
-   /review-skill sap-cap-capire
-   ```
+5. **Run manual quality review** using `docs/contributor-guide/quality-assurance.md`.
 
 6. **Commit changes**:
    ```bash
@@ -726,7 +719,7 @@ hana-cli deploy             # Deploy database artifacts
 
 **Output**:
 ```
-✓ Reading version from marketplace.json: 2.1.1
+✓ Reading version from marketplace.json: 2.2.2
 ✓ Generating plugin manifests...
   - sap-cap-capire: Updated
   - sap-btp-cloud-platform: Updated
@@ -785,9 +778,9 @@ sap-ai-*          → "ai"
 **Purpose**: Aggregates all plugin.json files → central marketplace.json
 
 **Process**:
-1. Scan `plugins/*/skills/*/.claude-plugin/plugin.json`
+1. Scan `plugins/*/.claude-plugin/plugin.json`
 2. Collect metadata: name, description, version, keywords, category
-3. Build plugins array (66 total: 33 plugin-level + 33 skill-level)
+3. Build plugins array (33 total: root plugin manifests)
 4. Collect unique categories
 5. Write marketplace.json with metadata
 
@@ -811,14 +804,14 @@ NOT:
 ```json
 {
   "name": "sap-skills",
-  "version": "2.1.1",
+  "version": "2.2.2",
   "metadata": {
-    "version": "2.1.1",
+    "version": "2.2.2",
     "last_updated": "2025-12-28T12:00:00Z",
     "total_skills": 33,
     "categories": ["abap", "ai", "btp", "cap", "data-analytics", "hana", "tooling", "ui-development"]
   },
-  "plugins": [ ... 66 entries ... ]
+  "plugins": [ ... 33 entries ... ]
 }
 ```
 
@@ -831,7 +824,7 @@ NOT:
 ./scripts/generate-marketplace.sh --dry-run
 
 # Validate output
-jq '.plugins | length' .claude-plugin/marketplace.json  # Should be 66
+jq '.plugins | length' .claude-plugin/marketplace.json  # Should be 33
 jq '.metadata.total_skills' .claude-plugin/marketplace.json  # Should be 33
 ```
 
@@ -862,7 +855,7 @@ jq '.metadata.total_skills' .claude-plugin/marketplace.json  # Should be 33
 3. **Update skill metadata**:
    ```yaml
    metadata:
-     version: "2.1.1"
+     version: "2.2.2"
      cap_version: "@sap/cds 9.5.x"  # Updated
      last_verified: "2026-03-28"     # Updated
    ```
@@ -873,10 +866,7 @@ jq '.metadata.total_skills' .claude-plugin/marketplace.json  # Should be 33
    - Verify error messages still accurate
    - Update error catalog if needed
 
-5. **Run skill-review**:
-   ```bash
-   /review-skill sap-cap-capire
-   ```
+5. **Run manual quality review** using `docs/contributor-guide/quality-assurance.md`.
 
 6. **Commit updates**:
    ```bash
@@ -962,7 +952,7 @@ jq '.metadata.total_skills' .claude-plugin/marketplace.json  # Should be 33
 - 🔧 How to document SAP errors and known issues
 - 🔧 How to use marketplace infrastructure (central registry, cross-references)
 - 🔧 How to maintain technical domain skills (production testing, error catalogs)
-- 🔧 14-phase review process for SAP skills (skill-review plugin)
+- 🔧 manual quality review process for SAP skills (manual quality review process)
 - 🔧 SAP-specific patterns (BTP, CAP, HANA, ABAP, Fiori)
 
 ---
@@ -983,10 +973,7 @@ jq '.metadata.total_skills' .claude-plugin/marketplace.json  # Should be 33
 - Automation scripts
 
 ### For Quality Verification
-→ Use **skill-review plugin**:
-```bash
-/review-skill <skill-name>
-```
+→ Use **manual quality review process** in `docs/contributor-guide/quality-assurance.md`.
 
 ### For Issues
 → GitHub Issues:
@@ -994,6 +981,6 @@ https://github.com/secondsky/sap-skills/issues
 
 ---
 
-**Last Updated**: 2026-02-06
-**Next Review**: 2026-03-28 (Quarterly)
+**Last Updated**: 2026-05-31
+**Next Review**: 2026-08-31 (Quarterly)
 **Maintainer**: SAP Skills Maintainers | [github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills)

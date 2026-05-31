@@ -191,7 +191,7 @@ This skill automatically triggers when working with:
 ## Source Information
 
 **Official Repository**: [https://github.com/UI5/linter](https://github.com/UI5/linter)
-**Current Version**: 1.20.5 (November 2025)
+**Current Version**: 1.21.1 (verified via npm on 2026-05-31)
 **Node.js**: v20.11+ or v22+
 **License**: Apache-2.0
 
@@ -206,8 +206,8 @@ This skill automatically triggers when working with:
 ## Skill Metadata
 
 **Version**: 1.0.0
-**Last Updated**: 2025-11-21
-**UI5 Linter Version**: 1.20.5
+**Last Updated**: 2026-05-31
+**UI5 Linter Version**: 1.21.1
 **Maintained By**: SAP Skills Repository
 **License**: GPL-3.0
 

@@ -107,7 +107,7 @@ Key scripting enhancements in the latest SAC release:
 - **Time Series Forecast API** - Programmatic forecasting control
 - **Comments APIs** - Widget and cell comment management
 
-See `references/whats-new-q1-2026.md` for complete details.
+See `references/whats-new-2025.23.md` for complete details.
 
 ## Environment Detection
 
@@ -218,7 +218,7 @@ console.log("Selections:", JSON.stringify(Chart_1.getSelections()));
 - Advanced: `references/api-calendar-bookmarks.md`, `references/api-advanced-widgets.md`
 - Best Practices: `references/best-practices-developer.md`, `references/best-practices-planning-stories.md`
 - Language: `references/scripting-language-fundamentals.md`
-- Q1 2026: `references/whats-new-q1-2026.md`, `references/chart-variance-apis.md`
+- Q1 2026-relevant API updates: `references/whats-new-2025.23.md`, `references/chart-variance-apis.md`
 - **OSE API (Q1 2026, v2025.14)** — complete method/parameter/return documentation:
   - `references/ose-api-application-core.md` — Application, PageBook, Panel, Popup, Widget (15 classes)
   - `references/ose-api-widgets.md` — Button, Dropdown, InputField, Slider, Switch, Text, TextArea (15 classes)

@@ -3,13 +3,13 @@
 
 **Repository**: https://github.com/secondsky/sap-skills
 **Purpose**: Production-ready skills for SAP development and AI coding assistants
-**Version**: 2.1.8 | **Plugins**: 32 | **Last Updated**: 2026-04-02
+**Version**: 2.2.2 | **Plugins**: 33 | **Last Updated**: 2026-05-31
 
 ---
 
 ## What This Repository Is
 
-32 production-tested Claude Code skills for SAP technologies: BTP, CAP, Fiori,
+33 production-tested Claude Code skills for SAP technologies: BTP, CAP, Fiori,
 ABAP, Analytics, and more. Enables context-aware AI assistance for SAP development.
 
 ---
@@ -89,8 +89,8 @@ errors that break functionality.
 
 ### Marketplace System
 
-**Scale**: 32 plugins with coordinated versioning
-**Structure**: Dual-level manifests (plugin + skill plugin.json)
+**Scale**: 33 plugins with coordinated versioning
+**Structure**: Single root manifest per plugin (`plugins/*/.claude-plugin/plugin.json`)
 **Registry**: Central marketplace.json (48KB, auto-generated)
 **Cross-References**: 13 plugins reference related skills
 
@@ -99,7 +99,7 @@ errors that break functionality.
 - SAP BTP Platform (14 skills)
 - UI Development (4 skills)
 - Data & Analytics (5 skills)
-- Core Technologies (6 skills)
+- Core Technologies (7 skills)
 
 ### Automation Scripts
 
@@ -110,7 +110,7 @@ errors that break functionality.
 
 **generate-plugin-manifests.sh**: SKILL.md YAML → plugin.json conversion
 
-**generate-marketplace.sh**: Aggregates 66 plugin.json into central registry
+**generate-marketplace.sh**: Aggregates 33 root plugin manifests into central registry
 
 **Usage**:
 ```bash
@@ -125,7 +125,7 @@ errors that break functionality.
 **Version Tracking**: SAP SDK versions documented in metadata
 ```yaml
 metadata:
-  version: "2.1.1"
+  version: "2.2.2"
   cap_version: "@sap/cds 9.4.x"
   last_verified: "2025-12-28"
 ```
@@ -181,7 +181,7 @@ or "the Code CLI" instead.
 
 ---
 
-**Last Updated**: 2026-04-02
-**Next Review**: 2026-07-02 (Quarterly)
+**Last Updated**: 2026-05-31
+**Next Review**: 2026-08-31 (Quarterly)
 **Maintainer**: E.J.
 </coding_guidelines>

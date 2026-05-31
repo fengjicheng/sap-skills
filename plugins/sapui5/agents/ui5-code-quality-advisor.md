@@ -896,9 +896,9 @@ Would that be helpful?
 ### Reference Integration
 
 Always link to reference files:
-- `references/security-compliance.md` for security
+- `references/security.md` for security
 - `references/performance-optimization.md` for performance
-- `references/accessibility-standards.md` for a11y
+- `references/accessibility.md` for a11y
 - `references/core-architecture.md` for MVC
 - `references/code-quality-checklist.md` for comprehensive checklist
 

@@ -2,7 +2,7 @@
 
 **Source**: [https://github.com/UI5/linter/blob/main/SUPPORT.md](https://github.com/UI5/linter/blob/main/SUPPORT.md)
 **Last Updated**: 2025-11-21
-**UI5 Linter Version**: 1.20.5
+**UI5 Linter Version**: 1.21.1
 
 ---
 
@@ -79,7 +79,7 @@ export default {
 ```
 
 ## Environment
-- UI5 Linter: 1.20.5
+- UI5 Linter: 1.21.1
 - Node.js: 20.11.0
 - OS: Windows 11
 
@@ -137,7 +137,7 @@ export default {
 };
 ```
 
-UI5 Linter: 1.20.5
+UI5 Linter: 1.21.1
 Node: 20.11.0
 
 Any ideas? 🤔

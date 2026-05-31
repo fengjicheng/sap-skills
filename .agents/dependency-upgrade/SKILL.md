@@ -1,17 +1,18 @@
 ---
 name: dependency-upgrade
 description: "Secure dependency upgrades with supply chain protection, cooldowns, and staged rollout. Use when upgrading deps, configuring security policies, or preventing supply chain attacks."
-license: MIT
+license: GPL-3.0
 ---
 
 # Dependency Upgrade
 
-Manage dependency upgrades with supply chain security, compatibility analysis, staged rollout, and comprehensive testing across all major package managers.
-
 ## Related Skills
 
-- **claude-automation-recommender**: Use to surface where dependency hardening should be applied across a repository before running upgrades
-- **dependency-upgrade (pluginized)**: Reusable pluginized version at `plugins/dependency-upgrade/skills/dependency-upgrade/SKILL.md` for installable hardening workflows
+- **sap-hana-cli**: For dependency-aware database tooling workflows and upgrade guidance
+- **sap-cap-capire**: For CAP dependency-safe runtime and service configuration guidance
+- **sap-fiori-tools**: For secure UI5/Fiori dependency strategy when tooling touches frontend packages
+
+Manage dependency upgrades with supply chain security, compatibility analysis, staged rollout, and comprehensive testing across all major package managers.
 
 ## When to Use This Skill
 

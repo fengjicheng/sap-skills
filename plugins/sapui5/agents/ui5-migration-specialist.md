@@ -990,7 +990,7 @@ npm install failed due to dependency conflicts:
 ```
 
 **Common Solutions**:
-1. **Clear cache**: `rm -rf node_modules package-lock.json && npm install`
+1. **Refresh install state**: move `node_modules` and the lockfile to a temporary backup, then run `npm install`
 2. **Force resolution**: `npm install --legacy-peer-deps`
 3. **Update related packages**: I can update compatible versions
 

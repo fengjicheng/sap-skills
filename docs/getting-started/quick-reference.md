@@ -27,7 +27,7 @@ See [Contributor Guide](../contributor-guide/README.md) for detailed patterns.
 ### SDK Version Tracking
 ```yaml
 metadata:
-  version: "2.1.1"
+  version: "2.2.2"
   cap_version: "@sap/cds 9.4.x"
   last_verified: "2025-12-28"
 ```
@@ -60,21 +60,19 @@ metadata:
 ```
 
 This auto-generates:
-- plugin.json files (plugin-level + skill-level)
+- root plugin.json files
 - Updates marketplace.json
-- Validates all 33 skills
+- Validates all 33 plugins
 
 ---
 
 ## Step 4: Quality Review
 
-```bash
-/review-skill <skill-name>
-```
+Perform manual quality review using the guidelines in `quality-assurance.md`.
 
-14-phase comprehensive audit covering:
+Review coverage:
 - YAML validation
-- Official docs verification
+- Source documentation verification
 - Version accuracy
 - Template testing
 - Error catalog validation
@@ -92,7 +90,7 @@ Use the [Workflow Checklist](../contributor-guide/workflow-checklist.md) for SAP
 - [ ] Production testing complete
 - [ ] Cross-references added
 - [ ] Error catalog validated
-- [ ] skill-review passed (all critical issues resolved)
+- [ ] Manual quality review passed (all critical issues resolved)
 
 ---
 
@@ -120,4 +118,4 @@ git commit -m "Add <skill-name> for [SAP technology]
 
 ---
 
-**Last Updated**: 2026-02-06
+**Last Updated**: 2026-05-31

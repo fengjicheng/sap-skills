@@ -5,7 +5,7 @@ description: |
 license: GPL-3.0
 metadata:
   version: 2.0.1
-  last_verified: 2026-02-25
+  last_verified: 2026-05-31
 ---
 
 # SAP Cloud SDK for AI
@@ -38,7 +38,7 @@ Use this skill when:
 
 ## Quick Start
 
-> **Note**: This skill uses SAP Cloud SDK for AI v2.2.0+. If you're migrating from v1.x, see [V1 to V2 Migration Guide](references/v1-to-v2-migration.md) for breaking changes.
+> **Note**: This skill uses SAP Cloud SDK for AI JavaScript v2.11.0+ and Java v1.19.0+. If you're migrating from v1.x, see [V1 to V2 Migration Guide](references/v1-to-v2-migration.md) for breaking changes.
 
 ### JavaScript/TypeScript
 
@@ -291,8 +291,8 @@ For detailed guidance:
 
 | SDK | Current Version | Node/Java Requirement |
 |-----|-----------------|----------------------|
-| JavaScript | 2.2.0+ | Node.js 20+ |
-| Java | 1.13.0 (Core) / 1.12.0 (Latest orchestration) | Java 17+ (21 LTS recommended) |
+| JavaScript | 2.11.0+ | Node.js 20+ |
+| Java | 1.19.0+ | Java 17+ (21 LTS recommended) |
 
 **Note**: Generated model classes (in `...model` packages) may change in minor releases but are safe to use.
 

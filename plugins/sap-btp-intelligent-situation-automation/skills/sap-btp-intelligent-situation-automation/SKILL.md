@@ -1,11 +1,11 @@
 ---
 name: sap-btp-intelligent-situation-automation
 description: |
-  This skill provides comprehensive guidance for SAP BTP Intelligent Situation Automation setup, configuration, and operations.
-  It should be used when implementing situation-based automation between SAP S/4HANA systems and SAP Business Technology Platform.
+  This archived skill provides legacy guidance for SAP BTP Intelligent Situation Automation data export, unsubscription, and configuration review.
+  It should be used only when maintaining existing ISA tenants, exporting data before access is removed, or understanding historical situation automation setups.
 
-  The skill covers subscription setup, Event Mesh integration, destination configuration, system onboarding,
-  user management with role collections, automatic situation resolution, and troubleshooting.
+  The skill covers Event Mesh integration, destination configuration, system onboarding,
+  user management with role collections, automatic situation resolution, unsubscription, and troubleshooting for existing deployments.
 
   Keywords: SAP BTP, Intelligent Situation Automation, ISA, situation handling, SAP S/4HANA, SAP S/4HANA Cloud,
   Event Mesh, Business Event Handling, situation automation, situation dashboard, analyze situations,
@@ -15,22 +15,22 @@ license: GPL-3.0
 metadata:
   version: "1.1.0"
   last_verified: "2025-11-27"
-  status: "DEPRECATED"
+  status: "ARCHIVED"
   deprecation_date: "2025-09-24"
-  end_of_service: "2026-03-24 (estimated)"
+  end_of_service: "2026-03-24 window reached; active contract commitments may extend access"
 ---
 
 # SAP BTP Intelligent Situation Automation
 
 ## ⚠️ DEPRECATION NOTICE
 
-**Service Status**: DEPRECATED as of September 24, 2025
+**Service Status**: ARCHIVED / DEPRECATED as of September 24, 2025
 
-SAP BTP Intelligent Situation Automation service has been deprecated and will reach end-of-service 6 months from the deprecation announcement (approximately March 2026) or when the last contract commitment is fulfilled.
+SAP BTP Intelligent Situation Automation service was deprecated on September 24, 2025. Its 6-month end-of-service window reached March 24, 2026; remaining access may exist only where contract commitments still apply.
 
 **Immediate Action Required**: 
 - Unsubscribe from the Intelligent Situation Automation service
-- Export any required data before end-of-service date
+- Export any required data before access is removed
 - Contact component CA-SIT-ATM for questions or concerns
 
 ## Overview (For Reference)
@@ -39,7 +39,7 @@ SAP Intelligent Situation Automation was a BTP service that enabled automatic ha
 
 **Documentation Source**: [https://github.com/SAP-docs/btp-intelligent-situation-automation](https://github.com/SAP-docs/btp-intelligent-situation-automation)
 
-**Last Verified**: 2025-11-27
+**Last Verified**: 2026-05-31
 
 ## Table of Contents
 - [Overview (For Reference)](#overview-for-reference)
@@ -59,7 +59,7 @@ SAP Intelligent Situation Automation was a BTP service that enabled automatic ha
 **⚠️ SERVICE DEPRECATED - Use only for:**
 
 - **Unsubscribing from Intelligent Situation Automation** service
-- **Exporting data** before end-of-service deadline
+- **Exporting data** before access is removed
 - **Understanding legacy configurations** for documentation purposes
 - **Migration planning** to alternative solutions
 
@@ -351,8 +351,8 @@ For any questions or concerns about the deprecation:
 ---
 
 **Skill Version**: 1.1.0
-**Status**: DEPRECATED
-**Last Updated**: 2025-11-27
+**Status**: ARCHIVED / DEPRECATED
+**Last Updated**: 2026-05-31
 **License**: GPL-3.0
 **Maintainer**: SAP Skills Team | [https://github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills)
 

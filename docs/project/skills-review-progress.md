@@ -1,17 +1,17 @@
 # Skills Review Progress Tracker
 
-> **⚠️ DEPRECATED**: This document tracked progress for the automated `skill-review` plugin, which has been removed as of v2.1.1 (2026-02-06). This file is retained for historical reference only. Quality assurance is now performed through manual review processes.
+> **⚠️ DEPRECATED**: This document is an archived progress log for a retired automated review workflow. It is retained for historical context only. Current quality assurance is performed through repository validators and manual review.
 
 **Start Date:** 2025-11-20
 **Total Skills:** 114
-**Review Method:** skill-review skill (14-phase comprehensive audit) - NO LONGER AVAILABLE
+**Review Method:** Retired 14-phase automated audit workflow
 **Baseline Audit:** ✅ Complete (2025-11-21) - All 114 skills CLEAN
 
 ---
 
 ## IMPORTANT: Review Process Requirements
 
-**EVERY skill review MUST follow the 14-phase audit process from the skill-review skill.**
+This section describes the historical audit process only. New reviews should follow the current contributor guide and repository validation scripts.
 
 ### Phases Overview
 
@@ -32,7 +32,7 @@
 | 13 | Fix Implementation | Manual | 30m-4h | Apply fixes, update files |
 | 14 | Post-Fix Verification | Manual | 10-15m | Test discovery, verify templates |
 
-**Automated Phases (1-2):** Run via `./scripts/review-skill.sh <skill-name> --quick`
+**Automated Phases (1-2):** Superseded by the current validation scripts in `package.json`.
 **Manual Phases (3-14):** Require human/AI judgment and verification
 
 ---
@@ -220,7 +220,7 @@
 | 77 | project-session-management | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 0 | 2025-11-21 |
 | 78 | project-workflow | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | 🟠 | ✅ | ✅ | ✅ | ✅ | ⏳ | ⏳ | 1H | 2025-11-21 |
 | 79 | mcp-dynamic-orchestrator | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 0 | 2025-11-21 |
-| 80 | skill-review | ✅ | ✅ | ✅ | ✅ | ✅ | 🟠 | 🟠 | ✅ | ✅ | ✅ | ✅ | ⏳ | ⏳ | 1M | 2025-11-21 |
+| 80 | retired automated review plugin | ✅ | ✅ | ✅ | ✅ | ✅ | 🟠 | 🟠 | ✅ | ✅ | ✅ | ✅ | ⏳ | ⏳ | 1M | 2025-11-21 |
 | 81 | dependency-upgrade | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 0 | 2025-11-21 |
 | 82 | github-project-automation | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | 🟠 | ✅ | ✅ | ✅ | ✅ | ⏳ | ⏳ | 1H | 2025-11-21 |
 | 83 | open-source-contributions | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | 🟠 | ✅ | ✅ | ✅ | ✅ | ⏳ | ⏳ | 1H | 2025-11-21 |

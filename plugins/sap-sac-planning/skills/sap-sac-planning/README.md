@@ -332,7 +332,7 @@ GPL-3.0 License - See repository LICENSE file.
 
 ## Contributing
 
-Contributions welcome! Please follow the repository guidelines in CLAUDE.md and verify changes with the skill-review skill before submitting.
+Contributions welcome! Please follow the repository guidelines in CLAUDE.md and verify changes with the manual quality review process before submitting.
 
 ---
 

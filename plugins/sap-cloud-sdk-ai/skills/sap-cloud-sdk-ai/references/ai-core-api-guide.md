@@ -39,9 +39,9 @@ npm install @sap-ai-sdk/prompt-registry
 ```json
 {
   "dependencies": {
-    "@sap-ai-sdk/ai-api": "~2.2.0",
-    "@sap-ai-sdk/document-grounding": "~2.2.0",
-    "@sap-ai-sdk/prompt-registry": "~2.2.0"
+    "@sap-ai-sdk/ai-api": "~2.11.0",
+    "@sap-ai-sdk/document-grounding": "~2.11.0",
+    "@sap-ai-sdk/prompt-registry": "~2.11.0"
   }
 }
 ```

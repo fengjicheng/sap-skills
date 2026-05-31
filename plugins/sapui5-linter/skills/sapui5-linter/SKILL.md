@@ -4,8 +4,8 @@ description: "Use this skill when working with the UI5 Linter (@ui5/linter) for 
 license: GPL-3.0
 metadata:
   version: "1.0.0"
-  last_updated: "2025-11-26"
-  ui5_linter_version: "1.20.5"
+  last_updated: "2026-05-31"
+  ui5_linter_version: "1.21.1"
   source: "https://github.com/UI5/linter"
   documentation: "https://github.com/UI5/linter/blob/main/README.md"
   status: "CONTENT_RESTRUCTURED"
@@ -37,7 +37,7 @@ The **UI5 Linter** (@ui5/linter) is a static code analysis tool designed specifi
 - ✅ Multiple output formats: stylish, JSON, Markdown, HTML
 - ✅ Fast performance: 1-40s depending on project size
 
-**Current Version**: 1.20.5 (November 2025)
+**Current Version**: 1.21.1 (verified via npm on 2026-05-31)
 **Official Repository**: [https://github.com/UI5/linter](https://github.com/UI5/linter)
 
 ---
@@ -69,7 +69,7 @@ npm install --save-dev @ui5/linter
 
 Verify installation:
 ```bash
-ui5lint --version  # Should output: 1.20.5 or higher
+ui5lint --version  # Should output: 1.21.1 or higher
 ```
 
 ### Basic Usage
@@ -217,7 +217,7 @@ ui5lint --perf
     "lint:report": "ui5lint --format html --details > lint-report.html"
   },
   "devDependencies": {
-    "@ui5/linter": "^1.20.5"
+    "@ui5/linter": "^1.21.1"
   }
 }
 ```
@@ -313,7 +313,7 @@ ui5lint --perf
 - **Husky Pre-commit**: `templates/husky-pre-commit.template`
 
 ### Support and Updates
-- **Version**: 1.20.5 (Current)
+- **Version**: 1.21.1 (Current)
 - **Release Notes**: Available in GitHub releases
 - **Roadmap**: Documented in GitHub Issues and Discussions
 - **Email**: security@sap.com
@@ -335,6 +335,6 @@ ui5lint --perf
 
 ---
 
-**Last Updated**: 2025-11-26 | **Version**: 1.0.1 (Restructured)
+**Last Updated**: 2026-05-31 | **Version**: 1.0.1 (Restructured)
 **Previous Version**: 1.0.0 | **Lines Reduced**: 376 (from 827)
 **Next Review**: 2026-02-25

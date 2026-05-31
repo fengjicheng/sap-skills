@@ -122,7 +122,11 @@ This skill provides comprehensive guidance for implementing SAP Build Work Zone,
 - `references/chatbots.md` - Chatbot configuration
 - `references/api-reference.md` - SCIM and OData APIs
 - `references/security.md` - Security configuration
-- `references/integrations.md` - External integrations
+- `references/administration.md` - Administration and lifecycle operations
+- `references/auditing.md` - Audit logging and monitoring
+- `references/mobile-app.md` - Mobile app enablement
+- `references/notifications.md` - Notification configuration
+- `references/workspaces.md` - Workspace management
 - `references/troubleshooting.md` - Error resolution
 
 ### Templates

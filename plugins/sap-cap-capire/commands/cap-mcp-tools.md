@@ -3,12 +3,11 @@ name: cap-mcp-tools
 description: Complete reference for CAP MCP server tools (search_model, search_docs) with usage examples
 ---
 
-## Compatibility and execution mode
+## Shell Snippet Notes
 
-- **Default execution path**: Bash (Linux/macOS), with Windows support via WSL or Git Bash.
-- **Required tooling**: Bash and the command-specific tooling shown in each section (for example `node`, `npm`, `cf`, and `curl`).
-- **Windows native shells**: Native CMD/PowerShell support is not guaranteed; use WSL2 or Git Bash for these commands.
-- If `sudo chown` is required for your environment, run these steps in a Unix shell with admin rights; skip/adjust for locked-down environments or non-privileged setups.
+- Shell snippets assume Bash on Linux/macOS, WSL2, or Git Bash.
+- Install the command-specific tooling shown near each snippet before running it.
+- Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
 
 
 # CAP MCP Tools Reference

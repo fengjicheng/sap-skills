@@ -190,5 +190,5 @@ Production tested: [evidence]
 
 ---
 
-**Last Updated**: 2026-02-06
+**Last Updated**: 2026-05-31
 **Navigation**: [↑ Contributor Guide](README.md) | [Quality Assurance →](quality-assurance.md)

@@ -8,13 +8,13 @@ Technical documentation for the SAP Skills marketplace system.
 
 ## Overview
 
-The SAP skills repository uses a **marketplace system** to manage 33+ production skills with:
-- Coordinated versioning (all at v2.1.1)
+The SAP skills repository uses a **marketplace system** to manage 33 production plugins with:
+- Coordinated versioning (all at v2.2.2)
 - Cross-references between related skills
 - Central registry (.claude-plugin/marketplace.json)
-- Dual-level manifest architecture
+- Single root manifest architecture
 
-**Scale**: 33 plugins across 5 categories (Tooling, BTP, UI, Data & Analytics, Core Technologies)
+**Scale**: 33 plugins across 8 manifest categories (`abap`, `ai`, `btp`, `cap`, `data-analytics`, `hana`, `tooling`, `ui-development`)
 
 ---
 
@@ -22,8 +22,8 @@ The SAP skills repository uses a **marketplace system** to manage 33+ production
 
 ### Skill Families
 
-**Tooling & Development** (4 skills):
-- skill-review, sap-api-style, sap-hana-cli, sapui5-linter
+**Tooling & Development** (2 plugins):
+- sap-api-style, dependency-upgrade
 
 **SAP BTP Platform** (14 skills):
 - sap-btp-best-practices, sap-btp-build-work-zone-advanced, sap-btp-business-application-studio,
@@ -39,7 +39,7 @@ The SAP skills repository uses a **marketplace system** to manage 33+ production
 - sap-datasphere, sap-sac-custom-widget, sap-sac-planning, sap-sac-scripting,
   sap-hana-cloud-data-intelligence
 
-**Core Technologies** (6 skills):
+**Core Technologies** (7 plugins):
 - sap-abap, sap-abap-cds, sap-cap-capire, sap-sqlscript, sap-ai-core, sap-cloud-sdk-ai, sap-hana-ml
 
 ### Cross-Reference Pattern
@@ -69,14 +69,14 @@ This enables Claude to:
 3. Script propagates version to all plugin.json files
 4. Commit all changes together
 
-**Current Version**: 2.1.1
-**Last Updated**: 2026-02-06
+**Current Version**: 2.2.2
+**Last Updated**: 2026-05-31
 
 ---
 
-## Dual-Level Manifest Architecture
+## Single Root Manifest Architecture
 
-SAP skills use a **nested structure** with manifests at two levels:
+SAP plugins keep skill content under `skills/<name>/`, but each plugin has exactly one manifest at the plugin root:
 
 ```
 plugins/sap-cap-capire/
@@ -86,7 +86,6 @@ plugins/sap-cap-capire/
 ├── commands/                           # Optional slash commands
 ├── hooks/hooks.json                    # Optional hooks
 └── skills/sap-cap-capire/              # Skill directory
-    ├── .claude-plugin/plugin.json      # Skill-level
     ├── SKILL.md                        # Main skill content
     ├── README.md                       # Keywords for discovery
     ├── references/                     # Documentation
@@ -94,16 +93,13 @@ plugins/sap-cap-capire/
     └── scripts/                        # Executable scripts
 ```
 
-**Why Two Levels?**
+**Why One Root Manifest?**
 
-- **Plugin-level** (`plugins/sap-cap-capire/.claude-plugin/plugin.json`):
-  - References the entire plugin (skills + agents + commands + hooks)
+- The installable unit is the plugin directory, including skills, agents, commands, hooks, MCP configs, templates, and references.
+- The marketplace points to `plugins/[name]`, so nested skill-level manifests are redundant and must not be restored.
+- `scripts/validate-inventory.sh` enforces root manifest count and rejects nested skill-level manifests.
 
-- **Skill-level** (`plugins/sap-cap-capire/skills/sap-cap-capire/.claude-plugin/plugin.json`):
-  - References just the skill content
-  - Used by marketplace.json for skill discovery
-
-**Auto-Generation**: Both are generated from SKILL.md YAML frontmatter by `generate-plugin-manifests.sh`
+**Auto-Generation**: Root manifests are generated from SKILL.md YAML frontmatter by `generate-plugin-manifests.sh`.
 
 ---
 
@@ -119,10 +115,10 @@ plugins/sap-cap-capire/
 ```json
 {
   "name": "sap-skills",
-  "version": "2.1.1",
+  "version": "2.2.2",
   "metadata": {
-    "version": "2.1.1",
-    "last_updated": "2026-02-06",
+    "version": "2.2.2",
+    "last_updated": "2026-05-31",
     "total_skills": 33,
     "categories": [
       "abap", "ai", "btp", "cap",
@@ -134,7 +130,7 @@ plugins/sap-cap-capire/
     {
       "name": "sap-cap-capire",
       "description": "...",
-      "version": "2.1.1",
+      "version": "2.2.2",
       "source": "plugins/sap-cap-capire",
       "license": "GPL-3.0",
       "keywords": [...],
@@ -186,5 +182,5 @@ This enables portfolio-wide skill discovery.
 
 ---
 
-**Last Updated**: 2026-02-06
+**Last Updated**: 2026-05-31
 **Maintainer**: SAP Skills Repository Team

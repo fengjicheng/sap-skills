@@ -573,6 +573,11 @@ main() {
     echo ""
     echo -e "${YELLOW}DRY RUN complete. Run without --dry-run to apply changes.${NC}"
   fi
+
+  if [ "$failed" -gt 0 ]; then
+    echo -e "${RED}Manifest generation failed for $failed plugin(s).${NC}" >&2
+    exit 1
+  fi
 }
 
 main

@@ -44,7 +44,7 @@ git config core.hooksPath .githooks
 ## Files Validated
 
 - `.claude-plugin/marketplace.json` - Central marketplace registry
-- `plugins/*/skills/*/.claude-plugin/plugin.json` - Individual plugin manifests
+- `plugins/*/.claude-plugin/plugin.json` - Root plugin manifests
 
 ## Key Validations
 

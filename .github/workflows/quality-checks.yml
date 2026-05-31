@@ -14,6 +14,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
       - name: Validate skill structure
         run: |
           echo "Checking skill directory structure..."
@@ -94,3 +99,18 @@ jobs:
         run: |
           chmod +x scripts/validate-reserved-words.sh
           ./scripts/validate-reserved-words.sh
+
+      - name: Validate repository inventory
+        run: ./scripts/validate-inventory.sh
+
+      - name: Validate bundled resources
+        run: ./scripts/validate-bundled-resources.mjs
+
+      - name: Validate command and agent frontmatter
+        run: ./scripts/validate-command-agent-frontmatter.mjs
+
+      - name: Validate dependency-upgrade mirror
+        run: ./scripts/sync-dependency-upgrade-mirror.sh --check
+
+      - name: Run hook fixture tests
+        run: ./scripts/test-hooks.sh
