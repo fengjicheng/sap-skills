@@ -3,6 +3,13 @@ name: data-action-template
 description: Generate a data action configuration template based on requirements
 ---
 
+## Shell Snippet Notes
+
+- Shell snippets assume Bash on Linux/macOS, WSL2, or Git Bash.
+- Install the command-specific tooling shown near each snippet before running it.
+- Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
+
+
 # Data Action Configuration Template
 
 Use this template to design and document data action configurations.

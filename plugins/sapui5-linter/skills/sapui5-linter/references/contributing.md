@@ -2,7 +2,7 @@
 
 **Source**: [https://github.com/UI5/linter/blob/main/CONTRIBUTING.md](https://github.com/UI5/linter/blob/main/CONTRIBUTING.md)
 **Last Updated**: 2025-11-21
-**UI5 Linter Version**: 1.20.5
+**UI5 Linter Version**: 1.21.1
 
 ---
 
@@ -123,7 +123,7 @@ What should happen
 What actually happens
 
 ## Environment
-- UI5 Linter version: 1.20.5
+- UI5 Linter version: 1.21.1
 - Node.js version: 20.11.0
 - npm version: 10.2.0
 - OS: Ubuntu 22.04

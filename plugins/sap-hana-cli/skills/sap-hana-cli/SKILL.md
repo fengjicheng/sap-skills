@@ -21,6 +21,7 @@ metadata:
 - **sap-btp-cloud-platform**: Use for HANA Cloud operations, BTP integration, and cloud instance management
 - **sap-abap-cds**: Use for comparing CDS syntax between CAP and ABAP or understanding HANA CDS features
 - **sap-datasphere**: Use when working with SAP Datasphere integration or data warehousing scenarios
+- **dependency-upgrade**: Use for secure dependency upgrades (npm package hardening, lockfile linting, and cooldown policy) when projects include hana-cli dependencies
 
 A developer-centric command-line interface for SAP HANA database development, particularly useful in non-SAP tooling environments like VS Code.
 
@@ -363,11 +364,13 @@ hana-cli inspectUser
 ### Reference Documentation
 - `references/command-reference.md` - Complete command reference with all options
 - `references/abap-programming.md` - ABAP-specific programming patterns
-- `references/quick-start.md` - Quick start guide and examples
+- `references/development-environment.md` - Development setup and environment guidance
+- `references/connection-security.md` - Secure connection and credential handling
+- `references/troubleshooting.md` - Common errors and recovery steps
 
-### Scripts
-- `scripts/hana-setup.sh` - HANA development environment setup script
-- `scripts/migration-helper.sh` - Migration helper script for existing projects
+### Templates
+- `templates/default-env.json` - Local connection template for CAP-style bindings
+- `templates/cdsrc-private.json` - CAP private configuration template
 
 ## Resources
 

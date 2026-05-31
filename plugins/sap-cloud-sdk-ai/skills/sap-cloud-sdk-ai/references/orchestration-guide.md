@@ -946,7 +946,7 @@ var imageMessage = Message.user(new ImageItem("[https://url.to/image.jpg](https:
 
 ## Embedding
 
-### JavaScript (v2.2.0+)
+### JavaScript (v2.11.0+)
 
 ```typescript
 import { OrchestrationEmbeddingClient } from '@sap-ai-sdk/orchestration';

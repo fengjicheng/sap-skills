@@ -8,6 +8,13 @@ allowed-tools:
   - Grep
 ---
 
+## Shell Snippet Notes
+
+- Shell snippets assume Bash on Linux/macOS, WSL2, or Git Bash.
+- Install the command-specific tooling shown near each snippet before running it.
+- Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
+
+
 # SQLScript Validation Command
 
 Validate SQLScript code for syntax errors, pattern violations, and best practices. Reports issues and offers to auto-fix common problems.

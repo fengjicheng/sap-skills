@@ -8,6 +8,13 @@ allowed-tools:
 argument-hint: [file_path]
 ---
 
+## Shell Snippet Notes
+
+- Shell snippets assume Bash on Linux/macOS, WSL2, or Git Bash.
+- Install the command-specific tooling shown near each snippet before running it.
+- Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
+
+
 # SAC Custom Widget Linter Command
 
 Analyze SAP Analytics Cloud custom widget code for performance optimization opportunities, security concerns, and best practice compliance.

@@ -621,7 +621,7 @@ tolerations: []
 affinity: {}
 ```
 
-### templates/deployment.yaml
+### Deployment Template Example
 
 ```yaml
 apiVersion: apps/v1

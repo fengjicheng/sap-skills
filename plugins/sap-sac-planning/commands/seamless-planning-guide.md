@@ -3,6 +3,13 @@ name: seamless-planning-guide
 description: Quick guidance on implementing Seamless Planning with SAP Datasphere
 ---
 
+## Shell Snippet Notes
+
+- Shell snippets assume Bash on Linux/macOS, WSL2, or Git Bash.
+- Install the command-specific tooling shown near each snippet before running it.
+- Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
+
+
 # Seamless Planning Implementation Guide
 
 Quick reference for implementing SAP Analytics Cloud Seamless Planning with SAP Datasphere.

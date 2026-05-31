@@ -7,6 +7,13 @@ arguments:
     required: false
 ---
 
+## Shell Snippet Notes
+
+- Shell snippets assume Bash on Linux/macOS, WSL2, or Git Bash.
+- Install the command-specific tooling shown near each snippet before running it.
+- Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
+
+
 # CAP Troubleshooter
 
 Diagnostic guide for common SAP Cloud Application Programming Model errors and issues.
@@ -51,9 +58,12 @@ entity Books {
 mbt validate mta.yaml
 
 # Clean build
-rm -rf mta_archives/ .mta.* gen/
+mkdir -p .cap-cleanup
+mv mta_archives .mta.* gen .cap-cleanup/ 2>/dev/null || true
 mbt build
 ```
+
+Only delete `.cap-cleanup/` after confirming it contains generated build artifacts and no hand-written files.
 
 ## Database Errors
 

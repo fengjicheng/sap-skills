@@ -7,6 +7,13 @@ arguments:
     required: true
 ---
 
+## Shell Snippet Notes
+
+- Shell snippets assume Bash on Linux/macOS, WSL2, or Git Bash.
+- Install the command-specific tooling shown near each snippet before running it.
+- Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
+
+
 Generate a connection setup guide for the specified source system.
 
 ## Available Source Types

@@ -158,7 +158,7 @@ This skill should be used when:
 2. Fetch latest documentation from GitHub
 3. Update affected sections in SKILL.md and references
 4. Update version and `last_updated` in SKILL.md frontmatter
-5. Run skill-review for validation
+5. Run manual quality review using `docs/contributor-guide/quality-assurance.md`
 
 ---
 
@@ -186,7 +186,7 @@ This skill should be used when:
 
 1. Check documentation sources for updates
 2. Follow skill standards in `CLAUDE.md`
-3. Verify with `skill-review` skill
+3. Verify with the manual quality review process in `docs/contributor-guide/quality-assurance.md`
 
 ---
 

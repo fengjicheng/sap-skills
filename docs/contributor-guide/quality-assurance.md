@@ -1,11 +1,11 @@
 # Skill Review Process
 
-> **⚠️ DEPRECATED**: The automated `skill-review` plugin has been removed as of v2.1.1 (2026-02-06). This document is retained for reference only. Quality assurance is now performed through manual review processes following the guidelines in this document.
+> **⚠️ DEPRECATED**: This document previously accompanied a retired automated review plugin. It is retained for reference only. Quality assurance is now performed through repository validators and manual review.
 
 **Version**: 1.0.0
-**Last Updated**: 2026-02-06
+**Last Updated**: 2026-05-31
 **Purpose**: Comprehensive deep-dive documentation review for claude-skills
-**Previous Usage**: `/review-skill <skill-name>` or invoke `skill-review` skill (no longer available)
+**Legacy Invocation**: Retired slash command and plugin workflow; do not use for current reviews
 
 ---
 
@@ -199,8 +199,8 @@ metadata:
 
 **Validation command**:
 ```bash
-# Use script's YAML check
-./scripts/review-skill.sh <skill-name> | grep "YAML"
+# Validate all skill frontmatter
+./scripts/validate-frontmatter.sh --quiet
 ```
 
 ### Step 2.2: Keywords Check

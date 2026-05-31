@@ -18,6 +18,10 @@ metadata:
 
 # SAP BTP Job Scheduling Service
 
+## Related Skills
+
+- **dependency-upgrade**: Use for secure dependency and workflow hardening when your job scheduling microservices maintain npm/CLI dependency stacks
+
 ## Table of Contents
 
 - [Overview](#overview)

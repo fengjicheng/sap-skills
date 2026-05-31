@@ -59,7 +59,7 @@ Unified validation script used by both hooks and CI:
 
 **Features**:
 - ✅ Validates marketplace.json against marketplace schema
-- ✅ Validates all 64 plugin.json files against plugin schema
+- ✅ Validates all 33 root plugin.json files against plugin schema
 - ✅ Colored output (green=pass, red=fail, yellow=warning)
 - ✅ Detailed error reporting with schema paths
 - ✅ Exit code 1 on any validation failure
@@ -113,9 +113,9 @@ npm scripts for local development:
 ```json
 {
   "scripts": {
-    "validate": "./scripts/validate-json-schemas.sh",
+    "validate": "./scripts/validate-json-schemas.sh && ./scripts/validate-reserved-words.sh && ./scripts/validate-bundled-resources.mjs && ./scripts/validate-command-agent-frontmatter.mjs && ./scripts/validate-inventory.sh && ./scripts/sync-dependency-upgrade-mirror.sh --check && ./scripts/test-hooks.sh",
     "validate:marketplace": "ajv validate -s schemas/marketplace.schema.json -d .claude-plugin/marketplace.json --all-errors",
-    "validate:plugins": "find plugins -name 'plugin.json' -path '*/.claude-plugin/plugin.json' -exec ajv validate -s schemas/plugin.schema.json -d {} \\;"
+    "validate:plugins": "./scripts/validate-json-schemas.sh"
   }
 }
 ```
@@ -150,7 +150,7 @@ Quick reference and navigation guide.
 - ✅ Version consistency (top-level matches metadata.version)
 - ✅ No unknown fields allowed
 
-### plugin.json (all 32 plugins, 64 files)
+### plugin.json (all 33 root plugin manifests)
 - ✅ Name in kebab-case (required)
 - ✅ All other fields optional (per spec)
 - ✅ Semantic versioning format (if present)
@@ -177,7 +177,7 @@ All tests passed successfully:
 
 ### Test 3: Valid Data Passes
 ```
-✅ PASSED - All 64 plugin.json files + marketplace.json validated successfully
+✅ PASSED - All 33 root plugin.json files + marketplace.json validated successfully
 ```
 
 ---
@@ -286,7 +286,7 @@ Fix the validation errors above, or bypass with: git commit --no-verify
 ### For Maintainers
 - **Prevents Invalid Data**: Bad data never enters Git history
 - **Automated Quality Gates**: No manual schema checking needed
-- **Consistent Standards**: All 32 plugins follow same structure
+- **Consistent Standards**: All 33 plugins follow same structure
 - **Self-Documenting**: Schemas serve as structure documentation
 
 ### For the Project

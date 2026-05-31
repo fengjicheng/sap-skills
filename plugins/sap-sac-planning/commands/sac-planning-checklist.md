@@ -3,6 +3,13 @@ name: sac-planning-checklist
 description: Generate a comprehensive checklist for SAC planning implementation projects
 ---
 
+## Shell Snippet Notes
+
+- Shell snippets assume Bash on Linux/macOS, WSL2, or Git Bash.
+- Install the command-specific tooling shown near each snippet before running it.
+- Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
+
+
 # SAC Planning Implementation Checklist
 
 Use this checklist to ensure comprehensive planning application implementation.

@@ -134,7 +134,7 @@
 - ✅ CI/CD patterns
 
 **Version History**:
-- ✅ Current version (1.20.5)
+- ✅ Current version (1.21.1)
 - ✅ Recent major versions (1.14-1.20)
 - ✅ Feature additions timeline
 
@@ -281,7 +281,7 @@
 - UI5 library structure with linter
 - Monorepo setup
 
-**Location**: `references/project-structures.md`
+**Proposed location**: Add a project-structure reference if this enhancement is implemented.
 
 **Estimated Size**: ~1,500 words
 

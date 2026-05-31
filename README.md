@@ -1,10 +1,10 @@
 # SAP Skills for Claude Code
 
-32 Claude Code plugins for SAP development
+33 Claude Code plugins for SAP development
 
 [![License: GPL-3.0](https://img.shields.io/badge/License-GPL%203.0-blue.svg)](LICENSE)
-[![Plugins](https://img.shields.io/badge/Plugins-32-brightgreen.svg)](.claude-plugin/marketplace.json)
-[![Version](https://img.shields.io/badge/Version-2.1.8-orange.svg)](CHANGELOG.md)
+[![Plugins](https://img.shields.io/badge/Plugins-33-brightgreen.svg)](.claude-plugin/marketplace.json)
+[![Version](https://img.shields.io/badge/Version-2.2.2-orange.svg)](CHANGELOG.md)
 
 Production-ready Claude Code plugins for SAP development. Each plugin provides context-aware skills that activate automatically when you work with SAP BTP, CAP, Fiori, ABAP, Analytics, and more.
 
@@ -80,7 +80,7 @@ Claude Code intelligently loads relevant skills when you need them, providing ex
 
 ---
 
-## Available Plugins (32)
+## Available Plugins (33)
 
 ### Component Legend
 
@@ -92,11 +92,12 @@ All plugins include context-aware skills. Advanced features shown in table colum
 
 ---
 
-### 🔧 Tooling & Development (2)
+### 🔧 Tooling & Development (3)
 
 | Plugin | Commands | Agents | MCP | LSP | Description |
 |--------|----------|--------|-----|-----|-------------|
 | **sap-api-style** | — | — | — | — | API documentation standards following SAP guidelines |
+| **dependency-upgrade** | — | — | — | — | Secure dependency upgrades, cooldown policies, lockfile hardening, and supply-chain safeguards |
 | **sap-hana-cli** | — | — | ✓ | — | SAP HANA Developer CLI for database operations |
 
 ### ☁️ SAP BTP Platform (14)
@@ -106,14 +107,14 @@ All plugins include context-aware skills. Advanced features shown in table colum
 | **sap-btp-best-practices** | — | — | — | — | SAP BTP development best practices and patterns |
 | **sap-btp-build-work-zone-advanced** | — | — | — | — | SAP Build Work Zone (Advanced Edition) development |
 | **sap-btp-business-application-studio** | — | — | — | — | SAP Business Application Studio (BAS) development |
-| **sap-btp-cias** | — | — | — | — | Cloud Identity Access Service (CIAS) integration |
+| **sap-btp-cias** | — | — | — | — | Cloud Integration Automation Service (CIAS) integration |
 | **sap-btp-cloud-logging** | — | — | — | — | SAP BTP Cloud Logging service |
 | **sap-btp-cloud-platform** | — | — | — | — | SAP Business Technology Platform core services |
 | **sap-btp-cloud-transport-management** | — | — | — | — | Cloud Transport Management (CTM) service |
 | **sap-btp-connectivity** | — | — | — | — | SAP BTP Connectivity service |
 | **sap-btp-developer-guide** | — | — | — | — | Comprehensive SAP BTP developer guide |
 | **sap-btp-integration-suite** | — | — | — | — | SAP Integration Suite development |
-| **sap-btp-intelligent-situation-automation** | — | — | — | — | Intelligent Situation Automation development |
+| **sap-btp-intelligent-situation-automation** | — | — | — | — | Deprecated Intelligent Situation Automation data export, unsubscription, and legacy reference |
 | **sap-btp-job-scheduling** | — | — | — | — | SAP BTP Job Scheduling service |
 | **sap-btp-master-data-integration** | — | — | — | — | Master Data Integration service |
 | **sap-btp-service-manager** | — | — | — | — | SAP BTP Service Manager operations |
@@ -177,7 +178,7 @@ sap-skills/
 ```
 
 **Key Features**:
-- **Dual-level manifests**: Plugin-level and skill-level `plugin.json` files
+- **Single root manifests**: Each plugin has one `plugins/[name]/.claude-plugin/plugin.json`
 - **Modular organization**: Each plugin is self-contained with its own resources
 - **Advanced features**: 7 plugins include commands (29 total), 7 with agents (24 total), 6 with MCP integration, 2 with LSP support
 - **Cross-references**: 13 plugins have marketplace cross-references to related plugins
@@ -235,6 +236,10 @@ Run: `/use plugin-dev:skill-development`, `plugin-dev:plugin-structure`, etc.
 
 ## Recent Changes
 
+**v2.2.2** - Added dependency-upgrade plugin, dependency hardening templates, and enforced dependency-workflow checks
+
+**v2.2.1** - Fixed Issue #74 by removing prompt-level blocking in SQLScript and SAC custom widget hooks
+
 **v2.1.8** - Plugin manifest structure improvements and description sanitization
 
 **v2.1.7** - Plugin metadata and validation updates
@@ -287,4 +292,4 @@ This project is licensed under the **GNU General Public License v3.0** - see the
 
 **Maintained by**: E.J.
 **Repository**: [https://github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills)
-**Last Updated**: 2026-04-02 (v2.1.8)
+**Last Updated**: 2026-05-30 (v2.2.2)

@@ -78,7 +78,7 @@ Claude: [Uses sap-fiori-tools and sapui5 skills]
 | `sap-btp-connectivity` | BTP Connectivity including Destination Service, Cloud Connector, Connectivity Proxy, and principal propagation |
 | `sap-btp-developer-guide` | BTP application development using CAP (Node.js/Java) or ABAP Cloud with CI/CD and observability |
 | `sap-btp-integration-suite` | SAP Integration Suite - Cloud Integration (iFlows), API Management, Event Mesh, Edge Integration Cell |
-| `sap-btp-intelligent-situation-automation` | BTP Intelligent Situation Automation for situation-based automation between S/4HANA and BTP |
+| `sap-btp-intelligent-situation-automation` | Deprecated Intelligent Situation Automation data export, unsubscription, and legacy reference |
 | `sap-btp-job-scheduling` | BTP Job Scheduling Service for scheduled jobs development, configuration, and operations |
 | `sap-btp-master-data-integration` | SAP Master Data Integration (MDI) service - tenant setup, distribution models, SOAP APIs, ODM integration |
 | `sap-btp-service-manager` | SAP Service Manager - service instances, bindings, brokers across Cloud Foundry, Kyma, and Kubernetes |
@@ -122,7 +122,7 @@ Claude: [Uses sap-fiori-tools and sapui5 skills]
 
 | Skill | Description |
 |-------|-------------|
-| `skill-review` | Comprehensive 14-phase audit process for skill quality assurance and documentation review |
+| `dependency-upgrade` | Secure dependency upgrades, cooldown policies, lockfile hardening, and supply-chain safeguards |
 
 ---
 
@@ -254,7 +254,7 @@ This project is licensed under the GNU General Public License v3.0 (GPL-3.0) - s
 
 ---
 
-**Last Updated**: 2025-12-19
-**Marketplace Version**: 2.1.1
+**Last Updated**: 2026-05-31
+**Marketplace Version**: 2.2.2
 **Skills**: 33
 **Maintainer**: SAP Skills Maintainers

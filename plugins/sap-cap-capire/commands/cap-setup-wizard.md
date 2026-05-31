@@ -10,6 +10,13 @@ arguments:
     required: false
 ---
 
+## Shell Snippet Notes
+
+- Shell snippets assume Bash on Linux/macOS, WSL2, or Git Bash.
+- Install the command-specific tooling shown near each snippet before running it.
+- Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
+
+
 # CAP Project Setup Wizard
 
 Interactive guide for initializing new SAP Cloud Application Programming Model projects.

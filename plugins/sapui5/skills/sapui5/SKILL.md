@@ -4,8 +4,8 @@ description: "This skill should be used when developing SAP UI5 applications, in
 license: GPL-3.0
 metadata:
   version: 2.0.0
-  last_verified: 2025-12-28
-  framework_version: "1.120.0+"
+  last_verified: 2026-05-31
+  framework_version: "1.148.1 latest verified, 1.120.0+ baseline"
   documentation_source: [https://github.com/SAP-docs/sapui5](https://github.com/SAP-docs/sapui5)
   documentation_files_analyzed: 1416
   reference_files: 15
@@ -26,6 +26,7 @@ metadata:
 - **sap-btp-cloud-platform**: Use for deployment options, HTML5 Application Repository service, and BTP integration
 - **sap-abap**: Use when connecting to ABAP backends or consuming OData services from SAP systems
 - **sap-api-style**: Use when documenting UI5 application APIs or following REST/OData standards
+- **dependency-upgrade**: Use for secure dependency upgrades, lockfile policies, and supply-chain controls in SAPUI5 frontend toolchains
 
 Comprehensive skill for building enterprise applications with SAP UI5 framework.
 
@@ -427,7 +428,7 @@ npm test     # Run tests
 
 ## Bundled Reference Files
 
-This skill includes comprehensive reference documentation (11 files):
+This skill includes comprehensive reference documentation (15 files):
 
 1. **references/glossary.md**: Complete SAPUI5 terminology and concepts (100+ terms)
 2. **references/core-architecture.md**: Framework architecture, components, MVC, bootstrapping
@@ -440,6 +441,10 @@ This skill includes comprehensive reference documentation (11 files):
 9. **references/accessibility.md**: WCAG 2.1 compliance, screen readers, ARIA
 10. **references/security.md**: XSS prevention, CSP, authentication, CSRF
 11. **references/mdc-typescript-advanced.md**: MDC controls, TypeScript control libraries
+12. **references/mcp-integration.md**: MCP setup, troubleshooting, and fallback behavior
+13. **references/code-quality-checklist.md**: Review checklist for UI5 projects
+14. **references/migration-patterns.md**: Upgrade and modernization patterns
+15. **references/scaffolding-templates.md**: Project scaffolding guidance
 
 **Access these files** for detailed information on specific topics while keeping the main skill concise.
 
@@ -474,22 +479,23 @@ When using this skill:
 ## Bundled Resources
 
 ### Reference Documentation
-- `references/api-reference.md` - Complete SAPUI5 API reference
-- `references/mobile-development.md` - Mobile app development guide
 - `references/accessibility.md` - Accessibility best practices
+- `references/core-architecture.md` - Framework architecture and component patterns
+- `references/data-binding-models.md` - Data binding and model usage
+- `references/fiori-elements.md` - Fiori Elements templates and annotations
+- `references/mdc-typescript-advanced.md` - MDC and TypeScript guidance
+- `references/mcp-integration.md` - MCP setup and troubleshooting
+- `references/migration-patterns.md` - Migration from older versions
 - `references/performance-optimization.md` - Performance optimization techniques
-- `references/theming.md` - Theming and styling guide
 - `references/testing.md` - Testing strategies and frameworks
-- `references/migration.md` - Migration from older versions
+- `references/security.md` - XSS, CSP, authentication, and CSRF guidance
 
 ### Templates
-- `templates/component-template.js` - Component development template
-- `templates/controller-template.js` - Controller template
-- `templates/fragment-template.xml` - Fragment template
-
-### Configuration
-- `config/grunt-config.js` - Grunt configuration example
-- `config/webapp/manifest.json` - Application manifest template
+- `templates/basic-component.js` - Component development template
+- `templates/controller.js` - Controller template
+- `templates/xml-view.xml` - XML view template
+- `templates/formatter.js` - Formatter helper template
+- `templates/manifest.json` - Application manifest template
 
 ---
 

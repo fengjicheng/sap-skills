@@ -3,6 +3,13 @@ name: cap-mcp-tools
 description: Complete reference for CAP MCP server tools (search_model, search_docs) with usage examples
 ---
 
+## Shell Snippet Notes
+
+- Shell snippets assume Bash on Linux/macOS, WSL2, or Git Bash.
+- Install the command-specific tooling shown near each snippet before running it.
+- Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
+
+
 # CAP MCP Tools Reference
 
 Complete reference for the official @cap-js/mcp-server tools that provide AI agents with live access to your CAP project.

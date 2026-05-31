@@ -7,6 +7,13 @@ args:
     required: false
 ---
 
+## Shell Snippet Notes
+
+- Shell snippets assume Bash on Linux/macOS, WSL2, or Git Bash.
+- Install the command-specific tooling shown near each snippet before running it.
+- Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
+
+
 # UI5 Version Information{{#if version}} for {{version}}{{/if}}
 
 {{#if version}}
@@ -22,19 +29,19 @@ First, let me determine which UI5 version to query:
 ```bash
 # Check project manifest.json
 if [ -f "webapp/manifest.json" ]; then
-  VERSION=$(grep -oP '"minUI5Version":\s*"\K[^"]+' webapp/manifest.json)
+  VERSION=$(node -e 'const fs = require("fs"); const t = fs.readFileSync("webapp/manifest.json", "utf8"); const m = t.match(/"minUI5Version"\s*:\s*"([^"]+)"/); console.log(m ? m[1] : "Not found");')
   echo "Project UI5 Version (manifest.json): $VERSION"
 fi
 
 # Check ui5.yaml
 if [ -f "ui5.yaml" ]; then
-  YAML_VERSION=$(grep -oP 'version:\s*"\K[^"]+' ui5.yaml)
+  YAML_VERSION=$(node -e 'const fs = require("fs"); const t = fs.readFileSync("ui5.yaml", "utf8"); const m = t.match(/^\s*version:\s*"([^"]+)"/m); console.log(m ? m[1] : "Not found");')
   echo "UI5 Tooling Version (ui5.yaml): $YAML_VERSION"
 fi
 
 # Check package.json
 if [ -f "package.json" ]; then
-  PKG_VERSION=$(grep -oP '"@ui5/cli":\s*"\^\K[^"]+' package.json)
+  PKG_VERSION=$(node -e 'const fs = require("fs"); const t = fs.readFileSync("package.json", "utf8"); const m = t.match(/"@ui5\/cli"\s*:\s*"\^?([^"]+)"/); console.log(m ? m[1] : "Not found");')
   echo "UI5 CLI Version (package.json): $PKG_VERSION"
 fi
 ```
@@ -85,13 +92,13 @@ If automated tools are unavailable, here's manual lookup information:
 
 ```bash
 # Detect from manifest.json
-MANIFEST_VERSION=$(grep -oP '"minUI5Version":\s*"\K[^"]+' webapp/manifest.json 2>/dev/null || echo "Not found")
+MANIFEST_VERSION=$(node -e 'const fs = require("fs"); const t = fs.readFileSync("webapp/manifest.json", "utf8"); const m = t.match(/"minUI5Version"\s*:\s*"([^"]+)"/); console.log(m ? m[1] : "Not found");' 2>/dev/null || echo "Not found")
 
 # Detect from ui5.yaml
-YAML_VERSION=$(grep -oP 'version:\s*"\K[^"]+' ui5.yaml 2>/dev/null || echo "Not found")
+YAML_VERSION=$(node -e 'const fs = require("fs"); const t = fs.readFileSync("ui5.yaml", "utf8"); const m = t.match(/^\s*version:\s*"([^"]+)"/m); console.log(m ? m[1] : "Not found");' 2>/dev/null || echo "Not found")
 
 # Detect from index.html (bootstrap script)
-HTML_VERSION=$(grep -oP 'ui5\.sap\.com/\K[0-9.]+' webapp/index.html 2>/dev/null || echo "Not found")
+HTML_VERSION=$(node -e 'const fs = require("fs"); const t = fs.readFileSync("webapp/index.html", "utf8"); const m = t.match(/ui5\.sap\.com\/([0-9.]+)/); console.log(m ? m[1] : "Not found");' 2>/dev/null || echo "Not found")
 
 echo "Detected Versions:"
 echo "  manifest.json: $MANIFEST_VERSION"
@@ -332,7 +339,7 @@ Current Version?
 
 **Check project version**:
 ```bash
-grep -oP '"minUI5Version":\s*"\K[^"]+' webapp/manifest.json
+node -e 'const fs = require("fs"); const t = fs.readFileSync("webapp/manifest.json", "utf8"); const m = t.match(/"minUI5Version"\s*:\s*"([^"]+)"/); console.log(m ? m[1] : "Not found");' 2>/dev/null || echo "Not found"
 ```
 
 **List all UI5 versions**:

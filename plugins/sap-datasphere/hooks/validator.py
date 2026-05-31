@@ -98,21 +98,41 @@ def is_ui5_deploy_command(command_lower: str) -> bool:
 
 
 def looks_like_hardcoded_secret(text_lower: str) -> bool:
-    keys = ["password", "passwd", "secret", "api_key", "apikey", "token", "client_secret", "access_token"]
     markers = ["changeme", "placeholder", "example", "dummy", "your_", "your-", "xxxx", "test"]
-    for key in keys:
-        start = 0
-        while True:
-            idx = text_lower.find(key, start)
-            if idx == -1:
-                break
-            window = text_lower[idx : idx + 120]
-            has_assignment = "=" in window or ":" in window
-            has_quote = '"' in window or "'" in window or "`" in window
-            is_placeholder = any(marker in window for marker in markers)
-            if has_assignment and has_quote and not is_placeholder:
-                return True
-            start = idx + len(key)
+    pattern = re.compile(
+        r'\b(password|passwd|secret|api[_-]?key|apikey|client[_-]?secret|clientsecret|access[_-]?token|accesstoken|token)\b'
+        r'\s*[:=]\s*["\']([^"\']{8,})["\']'
+    )
+    for match in pattern.finditer(text_lower):
+        window = match.group(0)
+        if not any(marker in window for marker in markers):
+            return True
+    return False
+
+
+def strip_sql_comments(text_lower: str) -> str:
+    without_block_comments = re.sub(r"/\*.*?\*/", " ", text_lower, flags=re.DOTALL)
+    return re.sub(r"--[^\n\r]*", " ", without_block_comments)
+
+
+def sql_statements(text_lower: str) -> List[str]:
+    cleaned = strip_sql_comments(text_lower)
+    return [statement.strip() for statement in cleaned.split(";") if statement.strip()]
+
+
+def has_delete_without_where(text_lower: str) -> bool:
+    for statement in sql_statements(text_lower):
+        normalized = re.sub(r"\s+", " ", statement)
+        if re.search(r"\bdelete\s+from\b", normalized) and not re.search(r"\bwhere\b", normalized):
+            return True
+    return False
+
+
+def has_update_without_where(text_lower: str) -> bool:
+    for statement in sql_statements(text_lower):
+        normalized = re.sub(r"\s+", " ", statement)
+        if re.search(r"\bupdate\s+\S+.*\bset\b", normalized) and not re.search(r"\bwhere\b", normalized):
+            return True
     return False
 
 
@@ -136,9 +156,9 @@ def detect_risks(plugin_name: str, text_lower: str, command_lower: str) -> List[
         risks.append("Hardcoded credential/secret detected. Move sensitive values to environment variables or secure bindings.")
 
     if plugin_name in {"sap-sqlscript", "sap-datasphere"}:
-        if "delete from" in text_lower and not re.search(r'\bwhere\b', text_lower):
+        if has_delete_without_where(text_lower):
             risks.append("DELETE statement appears without WHERE clause.")
-        if "update " in text_lower and " set " in text_lower and not re.search(r'\bwhere\b', text_lower):
+        if has_update_without_where(text_lower):
             risks.append("UPDATE statement appears without WHERE clause.")
         if "execute immediate" in text_lower and ("||" in text_lower or " + " in text_lower):
             risks.append("Potential SQL injection risk in dynamic EXECUTE IMMEDIATE concatenation.")

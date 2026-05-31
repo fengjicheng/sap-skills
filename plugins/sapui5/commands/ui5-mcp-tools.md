@@ -3,6 +3,13 @@ name: ui5-mcp-tools
 description: List all available UI5 MCP server tools and their usage
 ---
 
+## Shell Snippet Notes
+
+- Shell snippets assume Bash on Linux/macOS, WSL2, or Git Bash.
+- Install the command-specific tooling shown near each snippet before running it.
+- Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
+
+
 # UI5 MCP Server Tools
 
 This command lists all available tools provided by the **@ui5/mcp-server** (Model Context Protocol server for UI5 development).
@@ -369,10 +376,12 @@ npx -y @ui5/mcp-server --version
 
 ### Permission Errors
 ```bash
-# Fix npm permissions
-sudo chown -R $USER ~/.npm
-sudo chown -R $USER /usr/local/lib/node_modules
+# Prefer a user-local npm global directory instead of changing ownership
+mkdir -p ~/.npm-global
+npm config set prefix ~/.npm-global
 ```
+
+Avoid recursive ownership changes unless an administrator has confirmed the affected directory and impact.
 
 ### Network Issues
 ```bash

@@ -8,6 +8,13 @@ allowed-tools:
 argument-hint: [widget-name]
 ---
 
+## Shell Snippet Notes
+
+- Shell snippets assume Bash on Linux/macOS, WSL2, or Git Bash.
+- Install the command-specific tooling shown near each snippet before running it.
+- Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
+
+
 # SAC Custom Widget Generator Command
 
 Interactively create a complete SAP Analytics Cloud custom widget scaffold including widget.json metadata and widget.js Web Component implementation.

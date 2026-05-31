@@ -122,8 +122,8 @@ grep -E "BY DATABASE|AMDP" references/*.md
 
 ## Version Information
 
-- **SAP HANA Platform**: 2.0 SPS07
-- **SAP HANA Cloud**: QRC 3/2025
+- **SAP HANA Platform**: 2.0 SPS08
+- **SAP HANA Cloud**: QRC 1/2026
 - **AMDP Support**: NetWeaver 7.40 SP05+
 - **Last Updated**: 2025-12-27
 

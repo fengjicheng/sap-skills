@@ -8,6 +8,13 @@ allowed-tools:
   - Grep
 ---
 
+## Shell Snippet Notes
+
+- Shell snippets assume Bash on Linux/macOS, WSL2, or Git Bash.
+- Install the command-specific tooling shown near each snippet before running it.
+- Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
+
+
 # SQLScript Performance Optimization Command
 
 Analyze SQLScript procedures and functions for performance anti-patterns and suggest optimizations. Offers auto-fix for common performance issues.

@@ -2,7 +2,7 @@
 
 Comprehensive guide for developing, maintaining, and publishing SAP skills for Claude Code.
 
-**Version**: 2.1.1 | **Last Updated**: 2026-02-06
+**Version**: 2.2.2 | **Last Updated**: 2026-05-31
 
 ---
 
@@ -13,7 +13,7 @@ Comprehensive guide for developing, maintaining, and publishing SAP skills for C
 - [Workflow Checklist →](workflow-checklist.md) - Quality verification checklist
 
 **Deep Dives**:
-- [Quality Assurance →](quality-assurance.md) - 14-phase review process
+- [Quality Assurance →](quality-assurance.md) - manual quality review process
 - [Common Mistakes →](common-mistakes.md) - Patterns to avoid
 - [Marketplace Infrastructure →](../architecture/marketplace-infrastructure.md) - Technical architecture
 
@@ -86,10 +86,7 @@ For rapid skill creation, follow this streamlined process:
 ./scripts/sync-plugins.sh
 ```
 
-**Step 4**: Quality review
-```bash
-/review-skill <skill-name>
-```
+**Step 4**: Manual quality review using the guidelines in `quality-assurance.md`
 
 **Step 5**: Verify with checklist (see [workflow-checklist.md](workflow-checklist.md))
 
@@ -204,18 +201,18 @@ npm outdated  # Check for SAP package updates
 
 ### Overview
 
-The SAP skills repository manages **33+ production skills** using a marketplace system with:
-- Coordinated versioning (all at v2.1.1)
+The SAP skills repository manages **33 production plugins** using a marketplace system with:
+- Coordinated versioning (all at v2.2.2)
 - Cross-references between related skills
 - Central registry (.claude-plugin/marketplace.json)
-- Dual-level manifest architecture
+- Single root manifest architecture
 
-**Scale**: 33 plugins across 5 categories:
-- Tooling & Development (4 skills)
+**Scale**: 33 plugins across 5 user-facing groups:
+- Tooling & Development (2 plugins)
 - SAP BTP Platform (14 skills)
 - UI Development (4 skills)
 - Data & Analytics (5 skills)
-- Core Technologies (6 skills)
+- Core Technologies (7 skills)
 
 ### Key Concepts
 
@@ -223,10 +220,10 @@ The SAP skills repository manages **33+ production skills** using a marketplace 
 
 Skills are organized into families for better discoverability:
 - **BTP Platform**: 14 skills covering Cloud Foundry, services, integration
-- **Core Technologies**: CAP, ABAP, HANA, AI/ML (6 skills)
+- **Core Technologies**: CAP, ABAP, HANA, AI/ML (7 skills)
 - **UI Development**: Fiori, SAPUI5, tooling (4 skills)
 - **Data & Analytics**: SAC, Datasphere, Data Intelligence (5 skills)
-- **Tooling**: Development tools, linters, CLI (4 skills)
+- **Tooling**: API style guidance and dependency upgrade hardening (2 plugins)
 
 #### Cross-References
 
@@ -243,7 +240,7 @@ This enables Claude to discover complementary skills automatically.
 
 **Single Source of Truth**: `marketplace.json` metadata.version field
 
-All skills share the same version (currently 2.1.1) and are updated together:
+All plugins share the same version (currently 2.2.2) and are updated together:
 ```bash
 # Update version in marketplace.json
 vim .claude-plugin/marketplace.json
@@ -257,7 +254,7 @@ vim .claude-plugin/marketplace.json
 **Full technical details**: See [Marketplace Infrastructure](../architecture/marketplace-infrastructure.md)
 
 Topics covered:
-- Dual-level manifest architecture
+- Single root manifest architecture
 - Central registry structure
 - Discovery and installation
 - Portfolio management patterns
@@ -328,7 +325,7 @@ Every SAP skill must document SDK versions:
 ---
 name: sap-cap-capire
 metadata:
-  version: "2.1.1"
+  version: "2.2.2"
   cap_version: "@sap/cds 9.4.x"
   last_verified: "2025-12-28"
   sap_btp_compatible: true
@@ -643,9 +640,9 @@ sap-ai-*          → "ai"
 **Purpose**: Aggregates all plugin.json files → central marketplace.json
 
 **Process**:
-1. Scan `plugins/*/skills/*/.claude-plugin/plugin.json`
+1. Scan `plugins/*/.claude-plugin/plugin.json`
 2. Collect metadata: name, description, version, keywords, category
-3. Build plugins array (66 total: 33 plugin-level + 33 skill-level)
+3. Build plugins array (33 total: root plugin manifests)
 4. Collect unique categories
 5. Write marketplace.json with metadata
 
@@ -674,7 +671,7 @@ NOT:
 ./scripts/generate-marketplace.sh --dry-run
 
 # Validate output
-jq '.plugins | length' .claude-plugin/marketplace.json  # Should be 66
+jq '.plugins | length' .claude-plugin/marketplace.json  # Should be 33
 jq '.metadata.total_skills' .claude-plugin/marketplace.json  # Should be 33
 ```
 
@@ -705,7 +702,7 @@ jq '.metadata.total_skills' .claude-plugin/marketplace.json  # Should be 33
 3. **Update skill metadata**:
    ```yaml
    metadata:
-     version: "2.1.1"
+     version: "2.2.2"
      cap_version: "@sap/cds 9.5.x"  # Updated
      last_verified: "2026-03-28"     # Updated
    ```
@@ -850,7 +847,7 @@ https://github.com/secondsky/sap-skills/issues
 
 ---
 
-**Last Updated**: 2026-02-06
-**Next Review**: 2026-03-28 (Quarterly)
-**Version**: 2.1.1
+**Last Updated**: 2026-05-31
+**Next Review**: 2026-08-31 (Quarterly)
+**Version**: 2.2.2
 **Maintainer**: SAP Skills Repository Team | [github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills)

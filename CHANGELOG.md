@@ -5,6 +5,29 @@ All notable changes to SAP Skills will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.2] - 2026-05-30
+
+### Added
+- Added `dependency-upgrade` plugin at `plugins/dependency-upgrade` and hooked it into `.claude-plugin/marketplace.json` generation.
+- Added dependency hardening references to high-confidence dependency-using SKILLs in:
+  - `sap-cloud-sdk-ai`
+  - `sap-hana-cli`
+  - `sap-fiori-tools`
+  - `sap-cap-capire`
+  - `sap-datasphere`
+  - `sap-btp-job-scheduling`
+  - `sapui5-linter`
+  - `sapui5`
+  - `sap-hana-ml`
+  - `sap-sac-scripting`
+  - `sapui5-cli`
+- Added dependency security workflow:
+  - `.github/workflows/dependency-security-checks.yml`
+  - deterministic policy enforcement for dependency-manageable skill and lockfile/PM changes
+- Replaced `plugins/dependency-upgrade` generator placeholder implementation with functional script:
+  - `.agents/dependency-upgrade/scripts/generate-dependency-upgrades.sh`
+- Added dependency hardening reference notes in `.agents` workflow/automation docs
+
 ## [2.2.1] - 2026-05-30
 
 ### Fixed

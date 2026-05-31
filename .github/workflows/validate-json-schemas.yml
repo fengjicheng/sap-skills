@@ -32,6 +32,9 @@ jobs:
       - name: Run JSON schema validation
         run: ./scripts/validate-json-schemas.sh
 
+      - name: Validate inventory consistency
+        run: ./scripts/validate-inventory.sh
+
       - name: Upload validation results on failure
         if: failure()
         uses: actions/upload-artifact@v4

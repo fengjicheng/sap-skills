@@ -72,12 +72,55 @@ check_file() {
     fi
 }
 
+check_marketplace_entries() {
+    local file="$1"
+    local relpath="${file#$REPO_ROOT/}"
+    local failures=0
+
+    local entries
+    if ! entries=$(jq -r '
+        .plugins // []
+        | to_entries[]
+        | select(
+            ((.value.name // "") | test($pattern; "i"))
+            or ((.value.description // "") | test($pattern; "i"))
+          )
+        | "\(.key)\t\(.value.name // "")\t\(.value.description // "")"
+      ' --arg pattern "$RESERVED_PATTERN" "$file" 2>&1); then
+        echo -e "${RED}✗${NC} $relpath"
+        echo "  Failed to inspect marketplace plugin entries: $entries"
+        return 1
+    fi
+
+    if [ -n "$entries" ]; then
+        echo -e "${RED}✗${NC} $relpath plugins[]"
+        while IFS=$'\t' read -r index name_value desc_value; do
+            [ -z "$index" ] && continue
+            echo "  plugins[$index] contains reserved word in name or description"
+            if echo "$name_value" | grep -iE "$RESERVED_PATTERN" > /dev/null 2>&1; then
+                echo "    name: $name_value"
+            fi
+            if echo "$desc_value" | grep -iE "$RESERVED_PATTERN" > /dev/null 2>&1; then
+                echo "    description: $desc_value"
+            fi
+            failures=$((failures + 1))
+        done <<< "$entries"
+    else
+        echo -e "${GREEN}✓${NC} $relpath plugins[]"
+    fi
+
+    [ "$failures" -eq 0 ]
+}
+
 # Check marketplace.json
 echo "📋 Checking marketplace.json..."
 MARKETPLACE_JSON="$REPO_ROOT/.claude-plugin/marketplace.json"
 if [ -f "$MARKETPLACE_JSON" ]; then
     MARKETPLACE_CHECKED=true
     if ! check_file "$MARKETPLACE_JSON"; then
+        ERRORS=$((ERRORS + 1))
+    fi
+    if ! check_marketplace_entries "$MARKETPLACE_JSON"; then
         ERRORS=$((ERRORS + 1))
     fi
 else

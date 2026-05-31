@@ -3,6 +3,13 @@ name: datasphere-mcp-tools
 description: List all available SAP Datasphere MCP tools with descriptions and usage examples
 ---
 
+## Shell Snippet Notes
+
+- Shell snippets assume Bash on Linux/macOS, WSL2, or Git Bash.
+- Install the command-specific tooling shown near each snippet before running it.
+- Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
+
+
 Display available MCP tools for SAP Datasphere integration.
 
 ## SAP Datasphere MCP Tools (45 total)

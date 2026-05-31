@@ -1027,10 +1027,10 @@ Use emojis for clarity:
 
 Always reference relevant documentation:
 - `references/core-architecture.md` for MVC patterns
-- `references/data-binding.md` for binding examples
-- `references/event-handling.md` for event patterns
+- `references/data-binding-models.md` for binding examples
+- `references/routing-navigation.md` for navigation and route event patterns
 - `references/performance-optimization.md` for performance
-- `references/common-pitfalls.md` for mistakes
+- `references/code-quality-checklist.md` for common mistakes
 
 ## Summary
 
