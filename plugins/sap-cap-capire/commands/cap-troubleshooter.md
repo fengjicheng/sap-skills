@@ -7,6 +7,14 @@ arguments:
     required: false
 ---
 
+## Compatibility and execution mode
+
+- **Default execution path**: Bash (Linux/macOS), with Windows support via WSL or Git Bash.
+- **Required tooling**: Bash and the command-specific tooling shown in each section (for example `node`, `npm`, `cf`, and `curl`).
+- **Windows native shells**: Native CMD/PowerShell support is not guaranteed; use WSL2 or Git Bash for these commands.
+- If `sudo chown` is required for your environment, run these steps in a Unix shell with admin rights; skip/adjust for locked-down environments or non-privileged setups.
+
+
 # CAP Troubleshooter
 
 Diagnostic guide for common SAP Cloud Application Programming Model errors and issues.

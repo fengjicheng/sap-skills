@@ -10,6 +10,10 @@ metadata:
 
 # SAP Cloud SDK for AI
 
+## Related Skills
+
+- **dependency-upgrade**: Hardening guidance for npm package upgrades, lockfile policies, and secure dependency workflows
+
 The official SDK for SAP AI Core, SAP Generative AI Hub, and Orchestration Service.
 
 ## When to Use This Skill

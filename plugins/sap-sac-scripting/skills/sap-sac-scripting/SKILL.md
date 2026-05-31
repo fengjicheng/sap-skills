@@ -19,6 +19,10 @@ metadata:
 
 # SAP Analytics Cloud Scripting
 
+## Related Skills
+
+- **dependency-upgrade**: Use when securing dependency and SDK/tooling upgrades used in story automation pipelines that integrate with external script tooling
+
 Comprehensive skill for scripting in SAP Analytics Cloud (SAC) Analytics Designer and Optimized Story Experience.
 
 ## Getting Started

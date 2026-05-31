@@ -27,6 +27,7 @@ metadata:
 - **sap-btp-best-practices**: Use for production deployment patterns and architectural guidance
 - **sap-ai-core**: Use when adding AI capabilities to CAP applications or integrating with SAP AI services
 - **sap-api-style**: Use when documenting CAP OData services or following API documentation standards
+- **dependency-upgrade**: Use for secure dependency, lockfile, and supply-chain upgrade controls in CAP service repos
 
 ## Table of Contents
 - [Quick Start](#quick-start)

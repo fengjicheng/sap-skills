@@ -3,6 +3,14 @@ name: cap-mcp-tools
 description: Complete reference for CAP MCP server tools (search_model, search_docs) with usage examples
 ---
 
+## Compatibility and execution mode
+
+- **Default execution path**: Bash (Linux/macOS), with Windows support via WSL or Git Bash.
+- **Required tooling**: Bash and the command-specific tooling shown in each section (for example `node`, `npm`, `cf`, and `curl`).
+- **Windows native shells**: Native CMD/PowerShell support is not guaranteed; use WSL2 or Git Bash for these commands.
+- If `sudo chown` is required for your environment, run these steps in a Unix shell with admin rights; skip/adjust for locked-down environments or non-privileged setups.
+
+
 # CAP MCP Tools Reference
 
 Complete reference for the official @cap-js/mcp-server tools that provide AI agents with live access to your CAP project.

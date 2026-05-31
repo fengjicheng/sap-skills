@@ -1,0 +1,124 @@
+name: Dependency Security Checks
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  enforce-dependency-hardening:
+    name: Enforce dependency hardening policy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Detect dependency context and enforce policy
+        run: |
+          set -euo pipefail
+
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE_SHA="${{ github.event.pull_request.base.sha }}"
+            HEAD_SHA="${{ github.event.pull_request.head.sha }}"
+          else
+            BASE_SHA="${{ github.event.before }}"
+            HEAD_SHA="${{ github.sha }}"
+            if [ "$BASE_SHA" = "" ] || [ "$BASE_SHA" = "0000000000000000000000000000000000000000" ]; then
+              BASE_SHA="$(git rev-parse "${HEAD_SHA}~1")"
+            fi
+          fi
+
+          echo "Comparing $BASE_SHA -> $HEAD_SHA"
+          CHANGED_FILES=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA")
+
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "No changed files. Skipping dependency security checks."
+            exit 0
+          fi
+
+          REQUIRED_TEMPLATES=(
+            ".agents/dependency-upgrade/templates/npmrc-security.tmpl"
+            ".agents/dependency-upgrade/templates/bunfig-security.tmpl"
+            ".agents/dependency-upgrade/templates/pnpm-workspace-security.tmpl"
+            ".agents/dependency-upgrade/templates/yarnrc-security.tmpl"
+            ".agents/dependency-upgrade/templates/dependabot-security.tmpl"
+            ".agents/dependency-upgrade/templates/renovate-security.tmpl"
+            ".agents/dependency-upgrade/templates/socket-fix-ci.tmpl"
+            ".agents/dependency-upgrade/templates/socket-scan-ci.tmpl"
+            ".agents/dependency-upgrade/templates/devcontainer-security.tmpl"
+          )
+
+          DEPENDENCY_SKILL_PATHS=(
+            "plugins/sap-cloud-sdk-ai/skills/sap-cloud-sdk-ai/SKILL.md"
+            "plugins/sap-hana-cli/skills/sap-hana-cli/SKILL.md"
+            "plugins/sap-fiori-tools/skills/sap-fiori-tools/SKILL.md"
+            "plugins/sap-cap-capire/skills/sap-cap-capire/SKILL.md"
+            "plugins/sap-datasphere/skills/sap-datasphere/SKILL.md"
+            "plugins/sap-btp-job-scheduling/skills/sap-btp-job-scheduling/SKILL.md"
+            "plugins/sapui5-linter/skills/sapui5-linter/SKILL.md"
+            "plugins/sapui5/skills/sapui5/SKILL.md"
+            "plugins/sap-hana-ml/skills/sap-hana-ml/SKILL.md"
+            "plugins/sap-sac-scripting/skills/sap-sac-scripting/SKILL.md"
+            "plugins/sapui5-cli/skills/sapui5-cli/SKILL.md"
+          )
+
+          has_dependency_context=false
+          missing_skill_references=()
+
+          # Ensure all policy templates still exist (deterministic policy source-of-truth check)
+          missing_templates=0
+          for template_file in "${REQUIRED_TEMPLATES[@]}"; do
+            if [ ! -f "$template_file" ]; then
+              echo "::error::Missing dependency hardening template: $template_file"
+              missing_templates=1
+            fi
+          done
+
+          if [ "$missing_templates" -ne 0 ]; then
+            echo "Dependency hardening templates are incomplete. Update .agents/dependency-upgrade/templates first."
+            exit 1
+          fi
+
+          while IFS= read -r file; do
+            [ -z "$file" ] && continue
+
+            case "$file" in
+              plugins/*/skills/*/SKILL.md|.agents/*/SKILL.md)
+                case " ${DEPENDENCY_SKILL_PATHS[*]} " in
+                  *" $file "*)
+                    has_dependency_context=true
+                    if ! grep -qi "dependency-upgrade" "$file"; then
+                      missing_skill_references+=("$file")
+                    fi
+                    ;;
+                esac
+                ;;
+            esac
+
+            case "$file" in
+              */package.json|*/package-lock.json|*/pnpm-lock.yaml|*/bun.lock|*/bun.lockb|*/yarn.lock|*/deno.lock|.npmrc|bunfig.toml|pnpm-workspace.yaml|.yarnrc|.yarnrc.yml|.github/dependabot.yml|renovate.json)
+                has_dependency_context=true
+                ;;
+            esac
+          done <<< "$CHANGED_FILES"
+
+          if [ "$has_dependency_context" = false ]; then
+            echo "No dependency-manager context detected in this change set. Skipping dependency security checks."
+            exit 0
+          fi
+
+          if [ ${#missing_skill_references[@]} -gt 0 ]; then
+            echo "::error::Dependency-focused skill/workflow changes must include a dependency-upgrade reference."
+            for item in "${missing_skill_references[@]}"; do
+              echo "::error file=$item::Add a 'dependency-upgrade' entry in this SKILL.md's Related Skills section."
+            done
+            exit 1
+          fi
+
+          echo "Dependency hardening checks passed."

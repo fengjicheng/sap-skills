@@ -1,10 +1,10 @@
 # SAP Skills for Claude Code
 
-32 Claude Code plugins for SAP development
+33 Claude Code plugins for SAP development
 
 [![License: GPL-3.0](https://img.shields.io/badge/License-GPL%203.0-blue.svg)](LICENSE)
-[![Plugins](https://img.shields.io/badge/Plugins-32-brightgreen.svg)](.claude-plugin/marketplace.json)
-[![Version](https://img.shields.io/badge/Version-2.1.8-orange.svg)](CHANGELOG.md)
+[![Plugins](https://img.shields.io/badge/Plugins-33-brightgreen.svg)](.claude-plugin/marketplace.json)
+[![Version](https://img.shields.io/badge/Version-2.2.2-orange.svg)](CHANGELOG.md)
 
 Production-ready Claude Code plugins for SAP development. Each plugin provides context-aware skills that activate automatically when you work with SAP BTP, CAP, Fiori, ABAP, Analytics, and more.
 
@@ -80,7 +80,7 @@ Claude Code intelligently loads relevant skills when you need them, providing ex
 
 ---
 
-## Available Plugins (32)
+## Available Plugins (33)
 
 ### Component Legend
 
@@ -92,11 +92,12 @@ All plugins include context-aware skills. Advanced features shown in table colum
 
 ---
 
-### 🔧 Tooling & Development (2)
+### 🔧 Tooling & Development (3)
 
 | Plugin | Commands | Agents | MCP | LSP | Description |
 |--------|----------|--------|-----|-----|-------------|
 | **sap-api-style** | — | — | — | — | API documentation standards following SAP guidelines |
+| **dependency-upgrade** | — | — | — | — | Secure dependency upgrades, cooldown policies, lockfile hardening, and supply-chain safeguards |
 | **sap-hana-cli** | — | — | ✓ | — | SAP HANA Developer CLI for database operations |
 
 ### ☁️ SAP BTP Platform (14)
@@ -235,6 +236,10 @@ Run: `/use plugin-dev:skill-development`, `plugin-dev:plugin-structure`, etc.
 
 ## Recent Changes
 
+**v2.2.2** - Added dependency-upgrade plugin, dependency hardening templates, and enforced dependency-workflow checks
+
+**v2.2.1** - Fixed Issue #74 by removing prompt-level blocking in SQLScript and SAC custom widget hooks
+
 **v2.1.8** - Plugin manifest structure improvements and description sanitization
 
 **v2.1.7** - Plugin metadata and validation updates
@@ -287,4 +292,4 @@ This project is licensed under the **GNU General Public License v3.0** - see the
 
 **Maintained by**: E.J.
 **Repository**: [https://github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills)
-**Last Updated**: 2026-04-02 (v2.1.8)
+**Last Updated**: 2026-05-30 (v2.2.2)

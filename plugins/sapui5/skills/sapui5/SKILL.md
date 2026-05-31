@@ -26,6 +26,7 @@ metadata:
 - **sap-btp-cloud-platform**: Use for deployment options, HTML5 Application Repository service, and BTP integration
 - **sap-abap**: Use when connecting to ABAP backends or consuming OData services from SAP systems
 - **sap-api-style**: Use when documenting UI5 application APIs or following REST/OData standards
+- **dependency-upgrade**: Use for secure dependency upgrades, lockfile policies, and supply-chain controls in SAPUI5 frontend toolchains
 
 Comprehensive skill for building enterprise applications with SAP UI5 framework.
 

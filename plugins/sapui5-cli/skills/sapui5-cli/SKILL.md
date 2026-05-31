@@ -10,6 +10,10 @@ metadata:
 
 # SAPUI5/OpenUI5 CLI Management Skill
 
+## Related Skills
+
+- **dependency-upgrade**: Use for secure CLI/toolchain upgrades, lockfile hardening, and deterministic installs in UI5 tooling workflows
+
 ## Table of Contents
 - [Overview](#overview)
 - [When to Use This Skill](#when-to-use-this-skill)

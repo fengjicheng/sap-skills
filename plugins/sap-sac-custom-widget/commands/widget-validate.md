@@ -7,6 +7,14 @@ allowed-tools:
 argument-hint: [file_path]
 ---
 
+## Compatibility and execution mode
+
+- **Default execution path**: Bash (Linux/macOS), with Windows support via WSL or Git Bash.
+- **Required tooling**: Bash and the command-specific tooling shown in each section (for example `node`, `npm`, `cf`, and `curl`).
+- **Windows native shells**: Native CMD/PowerShell support is not guaranteed; use WSL2 or Git Bash for these commands.
+- If `sudo chown` is required for your environment, run these steps in a Unix shell with admin rights; skip/adjust for locked-down environments or non-privileged setups.
+
+
 # SAC Custom Widget Validation Command
 
 Validate SAP Analytics Cloud custom widget files (widget.json and widget.js) for schema compliance, required fields, and best practices.

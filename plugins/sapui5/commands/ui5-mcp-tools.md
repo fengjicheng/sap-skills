@@ -3,6 +3,14 @@ name: ui5-mcp-tools
 description: List all available UI5 MCP server tools and their usage
 ---
 
+## Compatibility and execution mode
+
+- **Default execution path**: Bash (Linux/macOS), with Windows support via WSL or Git Bash.
+- **Required tooling**: Bash and the command-specific tooling shown in each section (for example `node`, `npm`, `cf`, and `curl`).
+- **Windows native shells**: Native CMD/PowerShell support is not guaranteed; use WSL2 or Git Bash for these commands.
+- If `sudo chown` is required for your environment, run these steps in a Unix shell with admin rights; skip/adjust for locked-down environments or non-privileged setups.
+
+
 # UI5 MCP Server Tools
 
 This command lists all available tools provided by the **@ui5/mcp-server** (Model Context Protocol server for UI5 development).

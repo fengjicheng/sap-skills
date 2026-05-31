@@ -10,6 +10,10 @@ metadata:
 
 # SAP Datasphere Skill
 
+## Related Skills
+
+- **dependency-upgrade**: Use for secure dependency policy and lockfile hygiene when managing large connector or integration projects with package-managed tooling
+
 ## Table of Contents
 
 - [Overview](#overview)

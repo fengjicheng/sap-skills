@@ -19,6 +19,10 @@ metadata:
 
 # SAP HANA ML Python Client (hana-ml)
 
+## Related Skills
+
+- **dependency-upgrade**: Use for secure dependency pinning and upgrade workflows in Python/auxiliary tooling used alongside HANA ML stacks
+
 **Package Version**: 2.22.241011  
 **Last Verified**: 2025-11-27
 

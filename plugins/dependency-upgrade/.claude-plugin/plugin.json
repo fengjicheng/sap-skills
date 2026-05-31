@@ -1,0 +1,22 @@
+{
+  "name": "dependency-upgrade",
+  "description": "Secure dependency upgrades with supply chain protection, cooldowns, and staged rollout. Use when upgrading deps, configuring security policies, or preventing supply chain attacks.",
+  "version": "2.2.2",
+  "author": {
+    "name": "E.J.",
+    "email": "maintainers@example.com"
+  },
+  "license": "GPL-3.0",
+  "repository": "https://github.com/secondsky/sap-skills",
+  "keywords": [
+    "automation",
+    "cli",
+    "dependency",
+    "dependency-upgrade",
+    "development",
+    "productivity",
+    "tools",
+    "upgrade"
+  ],
+  "category": "tooling"
+}

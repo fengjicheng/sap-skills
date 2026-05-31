@@ -14,6 +14,10 @@ metadata:
 
 # SAPUI5 Linter Skill
 
+## Related Skills
+
+- **dependency-upgrade**: Use when hardening dependency management for UI5 linting toolchain upgrades and plugin/toolchain lockfile controls
+
 ## Table of Contents
 - [Overview](#overview)
 - [Quick Start](#quick-start)

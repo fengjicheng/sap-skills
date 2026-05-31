@@ -21,6 +21,7 @@ metadata:
 - **sap-btp-cloud-platform**: Use for HANA Cloud operations, BTP integration, and cloud instance management
 - **sap-abap-cds**: Use for comparing CDS syntax between CAP and ABAP or understanding HANA CDS features
 - **sap-datasphere**: Use when working with SAP Datasphere integration or data warehousing scenarios
+- **dependency-upgrade**: Use for secure dependency upgrades (npm package hardening, lockfile linting, and cooldown policy) when projects include hana-cli dependencies
 
 A developer-centric command-line interface for SAP HANA database development, particularly useful in non-SAP tooling environments like VS Code.
 
