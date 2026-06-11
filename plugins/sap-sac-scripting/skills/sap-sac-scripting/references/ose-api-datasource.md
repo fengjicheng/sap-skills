@@ -39,6 +39,9 @@ Data access and management: DataSource API, data actions, data binding, data cha
 - [DataSourceComments](#datasourcecomments)
 - [DataSourceInfo](#datasourceinfo)
 - [DataUploadExecutionResponseStatus](#datauploadexecutionresponsestatus)
+- [DataUploadFileHandler](#datauploadfilehandler)
+- [DataUploadStarter](#datauploadstarter)
+- [DataUploadStatistics](#datauploadstatistics)
 - [FileDataSource](#filedatasource)
 - [InputControl](#inputcontrol)
 - [InputControlDataSource](#inputcontroldatasource)
@@ -3713,7 +3716,7 @@ Widget for initiating data uploads. Extends `Widget`.
 
 ```javascript
 DataUploadStarter_1.onAfterExecute = function(status, message, statistics, rejectedDetails, versionName, fileName) {
-    if (status === DataUploadExecutionResponseStatus.Successful) {
+    if (status === DataUploadExecutionResponseStatus.Success) {
         Text_Status.setText("Upload complete: " + statistics.uploadedRowCount + " rows");
     }
     if (rejectedDetails.length > 0) {

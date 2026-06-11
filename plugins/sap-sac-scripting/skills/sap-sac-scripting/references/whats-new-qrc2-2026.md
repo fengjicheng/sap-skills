@@ -147,7 +147,7 @@ The Optimized Story Experience API Reference has been updated with the `2025.20`
 https://help.sap.com/doc/1639cb9ccaa54b2592224df577abe822/release/en-US/index.html
 
 Key classes with updates in this release:
-- `NavigationUtils.openInsight` — Last Update 2025.20 (new widget parameter)
+- `NavigationUtils.openInsight` — Last Update 2025.5 (signature updated in v2025.20 docs)
 - Data Import Service classes
 - Multi-Action API step configuration classes
 

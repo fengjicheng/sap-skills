@@ -2757,7 +2757,7 @@ C\
 
 Since: 2025.18
 
-Methods for managing chart variance display — add, get, update, and remove variances on charts.
+Accessed via `Chart_1.getChartVariance()` on a chart widget instance. Methods for managing chart variance display — add, get, update, and remove variances on charts.
 
 **Methods**:
 

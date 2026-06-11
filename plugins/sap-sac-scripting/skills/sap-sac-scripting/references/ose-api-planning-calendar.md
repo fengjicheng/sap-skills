@@ -36,6 +36,7 @@ Planning operations and calendar integration: version management, data locking, 
 - [CalendarTaskWorkFileType](#calendartaskworkfiletype)
 - [CalendarTime](#calendartime)
 - [CalendarTimeGranularity](#calendartimegranularity)
+- [Compass](#compass)
 - [Planning](#planning)
 - [PlanningAreaFilter](#planningareafilter)
 - [PlanningAreaInfo](#planningareainfo)
@@ -4051,6 +4052,8 @@ C\
 ---
 
 ## Compass
+
+<a name="compass"></a>
 
 Type Library: `compass` | Since: 2026.6
 

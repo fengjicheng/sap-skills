@@ -556,7 +556,7 @@ C
 
 Type Library: `standard`
 
-A built-in object that has properties and methods for mathematical constants and functions. Mirrors the standard JavaScript `Math` object for use in SAC scripting.
+A built-in object that has properties and methods for mathematical constants and functions. Mirrors the standard JavaScript `Math` object for use in SAC scripting. Note: SAC exposes specific arities for some methods (e.g., `max`/`min` take exactly two arguments, `hypot` takes one) rather than the variadic signatures of standard JS.
 
 **Constants** (static, read-only):
 
