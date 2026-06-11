@@ -1,6 +1,6 @@
 # OSE API: Planning & Calendar
 
-**Version**: 2025.14 | **SAC Release**: Q1 2026 (2026.2) | **Full API Docs**: [SAP Help Portal](https://help.sap.com/doc/1639cb9ccaa54b2592224df577abe822/release/en-US/index.html)
+**Version**: 2025.20 | **SAC Release**: Q2 2026 (2026.8) | **Full API Docs**: [SAP Help Portal](https://help.sap.com/doc/1639cb9ccaa54b2592224df577abe822/release/en-US/index.html)
 
 Planning operations and calendar integration: version management, data locking, BPC planning sequences, and calendar tasks/processes.
 
@@ -4048,6 +4048,24 @@ Type Library\
 C\
 \
 
-
 ---
+
+## Compass
+
+Type Library: `compass` | Since: 2026.6
+
+Widget for SAP Analytics Cloud's Compass feature — provides AI-assisted insights and recommendations for seamless planning scenarios. Extends `Widget`.
+
+**Inherited Methods** (from Widget):
+- `getCssClass(): string`
+- `getLayout(): object`
+- `isVisible(): boolean`
+- `setCssClass(cssClass: string): void`
+- `setVisible(isVisible: boolean): void`
+
+```javascript
+if (Compass_1.isVisible()) {
+    Compass_1.setVisible(false);
+}
+```
 
