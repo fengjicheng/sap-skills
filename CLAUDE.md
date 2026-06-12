@@ -3,13 +3,13 @@
 
 **Repository**: https://github.com/secondsky/sap-skills
 **Purpose**: Production-ready skills for SAP development and AI coding assistants
-**Version**: 2.2.3 | **Plugins**: 34 | **Last Updated**: 2026-06-12
+**Version**: 2.2.3 | **Plugins**: 35 | **Last Updated**: 2026-06-12
 
 ---
 
 ## What This Repository Is
 
-34 production-tested skills for SAP technologies: BTP, CAP, Fiori,
+35 production-tested skills for SAP technologies: BTP, CAP, Fiori,
 ABAP, Analytics, and more. Enables context-aware AI assistance for SAP development.
 
 ---
@@ -89,10 +89,10 @@ errors that break functionality.
 
 ### Marketplace System
 
-**Scale**: 34 plugins with coordinated versioning
+**Scale**: 35 plugins with coordinated versioning
 **Structure**: Single root manifest per plugin (`plugins/*/.claude-plugin/plugin.json`)
 **Registry**: Central marketplace.json (48KB, auto-generated)
-**Cross-References**: 13 plugins reference related skills
+**Cross-References**: 14 plugins reference related skills
 
 **Categories**:
 - Tooling & Development (3 skills)
