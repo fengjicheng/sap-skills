@@ -2,6 +2,18 @@
 
 Comprehensive skill for developing and operating enterprise integration solutions using SAP Integration Suite on SAP Business Technology Platform.
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 1: `/integration-flow-review` |
+| Agents | 1: `integration-flow-advisor` |
+| Hooks | No |
+| MCP | No |
+| LSP | No |
+| Source Freshness | `last_verified`: 2025-11-27; live Integration Suite runtime checks pending. |
+| Verification | `npm run validate`; tenant deployment/message processing checks require access. |
+
 ## Capabilities Covered
 
 - **Cloud Integration** (CPI/SCPI) - Integration flow development

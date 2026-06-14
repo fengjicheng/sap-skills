@@ -168,14 +168,14 @@ Integrate Cloud Connector with SAP Solution Management for monitoring and operat
 
 **Get Current Configuration**:
 ```bash
-curl -X GET "[https://localhost:8443/api/v1/configuration/connector/solutionManagement"](https://localhost:8443/api/v1/configuration/connector/solutionManagement") \
+curl -X GET "https://localhost:8443/api/v1/configuration/connector/solutionManagement" \
   -H "Authorization: Basic ${auth}" \
   -k
 ```
 
 **Enable Solution Management**:
 ```bash
-curl -X POST "[https://localhost:8443/api/v1/configuration/connector/solutionManagement"](https://localhost:8443/api/v1/configuration/connector/solutionManagement") \
+curl -X POST "https://localhost:8443/api/v1/configuration/connector/solutionManagement" \
   -H "Authorization: Basic ${auth}" \
   -H "Content-Type: application/json" \
   -d '{"enabled": true, "dsrEnabled": true}' \
@@ -184,14 +184,14 @@ curl -X POST "[https://localhost:8443/api/v1/configuration/connector/solutionMan
 
 **Disable Solution Management**:
 ```bash
-curl -X DELETE "[https://localhost:8443/api/v1/configuration/connector/solutionManagement"](https://localhost:8443/api/v1/configuration/connector/solutionManagement") \
+curl -X DELETE "https://localhost:8443/api/v1/configuration/connector/solutionManagement" \
   -H "Authorization: Basic ${auth}" \
   -k
 ```
 
 **Download Registration File**:
 ```bash
-curl -X GET "[https://localhost:8443/api/v1/configuration/connector/solutionManagement/registrationFile"](https://localhost:8443/api/v1/configuration/connector/solutionManagement/registrationFile") \
+curl -X GET "https://localhost:8443/api/v1/configuration/connector/solutionManagement/registrationFile" \
   -H "Authorization: Basic ${auth}" \
   -o registration.xml \
   -k
@@ -455,7 +455,7 @@ metadata:
   name: transparent-proxy-config
 data:
   destination-webhook: "true"
-  webhook-url: "[http://callback-service/destination-update"](http://callback-service/destination-update")
+  webhook-url: "http://callback-service/destination-update"
 ```
 
 ---

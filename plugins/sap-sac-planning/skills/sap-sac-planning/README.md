@@ -4,6 +4,18 @@ Production-ready skill for building SAP Analytics Cloud (SAC) planning applicati
 
 ---
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 3: `/data-action-template`, `/sac-planning-checklist`, `/seamless-planning-guide` |
+| Agents | 3: `data-action-debugger`, `planning-api-assistant`, `planning-model-architect` |
+| Hooks | Yes: `hooks/hooks.json` |
+| MCP | No |
+| LSP | No |
+| Source Freshness | `last_verified`: 2026-06-11; SKILL.md remains under 5k words with references routed progressively. |
+| Verification | `npm run validate`; live SAC planning/model checks pending. |
+
 ## Overview
 
 This skill provides comprehensive guidance for SAP Analytics Cloud planning development, including:

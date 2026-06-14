@@ -233,12 +233,12 @@ server:
       configuration:
         backend:
           - path: /sap/opu/odata
-            url: [http://localhost](http://localhost)
+            url: http://localhost
         ui5:
           path:
             - /resources
             - /test-resources
-          url: [https://ui5.sap.com](https://ui5.sap.com)
+          url: https://ui5.sap.com
 ```
 
 ### Theme Support
@@ -265,7 +265,7 @@ npm config delete @sap:registry
 
 ```bash
 # Clone repository
-git clone [https://github.com/SAP-samples/hana-developer-cli-tool-example](https://github.com/SAP-samples/hana-developer-cli-tool-example)
+git clone https://github.com/SAP-samples/hana-developer-cli-tool-example
 
 # Install dependencies
 cd hana-developer-cli-tool-example

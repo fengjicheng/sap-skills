@@ -360,7 +360,7 @@ The repository includes 20+ end-to-end implementations:
 
 ```bash
 # Clone the repository
-git clone [https://github.com/SAP-samples/sap-btp-ai-best-practices.git](https://github.com/SAP-samples/sap-btp-ai-best-practices.git)
+git clone https://github.com/SAP-samples/sap-btp-ai-best-practices.git
 cd sap-btp-ai-best-practices
 
 # Navigate to a specific best practice

@@ -80,7 +80,7 @@ ui5 build self-contained --all
 **Before**:
 ```html
 <script id="sap-ui-bootstrap"
-    src="[https://ui5.sap.com/resources/sap-ui-core.js"](https://ui5.sap.com/resources/sap-ui-core.js")
+    src="https://ui5.sap.com/resources/sap-ui-core.js"
     data-sap-ui-libs="sap.m">
 </script>
 ```

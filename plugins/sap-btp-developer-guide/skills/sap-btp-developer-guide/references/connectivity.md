@@ -83,9 +83,9 @@ SAP BTP provides comprehensive connectivity infrastructure for secure communicat
 # destination configuration
 - name: S4HANA_CLOUD
   type: HTTP
-  url: [https://my-s4.cloud.sap](https://my-s4.cloud.sap)
+  url: https://my-s4.cloud.sap
   authentication: OAuth2SAMLBearerAssertion
-  tokenServiceURL: [https://my-s4.cloud.sap/sap/bc/sec/oauth2/token](https://my-s4.cloud.sap/sap/bc/sec/oauth2/token)
+  tokenServiceURL: https://my-s4.cloud.sap/sap/bc/sec/oauth2/token
 ```
 
 ### Cloud-to-On-Premise

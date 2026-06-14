@@ -5,6 +5,7 @@ allowed-tools:
   - Read
   - Write
   - Grep
+argument-hint: "<file_path> --to <amdp|standalone|cds-function>"
 ---
 
 ## Shell Snippet Notes
@@ -12,6 +13,10 @@ allowed-tools:
 - Shell snippets assume Bash on Linux/macOS, WSL2, or Git Bash.
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
+
+## Output Contract
+
+Return a conversion plan, compatibility risks, generated snippet if requested, validation checklist, and confirmation points before writes. Default to read-only conversion guidance.
 
 
 # SQLScript Conversion Command

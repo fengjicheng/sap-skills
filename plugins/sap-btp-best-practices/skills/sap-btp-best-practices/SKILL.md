@@ -6,7 +6,7 @@ description: |
   Keywords: SAP BTP, account hierarchy, global account, directory, subaccount, Cloud Foundry, Kyma, ABAP, SAP Identity Authentication, CI/CD, governance, Platform Engineering, failover, multi-region, SAP BTP best practices
 license: GPL-3.0
 metadata:
-  version: "1.3.0"
+  version: "2.3.0"
   last_verified: "2025-11-27"
 ---
 
@@ -22,6 +22,18 @@ metadata:
 - **sap-ai-core**: Use for AI Core platform setup, model deployment, and orchestration configuration
 - **sap-cloud-sdk-ai**: Use for SDK-level AI integration in CAP or standalone BTP applications
 - **sap-fiori-tools**: Use for UI deployment strategies and frontend application guidelines
+
+## When to Use This Skill
+
+Use this skill when designing a BTP account model, setting up governance, choosing commercial/environment patterns, establishing security and authentication defaults, designing CI/CD and operations practices, or reviewing a BTP landscape before implementation.
+
+## Quick Start
+
+1. Identify the target account model: global account, directories, subaccounts, environments, and regions.
+2. Choose the runtime path: Cloud Foundry, Kyma, ABAP Environment, or a hybrid portfolio.
+3. Apply security defaults from [Security and Authentication](#security-and-authentication).
+4. Use the relevant implementation skill for detailed execution: `sap-btp-cloud-platform`, `sap-btp-connectivity`, `sap-btp-service-manager`, `sap-cap-capire`, or `sap-fiori-tools`.
+5. Record production-specific gaps in the project plan before changing `last_verified`.
 
 Production-ready SAP BTP implementation guidance based on official SAP documentation.
 

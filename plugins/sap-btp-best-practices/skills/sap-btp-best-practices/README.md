@@ -9,9 +9,21 @@ This skill provides production-ready guidance for SAP BTP implementations based 
 **Source Documentation**: [https://github.com/SAP-docs/btp-best-practices-guide](https://github.com/SAP-docs/btp-best-practices-guide)
 
 **Version**: 1.1.0
-**Last Verified**: 2025-11-21
+**Last Verified**: 2025-11-27
 
 ---
+
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 1: `/btp-architecture-review` |
+| Agents | 0 |
+| Hooks | No |
+| MCP | No |
+| LSP | No |
+| Source Freshness | `last_verified`: 2025-11-27; docs-only BTP guidance recheck pending in third-pass audit. |
+| Verification | `npm run validate`; live BTP account checks pending unless explicitly documented. |
 
 ## Keywords for Discovery
 

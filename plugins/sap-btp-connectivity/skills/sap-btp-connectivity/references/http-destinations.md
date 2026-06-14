@@ -68,7 +68,7 @@ KeyStorePassword: <password>
 Authentication: OAuth2ClientCredentials
 clientId: <client-id>
 clientSecret: <client-secret>
-tokenServiceURL: [https://auth.example.com/oauth/token](https://auth.example.com/oauth/token)
+tokenServiceURL: https://auth.example.com/oauth/token
 tokenServiceURLType: Dedicated | Common
 ```
 
@@ -84,7 +84,7 @@ tokenServiceURLType: Dedicated | Common
 Authentication: OAuth2JWTBearer
 clientId: <client-id>
 clientSecret: <client-secret>
-tokenServiceURL: [https://auth.example.com/oauth/token](https://auth.example.com/oauth/token)
+tokenServiceURL: https://auth.example.com/oauth/token
 ```
 
 Exchanges incoming user JWT for new access token.
@@ -94,7 +94,7 @@ Exchanges incoming user JWT for new access token.
 Authentication: OAuth2SAMLBearerAssertion
 audience: <saml-audience>
 clientKey: <client-key>
-tokenServiceURL: [https://auth.example.com/oauth2/token](https://auth.example.com/oauth2/token)
+tokenServiceURL: https://auth.example.com/oauth2/token
 KeyStoreLocation: <certificate-for-signing>
 ```
 
@@ -115,7 +115,7 @@ User: <username>
 Password: <password>
 clientId: <client-id>
 clientSecret: <client-secret>
-tokenServiceURL: [https://auth.example.com/oauth/token](https://auth.example.com/oauth/token)
+tokenServiceURL: https://auth.example.com/oauth/token
 ```
 
 **Deprecated**: Use OAuth2ClientCredentials or OAuth2SAMLBearerAssertion instead.
@@ -125,7 +125,7 @@ tokenServiceURL: [https://auth.example.com/oauth/token](https://auth.example.com
 Authentication: OAuth2AuthorizationCode
 clientId: <client-id>
 clientSecret: <client-secret>
-tokenServiceURL: [https://auth.example.com/oauth/token](https://auth.example.com/oauth/token)
+tokenServiceURL: https://auth.example.com/oauth/token
 ```
 
 For interactive user authorization flows.
@@ -135,7 +135,7 @@ For interactive user authorization flows.
 Authentication: OAuth2UserTokenExchange
 clientId: <client-id>
 clientSecret: <client-secret>
-tokenServiceURL: [https://auth.example.com/oauth/token](https://auth.example.com/oauth/token)
+tokenServiceURL: https://auth.example.com/oauth/token
 ```
 
 Exchanges user token for access token.
@@ -145,7 +145,7 @@ Exchanges user token for access token.
 Authentication: OAuth2RefreshToken
 clientId: <client-id>
 clientSecret: <client-secret>
-tokenServiceURL: [https://auth.example.com/oauth/token](https://auth.example.com/oauth/token)
+tokenServiceURL: https://auth.example.com/oauth/token
 refreshToken: <refresh-token>
 ```
 
@@ -218,7 +218,7 @@ Required when multiple Cloud Connectors connect to the same subaccount.
 
 Example with `Common`:
 ```
-tokenServiceURL: [https://{tenant}.auth.example.com/oauth/token](https://{tenant}.auth.example.com/oauth/token)
+tokenServiceURL: https://{tenant}.auth.example.com/oauth/token
 ```
 
 ---
@@ -229,12 +229,12 @@ tokenServiceURL: [https://{tenant}.auth.example.com/oauth/token](https://{tenant
 {
   "Name": "my-api-destination",
   "Type": "HTTP",
-  "URL": "[https://api.example.com/v1",](https://api.example.com/v1",)
+  "URL": "https://api.example.com/v1",
   "ProxyType": "Internet",
   "Authentication": "OAuth2ClientCredentials",
   "clientId": "my-client-id",
   "clientSecret": "my-client-secret",
-  "tokenServiceURL": "[https://auth.example.com/oauth/token",](https://auth.example.com/oauth/token",)
+  "tokenServiceURL": "https://auth.example.com/oauth/token",
   "tokenServiceURLType": "Dedicated",
   "scope": "read write",
   "URL.headers.X-Custom-Header": "custom-value",
@@ -251,7 +251,7 @@ tokenServiceURL: [https://{tenant}.auth.example.com/oauth/token](https://{tenant
 {
   "Name": "onprem-sap-system",
   "Type": "HTTP",
-  "URL": "[http://virtual-host:443/sap/opu/odata/sap/API_BUSINESS_PARTNER",](http://virtual-host:443/sap/opu/odata/sap/API_BUSINESS_PARTNER",)
+  "URL": "http://virtual-host:443/sap/opu/odata/sap/API_BUSINESS_PARTNER",
   "ProxyType": "OnPremise",
   "Authentication": "PrincipalPropagation",
   "CloudConnectorLocationId": "loc1"

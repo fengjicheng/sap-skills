@@ -83,14 +83,14 @@ git config --global user.name "[Your Name]"
 git config --global user.email "[your.email@example.com]"
 
 # Clone repository
-git clone [https://github.com/[org]/[repo].git](https://github.com/[org]/[repo].git)
+git clone https://github.com/[org]/[repo].git
 ```
 
 ### Cloud Foundry Login
 
 ```bash
 # Login to Cloud Foundry
-cf login -a [https://api.cf.[region].hana.ondemand.com](https://api.cf.[region].hana.ondemand.com)
+cf login -a https://api.cf.[region].hana.ondemand.com
 
 # Verify target
 cf target

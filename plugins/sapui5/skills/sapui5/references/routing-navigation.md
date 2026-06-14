@@ -26,7 +26,7 @@ SAPUI5 implements hash-based routing for single-page applications, enabling deep
 SAPUI5 uses URL hash to manage application state:
 
 ```
-[https://myapp.com/index.html#/products/123?tab=details](https://myapp.com/index.html#/products/123?tab=details)
+https://myapp.com/index.html#/products/123?tab=details
                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
                                         Hash
 ```

@@ -121,3 +121,15 @@ Provide analysis in this structure:
 - For very large procedures (>500 lines), summarize and focus on critical issues
 - For AMDP code, always verify ABAP-SQLScript integration patterns
 - For anonymous blocks, note that some patterns differ from stored procedures
+
+## Delegation and Safety
+
+**When to Delegate:** Use this agent for SQLScript reviews, performance anti-patterns, security issues, AMDP compatibility, and HANA syntax/pattern validation.
+
+**When Not to Delegate:** Keep work in the main thread for generating brand-new procedures, Datasphere model design, or production tuning without evidence.
+
+**First Checks:** Inspect full SQLScript text, HANA version, object type, execution context, explain plans/logs if available, and table sizes when known.
+
+**MCP Fallback:** If HANA/LSP validation is unavailable, perform static analysis from source and clearly separate verified findings from recommended runtime checks.
+
+**Safety Constraints:** Do not recommend mass UPDATE/DELETE, dynamic SQL concatenation, or schema-level changes without explicit safeguards and user confirmation.

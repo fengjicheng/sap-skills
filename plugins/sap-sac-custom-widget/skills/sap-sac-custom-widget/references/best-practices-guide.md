@@ -183,7 +183,7 @@ async _loadEcharts() {
 
   return new Promise((resolve, reject) => {
     const script = document.createElement("script");
-    script.src = "[https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js";](https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js";)
+    script.src = "https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js";
     script.onload = () => resolve(window.echarts);
     script.onerror = () => reject(new Error("Failed to load ECharts"));
     document.head.appendChild(script);
@@ -286,7 +286,7 @@ openssl dgst -sha256 -binary widget.js | openssl base64 -A
     {
       "kind": "main",
       "tag": "my-widget",
-      "url": "[https://host.com/widget.js",](https://host.com/widget.js",)
+      "url": "https://host.com/widget.js",
       "integrity": "sha256-K7gNU3sdo+OL0wNhqoVWhr3g6s1xYv72ol/pe/Unols=",
       "ignoreIntegrity": false
     }
@@ -326,7 +326,7 @@ app.listen(3000);
 ```javascript
 async _fetchExternalData() {
   // Always use HTTPS
-  const url = "[https://api.example.com/data";](https://api.example.com/data";)
+  const url = "https://api.example.com/data";
 
   try {
     const response = await fetch(url, {
@@ -503,7 +503,7 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, "dist")));
 
 app.listen(3000, () => {
-  console.log("Widget dev server: [http://localhost:3000](http://localhost:3000)");
+  console.log("Widget dev server: http://localhost:3000");
 });
 ```
 

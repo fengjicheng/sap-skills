@@ -1,6 +1,12 @@
 ---
 name: sac-optimize
 description: Analyze SAC scripts for performance optimization opportunities
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Edit
+argument-hint: "[script-file-or-symptom]"
 ---
 
 ## Shell Snippet Notes
@@ -8,6 +14,10 @@ description: Analyze SAC scripts for performance optimization opportunities
 - Shell snippets assume Bash on Linux/macOS, WSL2, or Git Bash.
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
+
+## Output Contract
+
+Return performance findings, backend-call risks, caching or batching suggestions, and validation steps. Default to read-only analysis and do not edit scripts.
 
 
 Analyze SAC scripts for performance issues and provide optimization recommendations.

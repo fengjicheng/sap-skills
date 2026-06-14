@@ -1,6 +1,13 @@
 ---
 name: cap-setup-wizard
 description: Interactive guide for setting up new CAP projects with framework and database selection
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+  - AskUserQuestion
+argument-hint: "[nodejs|java|typescript] [sqlite|hana|postgres]"
 arguments:
   - name: framework
     description: "Target framework: nodejs, java, or typescript"
@@ -15,6 +22,10 @@ arguments:
 - Shell snippets assume Bash on Linux/macOS, WSL2, or Git Bash.
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
+
+## Output Contract
+
+Return a setup plan, selected stack/runtime assumptions, generated-file checklist, safe commands, and confirmation points before writes. Default to planning unless the user explicitly requests project generation.
 
 
 # CAP Project Setup Wizard

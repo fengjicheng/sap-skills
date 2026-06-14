@@ -2,6 +2,18 @@
 
 A comprehensive Claude Code skill for SAP BTP Job Scheduling Service development, configuration, and operations.
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 1: `/job-schedule-check` |
+| Agents | 0 |
+| Hooks | No |
+| MCP | No |
+| LSP | No |
+| Source Freshness | `last_verified`: 2025-11-27; REST/API examples need docs-only recheck and service-instance validation. |
+| Verification | `npm run validate`; live scheduler checks pending. |
+
 ## Quick Start
 
 This skill provides guidance for:

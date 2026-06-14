@@ -96,7 +96,7 @@ builder:
       - /localService/**
 deploy:
   target:
-    url: [https://system.url](https://system.url)
+    url: https://system.url
     client: "100"
     scp: false
     params:

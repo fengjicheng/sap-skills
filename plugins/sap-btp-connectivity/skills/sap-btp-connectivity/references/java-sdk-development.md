@@ -304,7 +304,7 @@ applications:
       destinations: >
         [{
           "name": "backend",
-          "url": "[https://backend-app.cfapps.eu10.hana.ondemand.com",](https://backend-app.cfapps.eu10.hana.ondemand.com",)
+          "url": "https://backend-app.cfapps.eu10.hana.ondemand.com",
           "forwardAuthToken": true
         }]
     services:

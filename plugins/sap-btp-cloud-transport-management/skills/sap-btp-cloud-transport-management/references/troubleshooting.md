@@ -82,7 +82,7 @@ cf space <my-space-name> --guid
 
 **URL Pattern**:
 ```
-[https://deploy-service.cf.<domain>/slprot/<space-guid>/slp](https://deploy-service.cf.<domain>/slprot/<space-guid>/slp)
+https://deploy-service.cf.<domain>/slprot/<space-guid>/slp
 ```
 
 **Exception**: Avoid GUID-based URLs in automated pipelines that frequently recreate spaces for testing.

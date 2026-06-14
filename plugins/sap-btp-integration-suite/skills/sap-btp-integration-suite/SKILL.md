@@ -5,10 +5,10 @@ description: "Enterprise integration solutions using SAP Integration Suite on BT
 
 license: GPL-3.0
 metadata:
-  version: 1.1.0
+  version: "2.3.0"
   last_verified: 2025-11-27
-  documentation_source: [https://github.com/SAP-docs/sap-btp-integration-suite](https://github.com/SAP-docs/sap-btp-integration-suite)
-  sap_help_portal: [https://help.sap.com/docs/integration-suite](https://help.sap.com/docs/integration-suite)
+  documentation_source: "https://github.com/SAP-docs/sap-btp-integration-suite"
+  sap_help_portal: "https://help.sap.com/docs/integration-suite"
   status: production
   keywords: [sap integration suite, cloud integration, cpi, iflow, api management, apim, event mesh, edge integration cell, integration advisor, trading partner management, b2b integration, edi integration, migration assessment, graph, odata provisioning, message mapping, groovy script, adapter configuration, sftp adapter, http adapter, odata adapter, rfc adapter, amqp adapter, kafka adapter, jms queue, data store, idempotent processing]
 
@@ -22,6 +22,17 @@ allowed-tools:
 ---
 
 # SAP BTP Integration Suite Development
+
+## Related Skills
+
+- **sap-btp-cloud-platform**: Use for BTP subaccount, subscription, entitlement, and role setup
+- **sap-btp-connectivity**: Use for destinations, Cloud Connector, and hybrid connectivity dependencies
+- **sap-api-style**: Use for API proxy documentation, OpenAPI quality, and API lifecycle standards
+- **sap-btp-cloud-transport-management**: Use for transporting integration artifacts across landscapes
+
+## When to Use This Skill
+
+Use this skill when building or troubleshooting Cloud Integration iFlows, API Management proxies, Event Mesh topics/queues, Edge Integration Cell deployments, Integration Advisor mappings, Trading Partner Management flows, or migration assessment from Process Orchestration.
 
 ## Table of Contents
 - [Quick Reference](#quick-reference)

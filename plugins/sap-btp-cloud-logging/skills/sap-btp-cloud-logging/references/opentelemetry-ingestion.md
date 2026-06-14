@@ -367,7 +367,7 @@ spec:
 ### Connection Refused
 
 1. Verify `ingest_otlp.enabled: true` in instance configuration
-2. Check endpoint format is `hostname:443` (not `[https://...](https://...)`)
+2. Check endpoint format is `hostname:443` (not `https://...``)
 3. Verify firewall/network allows gRPC traffic
 
 ### Certificate Errors

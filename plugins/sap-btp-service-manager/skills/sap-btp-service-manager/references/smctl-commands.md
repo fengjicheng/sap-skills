@@ -91,18 +91,18 @@ smctl login [flags]
 **Examples**:
 ```bash
 # Interactive password login
-smctl login -a [https://service-manager.cfapps.eu10.hana.ondemand.com](https://service-manager.cfapps.eu10.hana.ondemand.com) \
+smctl login -a https://service-manager.cfapps.eu10.hana.ondemand.com \
   --param subdomain=my-subaccount
 
 # Client credentials (default)
-smctl login -a [https://service-manager.cfapps.eu10.hana.ondemand.com](https://service-manager.cfapps.eu10.hana.ondemand.com) \
+smctl login -a https://service-manager.cfapps.eu10.hana.ondemand.com \
   --param subdomain=my-subaccount \
   --auth-flow client-credentials \
   --client-id abc123 \
   --client-secret xyz789
 
 # Client credentials (X.509)
-smctl login -a [https://service-manager.cfapps.eu10.hana.ondemand.com](https://service-manager.cfapps.eu10.hana.ondemand.com) \
+smctl login -a https://service-manager.cfapps.eu10.hana.ondemand.com \
   --param subdomain=my-subaccount \
   --auth-flow client-credentials \
   --client-id abc123 \
@@ -399,7 +399,7 @@ smctl register-broker [name] [url] <description> [flags]
 
 **Example**:
 ```bash
-smctl register-broker my-broker [https://broker.example.com](https://broker.example.com) "My broker" \
+smctl register-broker my-broker https://broker.example.com "My broker" \
   -b admin:password123
 ```
 
@@ -423,7 +423,7 @@ smctl update-broker [name] <json_broker> [flags]
 
 **Example**:
 ```bash
-smctl update-broker broker '{"name": "new-name", "description": "new-description", "broker_url": "[http://broker.com",](http://broker.com",) "credentials": { "basic": { "username": "admin", "password": "admin" }}}'
+smctl update-broker broker '{"name": "new-name", "description": "new-description", "broker_url": "http://broker.com", "credentials": { "basic": { "username": "admin", "password": "admin" }}}'
 ```
 
 ---

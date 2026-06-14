@@ -244,7 +244,7 @@ When certificate login enabled, username/password fields hidden.
 2. **Register Application**:
    ```
    Application Name: <descriptive-name>
-   Application URL: [https://api.cf.<region>.ondemand.com/<subaccount-GUID>](https://api.cf.<region>.ondemand.com/<subaccount-GUID>)
+   Application URL: https://api.cf.<region>.ondemand.com/<subaccount-GUID>
    X.509 Certificate: <paste downloaded certificate>
    ```
 
@@ -258,14 +258,14 @@ When certificate login enabled, username/password fields hidden.
 {
   "Name": "successfactors-dest",
   "Type": "HTTP",
-  "URL": "[https://<sf-instance>.successfactors.com",](https://<sf-instance>.successfactors.com",)
+  "URL": "https://<sf-instance>.successfactors.com",
   "Authentication": "OAuth2SAMLBearerAssertion",
   "ProxyType": "Internet",
   "audience": "www.successfactors.com",
   "apiKey": "<API-Key-from-SF>",
   "companyId": "<company-id>",
   "clientKey": "<client-key-from-sf-oauth>",
-  "tokenServiceUrl": "[https://<sf-api>.successfactors.com/oauth/token",](https://<sf-api>.successfactors.com/oauth/token",)
+  "tokenServiceUrl": "https://<sf-api>.successfactors.com/oauth/token",
   "tokenServiceUser": "<token-service-user>",
   "tokenServicePassword": "<token-service-password>"
 }

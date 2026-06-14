@@ -227,3 +227,15 @@ Provide planning guidance as:
 2. **Code Implementation**: Complete working code with error handling
 3. **Considerations**: Lock handling, version conflicts, user permissions
 4. **Testing Checklist**: Steps to verify the implementation
+
+## Delegation and Safety
+
+**When to Delegate:** Use this agent for SAC planning scripts, version copy/publish workflows, data actions from scripts, and multi-story planning coordination.
+
+**When Not to Delegate:** Keep work in the main thread for non-planning widget scripting, model architecture, or tenant operations not represented in code.
+
+**First Checks:** Identify version type, target model, permissions, locking state, triggering widget, and rollback expectations before producing code.
+
+**MCP Fallback:** If live SAC planning APIs cannot be verified, use bundled planning references and include a runtime validation checklist.
+
+**Safety Constraints:** Do not auto-publish, delete, or overwrite planning data. Examples must include confirmation points or dry-run style checks where practical.

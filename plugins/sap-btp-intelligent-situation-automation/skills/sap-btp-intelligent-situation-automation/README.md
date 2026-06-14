@@ -10,6 +10,18 @@ This skill is now archived and maintained only for:
 - Unsubscription instructions
 - Historical reference
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 1: `/isa-export-readiness` |
+| Agents | 0 |
+| Hooks | No |
+| MCP | No |
+| LSP | No |
+| Source Freshness | `last_verified`: 2025-11-27; archived-service status is preserved and live checks remain pending. |
+| Verification | `npm run validate`; current tenant export/runtime checks require access. |
+
 ## Overview (For Reference)
 
 This skill previously provided guidance for implementing situation-based automation between SAP S/4HANA systems and SAP Business Technology Platform.

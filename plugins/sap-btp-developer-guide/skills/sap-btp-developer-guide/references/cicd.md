@@ -91,7 +91,7 @@ stages:
 
   Release:
     cloudFoundryDeploy: true
-    cfApiEndpoint: [https://api.cf.eu10.hana.ondemand.com](https://api.cf.eu10.hana.ondemand.com)
+    cfApiEndpoint: https://api.cf.eu10.hana.ondemand.com
     cfOrg: my-org
     cfSpace: my-space
     mtarFilePath: mta_archives/my-cap-app.mtar
@@ -126,14 +126,14 @@ stages:
   Acceptance:
     cfDeploy: true
     cloudFoundryDeploy: true
-    cfApiEndpoint: [https://api.cf.eu10.hana.ondemand.com](https://api.cf.eu10.hana.ondemand.com)
+    cfApiEndpoint: https://api.cf.eu10.hana.ondemand.com
     cfOrg: my-org
     cfSpace: dev
 
   Release:
     cfDeploy: true
     cloudFoundryDeploy: true
-    cfApiEndpoint: [https://api.cf.eu10.hana.ondemand.com](https://api.cf.eu10.hana.ondemand.com)
+    cfApiEndpoint: https://api.cf.eu10.hana.ondemand.com
     cfOrg: my-org
     cfSpace: prod
 ```

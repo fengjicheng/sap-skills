@@ -103,7 +103,7 @@ echo "<ingest-mtls-key>" > client.key
 
 Create user-provided service:
 ```bash
-cf cups <ups-name> -l "[https://<ingest-mtls-endpoint>"](https://<ingest-mtls-endpoint>") \
+cf cups <ups-name> -l "https://<ingest-mtls-endpoint>" \
   -p '{"cert": "<contents-of-client.crt>", "key": "<contents-of-client.key>"}'
 ```
 

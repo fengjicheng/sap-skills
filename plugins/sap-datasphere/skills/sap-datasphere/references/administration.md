@@ -98,8 +98,8 @@
 {
   "clientid": "sb-xxx",
   "clientsecret": "xxx",
-  "url": "[https://xxx.authentication.xxx.hana.ondemand.com",](https://xxx.authentication.xxx.hana.ondemand.com",)
-  "apiurl": "[https://xxx.hana.ondemand.com"](https://xxx.hana.ondemand.com")
+  "url": "https://xxx.authentication.xxx.hana.ondemand.com",
+  "apiurl": "https://xxx.hana.ondemand.com"
 }
 ```
 
@@ -611,7 +611,7 @@ Elastic compute nodes provide additional processing capacity for intensive workl
 **Agent Properties**:
 ```properties
 # Connection settings
-datasphere.tenant.url=[https://xxx.hana.ondemand.com](https://xxx.hana.ondemand.com)
+datasphere.tenant.url=https://xxx.hana.ondemand.com
 datasphere.agent.name=dp_agent_01
 
 # Performance settings

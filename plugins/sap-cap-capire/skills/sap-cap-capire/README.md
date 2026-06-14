@@ -2,6 +2,18 @@
 
 A comprehensive Claude Code skill for SAP Cloud Application Programming Model (CAP) development.
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 5: `/cap-cds-reference`, `/cap-deployment-checklist`, `/cap-mcp-tools`, `/cap-setup-wizard`, `/cap-troubleshooter` |
+| Agents | 4: `cap-cds-modeler`, `cap-performance-debugger`, `cap-project-architect`, `cap-service-developer` |
+| Hooks | Yes: `hooks/hooks.json` |
+| MCP | Yes: `.mcp.json` |
+| LSP | Yes: `.lsp.json` |
+| Source Freshness | `last_verified`: 2026-02-22; CAP MCP/LSP package freshness noted separately in audit report. |
+| Verification | `npm run validate`; live CAP tenant/deployment checks pending unless project evidence exists. |
+
 ## Overview
 
 This skill provides guidance for building enterprise-grade applications using SAP CAP framework. It covers the complete development lifecycle from project initialization to production deployment.
@@ -217,8 +229,8 @@ sap-cap-capire/
 
 - **Skill Version**: 2.1.0
 - **CAP Version**: @sap/cds 9.4.x
-- **MCP Version**: @cap-js/mcp-server 0.0.3+
-- **Last Verified**: 2025-12-28
+- **MCP Version**: @cap-js/mcp-server 0.0.5
+- **Last Verified**: 2026-02-22
 
 ## License
 

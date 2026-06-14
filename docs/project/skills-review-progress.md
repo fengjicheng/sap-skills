@@ -221,7 +221,7 @@ This section describes the historical audit process only. New reviews should fol
 | 78 | project-workflow | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | 🟠 | ✅ | ✅ | ✅ | ✅ | ⏳ | ⏳ | 1H | 2025-11-21 |
 | 79 | mcp-dynamic-orchestrator | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 0 | 2025-11-21 |
 | 80 | retired automated review plugin | ✅ | ✅ | ✅ | ✅ | ✅ | 🟠 | 🟠 | ✅ | ✅ | ✅ | ✅ | ⏳ | ⏳ | 1M | 2025-11-21 |
-| 81 | dependency-upgrade | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 0 | 2025-11-21 |
+| 81 | sap-dependency-security | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 0 | 2025-11-21 |
 | 82 | github-project-automation | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | 🟠 | ✅ | ✅ | ✅ | ✅ | ⏳ | ⏳ | 1H | 2025-11-21 |
 | 83 | open-source-contributions | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | 🟠 | ✅ | ✅ | ✅ | ✅ | ⏳ | ⏳ | 1H | 2025-11-21 |
 | 84 | swift-best-practices | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 0 | 2025-11-21 |

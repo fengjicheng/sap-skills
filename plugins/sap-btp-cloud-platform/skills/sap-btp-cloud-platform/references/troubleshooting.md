@@ -179,7 +179,7 @@ Common issues and solutions for SAP BTP.
 {
   "oauth2-configuration": {
     "redirect-uris": [
-      "[https://myapp.cfapps.eu10.hana.ondemand.com/**"](https://myapp.cfapps.eu10.hana.ondemand.com/**")
+      "https://myapp.cfapps.eu10.hana.ondemand.com/**"
     ]
   }
 }
@@ -447,7 +447,7 @@ kubectl get all -n <ns>
 echo "<token>" | cut -d. -f2 | base64 -d | jq
 
 # Test token endpoint
-curl -X POST "[https://<uaa-url>/oauth/token"](https://<uaa-url>/oauth/token") \
+curl -X POST "https://<uaa-url>/oauth/token" \
   -H "Content-Type: application/x-www-form-urlencoded" \
   -d "grant_type=client_credentials" \
   -u "client_id:client_secret"

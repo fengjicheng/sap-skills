@@ -35,7 +35,7 @@ resources:
             destinations:
               - Name: my-destination
                 Type: HTTP
-                URL: [https://api.example.com](https://api.example.com)
+                URL: https://api.example.com
                 Authentication: NoAuthentication
 ```
 
@@ -59,7 +59,7 @@ resources:
         {
           "Name": "my-destination",
           "Type": "HTTP",
-          "URL": "[https://api.example.com",](https://api.example.com",)
+          "URL": "https://api.example.com",
           "Authentication": "OAuth2ClientCredentials",
           "clientId": "...",
           "clientSecret": "...",
@@ -99,9 +99,9 @@ resources:
 {
   "Name": "ias-saml-provider",
   "Type": "HTTP",
-  "URL": "[https://ias-tenant.accounts.ondemand.com",](https://ias-tenant.accounts.ondemand.com",)
+  "URL": "https://ias-tenant.accounts.ondemand.com",
   "Authentication": "OAuth2TokenExchange",
-  "tokenServiceURL": "[https://ias-tenant.accounts.ondemand.com/oauth2/token"](https://ias-tenant.accounts.ondemand.com/oauth2/token")
+  "tokenServiceURL": "https://ias-tenant.accounts.ondemand.com/oauth2/token"
 }
 ```
 
@@ -110,7 +110,7 @@ resources:
 {
   "Name": "target-api",
   "Type": "HTTP",
-  "URL": "[https://api.example.com",](https://api.example.com",)
+  "URL": "https://api.example.com",
   "Authentication": "OAuth2SAMLBearerAssertion",
   "x_chain_name": "com.sap.iasGeneratedOAuth2SamlBearerAssertion",
   "x_chain_var_saml_provider": "ias-saml-provider"

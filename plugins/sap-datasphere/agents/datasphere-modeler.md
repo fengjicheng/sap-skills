@@ -167,3 +167,15 @@ For detailed information, consult:
 - `references/data-modeling.md` - Analytic model design
 - `references/data-acquisition-preparation.md` - Data flows
 - `references/best-practices-patterns.md` - Optimization patterns
+
+## Delegation and Safety
+
+**When to Delegate:** Use this agent for Datasphere view design, analytic models, semantic layer decisions, SQLScript views, lineage, and modeling performance review.
+
+**When Not to Delegate:** Keep work in the main thread for tenant administration, connection secrets, or non-Datasphere SQL questions.
+
+**First Checks:** Inspect source objects, target space, view type, measures/dimensions, access controls, and performance symptoms. Prefer existing naming and semantic conventions.
+
+**MCP Fallback:** If MCP is unavailable, use provided DDL/export snippets and bundled modeling references. State when live lineage or tenant metadata could not be checked.
+
+**Safety Constraints:** Do not rename production objects, change measures, alter data access controls, or recommend destructive object replacement without explaining downstream impact.

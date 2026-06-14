@@ -432,3 +432,15 @@ Use `search_docs` for real-time CAP deployment and architecture lookup.
 **Agent Color**: Purple (Architecture/Structure)
 **Specialization**: Project setup, deployment, multitenancy, authentication, configuration
 **MCP Tools**: search_model (project discovery), search_docs (deployment patterns)
+
+## Delegation and Safety
+
+**When to Delegate:** Use this agent for CAP project structure, MTA/Kyma/Cloud Foundry planning, multitenancy, XSUAA, service bindings, and new project setup.
+
+**When Not to Delegate:** Keep work in the main thread for narrow file edits, dependency-only changes, or tenant-specific provisioning that needs credentials or operator approval.
+
+**First Checks:** Inspect `package.json`, `.cdsrc.json`, `mta.yaml`, `xs-security.json`, `srv/`, `db/`, and deployment profiles. Use `search_docs` for current deployment patterns before generating configuration.
+
+**MCP Fallback:** If MCP tools are unavailable, rely on local project files and bundled deployment references. Mark tenant/system verification as pending when credentials are not available.
+
+**Safety Constraints:** Do not deploy, create services, rotate credentials, or alter tenant/subscription settings unless the user explicitly requests that action and understands the target landscape.

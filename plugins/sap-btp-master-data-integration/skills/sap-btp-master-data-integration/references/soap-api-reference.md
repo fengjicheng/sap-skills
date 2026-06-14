@@ -16,7 +16,7 @@ Complete reference for SOAP-based integrations with SAP Master Data Integration.
 ## Endpoint Base URL
 
 ```
-[https://one-mds.cfapps.{region}.hana.ondemand.com/businesspartner/v0/soap/](https://one-mds.cfapps.{region}.hana.ondemand.com/businesspartner/v0/soap/)
+https://one-mds.cfapps.{region}.hana.ondemand.com/businesspartner/v0/soap/
 ```
 
 **Regions**: For the complete, current list of SAP BTP Cloud Foundry regions and API endpoints, see:
@@ -35,7 +35,7 @@ URL Param: ?tenantId=<identityzone>
 
 Example:
 ```
-[https://one-mds.cfapps.eu10.hana.ondemand.com:443/businesspartner/v0/soap/BusinessPartnerBulkReplicateRequestIn?tenantId=<identityzone>](https://one-mds.cfapps.eu10.hana.ondemand.com:443/businesspartner/v0/soap/BusinessPartnerBulkReplicateRequestIn?tenantId=<identityzone>)
+https://one-mds.cfapps.eu10.hana.ondemand.com:443/businesspartner/v0/soap/BusinessPartnerBulkReplicateRequestIn?tenantId=<identityzone>
 ```
 
 ### OAuth Authentication

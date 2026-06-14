@@ -299,7 +299,7 @@ Connect from local VS Code desktop to BAS dev spaces.
   "vscodeExtensions": [
     {
       "name": "extension-name",
-      "url": "[https://url-to-vsix-file"](https://url-to-vsix-file")
+      "url": "https://url-to-vsix-file"
     }
   ]
 }

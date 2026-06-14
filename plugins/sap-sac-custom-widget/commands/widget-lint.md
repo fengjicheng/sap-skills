@@ -14,6 +14,10 @@ argument-hint: [file_path]
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
 
+## Output Contract
+
+Return widget lint findings grouped by security, lifecycle, performance, and packaging, with file references and suggested fixes. Default to read-only analysis and do not edit files.
+
 
 # SAC Custom Widget Linter Command
 

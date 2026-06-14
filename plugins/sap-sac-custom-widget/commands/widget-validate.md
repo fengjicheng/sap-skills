@@ -13,6 +13,10 @@ argument-hint: [file_path]
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
 
+## Output Contract
+
+Return validation status, manifest/resource findings, packaging risks, and safe local checks. Default to read-only validation and do not upload or publish widget content.
+
 
 # SAC Custom Widget Validation Command
 

@@ -193,7 +193,7 @@ cf service-key my-abap-system my-key
 
 | Component | URL Pattern |
 |-----------|-------------|
-| Fiori Launchpad | `[https://<system>.abap.<region>.hana.ondemand.com/`](https://<system>.abap.<region>.hana.ondemand.com/`) |
+| Fiori Launchpad | `https://<system>.abap.<region>.hana.ondemand.com/` |
 | SAP GUI for HTML | Via Fiori Launchpad |
 | ADT | Via Eclipse with service key |
 

@@ -106,7 +106,7 @@ applications:
 ```yaml
 applications:
 - name: my-app
-  buildpack: [https://github.com/my-org/my-buildpack.git](https://github.com/my-org/my-buildpack.git)
+  buildpack: https://github.com/my-org/my-buildpack.git
 ```
 
 ---
@@ -143,7 +143,7 @@ cf service-key my-service my-key
 For external services not in marketplace:
 
 ```bash
-cf create-user-provided-service my-external-service -p '{"url":"[https://api.example.com","key":"xxx"}'](https://api.example.com","key":"xxx"}')
+cf create-user-provided-service my-external-service -p '{"url":"https://api.example.com","key":"xxx"}'
 ```
 
 ### VCAP_SERVICES
@@ -225,10 +225,10 @@ cf rename my-app-new my-app
 
 ```bash
 # Login
-cf login -a [https://api.cf.eu10.hana.ondemand.com](https://api.cf.eu10.hana.ondemand.com)
+cf login -a https://api.cf.eu10.hana.ondemand.com
 
 # Login with SSO
-cf login -a [https://api.cf.eu10.hana.ondemand.com](https://api.cf.eu10.hana.ondemand.com) --sso
+cf login -a https://api.cf.eu10.hana.ondemand.com --sso
 
 # Target org/space
 cf target -o my-org -s my-space

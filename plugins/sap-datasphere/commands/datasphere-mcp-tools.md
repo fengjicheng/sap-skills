@@ -1,6 +1,11 @@
 ---
 name: datasphere-mcp-tools
 description: List all available SAP Datasphere MCP tools with descriptions and usage examples
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 ---
 
 ## Shell Snippet Notes
@@ -8,6 +13,10 @@ description: List all available SAP Datasphere MCP tools with descriptions and u
 - Shell snippets assume Bash on Linux/macOS, WSL2, or Git Bash.
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
+
+## Output Contract
+
+Return the relevant MCP tool category, configuration checks, local fallback approach, and unresolved tenant/MCP availability items. Default to read-only guidance and avoid changing MCP config.
 
 
 Display available MCP tools for SAP Datasphere integration.
@@ -17,7 +26,7 @@ Display available MCP tools for SAP Datasphere integration.
 The SAP Datasphere MCP Server (@mariodefe/sap-datasphere-mcp) provides 45 tools for direct tenant interaction.
 
 **GitHub:** https://github.com/MarioDeFelipe/sap-datasphere-mcp
-**Package:** npm install -g @mariodefe/sap-datasphere-mcp
+**Package:** npm install -g @mariodefe/sap-datasphere-mcp@1.2.1
 
 ---
 
@@ -340,7 +349,7 @@ Common errors and solutions:
 
 Run diagnostics:
 ```bash
-npx @mariodefe/sap-datasphere-mcp --test
+npx @mariodefe/sap-datasphere-mcp@1.2.1 --test
 ```
 
 Enable debug mode (add to .env):
@@ -350,7 +359,7 @@ LOG_LEVEL=debug
 
 Check MCP server status:
 ```bash
-# From Claude Code, use:
+# From the Code CLI, use:
 /mcp
 ```
 

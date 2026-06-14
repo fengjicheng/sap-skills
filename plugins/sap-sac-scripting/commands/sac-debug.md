@@ -1,6 +1,11 @@
 ---
 name: sac-debug
 description: Debug SAC script issues with guided analysis and common error resolution
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+argument-hint: "[error-or-widget]"
 arguments:
   - name: error
     description: "Error message or description of the issue (optional)"
@@ -12,6 +17,10 @@ arguments:
 - Shell snippets assume Bash on Linux/macOS, WSL2, or Git Bash.
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
+
+## Output Contract
+
+Return the likely script error cause, reproduction questions, API/version caveats, safe code suggestions, and pending SAC runtime checks. Default to read-only debugging.
 
 
 Provide guided SAC script debugging assistance.

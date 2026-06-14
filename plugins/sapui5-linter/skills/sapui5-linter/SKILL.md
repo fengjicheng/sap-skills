@@ -3,12 +3,11 @@ name: sapui5-linter
 description: "Use this skill when working with the UI5 Linter (@ui5/linter) for static code analysis of SAPUI5/OpenUI5 applications and libraries. Covers setup, configuring linting rules, running the linter to detect deprecated APIs, global variable usage, CSP violations, and manifest issues. Supports autofix for deprecated API usage, global references, event handlers, and manifest properties. Includes CI/CD integration, pre-commit hooks, and UI5 2.x migration preparation."
 license: GPL-3.0
 metadata:
-  version: "1.0.0"
-  last_updated: "2026-05-31"
-  ui5_linter_version: "1.21.1"
+  version: "2.3.0"
+  last_verified: "2026-06-14"
+  ui5_linter_version: "1.22.0"
   source: "https://github.com/UI5/linter"
   documentation: "https://github.com/UI5/linter/blob/main/README.md"
-  status: "CONTENT_RESTRUCTURED"
   keywords: [SAPUI5, OpenUI5, UI5 Linter, "@ui5/linter", static analysis, deprecated APIs, global variables, CSP, manifest.json, ui5.yaml, ESLint, pre-commit hooks, GitHub Actions, CI/CD, Node.js, TypeScript, XML, JSON, HTML, YAML, OData v2/v4, async, event handlers, jQuery, autofix, performance optimization, 19 linting rules, no-deprecated-api, no-globals, no-async-component-flags, manifest-v2, UI5 2.x migration]
 ---
 
@@ -16,7 +15,11 @@ metadata:
 
 ## Related Skills
 
-- **dependency-upgrade**: Use when hardening dependency management for UI5 linting toolchain upgrades and plugin/toolchain lockfile controls
+- **sap-dependency-security**: Use when hardening dependency management for UI5 linting toolchain upgrades and plugin/toolchain lockfile controls
+
+## When to Use This Skill
+
+Use this skill when adding or running `@ui5/linter`, configuring UI5 lint rules, preparing UI5 2.x migrations, autofixing deprecated APIs/globals/manifest issues, producing CI reports, or troubleshooting `ui5lint` parsing, performance, or configuration behavior.
 
 ## Table of Contents
 - [Overview](#overview)
@@ -37,7 +40,7 @@ The **UI5 Linter** (@ui5/linter) is a static code analysis tool designed specifi
 - ✅ Multiple output formats: stylish, JSON, Markdown, HTML
 - ✅ Fast performance: 1-40s depending on project size
 
-**Current Version**: 1.21.1 (verified via npm on 2026-05-31)
+**Current Version**: 1.22.0 (verified via npm on 2026-06-14)
 **Official Repository**: [https://github.com/UI5/linter](https://github.com/UI5/linter)
 
 ---
@@ -69,7 +72,7 @@ npm install --save-dev @ui5/linter
 
 Verify installation:
 ```bash
-ui5lint --version  # Should output: 1.21.1 or higher
+ui5lint --version  # Should output: 1.22.0 or higher
 ```
 
 ### Basic Usage
@@ -81,7 +84,7 @@ ui5lint
 
 # Lint specific files or directories
 ui5lint "webapp/**/*.js"
-ui5ling "webapp/controller/" "webapp/view/"
+ui5lint "webapp/controller/" "webapp/view/"
 
 # Show detailed information about findings
 ui5lint --details
@@ -217,7 +220,7 @@ ui5lint --perf
     "lint:report": "ui5lint --format html --details > lint-report.html"
   },
   "devDependencies": {
-    "@ui5/linter": "^1.21.1"
+    "@ui5/linter": "^1.22.0"
   }
 }
 ```
@@ -313,7 +316,7 @@ ui5lint --perf
 - **Husky Pre-commit**: `templates/husky-pre-commit.template`
 
 ### Support and Updates
-- **Version**: 1.21.1 (Current)
+- **Version**: 1.22.0 (Current)
 - **Release Notes**: Available in GitHub releases
 - **Roadmap**: Documented in GitHub Issues and Discussions
 - **Email**: security@sap.com
@@ -335,6 +338,6 @@ ui5lint --perf
 
 ---
 
-**Last Updated**: 2026-05-31 | **Version**: 1.0.1 (Restructured)
-**Previous Version**: 1.0.0 | **Lines Reduced**: 376 (from 827)
+**Last Updated**: 2026-06-14 | **Version**: 2.3.0
+**Previous Restructure Version**: 1.0.1 | **Lines Reduced**: 376 (from 827)
 **Next Review**: 2026-02-25

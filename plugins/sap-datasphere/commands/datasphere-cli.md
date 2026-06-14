@@ -1,6 +1,10 @@
 ---
 name: datasphere-cli
 description: SAP Datasphere CLI command reference with examples
+allowed-tools:
+  - Read
+  - Bash
+argument-hint: "<auth|spaces|objects|tasks|users|marketplace>"
 arguments:
   - name: command
     description: "Command category: auth, spaces, objects, tasks, users, marketplace"
@@ -12,6 +16,10 @@ arguments:
 - Shell snippets assume Bash on Linux/macOS, WSL2, or Git Bash.
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
+
+## Output Contract
+
+Return the relevant Datasphere CLI command set, authentication assumptions, safe read-only examples first, and tenant actions that require confirmation. Do not execute mutating CLI commands by default.
 
 
 Generate CLI command reference for the specified category.

@@ -2,6 +2,18 @@
 
 Comprehensive Claude Code plugin for SAP Datasphere development with 3 specialized agents, 5 slash commands, validation hooks, and 17 reference documents covering data warehouse creation, analytic modeling, data integration, CLI automation, data marketplace, governance, and SAP Business Data Cloud.
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 5: `/datasphere-cli`, `/datasphere-connection-guide`, `/datasphere-mcp-tools`, `/datasphere-space-template`, `/datasphere-view-template` |
+| Agents | 3: `datasphere-admin-helper`, `datasphere-integration-advisor`, `datasphere-modeler` |
+| Hooks | Yes: `hooks/hooks.json` |
+| MCP | Yes: `.mcp.json` |
+| LSP | No |
+| Source Freshness | `last_verified`: 2026-06-11; MCP package upgrade candidate and tenant checks tracked separately. |
+| Verification | `npm run validate`; live Datasphere tenant checks pending unless evidence is provided. |
+
 ## Overview
 
 SAP Datasphere is SAP's cloud-native data warehouse solution on SAP Business Technology Platform (BTP) and the data foundation of SAP Business Data Cloud (BDC). This plugin provides comprehensive guidance for building enterprise data warehouses with SAP Datasphere, including 2026 features like task chain ports, replication flow enhancements, SAP Snowflake integration, and BDC data products.
@@ -49,7 +61,7 @@ This plugin integrates with the SAP Datasphere MCP Server for direct tenant inte
 
 1. **Install MCP Server:**
    ```bash
-   npm install -g @mariodefe/sap-datasphere-mcp
+   npm install -g @mariodefe/sap-datasphere-mcp@1.2.1
    ```
 
 2. **Configure Environment Variables:**

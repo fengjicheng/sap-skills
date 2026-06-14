@@ -8,10 +8,10 @@ description: |
   Node.js and Java runtimes, event handlers, OData services, and CAP plugins.
 license: GPL-3.0
 metadata:
-  version: "2.1.2"
+  version: "2.3.0"
   last_verified: "2026-02-22"
   cap_version: "@sap/cds 9.7.x"
-  mcp_version: "@cap-js/mcp-server 0.0.3+"
+  mcp_version: "@cap-js/mcp-server 0.0.5"
   lsp_version: "@sap/cds-lsp 9.7.x"
 ---
 
@@ -29,7 +29,20 @@ metadata:
 - **sap-cloud-sdk-ai**: Use for SDK-level AI integration (chat completion, streaming, tool calling) in CAP event handlers
 - **sap-cloud-sdk-ai-python**: Use for Python-based AI integration with CAP Java or standalone BTP services
 - **sap-api-style**: Use when documenting CAP OData services or following API documentation standards
-- **dependency-upgrade**: Use for secure dependency, lockfile, and supply-chain upgrade controls in CAP service repos
+- **sap-dependency-security**: Use for secure dependency, lockfile, supply-chain, and exact MCP server pin controls in CAP service repos
+
+## When to Use This Skill
+
+Use this skill when creating CAP projects, modeling CDS entities/services, implementing Node.js or Java event handlers, configuring HANA/SQLite/PostgreSQL persistence, deploying to BTP Cloud Foundry or Kyma, adding Fiori UIs, configuring authorization/multitenancy/messaging, or using CAP MCP/LSP tooling.
+
+## Common Issues
+
+| Issue | First check |
+|-------|-------------|
+| `cds watch` or `cds serve` fails | Verify `@sap/cds-dk`, Node.js version, and project `package.json` scripts. |
+| Entity/service not found | Use CAP MCP `search_model` when available, then inspect `db/` and `srv/` CDS files. |
+| HANA deployment fails | Check HDI service binding, `mta.yaml`, and the HANA deployment references. |
+| Authorization behaves unexpectedly | Review `@requires`, `@restrict`, XSUAA/IAS bindings, and user role mappings. |
 
 ## Table of Contents
 - [Quick Start](#quick-start)
@@ -109,11 +122,20 @@ This skill integrates with the official CAP MCP (Model Context Protocol) server,
 - **Zero Configuration**: No credentials or environment variables required
 - **Offline-Capable**: All searches are local (model) or cached (docs)
 
-**Setup**: See [MCP Integration Guide](references/mcp-integration.md) for configuration with Claude Code, opencode, or GitHub Copilot.
+**Setup**: See [MCP Integration Guide](references/mcp-integration.md) for configuration with Claude Code, opencode, or GitHub Copilot. MCP package pins are governed by **sap-dependency-security** and validated by `npm run validate:mcp-security`.
 
 **Use Cases**: See [MCP Use Cases](references/mcp-use-cases.md) for real-world examples with quantified ROI (~$131K/developer/year time savings).
 
 **Agent Integration**: The specialized agents (cap-cds-modeler, cap-service-developer, cap-project-architect, cap-performance-debugger) automatically use these MCP tools as part of their workflows.
+
+### CAP MCP and LSP Routing
+
+Use MCP first for local model and docs questions, then fall back to direct file search when MCP is unavailable. Use `rg -n "<entity|service|aspect|annotation|handler|cds compile|deployment>" references/*.md srv db app` to locate the narrowest reference before loading long CAP guides.
+
+- Use `references/mcp-integration.md` for MCP configuration and package pin checks.
+- Use `references/mcp-use-cases.md` only for workflow selection and ROI examples.
+- Use `.lsp.json` as a sidecar for editor integration; it is intentionally not exposed as a manifest field.
+- Mark live deployment, HANA, XSUAA, and multitenancy verification pending unless the target project or tenant evidence is available.
 
 ## Project Structure
 ```
@@ -462,7 +484,7 @@ cds version               # Show version info
 ## Version Information
 - **Skill Version**: 2.1.2
 - **CAP Version**: @sap/cds 9.7.x
-- **MCP Version**: @cap-js/mcp-server 0.0.3+
+- **MCP Version**: @cap-js/mcp-server 0.0.5
 - **LSP Version**: @sap/cds-lsp 9.7.x
 - **Last Verified**: 2026-02-22
 - **License**: GPL-3.0

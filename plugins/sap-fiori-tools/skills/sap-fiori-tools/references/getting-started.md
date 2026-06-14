@@ -41,7 +41,7 @@ Use package manager: Homebrew or Node Version Manager (nvm)
 ```bash
 npm config get @sap:registry
 ```
-Expected values: `[https://registry.npmjs.org`](https://registry.npmjs.org`) or `undefined`
+Expected values: `https://registry.npmjs.org` or `undefined`
 
 If set incorrectly to `@sap`, remove entry from `.npmrc` file in home directory.
 

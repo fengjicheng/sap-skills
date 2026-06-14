@@ -360,13 +360,13 @@ def Message processData(Message message) {
     def endpoint
     switch(json.region) {
         case "US":
-            endpoint = "[https://us-api.example.com"](https://us-api.example.com")
+            endpoint = "https://us-api.example.com"
             break
         case "EU":
-            endpoint = "[https://eu-api.example.com"](https://eu-api.example.com")
+            endpoint = "https://eu-api.example.com"
             break
         default:
-            endpoint = "[https://default-api.example.com"](https://default-api.example.com")
+            endpoint = "https://default-api.example.com"
     }
 
     message.setProperty("TargetEndpoint", endpoint)

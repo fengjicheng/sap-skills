@@ -10,13 +10,24 @@ description: |
   ingestion methods (Cloud Foundry, Kyma, OpenTelemetry, JSON API), and security best practices.
 license: GPL-3.0
 metadata:
-  version: "1.1.0"
+  version: "2.3.0"
   last_verified: "2025-11-27"
   source_documentation: "https://github.com/SAP-docs/btp-cloud-logging"
   sap_help_portal: "https://help.sap.com/docs/cloud-logging"
 ---
 
 # SAP BTP Cloud Logging Skill
+
+## Related Skills
+
+- **sap-btp-cloud-platform**: Use for BTP subaccount setup, entitlements, and runtime context
+- **sap-btp-cloud-identity-services**: Use for SAML/IAS authentication and trust configuration
+- **sap-btp-developer-guide**: Use for application observability patterns across CAP and BTP apps
+- **sap-btp-best-practices**: Use for production monitoring and operations governance
+
+## When to Use This Skill
+
+Use this skill when creating Cloud Logging instances, choosing service plans, configuring Cloud Foundry/Kyma/OpenTelemetry/JSON ingestion, rotating certificates, setting up OpenSearch dashboards, enabling SAML, or troubleshooting missing logs, metrics, traces, or alerts.
 
 ## Table of Contents
 
@@ -197,8 +208,8 @@ spec:
     "admin_group": "CLS-Admins",
     "roles_key": "groups",
     "idp": {
-      "metadata_url": "[https://<tenant>.accounts.ondemand.com/saml2/metadata",](https://<tenant>.accounts.ondemand.com/saml2/metadata",)
-      "entity_id": "[https://<tenant>.accounts.ondemand.com"](https://<tenant>.accounts.ondemand.com")
+      "metadata_url": "https://<tenant>.accounts.ondemand.com/saml2/metadata",
+      "entity_id": "https://<tenant>.accounts.ondemand.com"
     },
     "sp": {
       "entity_id": "cloud-logging-<instance-id>"
@@ -259,7 +270,7 @@ For Java/Node.js automation libraries, see `references/opentelemetry-ingestion.m
 ### 4. JSON API
 Send logs via HTTP with mTLS:
 ```bash
-curl -X PUT "[https://<ingest-endpoint>/v1/ingest"](https://<ingest-endpoint>/v1/ingest") \
+curl -X PUT "https://<ingest-endpoint>/v1/ingest" \
   --cert client.crt --key client.key \
   -H "Content-Type: application/json" \
   -d '[{"msg": "log message", "date": "2025-01-15T10:30:00Z"}]'

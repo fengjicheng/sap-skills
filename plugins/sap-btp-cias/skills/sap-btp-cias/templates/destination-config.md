@@ -13,7 +13,7 @@ Templates for configuring destinations in Cloud Integration Automation Service.
 | Name | `<SYSTEM_ID>_DEST` | Use meaningful identifier |
 | Type | `HTTP` | Default |
 | Description | Integration destination for [System Name] | Purpose description |
-| URL | `[https://<hostname>:<port>`](https://<hostname>:<port>`) | Always use HTTPS |
+| URL | `https://<hostname>:<port>` | Always use HTTPS |
 | Proxy Type | `Internet` | For cloud systems |
 | Authentication | See options below | Based on requirements |
 
@@ -42,7 +42,7 @@ Password: <password>
 Authentication: OAuth2ClientCredentials
 Client ID: <client_id>
 Client Secret: <client_secret>
-Token Service URL: [https://<auth_server>/oauth/token](https://<auth_server>/oauth/token)
+Token Service URL: https://<auth_server>/oauth/token
 ```
 
 **Use when**:
@@ -56,7 +56,7 @@ Token Service URL: [https://<auth_server>/oauth/token](https://<auth_server>/oau
 Authentication: OAuth2UserTokenExchange
 Client ID: <client_id>
 Client Secret: <client_secret>
-Token Service URL: [https://<auth_server>/oauth/token](https://<auth_server>/oauth/token)
+Token Service URL: https://<auth_server>/oauth/token
 ```
 
 **Use when**:
@@ -85,12 +85,12 @@ Key Store Password: <keystore_password>
 ```
 Name: S4HC_<TENANT_ID>
 Type: HTTP
-URL: [https://<tenant>.s4hana.ondemand.com](https://<tenant>.s4hana.ondemand.com)
+URL: https://<tenant>.s4hana.ondemand.com
 Proxy Type: Internet
 Authentication: OAuth2SAMLBearerAssertion
-Audience: [https://<tenant>.s4hana.ondemand.com](https://<tenant>.s4hana.ondemand.com)
+Audience: https://<tenant>.s4hana.ondemand.com
 Client Key: <client_key>
-Token Service URL: [https://<tenant>.s4hana.ondemand.com/sap/bc/sec/oauth2/token](https://<tenant>.s4hana.ondemand.com/sap/bc/sec/oauth2/token)
+Token Service URL: https://<tenant>.s4hana.ondemand.com/sap/bc/sec/oauth2/token
 Token Service User: <communication_user>
 Token Service Password: <password>
 ```
@@ -100,7 +100,7 @@ Token Service Password: <password>
 ```
 Name: S4OP_<SYSTEM_ID>
 Type: HTTP
-URL: [http://<virtual_host>:<virtual_port>](http://<virtual_host>:<virtual_port>)
+URL: http://<virtual_host>:<virtual_port>
 Proxy Type: OnPremise
 Location ID: <cloud_connector_location_id>
 Authentication: BasicAuthentication
@@ -113,12 +113,12 @@ Password: <password>
 ```
 Name: SFSF_<COMPANY_ID>
 Type: HTTP
-URL: [https://<datacenter>.successfactors.com](https://<datacenter>.successfactors.com)
+URL: https://<datacenter>.successfactors.com
 Proxy Type: Internet
 Authentication: OAuth2SAMLBearerAssertion
 Audience: www.successfactors.com
 Client Key: <api_key>
-Token Service URL: [https://<datacenter>.successfactors.com/oauth/token](https://<datacenter>.successfactors.com/oauth/token)
+Token Service URL: https://<datacenter>.successfactors.com/oauth/token
 Token Service User: <admin_user>
 Token Service Password: <password>
 ```
@@ -128,12 +128,12 @@ Token Service Password: <password>
 ```
 Name: CPI_<TENANT_ID>
 Type: HTTP
-URL: [https://<tenant>.it-cpi<region>.cfapps.<region>.hana.ondemand.com](https://<tenant>.it-cpi<region>.cfapps.<region>.hana.ondemand.com)
+URL: https://<tenant>.it-cpi<region>.cfapps.<region>.hana.ondemand.com
 Proxy Type: Internet
 Authentication: OAuth2ClientCredentials
 Client ID: <client_id>
 Client Secret: <client_secret>
-Token Service URL: [https://<tenant>.authentication.<region>.hana.ondemand.com/oauth/token](https://<tenant>.authentication.<region>.hana.ondemand.com/oauth/token)
+Token Service URL: https://<tenant>.authentication.<region>.hana.ondemand.com/oauth/token
 ```
 
 ### SAP BTP ABAP Environment
@@ -141,12 +141,12 @@ Token Service URL: [https://<tenant>.authentication.<region>.hana.ondemand.com/o
 ```
 Name: ABAP_ENV_<SYSTEM_ID>
 Type: HTTP
-URL: [https://<system_id>.abap.<region>.hana.ondemand.com](https://<system_id>.abap.<region>.hana.ondemand.com)
+URL: https://<system_id>.abap.<region>.hana.ondemand.com
 Proxy Type: Internet
 Authentication: OAuth2ClientCredentials
 Client ID: <client_id>
 Client Secret: <client_secret>
-Token Service URL: [https://<system_id>.authentication.<region>.hana.ondemand.com/oauth/token](https://<system_id>.authentication.<region>.hana.ondemand.com/oauth/token)
+Token Service URL: https://<system_id>.authentication.<region>.hana.ondemand.com/oauth/token
 ```
 
 ### SAP Ariba
@@ -154,12 +154,12 @@ Token Service URL: [https://<system_id>.authentication.<region>.hana.ondemand.co
 ```
 Name: ARIBA_<REALM_ID>
 Type: HTTP
-URL: [https://<datacenter>.ariba.com](https://<datacenter>.ariba.com)
+URL: https://<datacenter>.ariba.com
 Proxy Type: Internet
 Authentication: OAuth2ClientCredentials
 Client ID: <application_key>
 Client Secret: <shared_secret>
-Token Service URL: [https://api.ariba.com/v2/oauth/token](https://api.ariba.com/v2/oauth/token)
+Token Service URL: https://api.ariba.com/v2/oauth/token
 ```
 
 ### SAP Concur
@@ -167,12 +167,12 @@ Token Service URL: [https://api.ariba.com/v2/oauth/token](https://api.ariba.com/
 ```
 Name: CONCUR_<ENTITY_ID>
 Type: HTTP
-URL: [https://<datacenter>.concursolutions.com](https://<datacenter>.concursolutions.com)
+URL: https://<datacenter>.concursolutions.com
 Proxy Type: Internet
 Authentication: OAuth2ClientCredentials
 Client ID: <client_id>
 Client Secret: <client_secret>
-Token Service URL: [https://<datacenter>.concursolutions.com/oauth2/v0/token](https://<datacenter>.concursolutions.com/oauth2/v0/token)
+Token Service URL: https://<datacenter>.concursolutions.com/oauth2/v0/token
 ```
 
 ---
@@ -193,7 +193,7 @@ Token Service URL: [https://<datacenter>.concursolutions.com/oauth2/v0/token](ht
 ```
 Name: S4HC_PROD
 Type: HTTP
-URL: [https://my-tenant.s4hana.ondemand.com](https://my-tenant.s4hana.ondemand.com)
+URL: https://my-tenant.s4hana.ondemand.com
 Proxy Type: Internet
 Authentication: OAuth2SAMLBearerAssertion
 [Authentication details...]

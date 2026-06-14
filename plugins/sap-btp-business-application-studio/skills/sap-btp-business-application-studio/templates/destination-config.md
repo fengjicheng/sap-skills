@@ -16,7 +16,7 @@ Use for connecting to SAP S/4HANA, ECC, or other on-premise ABAP systems.
 # Basic Configuration
 Name = [DESTINATION_NAME]
 Type = HTTP
-URL = [https://[virtual-host]:[port]](https://[virtual-host]:[port])
+URL = https://[virtual-host]:[port]
 ProxyType = OnPremise
 Authentication = [BasicAuthentication | PrincipalPropagation | NoAuthentication]
 
@@ -48,7 +48,7 @@ Use for connecting to SAP S/4HANA Cloud public edition.
 # Basic Configuration
 Name = [DESTINATION_NAME]
 Type = HTTP
-URL = [https://[tenant].s4hana.ondemand.com](https://[tenant].s4hana.ondemand.com)
+URL = https://[tenant].s4hana.ondemand.com
 ProxyType = Internet
 Authentication = OAuth2SAMLBearerAssertion
 
@@ -60,7 +60,7 @@ HTML5.DynamicDestination = true
 WebIDEUsage = odata_abap,dev_abap
 
 # OAuth Configuration
-tokenServiceURL = [https://[tenant].s4hana.ondemand.com/sap/bc/sec/oauth2/token](https://[tenant].s4hana.ondemand.com/sap/bc/sec/oauth2/token)
+tokenServiceURL = https://[tenant].s4hana.ondemand.com/sap/bc/sec/oauth2/token
 clientKey = [CLIENT_ID]
 tokenServiceUser = [TOKEN_SERVICE_USER]
 tokenServicePassword = [TOKEN_SERVICE_PASSWORD]
@@ -81,7 +81,7 @@ Use for connecting to SAP BTP ABAP Environment (Steampunk).
 # Basic Configuration
 Name = [DESTINATION_NAME]
 Type = HTTP
-URL = [https://[abap-env-instance].abap.[region].hana.ondemand.com](https://[abap-env-instance].abap.[region].hana.ondemand.com)
+URL = https://[abap-env-instance].abap.[region].hana.ondemand.com
 ProxyType = Internet
 Authentication = OAuth2UserTokenExchange
 
@@ -109,7 +109,7 @@ Use for connecting to any OData service.
 # Basic Configuration
 Name = [DESTINATION_NAME]
 Type = HTTP
-URL = [https://[service-host]/[path]](https://[service-host]/[path])
+URL = https://[service-host]/[path]
 ProxyType = Internet
 Authentication = [BasicAuthentication | OAuth2ClientCredentials | NoAuthentication]
 
@@ -134,7 +134,7 @@ Use for connecting to SAP Business Accelerator Hub sandbox APIs.
 # Basic Configuration
 Name = [DESTINATION_NAME]
 Type = HTTP
-URL = [https://sandbox.api.sap.com](https://sandbox.api.sap.com)
+URL = https://sandbox.api.sap.com
 ProxyType = Internet
 Authentication = NoAuthentication
 
@@ -163,7 +163,7 @@ Use for connecting to SAP Cloud for Customer.
 # Basic Configuration
 Name = [DESTINATION_NAME]
 Type = HTTP
-URL = [https://[tenant].crm.ondemand.com](https://[tenant].crm.ondemand.com)
+URL = https://[tenant].crm.ondemand.com
 ProxyType = Internet
 Authentication = BasicAuthentication
 

@@ -453,7 +453,7 @@ annotate AdminService.OrderItems with @Common.SideEffects: {
 ```
 
 ### Access Preview
-Navigate to: `[http://localhost:4004/$fiori-preview/CatalogService/Books#preview-app`](http://localhost:4004/$fiori-preview/CatalogService/Books#preview-app`)
+Navigate to: `http://localhost:4004/$fiori-preview/CatalogService/Books#preview-app`
 
 ## Separation of Concerns
 

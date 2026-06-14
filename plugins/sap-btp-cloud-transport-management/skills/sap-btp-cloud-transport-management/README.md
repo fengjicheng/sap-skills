@@ -2,6 +2,18 @@
 
 Comprehensive Claude Code skill for SAP Cloud Transport Management service on SAP Business Technology Platform.
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 1: `/btp-transport-check` |
+| Agents | 0 |
+| Hooks | No |
+| MCP | No |
+| LSP | No |
+| Source Freshness | `last_verified`: 2025-11-27; import queue/runtime verification remains pending. |
+| Verification | `npm run validate`; live transport import checks require tenant access. |
+
 ## Overview
 
 This skill provides complete guidance for implementing and managing SAP Cloud Transport Management, including initial setup, landscape configuration, import queue operations, destination configuration, security, and integrations.

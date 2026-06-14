@@ -216,7 +216,7 @@ spec:
     - handler: jwt
       config:
         jwks_urls:
-        - [https://<subaccount>.authentication.<region>.hana.ondemand.com/token_keys](https://<subaccount>.authentication.<region>.hana.ondemand.com/token_keys)
+        - https://<subaccount>.authentication.<region>.hana.ondemand.com/token_keys
 ```
 
 ### Helm Chart
@@ -344,7 +344,7 @@ metadata:
   name: my-subscription
   namespace: my-namespace
 spec:
-  sink: [http://my-function.my-namespace.svc.cluster.local](http://my-function.my-namespace.svc.cluster.local)
+  sink: http://my-function.my-namespace.svc.cluster.local
   source: myapp
   types:
   - order.created.v1
@@ -382,9 +382,9 @@ accessStrategies:
 - handler: jwt
   config:
     jwks_urls:
-    - [https://<subaccount>.authentication.<region>.hana.ondemand.com/token_keys](https://<subaccount>.authentication.<region>.hana.ondemand.com/token_keys)
+    - https://<subaccount>.authentication.<region>.hana.ondemand.com/token_keys
     trusted_issuers:
-    - [https://<subaccount>.authentication.<region>.hana.ondemand.com/oauth/token](https://<subaccount>.authentication.<region>.hana.ondemand.com/oauth/token)
+    - https://<subaccount>.authentication.<region>.hana.ondemand.com/oauth/token
 ```
 
 ### RBAC

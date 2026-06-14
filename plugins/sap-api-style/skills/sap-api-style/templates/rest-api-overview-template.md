@@ -43,7 +43,7 @@ Fully supports pagination, filtering, and sorting."
 
 ## Base Information
 
-**Base URI**: `[Absolute URI where API is hosted, e.g., [https://api.example.com/v1/employees]`](https://api.example.com/v1/employees]`)
+**Base URI**: [Absolute URI where API is hosted, e.g., `https://api.example.com/v1/employees`]
 
 **Permissions**:
 - [Read/Query operations]: [Required role, e.g., ROLE_HR_USER]
@@ -127,7 +127,7 @@ The following headers appear in responses from this API:
 | X-RateLimit-Limit | Maximum API calls allowed in rate limit window. Example: `1000` |
 | X-RateLimit-Remaining | Number of API calls remaining in current window. Example: `998` |
 | X-RateLimit-Reset | Timestamp when rate limit resets (Unix seconds). Example: `1642123456` |
-| Location | URL of newly created resource (included in 201 Created responses). Format: Absolute URL. Example: `[https://api.example.com/v1/employees/E12346`](https://api.example.com/v1/employees/E12346`) |
+| Location | URL of newly created resource (included in 201 Created responses). Format: Absolute URL. Example: `https://api.example.com/v1/employees/E12346` |
 | ETag | Entity tag for caching and optimistic locking. Format: Quoted string. Example: `"abc123def456"` |
 
 ## Status Codes

@@ -1,6 +1,11 @@
 ---
 name: ui5-mcp-tools
 description: List all available UI5 MCP server tools and their usage
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 ---
 
 ## Shell Snippet Notes
@@ -8,6 +13,10 @@ description: List all available UI5 MCP server tools and their usage
 - Shell snippets assume Bash on Linux/macOS, WSL2, or Git Bash.
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
+
+## Output Contract
+
+Return the relevant UI5 MCP tool, expected inputs, fallback local commands, and unresolved MCP availability checks. Default to read-only guidance.
 
 
 # UI5 MCP Server Tools
@@ -259,15 +268,15 @@ get_integration_cards_guidelines({
 
 ### Install Globally (Recommended)
 ```bash
-npm install -g @ui5/mcp-server
+npm install -g @ui5/mcp-server@0.2.11
 ```
 
 ### Use with npx (No Installation)
 ```bash
-npx -y @ui5/mcp-server <tool-name> <arguments>
+npx -y @ui5/mcp-server@0.2.11 <tool-name> <arguments>
 ```
 
-### Configure for Claude Code
+### Configure for Code CLI
 
 The sapui5 plugin automatically configures MCP via `.mcp.json`:
 
@@ -275,7 +284,7 @@ The sapui5 plugin automatically configures MCP via `.mcp.json`:
 {
   "ui5-tooling": {
     "command": "npx",
-    "args": ["-y", "@ui5/mcp-server"],
+    "args": ["-y", "@ui5/mcp-server@0.2.11"],
     "env": {
       "UI5_PROJECT_DIR": "${cwd}",
       "UI5_VERSION": "1.120.0",
@@ -354,7 +363,7 @@ To check if MCP tools are available:
 
 ```bash
 # Test MCP server
-npx -y @ui5/mcp-server --help
+npx -y @ui5/mcp-server@0.2.11 --help
 
 # Expected output: List of available tools
 ```
@@ -368,10 +377,10 @@ If this works, all agents will automatically use MCP tools for faster, more accu
 ### MCP Server Not Found
 ```bash
 # Install globally
-npm install -g @ui5/mcp-server
+npm install -g @ui5/mcp-server@0.2.11
 
 # Or use npx (automatic download)
-npx -y @ui5/mcp-server --version
+npx -y @ui5/mcp-server@0.2.11 --version
 ```
 
 ### Permission Errors

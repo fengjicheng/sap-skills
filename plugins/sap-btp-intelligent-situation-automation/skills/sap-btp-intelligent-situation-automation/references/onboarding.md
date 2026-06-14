@@ -86,8 +86,8 @@ Expose and activate these APIs:
 
 | ✅ Correct | ❌ Incorrect |
 |-----------|-------------|
-| `[https://my-s4hana.company.com`](https://my-s4hana.company.com`) | `[https://my-s4hana.company.com/sap/opu/odata/`](https://my-s4hana.company.com/sap/opu/odata/`) |
-| `[https://my-s4hana.s4hana.ondemand.com`](https://my-s4hana.s4hana.ondemand.com`) | `[https://my-s4hana.company.com/api/v1`](https://my-s4hana.company.com/api/v1`) |
+| `https://my-s4hana.company.com` | `https://my-s4hana.company.com/sap/opu/odata/` |
+| `https://my-s4hana.s4hana.ondemand.com` | `https://my-s4hana.company.com/api/v1` |
 
 ### Subaccount Constraints
 

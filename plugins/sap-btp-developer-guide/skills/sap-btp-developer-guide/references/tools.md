@@ -88,15 +88,15 @@ brew install cloudfoundry/tap/cf-cli
 choco install cloudfoundry-cli
 
 # Linux
-wget -q -O - [https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key](https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key) | sudo apt-key add -
-echo "deb [https://packages.cloudfoundry.org/debian](https://packages.cloudfoundry.org/debian) stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
+echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
 sudo apt update && sudo apt install cf-cli
 ```
 
 **Common Commands:**
 ```bash
 # Login
-cf login -a [https://api.cf.eu10.hana.ondemand.com](https://api.cf.eu10.hana.ondemand.com)
+cf login -a https://api.cf.eu10.hana.ondemand.com
 
 # Deploy
 cf push my-app

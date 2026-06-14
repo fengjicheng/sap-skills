@@ -5,6 +5,18 @@ Python SDK for SAP Generative AI Hub and Orchestration Service. Package `sap-ai-
 for OpenAI, Amazon Bedrock, Google GenAI, LangChain support, and full Orchestration
 Service access including content filtering, data masking, and document grounding.
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 1: `/cloud-sdk-ai-python-chat-template` |
+| Agents | 0 |
+| Hooks | No |
+| MCP | No |
+| LSP | No |
+| Source Freshness | `last_verified`: 2026-06-12; Python package/source evidence checked in docs-only audit notes. |
+| Verification | `npm run validate`; AI Core tenant execution checks pending. |
+
 ## Quick Start
 
 ```bash

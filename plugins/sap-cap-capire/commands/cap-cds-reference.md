@@ -1,6 +1,11 @@
 ---
 name: cap-cds-reference
 description: Quick CDS syntax reference for entities, services, annotations, and queries
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+argument-hint: "[topic]"
 arguments:
   - name: topic
     description: "Topic: entities, services, annotations, queries, or types"
@@ -12,6 +17,10 @@ arguments:
 - Shell snippets assume Bash on Linux/macOS, WSL2, or Git Bash.
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
+
+## Output Contract
+
+Return the requested CDS reference, version-sensitive caveats, minimal examples, and related CAP commands or references. Default to read-only guidance and mark runtime or activation checks as pending unless project evidence is available.
 
 
 # CAP CDS Quick Reference

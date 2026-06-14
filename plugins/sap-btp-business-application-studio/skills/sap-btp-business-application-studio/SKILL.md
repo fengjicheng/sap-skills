@@ -6,11 +6,22 @@ description: |
   Keywords: SAP Business Application Studio, BAS, SAP BTP, dev space, Cloud Foundry, MTA, multitarget application, SAP Fiori, CAP, HANA, destination, WebIDEEnabled, Cloud Connector, Service Center, Storyboard, Layout Editor, ABAP, OData, subscription, entitlements, role collection, Business_Application_Studio_Developer, Git, clone, push, pull, Gerrit, PAT, OAuth, asdf, runtime, Node.js, Java, Python, Task Explorer, CI/CD, Yeoman, generator, template wizard, mbt, mtar, debugging, breakpoint
 license: GPL-3.0
 metadata:
-  version: "1.1.0"
+  version: "2.3.0"
   last_verified: "2025-11-27"
 ---
 
 # SAP Business Application Studio
+
+## Related Skills
+
+- **sap-btp-cloud-platform**: Use for subaccount, entitlement, subscription, and Cloud Foundry setup
+- **sap-fiori-tools**: Use for Fiori project generation and Fiori-specific BAS workflows
+- **sap-cap-capire**: Use for CAP projects, CDS modeling, and service implementation in BAS
+- **sap-btp-connectivity**: Use for destinations, Cloud Connector, and external-system access
+
+## When to Use This Skill
+
+Use this skill when setting up BAS subscriptions, choosing dev space types, connecting BAS to SAP or external systems, configuring Git and runtime versions, deploying MTA projects, using Service Center/Layout Editor, or troubleshooting BAS access and connectivity.
 
 ## Table of Contents
 - [Overview](#overview)

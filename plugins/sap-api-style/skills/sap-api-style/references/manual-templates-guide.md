@@ -117,7 +117,7 @@ Supports querying employees by department, status, and other criteria.
 
 **Base URI**
 - Absolute endpoint where API is hosted
-- Example: `[https://api.example.com/v1/employees`](https://api.example.com/v1/employees`)
+- Example: `https://api.example.com/v1/employees`
 - Include protocol, host, and path prefix
 
 **Permissions**
@@ -133,7 +133,7 @@ Supports querying employees by department, status, and other criteria.
 ```
 ## Base Information
 
-Base URI: [Absolute URI, e.g., [https://api.example.com/v1]](https://api.example.com/v1])
+Base URI: Absolute URI, e.g., https://api.example.com/v1
 
 Permissions: [Required permissions, e.g., ROLE_USER, ROLE_ADMIN]
 
@@ -242,7 +242,7 @@ and other criteria.
 
 ## Base Information
 
-**Base URI**: `[https://api.example.com/v1/employees`](https://api.example.com/v1/employees`)
+**Base URI**: `https://api.example.com/v1/employees`
 
 **Permissions**: ROLE_HR_USER (read), ROLE_HR_MANAGER (write/delete)
 
@@ -557,7 +557,7 @@ X-Total-Count: [Total count for paginated responses]
 ```
 HTTP/1.1 201 Created
 Content-Type: application/json
-Location: [https://api.example.com/v1/employees/E12346](https://api.example.com/v1/employees/E12346)
+Location: https://api.example.com/v1/employees/E12346
 
 {
   "employeeId": "E12346",
@@ -818,11 +818,11 @@ Include:
 - Protocol (https://)
 - Host
 - Service path
-- Example: `[https://api.example.com/odata/v4/employees`](https://api.example.com/odata/v4/employees`)
+- Example: `https://api.example.com/odata/v4/employees`
 
 **Example**:
 ```
-Root URI: `[https://api.example.com/odata/v4`](https://api.example.com/odata/v4`)
+Root URI: `https://api.example.com/odata/v4`
 
 Service endpoints:
 - Employees: `/odata/v4/Employees`
@@ -913,7 +913,7 @@ The $metadata endpoint provides:
 
 **Example**:
 ```
-Service Metadata URI: `[https://api.example.com/odata/v4/$metadata`](https://api.example.com/odata/v4/$metadata`)
+Service Metadata URI: `https://api.example.com/odata/v4/$metadata`
 
 This endpoint returns the complete service definition in CSDL (Common Schema Definition Language) format.
 Useful for code generation and understanding the full service structure.
@@ -975,7 +975,7 @@ and advanced query capabilities.
 
 **OData Version**: 4.0 (with backward compatibility for 3.0 via separate endpoints)
 
-**Root URI**: `[https://api.example.com/odata/v4`](https://api.example.com/odata/v4`)
+**Root URI**: `https://api.example.com/odata/v4`
 
 **Required Permissions**:
 - ROLE_HR_USER: Read access to all resources
@@ -1020,7 +1020,7 @@ The service manages the following entity relationships:
 - Navigates to Employee
 - Properties: CompensationID, EmployeeID, BaseSalary, Currency, Benefits, etc.
 
-**Service Metadata URI**: `[https://api.example.com/odata/v4/$metadata`](https://api.example.com/odata/v4/$metadata`)
+**Service Metadata URI**: `https://api.example.com/odata/v4/$metadata`
 
 The metadata endpoint returns the complete service definition. Use for understanding
 entity properties, relationships, and available operations.
@@ -1087,7 +1087,7 @@ Example: `/Employees`
 **Complete addressing**:
 ```
 Absolute path: [Root URI] + [Resource Path]
-Example: `[https://api.example.com/odata/v4/Employees`](https://api.example.com/odata/v4/Employees`)
+Example: `https://api.example.com/odata/v4/Employees`
 ```
 
 **Individual Resource Addressing**:
@@ -1112,7 +1112,7 @@ Delete: [Required role]
 
 **Resource Path**: `/Employees`
 
-**Absolute URI**: `[https://api.example.com/odata/v4/Employees`](https://api.example.com/odata/v4/Employees`)
+**Absolute URI**: `https://api.example.com/odata/v4/Employees`
 
 **Key Property**: EmployeeID
 
@@ -1202,7 +1202,7 @@ status, and compensation information.
 
 **Resource Path**: `/Employees`
 
-**Absolute URI**: `[https://api.example.com/odata/v4/Employees`](https://api.example.com/odata/v4/Employees`)
+**Absolute URI**: `https://api.example.com/odata/v4/Employees`
 
 **Key Property**: EmployeeID
 
@@ -1549,8 +1549,8 @@ Success response body with actual data structure:
   "Salary": 95000.00,
   "CreatedAt": "2024-01-15T10:30:00Z",
   "LastModified": "2024-01-15T10:30:00Z",
-  "Department@odata.navigationLink": "[https://api.example.com/odata/v4/Departments('ENG](https://api.example.com/odata/v4/Departments('ENG)')",
-  "Manager@odata.navigationLink": "[https://api.example.com/odata/v4/Employees('E10001](https://api.example.com/odata/v4/Employees('E10001)')"
+  "Department@odata.navigationLink": "https://api.example.com/odata/v4/Departments('ENG')",
+  "Manager@odata.navigationLink": "https://api.example.com/odata/v4/Employees('E10001')"
 }
 ```
 
@@ -2064,7 +2064,7 @@ Complete REST API for managing employee records in the company system.
 
 ## Base Information
 
-**Base URI**: `[https://api.example.com/v1/employees`](https://api.example.com/v1/employees`)
+**Base URI**: `https://api.example.com/v1/employees`
 
 **Permissions**:
 - Read: ROLE_HR_USER
@@ -2417,7 +2417,7 @@ Comprehensive OData v4 service for employee data management.
 
 **OData Version**: 4.0
 
-**Root URI**: `[https://api.example.com/odata/v4`](https://api.example.com/odata/v4`)
+**Root URI**: `https://api.example.com/odata/v4`
 
 **Permissions**:
 - Read: ROLE_HR_USER

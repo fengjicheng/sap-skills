@@ -328,7 +328,7 @@ Customer customer = api.getCustomer("12345");
 
 ```javascript
 // Simple GET request example
-const response = await fetch('[https://api.sap.com/customers/12345',](https://api.sap.com/customers/12345',) {
+const response = await fetch('https://api.sap.com/customers/12345', {
   headers: {
     'Authorization': 'Bearer YOUR_TOKEN',
     'Content-Type': 'application/json'
@@ -650,7 +650,7 @@ Complete reference for OAuth 2.0 configuration options.
 
 ## Token Endpoint
 
-**URL**: `[https://auth.sap.com/oauth/token`](https://auth.sap.com/oauth/token`)
+**URL**: `https://auth.sap.com/oauth/token`
 
 ## Request Parameters
 

@@ -49,7 +49,7 @@ Maintenance Planner provides an alternative method for invoking Cloud Integratio
 
 Access the maintenance planner at:
 ```
-[https://maintenanceplanner.cfapps.eu10.hana.ondemand.com](https://maintenanceplanner.cfapps.eu10.hana.ondemand.com)
+https://maintenanceplanner.cfapps.eu10.hana.ondemand.com
 ```
 
 ### Step 2: Select Planning Tile

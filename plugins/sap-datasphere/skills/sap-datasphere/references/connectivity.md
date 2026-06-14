@@ -501,7 +501,7 @@ api_secret: xxx
 **Connection Properties**:
 ```yaml
 type: Generic OData
-service_url: [https://api.example.com/odata/v2](https://api.example.com/odata/v2)
+service_url: https://api.example.com/odata/v2
 authentication: OAuth 2.0
 ```
 
@@ -514,7 +514,7 @@ authentication: OAuth 2.0
 **Connection Properties**:
 ```yaml
 type: Generic HTTP
-base_url: [https://api.example.com](https://api.example.com)
+base_url: https://api.example.com
 authentication: Bearer Token
 ```
 
@@ -537,7 +537,7 @@ authentication: Password or SSH Key
 **Connection Properties**:
 ```yaml
 type: Open Connectors
-instance_url: [https://api.openconnectors.ext.hanatrial.ondemand.com](https://api.openconnectors.ext.hanatrial.ondemand.com)
+instance_url: https://api.openconnectors.ext.hanatrial.ondemand.com
 organization_secret: xxx
 user_secret: xxx
 element_token: xxx
@@ -670,7 +670,7 @@ name=dp_agent_01
 framework_port=5050
 
 [Datasphere]
-tenant_url=[https://xxx.hana.ondemand.com](https://xxx.hana.ondemand.com)
+tenant_url=https://xxx.hana.ondemand.com
 ```
 
 > **⚠️ Security Note**: The `dpagentconfig.ini` file contains sensitive configuration and credentials. Ensure proper file permissions (`chmod 600` on Linux) and keep it out of version control. Consider using environment variables for credentials where supported.

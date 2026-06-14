@@ -805,5 +805,5 @@ Always use Component-based architecture:
 ---
 
 **Last Updated**: 2025-12-28
-**MCP Server Version**: 0.2.0
+**MCP Server Version**: 0.2.11
 **Plugin Version**: 3.0.0

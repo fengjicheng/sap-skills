@@ -2,6 +2,18 @@
 
 Comprehensive skill for managing SAPUI5 and OpenUI5 projects using the UI5 Tooling CLI.
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 2: `/ui5-cli-build`, `/ui5-cli-troubleshoot` |
+| Agents | 0 |
+| Hooks | No |
+| MCP | No |
+| LSP | No |
+| Source Freshness | `last_verified`: 2026-05-31; current `@ui5/cli` package evidence tracked in audit report. |
+| Verification | `npm run validate`; project build checks require a target UI5 app. |
+
 ## Auto-Trigger Keywords
 
 This skill automatically activates when you mention any of these terms in your requests:

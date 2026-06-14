@@ -3,7 +3,7 @@ name: sap-abap-cds
 description: "Comprehensive SAP ABAP CDS (Core Data Services) reference for data modeling, view development, and semantic enrichment. Use when creating CDS views or view entities, defining data models with annotations, working with associations and cardinality, implementing input parameters, using built-in functions, writing CASE expressions, implementing access control with DCL, handling CURR/QUAN data types, troubleshooting CDS errors, querying CDS views from ABAP, or displaying data with SALV IDA. Covers ABAP 7.4+ through ABAP Cloud."
 license: GPL-3.0
 metadata:
-  version: "1.1.0"
+  version: "2.3.0"
   last_verified: "2026-04-02"
   abap_release: "7.4 SP8+ / 7.50+ / ABAP Cloud"
   sources:
@@ -21,6 +21,10 @@ metadata:
 - **sap-fiori-tools**: Use when building Fiori Elements applications that consume CDS views or working with UI annotations
 - **sap-cap-capire**: Use for comparing CDS syntax between ABAP and CAP or when integrating ABAP CDS with CAP services
 - **sap-api-style**: Use when documenting CDS-based OData services or following API documentation standards
+
+## When to Use This Skill
+
+Use this skill when creating ABAP CDS views or view entities, defining associations and cardinalities, adding UI or semantic annotations, implementing DCL access control, handling currency/unit fields, troubleshooting CDS compiler errors, or comparing classic CDS views with newer view entities.
 
 **Quick Reference**: [https://help.sap.com/doc/abapdocu_cp_index_htm/CLOUD/en-US/abencds.html](https://help.sap.com/doc/abapdocu_cp_index_htm/CLOUD/en-US/abencds.html) | SAP Cheat Sheets: [https://github.com/SAP-samples/abap-cheat-sheets/blob/main/15_CDS_View_Entities.md](https://github.com/SAP-samples/abap-cheat-sheets/blob/main/15_CDS_View_Entities.md)
 
@@ -544,10 +548,10 @@ For templates, see `templates/`:
 ## Source Documentation
 
 **Update this skill by checking**:
-- [https://help.sap.com/doc/abapdocu_cp_index_htm/CLOUD/en-US/abencds.html](https://help.sap.com/doc/abapdocu_cp_index_htm/CLOUD/en-US/abencds.html) (ABAP Cloud)
-- [https://help.sap.com/doc/abapdocu_740_index_htm/7.40/en-US/index.htm](https://help.sap.com/doc/abapdocu_740_index_htm/7.40/en-US/index.htm) (7.40 Reference)
-- [https://help.sap.com/docs/SAP_NETWEAVER_AS_ABAP_752/f2e545608079437ab165c105649b89db/7c078765ec6d4e6b88b71bdaf8a2bd9f.html](https://help.sap.com/docs/SAP_NETWEAVER_AS_ABAP_752/f2e545608079437ab165c105649b89db/7c078765ec6d4e6b88b71bdaf8a2bd9f.html) (NetWeaver 7.52 User Guide)
-- [https://github.com/SAP-samples/abap-cheat-sheets](https://github.com/SAP-samples/abap-cheat-sheets)
-- [https://github.com/SAP-samples/abap-cheat-sheets/blob/main/33_ABAP_Release_News.md](https://github.com/SAP-samples/abap-cheat-sheets/blob/main/33_ABAP_Release_News.md) (Release News)
+- https://help.sap.com/doc/abapdocu_cp_index_htm/CLOUD/en-US/abencds.html (ABAP Cloud)
+- https://help.sap.com/doc/abapdocu_740_index_htm/7.40/en-US/index.htm (7.40 Reference)
+- https://help.sap.com/docs/SAP_NETWEAVER_AS_ABAP_752/f2e545608079437ab165c105649b89db/7c078765ec6d4e6b88b71bdaf8a2bd9f.html (NetWeaver 7.52 User Guide)
+- https://github.com/SAP-samples/abap-cheat-sheets
+- https://github.com/SAP-samples/abap-cheat-sheets/blob/main/33_ABAP_Release_News.md (Release News)
 
 **Last Verified**: 2026-04-02

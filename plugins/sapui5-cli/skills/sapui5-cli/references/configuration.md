@@ -761,7 +761,7 @@ server:
     - name: api-proxy
       afterMiddleware: compression
       configuration:
-        target: [https://api.example.com](https://api.example.com)
+        target: https://api.example.com
 ```
 
 ---

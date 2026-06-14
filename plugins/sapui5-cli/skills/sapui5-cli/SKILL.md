@@ -3,16 +3,17 @@ name: sapui5-cli
 description: Manages SAPUI5/OpenUI5 projects using the UI5 Tooling CLI (@ui5/cli). Use when initializing UI5 projects, configuring ui5.yaml or ui5-workspace.yaml files, building UI5 applications or libraries, running development servers with HTTP/2 support, creating custom build tasks or server middleware, managing workspace/monorepo setups, troubleshooting UI5 CLI errors, migrating between UI5 CLI versions, or optimizing build performance. Supports both OpenUI5 and SAPUI5 frameworks with complete configuration and extensibility guidance.
 license: GPL-3.0
 metadata:
-  version: 4.0.55
-  lastUpdated: 2026-05-31
-  officialDocs: "https://ui5.github.io/cli/stable/"
+  version: "2.3.0"
+  ui5_cli_version: "4.0.55"
+  last_verified: "2026-05-31"
+  official_docs: "https://ui5.github.io/cli/stable/"
 ---
 
 # SAPUI5/OpenUI5 CLI Management Skill
 
 ## Related Skills
 
-- **dependency-upgrade**: Use for secure CLI/toolchain upgrades, lockfile hardening, and deterministic installs in UI5 tooling workflows
+- **sap-dependency-security**: Use for secure CLI/toolchain upgrades, lockfile hardening, and deterministic installs in UI5 tooling workflows
 
 ## Table of Contents
 - [Overview](#overview)

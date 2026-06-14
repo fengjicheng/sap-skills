@@ -4,6 +4,18 @@ Production-ready Claude Code skill for SAP BTP Cloud Integration Automation Serv
 
 ---
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 1: `/cias-scenario-check` |
+| Agents | 0 |
+| Hooks | No |
+| MCP | No |
+| LSP | No |
+| Source Freshness | `last_verified`: 2025-11-27; live CIAS scenario behavior remains pending. |
+| Verification | `npm run validate`; CIAS cockpit/scenario execution checks pending. |
+
 ## Overview
 
 This skill provides comprehensive guidance for working with SAP BTP Cloud Integration Automation Service (CIAS), which delivers guided workflows to integrate SAP cloud solutions with on-premise and other SAP cloud solutions.

@@ -197,8 +197,8 @@ Configures SAML 2.0 authentication for OpenSearch Dashboards.
     "admin_group": "CLS-Admins",
     "roles_key": "groups",
     "idp": {
-      "metadata_url": "[https://mytenant.accounts.ondemand.com/saml2/metadata",](https://mytenant.accounts.ondemand.com/saml2/metadata",)
-      "entity_id": "[https://mytenant.accounts.ondemand.com"](https://mytenant.accounts.ondemand.com")
+      "metadata_url": "https://mytenant.accounts.ondemand.com/saml2/metadata",
+      "entity_id": "https://mytenant.accounts.ondemand.com"
     },
     "sp": {
       "entity_id": "cloud-logging-abc123",
@@ -239,8 +239,8 @@ Configures SAML 2.0 authentication for OpenSearch Dashboards.
     "admin_group": "CLS-Administrators",
     "roles_key": "groups",
     "idp": {
-      "metadata_url": "[https://<tenant>.accounts.ondemand.com/saml2/metadata",](https://<tenant>.accounts.ondemand.com/saml2/metadata",)
-      "entity_id": "[https://<tenant>.accounts.ondemand.com"](https://<tenant>.accounts.ondemand.com")
+      "metadata_url": "https://<tenant>.accounts.ondemand.com/saml2/metadata",
+      "entity_id": "https://<tenant>.accounts.ondemand.com"
     },
     "sp": {
       "entity_id": "cloud-logging-<unique-id>",

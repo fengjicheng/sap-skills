@@ -2,6 +2,18 @@
 
 Claude Code skill for developing with SAP Cloud SDK for AI - the official SDK for SAP AI Core, SAP Generative AI Hub, and Orchestration Service.
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 1: `/cloud-sdk-ai-chat-template` |
+| Agents | 0 |
+| Hooks | No |
+| MCP | No |
+| LSP | No |
+| Source Freshness | `last_verified`: 2026-05-31; package/source evidence checked in docs-only audit notes. |
+| Verification | `npm run validate`; AI Core tenant execution checks pending. |
+
 ## Auto-Trigger Keywords
 
 This skill activates when working with:

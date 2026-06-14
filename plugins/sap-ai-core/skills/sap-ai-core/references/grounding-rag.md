@@ -145,7 +145,7 @@ curl -X POST "$AI_API_URL/v2/lm/groundingPipelines" \
       "dataSource": {
         "type": "sharepoint",
         "configuration": {
-          "siteUrl": "[https://company.sharepoint.com/sites/HR",](https://company.sharepoint.com/sites/HR",)
+          "siteUrl": "https://company.sharepoint.com/sites/HR",
           "folderPath": "/Documents/Policies"
         }
       },

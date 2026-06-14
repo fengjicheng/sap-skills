@@ -1,6 +1,11 @@
 ---
 name: sac-planning
 description: Generate SAC planning operation templates and workflows
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+argument-hint: "<publish|copy|lock|workflow|version|dataaction>"
 arguments:
   - name: operation
     description: "Planning operation: publish, copy, lock, workflow, version, dataaction"
@@ -12,6 +17,10 @@ arguments:
 - Shell snippets assume Bash on Linux/macOS, WSL2, or Git Bash.
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
+
+## Output Contract
+
+Return planning API guidance, version/data-locking caveats, safe script examples, and pending SAC tenant checks. Default to read-only guidance and do not publish planning data.
 
 
 Generate SAC planning operation templates based on the requested operation type.

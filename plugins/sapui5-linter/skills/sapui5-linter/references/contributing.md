@@ -2,7 +2,7 @@
 
 **Source**: [https://github.com/UI5/linter/blob/main/CONTRIBUTING.md](https://github.com/UI5/linter/blob/main/CONTRIBUTING.md)
 **Last Updated**: 2025-11-21
-**UI5 Linter Version**: 1.21.1
+**UI5 Linter Version**: 1.22.0
 
 ---
 
@@ -19,10 +19,10 @@ This guide covers how to contribute to the UI5 Linter project, including reporti
 **Search First**:
 ```bash
 # Check if issue already exists
-[https://github.com/UI5/linter/issues](https://github.com/UI5/linter/issues)
+https://github.com/UI5/linter/issues
 
 # Check the Task Board for related work
-[https://github.com/orgs/SAP/projects/110](https://github.com/orgs/SAP/projects/110)
+https://github.com/orgs/SAP/projects/110
 ```
 
 **Why**: Avoid duplicate reports and identify ongoing work that might address your needs.
@@ -123,7 +123,7 @@ What should happen
 What actually happens
 
 ## Environment
-- UI5 Linter version: 1.21.1
+- UI5 Linter version: 1.22.0
 - Node.js version: 20.11.0
 - npm version: 10.2.0
 - OS: Ubuntu 22.04
@@ -254,7 +254,7 @@ Understanding issue labels helps track and prioritize issues.
 1. **Confirm Change is Welcome**
    ```bash
    # Check Task Board for related work
-   [https://github.com/orgs/SAP/projects/110](https://github.com/orgs/SAP/projects/110)
+   https://github.com/orgs/SAP/projects/110
 
    # Comment on related issue or create discussion
    ```
@@ -262,7 +262,7 @@ Understanding issue labels helps track and prioritize issues.
 2. **Fork the Repository**
    ```bash
    # Fork via GitHub UI, then clone
-   git clone [https://github.com/YOUR-USERNAME/linter.git](https://github.com/YOUR-USERNAME/linter.git)
+   git clone https://github.com/YOUR-USERNAME/linter.git
    cd linter
    ```
 
@@ -502,7 +502,7 @@ ui5lint test.js --verbose
 # GitHub issue #789
 
 # 3. Fork and branch
-git clone [https://github.com/YOUR-USERNAME/linter.git](https://github.com/YOUR-USERNAME/linter.git)
+git clone https://github.com/YOUR-USERNAME/linter.git
 git checkout -b fix/issue-789
 
 # 4. Write failing test

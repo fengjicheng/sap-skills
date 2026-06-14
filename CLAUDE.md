@@ -3,7 +3,7 @@
 
 **Repository**: https://github.com/secondsky/sap-skills
 **Purpose**: Production-ready skills for SAP development and AI coding assistants
-**Version**: 2.2.3 | **Plugins**: 35 | **Last Updated**: 2026-06-12
+**Version**: 2.3.0 | **Plugins**: 35 | **Last Updated**: 2026-06-14
 
 ---
 
@@ -91,7 +91,7 @@ errors that break functionality.
 
 **Scale**: 35 plugins with coordinated versioning
 **Structure**: Single root manifest per plugin (`plugins/*/.claude-plugin/plugin.json`)
-**Registry**: Central marketplace.json (48KB, auto-generated)
+**Registry**: Central marketplace.json (~40KB, auto-generated)
 **Cross-References**: 14 plugins reference related skills
 
 **Categories**:
@@ -122,7 +122,7 @@ errors that break functionality.
 **Version Tracking**: SAP SDK versions documented in metadata
 ```yaml
 metadata:
-  version: "2.2.2"
+  version: "2.3.0"
   cap_version: "@sap/cds 9.4.x"
   last_verified: "2025-12-28"
 ```
@@ -178,7 +178,7 @@ or "the Code CLI" instead.
 
 ---
 
-**Last Updated**: 2026-05-31
+**Last Updated**: 2026-06-14
 **Next Review**: 2026-08-31 (Quarterly)
 **Maintainer**: E.J.
 </coding_guidelines>

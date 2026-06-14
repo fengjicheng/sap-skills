@@ -69,7 +69,7 @@
 **Client Credentials Flow (clientsecret):**
 
 ```bash
-curl -X POST "[https://<uaa-url>/oauth/token"](https://<uaa-url>/oauth/token") \
+curl -X POST "https://<uaa-url>/oauth/token" \
   -H "Authorization: Basic $(echo -n '<clientid>:<clientsecret>' | base64)" \
   -H "Content-Type: application/x-www-form-urlencoded" \
   -d "grant_type=client_credentials"
@@ -78,7 +78,7 @@ curl -X POST "[https://<uaa-url>/oauth/token"](https://<uaa-url>/oauth/token") \
 **Certificate-Based Authentication:**
 
 ```bash
-curl -X POST "[https://<certurl>/oauth/token"](https://<certurl>/oauth/token") \
+curl -X POST "https://<certurl>/oauth/token" \
   --cert /path/to/certificate.pem \
   --key /path/to/key.pem \
   -H "Content-Type: application/x-www-form-urlencoded" \

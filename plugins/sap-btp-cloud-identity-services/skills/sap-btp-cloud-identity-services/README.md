@@ -1,5 +1,17 @@
 # SAP Cloud Identity Services — Keywords
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 1: `/identity-trust-check` |
+| Agents | 1: `identity-security-advisor` |
+| Hooks | No |
+| MCP | No |
+| LSP | No |
+| Source Freshness | `last_verified`: 2026-06-12; tenant trust/provisioning verification remains pending. |
+| Verification | `npm run validate`; live IAS/IPS checks pending unless sanitized evidence is supplied. |
+
 ## Service Names
 SAP Cloud Identity Services, Identity Authentication Service, IAS, Identity Provisioning Service, IPS, Identity Directory, Authorization Management Service, AMS
 

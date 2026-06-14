@@ -4,12 +4,23 @@ description: |
   Comprehensive skill for SAP Cloud Transport Management service on SAP BTP. Use when setting up transport landscapes, configuring transport nodes and routes, managing import queues, deploying MTAs across Cloud Foundry environments, integrating with CI/CD pipelines, configuring ABAP environment transports, troubleshooting deployment errors, or implementing change management workflows. Covers entitlements, subscriptions, role collections, service instances, destinations, and API integrations.
 license: GPL-3.0
 metadata:
-  version: "1.0.0"
+  version: "2.3.0"
   last_verified: "2025-11-27"
   sap_documentation_source: "https://help.sap.com/docs/cloud-transport-management"
 ---
 
 # SAP Cloud Transport Management Skill
+
+## Related Skills
+
+- **sap-btp-cloud-platform**: Use for BTP subaccount, role collection, and Cloud Foundry runtime setup
+- **sap-btp-developer-guide**: Use for application delivery and CI/CD patterns around transported content
+- **sap-btp-service-manager**: Use for service instances, service keys, and API/service lifecycle operations
+- **sap-abap**: Use when transport flows include ABAP Environment or gCTS-managed content
+
+## When to Use This Skill
+
+Use this skill when setting up transport landscapes, creating transport nodes/routes, managing import queues, deploying MTAs across environments, configuring destinations for deployment transport, integrating transports into CI/CD, or troubleshooting TMS import/deployment errors.
 
 ## Table of Contents
 
@@ -134,9 +145,9 @@ Assign roles: **Security > Role Collections > [Collection] > Edit > Users**
   "uaa": {
     "clientid": "sb-xxxxxx",
     "clientsecret": "xxxxxx",
-    "url": "[https://<domain>.authentication.sap.hana.ondemand.com"](https://<domain>.authentication.sap.hana.ondemand.com")
+    "url": "https://<domain>.authentication.sap.hana.ondemand.com"
   },
-  "uri": "[https://transport-service-app-backend.ts.cfapps.sap.hana.ondemand.com"](https://transport-service-app-backend.ts.cfapps.sap.hana.ondemand.com")
+  "uri": "https://transport-service-app-backend.ts.cfapps.sap.hana.ondemand.com"
 }
 ```
 
@@ -198,8 +209,8 @@ Required for applications exporting content directly to TMS.
 
 | Field | Value |
 |-------|-------|
-| URL (org/space) | `[https://deploy-service.cf.<domain>/slprot/<org>/<space>/slp`](https://deploy-service.cf.<domain>/slprot/<org>/<space>/slp`) |
-| URL (space GUID) | `[https://deploy-service.cf.<domain>/slprot/<guid>/slp`](https://deploy-service.cf.<domain>/slprot/<guid>/slp`) |
+| URL (org/space) | `https://deploy-service.cf.<domain>/slprot/<org>/<space>/slp` |
+| URL (space GUID) | `https://deploy-service.cf.<domain>/slprot/<guid>/slp` |
 | Authentication | BasicAuthentication |
 | User | Platform user email with `SpaceDeveloper` role |
 
@@ -214,13 +225,13 @@ Required for applications exporting content directly to TMS.
 | Authentication | OAuth2Password |
 | Client ID | `cf` |
 | Client Secret | (leave empty) |
-| Token Service URL | `[https://login.cf.<domain>`](https://login.cf.<domain>`) |
+| Token Service URL | `https://login.cf.<domain>` |
 
 ### BTP ABAP Environment Destinations
 
 | Field | Value |
 |-------|-------|
-| URL | `[https://<instance>.abap.<region>.hana.ondemand.com/sap/opu/odata4/sap/a4c_mswc_api/srvd_a2x/sap/manage_software_components/0001/`](https://<instance>.abap.<region>.hana.ondemand.com/sap/opu/odata4/sap/a4c_mswc_api/srvd_a2x/sap/manage_software_components/0001/`) |
+| URL | `https://<instance>.abap.<region>.hana.ondemand.com/sap/opu/odata4/sap/a4c_mswc_api/srvd_a2x/sap/manage_software_components/0001/` |
 | Authentication | BasicAuthentication |
 | User | Communication user from `SAP_COM_0948` |
 

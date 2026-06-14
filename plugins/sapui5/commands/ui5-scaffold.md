@@ -1,7 +1,17 @@
 ---
 name: ui5-scaffold
 description: Interactive project scaffolding for UI5 applications and Integration Cards
-args:
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+  - AskUserQuestion
+  - mcp__plugin_sapui5_ui5-tooling__create_ui5_app
+  - mcp__plugin_sapui5_ui5-tooling__create_integration_card
+  - mcp__plugin_sapui5_ui5-tooling__get_project_info
+argument-hint: "[type] [lang] [backend] [name]"
+arguments:
   - name: type
     description: Project type (freestyle, fiori-elements, integration-card, cap)
     required: false
@@ -22,6 +32,10 @@ args:
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
 
+## Output Contract
+
+Return project choices, files to create, package/version assumptions, and confirmation points before writes. Scaffold only when the user explicitly requests generation.
+
 
 # Scaffold UI5 Project
 
@@ -33,7 +47,7 @@ Starting interactive project scaffolding...
 
 ## Project Scaffolding
 
-I'll invoke the **ui5-app-scaffolder agent** to create your UI5 project.
+Use the **ui5-app-scaffolder agent** to create the UI5 project when available.
 
 The agent will:
 
@@ -75,30 +89,30 @@ The agent will use these as defaults and may ask for additional details.
 
 ---
 
-**Invoking ui5-app-scaffolder agent...**
+**Route to ui5-app-scaffolder when available.**
 
-*Agent will scaffold your project and provide complete setup instructions.*
+Expected output: generated project files, validation notes, and complete setup instructions.
 
 ---
 
 ## Manual Scaffolding (If Agent Unavailable)
 
-If the agent cannot be invoked, you can use these manual commands:
+If the agent is unavailable, use these manual commands:
 
 ### Using @ui5/mcp-server (Recommended)
 
 ```bash
 # Install MCP server globally
-npm install -g @ui5/mcp-server
+npm install -g @ui5/mcp-server@0.2.11
 
 # Create freestyle JavaScript app
-npx @ui5/mcp-server create_ui5_app \
+npx @ui5/mcp-server@0.2.11 create_ui5_app \
   --template="freestyle-js" \
   --projectName="my-ui5-app" \
   --namespace="com.mycompany.myapp"
 
 # Create Fiori Elements TypeScript app
-npx @ui5/mcp-server create_ui5_app \
+npx @ui5/mcp-server@0.2.11 create_ui5_app \
   --template="fiori-elements-list-report-ts" \
   --projectName="my-fiori-app" \
   --namespace="com.mycompany.fiori" \

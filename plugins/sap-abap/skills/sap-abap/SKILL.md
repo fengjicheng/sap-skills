@@ -9,7 +9,7 @@ description: |
   ABAP and modern ABAP for Cloud Development patterns.
 license: GPL-3.0
 metadata:
-  version: "1.1.0"
+  version: "2.3.0"
   last_verified: "2026-04-02"
   abap_release: "7.40 SP08+ / 7.50+ / ABAP Cloud"
   sources:
@@ -26,6 +26,10 @@ metadata:
 - **sap-cap-capire**: Use when connecting ABAP systems with CAP applications or integrating with OData services
 - **sap-fiori-tools**: Use when building Fiori applications with ABAP backends or consuming OData services from ABAP systems
 - **sap-api-style**: Use when documenting ABAP APIs or following SAP API documentation standards
+
+## When to Use This Skill
+
+Use this skill when writing or reviewing ABAP code, modernizing classic ABAP to ABAP Cloud-compatible patterns, working with RAP or EML, implementing ABAP SQL, designing unit tests, or troubleshooting language/runtime behavior across supported ABAP releases.
 
 ## Version Compatibility
 

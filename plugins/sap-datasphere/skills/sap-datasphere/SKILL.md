@@ -3,7 +3,7 @@ name: sap-datasphere
 description: "SAP Datasphere development skill with 3 specialized agents, 5 slash commands, and validation hooks. Use when building data warehouses on SAP BTP, creating analytic models, configuring data flows and replication flows, setting up connections, managing spaces and users, implementing data access controls, or using the datasphere CLI. Covers Data Builder, Business Builder, analytic models, 40+ connection types, real-time replication, task chains, content transport, and data marketplace."
 license: GPL-3.0
 metadata:
-  version: 2.2.0
+  version: "2.3.0"
   last_verified: 2026-06-11
   keywords: [sap datasphere, data warehouse cloud, dwc, data builder, business builder, analytic model, graphical view, sql view, transformation flow, replication flow, data flow, task chain, remote table, local table, datasphere connection, datasphere space, data access control, elastic compute node, datasphere cli, data products, data marketplace, catalog, governance, business data cloud, bdc, sap databricks]
 ---
@@ -12,7 +12,7 @@ metadata:
 
 ## Related Skills
 
-- **dependency-upgrade**: Use for secure dependency policy and lockfile hygiene when managing large connector or integration projects with package-managed tooling
+- **sap-dependency-security**: Use for secure dependency policy, lockfile hygiene, and exact MCP server pins when managing large connector or integration projects with package-managed tooling
 
 ## Table of Contents
 
@@ -45,6 +45,8 @@ metadata:
 SAP Datasphere is SAP's cloud-native data warehouse solution on SAP Business Technology Platform (BTP). It serves as the **data foundation** within **SAP Business Data Cloud (BDC)**, SAP's unified data and analytics platform that also includes SAP Analytics Cloud, SAP HANA Cloud, SAP Databricks, and curated data products. See `references/business-data-cloud.md` for the BDC architecture and how Datasphere fits within it.
 
 This skill provides comprehensive guidance for data acquisition, preparation, modeling, administration, and integration.
+
+## When to Use This Skill
 
 **Use this skill when**:
 - Creating data warehouses on SAP BTP
@@ -604,6 +606,14 @@ For transport procedures, see `references/content-transport.md`.
 16. **`references/mcp-tools-reference.md`** - Complete MCP tool reference, 45 tools across 8 categories, API documentation, authentication patterns
 17. **`references/mcp-use-cases.md`** - 8 real-world use cases with personas, time savings, and ROI analysis ($159K+/year savings)
 
+### MCP Reference Routing
+
+Search MCP references before loading them. Use `rg -n "<space|view|connection|task|lineage|marketplace|governance|admin>" references/mcp-*.md` to locate the exact tool or scenario, then open only that excerpt.
+
+- Use `references/mcp-tools-reference.md` for tool names, inputs, and direct tenant-operation boundaries.
+- Use `references/mcp-use-cases.md` only when choosing a workflow pattern or estimating ROI; do not load the full use-case guide for ordinary tool lookup.
+- If MCP access is unavailable, fall back to the matching CLI/reference command and mark tenant checks pending.
+
 ### Plugin Components
 
 This plugin includes 3 specialized agents, 5 slash commands, and validation hooks:
@@ -626,7 +636,7 @@ This plugin includes 3 specialized agents, 5 slash commands, and validation hook
 
 ## MCP Integration
 
-This skill integrates with the **SAP Datasphere MCP Server** (@mariodefe/sap-datasphere-mcp) providing 45 tools for live tenant interaction.
+This skill integrates with the **SAP Datasphere MCP Server** (`@mariodefe/sap-datasphere-mcp`) providing 45 tools for live tenant interaction. The bundled MCP config uses an exact package pin governed by **sap-dependency-security** and validated by `npm run validate:mcp-security`.
 
 ### MCP Tools
 

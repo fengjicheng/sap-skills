@@ -2,6 +2,18 @@
 
 Production-ready Claude Code skill for SAP Data Intelligence Cloud development.
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 1: `/data-intelligence-pipeline-check` |
+| Agents | 0 |
+| Hooks | No |
+| MCP | No |
+| LSP | No |
+| Source Freshness | `last_verified`: 2025-11-27; product lifecycle and docs-only verification pending. |
+| Verification | `npm run validate`; live graph/runtime checks require tenant access. |
+
 ## Overview
 
 This skill enables efficient development of data processing pipelines, integrations, and machine learning scenarios in SAP Data Intelligence Cloud. It provides comprehensive guidance for operators, graphs, ABAP integration, replication flows, and ML workflows.

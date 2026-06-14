@@ -2,6 +2,18 @@
 
 Claude Code skill for SAP Build Work Zone, advanced edition digital workplace development.
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 1: `/work-zone-content-check` |
+| Agents | 0 |
+| Hooks | No |
+| MCP | No |
+| LSP | No |
+| Source Freshness | `last_verified`: 2025-11-27; Work Zone template/source freshness pending docs-only recheck. |
+| Verification | `npm run validate`; tenant content import/export checks pending. |
+
 ## Overview
 
 This skill provides comprehensive guidance for implementing SAP Build Work Zone, advanced edition - a digital workplace platform for unified access to business applications, collaboration, and content management.

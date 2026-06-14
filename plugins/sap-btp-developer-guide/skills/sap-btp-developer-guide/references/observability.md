@@ -176,7 +176,7 @@ async function processOrder(orderId) {
       "name": "notify-team",
       "type": "SLACK",
       "properties": {
-        "webhookUrl": "[https://hooks.slack.com/..."](https://hooks.slack.com/...")
+        "webhookUrl": "https://hooks.slack.com/..."
       }
     }
   ]

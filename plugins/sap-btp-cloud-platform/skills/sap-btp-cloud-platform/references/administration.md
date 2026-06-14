@@ -334,7 +334,7 @@ Access via:
 
 ```bash
 # API access
-curl -X GET "[https://auditlog.cf.<region>.hana.ondemand.com/v2/auditlogrecords"](https://auditlog.cf.<region>.hana.ondemand.com/v2/auditlogrecords") \
+curl -X GET "https://auditlog.cf.<region>.hana.ondemand.com/v2/auditlogrecords" \
   -H "Authorization: Bearer <token>"
 ```
 

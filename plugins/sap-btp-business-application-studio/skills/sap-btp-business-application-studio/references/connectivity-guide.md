@@ -164,7 +164,7 @@ In Cloud Connector:
 
 #### OData Service List Not Displayed
 
-1. Test in internal network: `[https://<system-url>/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/ServiceCollection`](https://<system-url>/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/ServiceCollection`)
+1. Test in internal network: `https://<system-url>/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/ServiceCollection`
 2. Verify `sap-opu-iwfnd-catalogservice` service is active (transaction `/NSICF`)
 3. Check destination credentials
 
@@ -270,7 +270,7 @@ Example (eu10 region):
 ### Inbound Connectivity
 
 For firewall allowlisting:
-- Connectivity service host: `[https://connectivity.[region].applicationstudio.cloud.sap`](https://connectivity.[region].applicationstudio.cloud.sap`)
+- Connectivity service host: `https://connectivity.[region].applicationstudio.cloud.sap`
 - Inbound IPs listed in availability documentation
 
 For trial environments, use DNS resolution:

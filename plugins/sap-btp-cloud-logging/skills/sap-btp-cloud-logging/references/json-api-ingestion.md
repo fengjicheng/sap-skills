@@ -80,7 +80,7 @@ SAP Cloud Logging supports document ingestion via JSON API endpoint as an altern
 ### Single Document Ingestion
 
 ```bash
-curl -X PUT "[https://<ingest-endpoint>/v1/ingest"](https://<ingest-endpoint>/v1/ingest") \
+curl -X PUT "https://<ingest-endpoint>/v1/ingest" \
   --cert client.crt \
   --key client.key \
   --cacert server-ca.crt \
@@ -96,7 +96,7 @@ curl -X PUT "[https://<ingest-endpoint>/v1/ingest"](https://<ingest-endpoint>/v1
 ### Batch Document Ingestion
 
 ```bash
-curl -X PUT "[https://<ingest-endpoint>/v1/ingest"](https://<ingest-endpoint>/v1/ingest") \
+curl -X PUT "https://<ingest-endpoint>/v1/ingest" \
   --cert client.crt \
   --key client.key \
   --cacert server-ca.crt \
@@ -112,7 +112,7 @@ curl -X PUT "[https://<ingest-endpoint>/v1/ingest"](https://<ingest-endpoint>/v1
 
 ```bash
 # gzip compression
-curl -X PUT "[https://<ingest-endpoint>/v1/ingest"](https://<ingest-endpoint>/v1/ingest") \
+curl -X PUT "https://<ingest-endpoint>/v1/ingest" \
   --cert client.crt \
   --key client.key \
   --cacert server-ca.crt \
@@ -121,7 +121,7 @@ curl -X PUT "[https://<ingest-endpoint>/v1/ingest"](https://<ingest-endpoint>/v1
   --data-binary @logs.json.gz
 
 # deflate compression
-curl -X PUT "[https://<ingest-endpoint>/v1/ingest"](https://<ingest-endpoint>/v1/ingest") \
+curl -X PUT "https://<ingest-endpoint>/v1/ingest" \
   --cert client.crt \
   --key client.key \
   --cacert server-ca.crt \
@@ -287,7 +287,7 @@ data:
     [FILTER]
         Name                kubernetes
         Match               kube.*
-        Kube_URL            [https://kubernetes.default.svc:443](https://kubernetes.default.svc:443)
+        Kube_URL            https://kubernetes.default.svc:443
         Kube_CA_File        /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
         Kube_Token_File     /var/run/secrets/kubernetes.io/serviceaccount/token
         Merge_Log           On
@@ -329,7 +329,7 @@ Alternative to Fluent Bit for existing Logstash deployments.
 ```ruby
 output {
   http {
-    url => "[https://<ingest-endpoint>/v1/ingest"](https://<ingest-endpoint>/v1/ingest")
+    url => "https://<ingest-endpoint>/v1/ingest"
     http_method => "put"
     format => "json"
     content_type => "application/json"
@@ -368,7 +368,7 @@ def send_logs_to_cls(logs, endpoint, cert_path, key_path, ca_path):
             log['msg'] = '-'
 
     response = requests.put(
-        f"[https://{endpoint}/v1/ingest",](https://{endpoint}/v1/ingest",)
+        f"https://{endpoint}/v1/ingest",
         json=logs,
         cert=(cert_path, key_path),
         verify=ca_path,

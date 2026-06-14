@@ -919,7 +919,7 @@ I couldn't fetch complete API documentation for `{{control}}` (MCP unavailable a
 3. **Search project**: Let me search your codebase for existing usage
 4. **Install MCP**: Enable full API access with:
    ```bash
-   npm install -g @ui5/mcp-server
+   npm install -g @ui5/mcp-server@0.2.11
    ```
 
 Would you like me to search your project files for `{{control}}` usage patterns?
@@ -1049,3 +1049,15 @@ Always prioritize:
 3. **Context**: Match user's project setup and preferences
 4. **Speed**: Use MCP when available for fast responses
 5. **Completeness**: Cover methods, events, properties, common patterns, and pitfalls
+
+## Delegation and Safety
+
+**When to Delegate:** Use this agent for UI5 API lookup, control/member examples, version-aware documentation, and project-specific control usage guidance.
+
+**When Not to Delegate:** Keep work in the main thread for broad architecture, scaffolding, migration execution, or code-quality remediation.
+
+**First Checks:** Detect UI5 version from `manifest.json`, `ui5.yaml`, `package.json`, or user input. Prefer MCP API lookup when available, then confirm with local usage.
+
+**MCP Fallback:** If MCP is unavailable, use UI5 API URLs, local project search, and bundled references. State any version assumptions.
+
+**Safety Constraints:** Do not invent control APIs. If a method/member cannot be confirmed, say so and provide a verification path.

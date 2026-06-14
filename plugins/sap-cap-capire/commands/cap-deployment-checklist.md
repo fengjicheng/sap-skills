@@ -1,6 +1,12 @@
 ---
 name: cap-deployment-checklist
 description: Pre-deployment validation checklist for CAP applications to Cloud Foundry, Kyma, or local environments
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
+argument-hint: "[cf|kyma|local]"
 arguments:
   - name: target
     description: "Deployment target: cf (Cloud Foundry), kyma, or local"
@@ -12,6 +18,10 @@ arguments:
 - Shell snippets assume Bash on Linux/macOS, WSL2, or Git Bash.
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
+
+## Output Contract
+
+Return a deployment readiness checklist, blockers, environment assumptions, safe validation commands, and pending tenant/system checks. Default to read-only guidance and do not deploy or modify services.
 
 
 # CAP Deployment Checklist

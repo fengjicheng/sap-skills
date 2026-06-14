@@ -458,6 +458,18 @@ generate_plugin_json() {
     commands_json="$scanned_commands_json"
   fi
 
+  # Optional plugin-level sidecar configs. These paths are resolved from the
+  # plugin root by the CLI, matching commands/agents behavior.
+  local hooks_path=""
+  if [ -f "$plugin_dir/hooks/hooks.json" ]; then
+    hooks_path="./hooks/hooks.json"
+  fi
+
+  local mcp_servers_path=""
+  if [ -f "$plugin_dir/.mcp.json" ]; then
+    mcp_servers_path="./.mcp.json"
+  fi
+
   # Set default license if empty
   if [ -z "$license" ]; then
     license="GPL-3.0"
@@ -474,6 +486,8 @@ generate_plugin_json() {
     --arg category "$category" \
     --argjson agents "$agents_json" \
     --argjson commands "$commands_json" \
+    --arg hooks "$hooks_path" \
+    --arg mcp_servers "$mcp_servers_path" \
     '{
       name: $name,
       description: $description,
@@ -487,7 +501,9 @@ generate_plugin_json() {
       keywords: $keywords,
       category: $category
     } + (if $agents != [] then {agents: $agents} else {} end)
-      + (if $commands != [] then {commands: $commands} else {} end)'
+      + (if $commands != [] then {commands: $commands} else {} end)
+      + (if $hooks != "" then {hooks: $hooks} else {} end)
+      + (if $mcp_servers != "" then {mcpServers: $mcp_servers} else {} end)'
   )
 
   # Validate JSON

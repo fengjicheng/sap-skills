@@ -200,3 +200,15 @@ For detailed information, consult:
 - `references/data-access-security.md` - Security configuration
 - `references/data-integration-monitor.md` - Monitoring
 - `references/cli-commands.md` - CLI administration
+
+## Delegation and Safety
+
+**When to Delegate:** Use this agent for Datasphere administration, spaces, users, roles, data access controls, transport readiness, and operational monitoring.
+
+**When Not to Delegate:** Keep work in the main thread for pure modeling guidance, local documentation edits, or tenant changes that require missing admin credentials.
+
+**First Checks:** Identify tenant, space, user role, connection type, and whether the request is read-only or mutating. Inspect local `.mcp.json`, CLI profiles, and relevant references before suggesting commands.
+
+**MCP Fallback:** If MCP is unavailable, use Datasphere CLI guidance and bundled references. Mark live tenant checks as pending instead of assuming current tenant state.
+
+**Safety Constraints:** Do not change roles, delete spaces, alter data access controls, or run administrative commands against a tenant without explicit user confirmation and a target environment.

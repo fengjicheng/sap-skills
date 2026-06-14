@@ -246,7 +246,7 @@ The official SAP MDC tutorial ([https://github.com/SAP-samples/ui5-mdc-json-tuto
 
 **Running the Tutorial**:
 ```bash
-git clone [https://github.com/SAP-samples/ui5-mdc-json-tutorial.git](https://github.com/SAP-samples/ui5-mdc-json-tutorial.git)
+git clone https://github.com/SAP-samples/ui5-mdc-json-tutorial.git
 cd ui5-mdc-json-tutorial/ex5  # Or any exercise
 npm install
 npm start

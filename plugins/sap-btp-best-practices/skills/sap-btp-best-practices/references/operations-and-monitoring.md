@@ -156,7 +156,7 @@ SAP BTP Applications
 {
   "name": "daily-cleanup",
   "description": "Daily data cleanup job",
-  "action": "[https://my-app.cfapps.region.hana.ondemand.com/cleanup",](https://my-app.cfapps.region.hana.ondemand.com/cleanup",)
+  "action": "https://my-app.cfapps.region.hana.ondemand.com/cleanup",
   "active": true,
   "httpMethod": "POST",
   "schedules": [
@@ -248,7 +248,7 @@ Subscribe to notifications for:
     },
     {
       "type": "SLACK",
-      "webhookUrl": "[https://hooks.slack.com/..."](https://hooks.slack.com/...")
+      "webhookUrl": "https://hooks.slack.com/..."
     }
   ]
 }

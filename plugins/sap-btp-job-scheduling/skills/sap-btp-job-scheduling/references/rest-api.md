@@ -23,7 +23,7 @@
 ### Base URL
 
 ```
-[https://jobscheduler-rest.<landscape-domain>](https://jobscheduler-rest.<landscape-domain>)
+https://jobscheduler-rest.<landscape-domain>
 ```
 
 Example landscapes:
@@ -55,7 +55,7 @@ Content-Type: application/json
 ### Lite Plan (HTTP Basic)
 
 ```bash
-curl -X GET "[https://jobscheduler-rest.<domain>/scheduler/jobs"](https://jobscheduler-rest.<domain>/scheduler/jobs") \
+curl -X GET "https://jobscheduler-rest.<domain>/scheduler/jobs" \
   -u "<user>:<password>" \
   -H "Content-Type: application/json"
 ```
@@ -97,7 +97,7 @@ curl -X POST "<certurl>/oauth/token" \
 **Using Token:**
 
 ```bash
-curl -X GET "[https://jobscheduler-rest.<domain>/scheduler/jobs"](https://jobscheduler-rest.<domain>/scheduler/jobs") \
+curl -X GET "https://jobscheduler-rest.<domain>/scheduler/jobs" \
   -H "Authorization: Bearer <access_token>" \
   -H "Content-Type: application/json"
 ```
@@ -182,7 +182,7 @@ POST /scheduler/jobs
 {
   "name": "salesReportJob",
   "description": "Generate daily sales report",
-  "action": "[https://myapp.cfapps.eu10.hana.ondemand.com/api/reports/sales",](https://myapp.cfapps.eu10.hana.ondemand.com/api/reports/sales",)
+  "action": "https://myapp.cfapps.eu10.hana.ondemand.com/api/reports/sales",
   "active": true,
   "httpMethod": "POST",
   "schedules": [{
@@ -210,7 +210,7 @@ POST /scheduler/jobs
 {
   "name": "salesReportJob",
   "description": "Generate daily sales report",
-  "action": "[https://myapp.cfapps.eu10.hana.ondemand.com/api/reports/sales",](https://myapp.cfapps.eu10.hana.ondemand.com/api/reports/sales",)
+  "action": "https://myapp.cfapps.eu10.hana.ondemand.com/api/reports/sales",
   "active": true,
   "httpMethod": "POST",
   "_id": 42,
@@ -311,7 +311,7 @@ GET /scheduler/jobs/42?displaySchedules=true
   "_id": 42,
   "name": "salesReportJob",
   "description": "Generate daily sales report",
-  "action": "[https://myapp.../api/reports/sales",](https://myapp.../api/reports/sales",)
+  "action": "https://myapp.../api/reports/sales",
   "active": true,
   "httpMethod": "POST",
   "startTime": null,
@@ -385,7 +385,7 @@ PUT /scheduler/jobs/dailyReport
 {
   "name": "dailyReport",
   "description": "Generate daily sales report",
-  "action": "[https://myapp.../api/reports",](https://myapp.../api/reports",)
+  "action": "https://myapp.../api/reports",
   "active": true,
   "httpMethod": "POST"
 }
@@ -714,7 +714,7 @@ scheduler.createJob({
 }, {
   name: 'myJob',
   description: 'My scheduled job',
-  action: '[https://myapp.../api/process',](https://myapp.../api/process',)
+  action: 'https://myapp.../api/process',
   active: true,
   httpMethod: 'POST',
   schedules: [{

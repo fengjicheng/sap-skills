@@ -155,7 +155,7 @@ SAML Attribute: NameID (any supported format)
 ```
 Trust Configuration:
   Identity Provider: IAS Tenant
-  Tenant URL: [https://<tenant>.accounts.ondemand.com](https://<tenant>.accounts.ondemand.com)
+  Tenant URL: https://<tenant>.accounts.ondemand.com
 
 User Format: <email> or <user_id>
 ```

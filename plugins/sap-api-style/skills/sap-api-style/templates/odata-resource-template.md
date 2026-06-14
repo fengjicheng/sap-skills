@@ -65,7 +65,7 @@ Navigation properties allow [explain relationships].
 
 **Absolute URI**: `[Root URI]/[Resource Path]`
 
-**Example**: `[https://api.example.com/odata/v4/Employees`](https://api.example.com/odata/v4/Employees`)
+**Example**: `https://api.example.com/odata/v4/Employees`
 
 ### Key Property
 
@@ -91,7 +91,7 @@ Example: E12345
 **Examples**:
 - `/Employees('E12345')` - Address by string key
 - `/Employees(EmployeeID='E12345')` - Explicit property name
-- `[https://api.example.com/odata/v4/Employees('E12345](https://api.example.com/odata/v4/Employees('E12345)')` - Absolute URI
+- `https://api.example.com/odata/v4/Employees('E12345`')` - Absolute URI
 
 ### Required Permissions
 
@@ -271,7 +271,7 @@ For each custom operation, provide:
 |---|---|---|
 | Content-Type | Response body media type | application/json |
 | ETag | Entity tag for caching and optimistic concurrency | "abc123def456" |
-| Location | URL of newly created resource (201 responses) | [https://api.example.com/odata/v4/Employees('E12346](https://api.example.com/odata/v4/Employees('E12346)') |
+| Location | URL of newly created resource (201 responses) | https://api.example.com/odata/v4/Employees('E12346') |
 | OData-Version | OData protocol version | 4.0 |
 | Preference-Applied | Which Prefer header preference was applied | return=representation |
 ```
@@ -466,7 +466,7 @@ Prefer: return=representation
 ```http
 HTTP/1.1 201 Created
 Content-Type: application/json
-Location: [https://api.example.com/odata/v4/Employees('E12347](https://api.example.com/odata/v4/Employees('E12347)')
+Location: https://api.example.com/odata/v4/Employees('E12347')
 
 {
   "EmployeeID": "E12347",

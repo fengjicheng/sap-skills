@@ -1,0 +1,55 @@
+{
+  "policy": {
+    "sapCooldownDays": 14,
+    "lastVerified": "2026-06-14",
+    "notes": "SAP MCP servers are executable dependencies. Use exact npm pins or documented source commits; no @latest or bare npx package specs."
+  },
+  "npmPackages": {
+    "@cap-js/mcp-server": {
+      "approvedVersion": "0.0.5",
+      "owner": "CAP project",
+      "usedBy": "plugins/sap-cap-capire/.mcp.json",
+      "trust": "CAP model and documentation access; no tenant credentials in the bundled config.",
+      "scan": "npm view @cap-js/mcp-server@0.0.5 version dist.integrity && npm audit --package-lock-only"
+    },
+    "@mariodefe/sap-datasphere-mcp": {
+      "approvedVersion": "1.2.1",
+      "owner": "Community package",
+      "usedBy": "plugins/sap-datasphere/.mcp.json",
+      "trust": "Datasphere tenant access through OAuth environment variables; update only after explicit review.",
+      "scan": "npm view @mariodefe/sap-datasphere-mcp@1.2.1 version dist.integrity && npm audit --package-lock-only"
+    },
+    "@sap-ux/fiori-mcp-server": {
+      "approvedVersion": "1.4.0",
+      "owner": "SAP Fiori tools / open-ux-tools",
+      "usedBy": "plugins/sap-fiori-tools/.mcp.json",
+      "trust": "Newest exact pin approved by maintainer request on 2026-06-14 despite the SAP 14-day cooldown default.",
+      "scan": "npm view @sap-ux/fiori-mcp-server@1.4.0 version dist.integrity && npm audit --package-lock-only"
+    },
+    "@ui5/mcp-server": {
+      "approvedVersion": "0.2.11",
+      "owner": "UI5 project",
+      "usedBy": "plugins/sapui5/.mcp.json",
+      "trust": "UI5 documentation, scaffolding, and lint tooling; no tenant credentials in the bundled config.",
+      "scan": "npm view @ui5/mcp-server@0.2.11 version dist.integrity && npm audit --package-lock-only"
+    },
+    "hana-mcp-server": {
+      "approvedVersion": "0.3.1",
+      "owner": "Community package",
+      "usedBy": "plugins/sap-hana-cli/.mcp.json",
+      "trust": "HANA database access through environment variables; update only after explicit review.",
+      "scan": "npm view hana-mcp-server@0.3.1 version dist.integrity && npm audit --package-lock-only"
+    }
+  },
+  "sourceServers": {
+    "plugins/sap-sac-scripting/.mcp.json:sac-mcp": {
+      "repo": "https://github.com/secondsky/sap_analytics_cloud_mcp",
+      "commit": "2020235505d98111c2889598ab2217c1619b6943",
+      "pathEnv": "SAC_MCP_PATH",
+      "commitEnv": "SAC_MCP_COMMIT",
+      "usedBy": "plugins/sap-sac-scripting/.mcp.json",
+      "trust": "Trusted secondsky fork source install. This MCP uses SAC OAuth credentials and exposes read/write SAC REST API tools.",
+      "scan": "git -C \"$SAC_MCP_PATH\" rev-parse HEAD && npm --prefix \"$SAC_MCP_PATH\" ci --ignore-scripts && npm --prefix \"$SAC_MCP_PATH\" audit"
+    }
+  }
+}

@@ -150,7 +150,7 @@ For remote system integration, add prerequisites section:
       "destinations": [
         {
           "name": "MyDestination",
-          "document": "[https://documentation.url"](https://documentation.url")
+          "document": "https://documentation.url"
         },
         {
           "name": "SecondDestination"

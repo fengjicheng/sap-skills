@@ -76,7 +76,7 @@ Documented errors occurring during method execution, typically using `@throws`, 
 ### M
 
 **Metadata (OData)**
-XML document describing the structure of an OData service. Accessible at `$metadata` endpoint (e.g., `[https://api.sap.com/odata/$metadata](https://api.sap.com/odata/$metadata)`).
+XML document describing the structure of an OData service. Accessible at `$metadata` endpoint (e.g., `https://api.sap.com/odata/$metadata``).
 
 ### O
 
@@ -337,7 +337,7 @@ SAP-specific OpenAPI extension attribute defining API lifecycle state: beta, act
 
 **Clone Command**:
 ```bash
-git clone [https://github.com/SAP-docs/api-style-guide.git](https://github.com/SAP-docs/api-style-guide.git)
+git clone https://github.com/SAP-docs/api-style-guide.git
 ```
 
 ### SAP BTP (Business Technology Platform)

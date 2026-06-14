@@ -1,6 +1,11 @@
 ---
 name: datasphere-connection-guide
 description: Generate step-by-step connection setup guides for SAP Datasphere
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+argument-hint: "<source-system>"
 arguments:
   - name: source
     description: "Source system: s4hana-cloud, s4hana-onprem, bw4hana, hana, aws-s3, azure-blob, gcp-storage, kafka, odata, generic-http"
@@ -12,6 +17,10 @@ arguments:
 - Shell snippets assume Bash on Linux/macOS, WSL2, or Git Bash.
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
+
+## Output Contract
+
+Return connection prerequisites, required credentials or certificates without exposing secrets, safe validation steps, and tenant-only checks. Default to read-only setup guidance and do not create connections.
 
 
 Generate a connection setup guide for the specified source system.

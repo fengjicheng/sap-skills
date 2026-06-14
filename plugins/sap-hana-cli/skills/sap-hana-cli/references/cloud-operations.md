@@ -268,7 +268,7 @@ cds bind --to hana --for hybrid
       "kind": "hana",
       "binding": {
         "type": "cf",
-        "apiEndpoint": "[https://api.cf.eu10.hana.ondemand.com",](https://api.cf.eu10.hana.ondemand.com",)
+        "apiEndpoint": "https://api.cf.eu10.hana.ondemand.com",
         "org": "my-org",
         "space": "dev",
         "instance": "hana-hdi"

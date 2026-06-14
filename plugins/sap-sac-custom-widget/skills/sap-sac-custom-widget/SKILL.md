@@ -4,7 +4,7 @@ description: "SAP Analytics Cloud (SAC) Custom Widget development. Use when buil
 
 license: GPL-3.0
 metadata:
-  version: 2.1.0
+  version: "2.3.0"
   last_verified: 2026-06-12
   sac_version: "2026.8"
   errors_prevented: 25+
@@ -23,6 +23,13 @@ allowed-tools:
 
 # SAP Analytics Cloud Custom Widget Development
 
+## Related Skills
+
+- **sap-sac-scripting**: Use when custom widgets interact with SAC scripting, widgets, or story/application APIs
+- **sap-sac-planning**: Use when widgets participate in planning workflows or planning table interactions
+- **sapui5**: Use for Web Component/UI5 frontend implementation patterns and browser-side quality
+- **sap-dependency-security**: Use when adding third-party charting or build dependencies to widget projects
+
 ## Table of Contents
 - [Overview](#overview)
 - [Plugin Components](#plugin-components)
@@ -35,6 +42,8 @@ allowed-tools:
 ## Overview
 
 This skill enables development of custom widgets for SAP Analytics Cloud (SAC). Custom widgets are Web Components that extend SAC stories and applications with custom visualizations, interactive elements, and specialized functionality.
+
+## When to Use This Skill
 
 **Use this skill when**:
 - Building custom visualizations not available in standard SAC
@@ -110,7 +119,7 @@ A custom widget requires two files:
     {
       "kind": "main",
       "tag": "my-custom-widget",
-      "url": "[https://your-host.com/widget.js",](https://your-host.com/widget.js",)
+      "url": "https://your-host.com/widget.js",
       "integrity": "",
       "ignoreIntegrity": true
     }
@@ -276,7 +285,7 @@ this.myDataBinding.data.forEach(row => {
 **2. GitHub Pages**
 - Create repository with widget files
 - Enable GitHub Pages in Settings
-- Use URL: `[https://username.github.io/repo/widget.js`](https://username.github.io/repo/widget.js`)
+- Use URL: `https://username.github.io/repo/widget.js`
 
 **3. External Web Server**
 - AWS S3, Azure Blob, or any HTTPS server

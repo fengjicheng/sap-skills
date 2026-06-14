@@ -4,7 +4,7 @@ description: |
   Comprehensive SAC scripting skill for SAP Analytics Cloud Analytics Designer and Optimized Story Experience. This skill should be used when the user asks to "create SAC script", "debug Analytics Designer", "optimize SAC performance", "planning operations in SAC", "filter data in SAC", "use DataSource API", "chart scripting", "table manipulation", "SAC event handlers", "version management", "data locking", "Optimized Story Experience API", "OSE scripting", "OSE widget API", "OSE DataSource", "story scripting API", "OSE planning API", "OSE method", "optimized story", "SAC story scripting", "story script", "SAC scripting", or works with SAC widgets, planning models, or analytics applications.
 license: GPL-3.0
 metadata:
-  version: 3.1.0
+  version: "2.3.0"
   last_verified: 2026-06-11
   sac_version: "Q2 2026 (2026.8)"
   api_reference_version: "2025.20 (OSE Q2 2026)"
@@ -21,7 +21,11 @@ metadata:
 
 ## Related Skills
 
-- **dependency-upgrade**: Use when securing dependency and SDK/tooling upgrades used in story automation pipelines that integrate with external script tooling
+- **sap-dependency-security**: Use when securing dependency, SDK/tooling, and source-pinned SAC MCP upgrades used in story automation pipelines
+
+## When to Use This Skill
+
+Use this skill when writing or debugging SAC Analytics Designer scripts, Optimized Story Experience scripts, widget APIs, data-source filtering/selection logic, planning/version scripts, export/navigation handlers, performance-sensitive story logic, or SAC MCP-assisted automation.
 
 Comprehensive skill for scripting in SAP Analytics Cloud (SAC) Analytics Designer and Optimized Story Experience.
 
@@ -63,10 +67,12 @@ This plugin provides specialized tools for SAC development:
 
 ## MCP Setup
 
-This plugin ships with a `.mcp.json` that connects to the community `sap_analytics_cloud_mcp`
+This plugin ships with a `.mcp.json` that connects to the trusted `secondsky/sap_analytics_cloud_mcp`
 server, exposing 90 SAC REST API tools across 11 service areas (Content, Data Export, Data Import,
 Multi Actions, Calendar, Content Transport, User Management, Monitoring, Schedule & Publication,
 Translation, Smart Query).
+
+The SAC MCP is source-installed, not npm-installed. Use **sap-dependency-security** before changing the trusted fork or commit pin because this server receives SAC OAuth credentials and exposes tenant API tools.
 
 **Before using MCP tools**, check if the server is already installed:
 - Look for `.claude/sac-mcp.local.md` in the project
@@ -79,11 +85,15 @@ If not installed, ask the user once: **"Would you like help setting up the SAC M
 1. Clone and build:
    ```bash
    git clone https://github.com/secondsky/sap_analytics_cloud_mcp
-   cd sap_analytics_cloud_mcp && npm install && npm run build
+   cd sap_analytics_cloud_mcp
+   git checkout 2020235505d98111c2889598ab2217c1619b6943
+   npm ci --ignore-scripts
+   npm run build
    ```
 
 2. Configure environment variables:
    - `SAC_MCP_PATH` — absolute path to the cloned repo (e.g. `/home/user/sap_analytics_cloud_mcp`)
+   - `SAC_MCP_COMMIT` — `2020235505d98111c2889598ab2217c1619b6943`
    - `SAC_BASE_URL` — SAC tenant root URL (e.g. `https://mytenant.eu10.hanacloudservices.cloud.sap`)
    - `SAC_TOKEN_URL` — OAuth token endpoint
    - `SAC_CLIENT_ID` / `SAC_CLIENT_SECRET` — from SAC OAuth client configuration
@@ -92,8 +102,11 @@ If not installed, ask the user once: **"Would you like help setting up the SAC M
    ```markdown
    # SAC MCP Installation Record
    - Installed: [date]
+   - Repository: https://github.com/secondsky/sap_analytics_cloud_mcp
+   - Commit: 2020235505d98111c2889598ab2217c1619b6943
    - Path: [absolute path to build/index.js]
-   - Env vars configured: SAC_MCP_PATH, SAC_BASE_URL, SAC_TOKEN_URL, SAC_CLIENT_ID, SAC_CLIENT_SECRET
+   - Build command: npm ci --ignore-scripts && npm run build
+   - Env vars configured: SAC_MCP_PATH, SAC_MCP_COMMIT, SAC_BASE_URL, SAC_TOKEN_URL, SAC_CLIENT_ID, SAC_CLIENT_SECRET
    ```
 
 This prevents re-prompting in future sessions.
@@ -132,6 +145,17 @@ Do not ask again after the user answers.
 **After confirmation**, use the correct references:
 - **OSE** → `references/ose-api-*.md` (8 files, Q2 2026, v2025.20)
 - **Analytics Designer** → `references/api-*.md` (existing files)
+
+## Large Reference Search Routing
+
+Search large OSE API references with `rg` before opening them. Use patterns such as `rg -n "class Chart|interface DataSource|enum Feed|setDimensionFilter|getPlanning|PlanningModel" references/ose-api-*.md`, then read only the matching section.
+
+- Use `references/ose-api-datasource.md` for DataSource, DataAction, DataBinding, DataLocking, DataChangeInsights, and result-set methods.
+- Use `references/ose-api-chart-viz.md` for Chart, Table, GeoMap, RVisualization, ValueDriverTree, feeds, and visualization APIs.
+- Use `references/ose-api-planning-calendar.md` for Planning, PlanningModel, versions, calendars, data actions, and planning workflows.
+- Use `references/ose-api-application-core.md` for Application, PageBook, Panel, Popup, Widget, and lifecycle or container APIs.
+- Use `references/ose-api-types-enums.md` for enum/type lookup when a method signature mentions `Feed`, `Layout`, `NumberFormat`, `VariableValue`, or other SAC-specific types.
+- Use smaller `references/api-*.md` files first for Analytics Designer unless the user explicitly says Optimized Story Experience.
 
 ## Quick Start
 

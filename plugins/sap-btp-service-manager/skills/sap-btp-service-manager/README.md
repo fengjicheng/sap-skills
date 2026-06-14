@@ -7,6 +7,18 @@
 
 ---
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 1: `/btp-service-manager-troubleshoot` |
+| Agents | 0 |
+| Hooks | No |
+| MCP | No |
+| LSP | No |
+| Source Freshness | `last_verified`: 2025-11-27; SMCTL/BTP CLI source freshness pending docs-only recheck. |
+| Verification | `npm run validate`; live service-manager checks require access. |
+
 ## Overview
 
 Comprehensive Claude Code skill for managing SAP BTP services across Cloud Foundry, Kyma, Kubernetes, and other environments using SAP Service Manager.
@@ -182,10 +194,10 @@ go install github.com/Peripli/service-manager-cli@latest
 export PATH=$PATH:$(go env GOPATH)/bin
 
 # Alternative: Download from releases (repository archived 2025-09-30)
-# [https://github.com/Peripli/service-manager-cli/releases](https://github.com/Peripli/service-manager-cli/releases)
+# https://github.com/Peripli/service-manager-cli/releases
 
 # Login
-smctl login -a [https://service-manager.cfapps.eu10.hana.ondemand.com](https://service-manager.cfapps.eu10.hana.ondemand.com) \
+smctl login -a https://service-manager.cfapps.eu10.hana.ondemand.com \
   --param subdomain=my-subaccount
 
 # List available services
@@ -209,7 +221,7 @@ smctl get-binding my-binding -o json
 - **SAP Help Portal**: [https://help.sap.com/docs/service-manager](https://help.sap.com/docs/service-manager)
 - **Service Operator**: [https://github.com/SAP/sap-btp-service-operator](https://github.com/SAP/sap-btp-service-operator)
 - **SMCTL Releases**: [https://github.com/Peripli/service-manager-cli/releases](https://github.com/Peripli/service-manager-cli/releases)
-- **Swagger API**: `[https://service-manager.cfapps.<region>.hana.ondemand.com/swaggerui/swagger-ui.html`](https://service-manager.cfapps.<region>.hana.ondemand.com/swaggerui/swagger-ui.html`)
+- **Swagger API**: `https://service-manager.cfapps.<region>.hana.ondemand.com/swaggerui/swagger-ui.html`
 
 ---
 

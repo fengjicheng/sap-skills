@@ -25,7 +25,7 @@ The SAP Analytics Cloud calendar organizes collaborative planning workflows, str
 ### Accessing Calendar
 
 1. Main Menu → **Calendar**
-2. Or via direct URL: `[https://<tenant>/calendar`](https://<tenant>/calendar`)
+2. Or via direct URL: `https://<tenant>/calendar`
 
 ### Calendar Views
 

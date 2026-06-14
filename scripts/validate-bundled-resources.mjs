@@ -133,7 +133,6 @@ function findResourceRefs(markdownFile) {
 
 const markdownFiles = [
   ...walk(path.join(repoRoot, "plugins")),
-  ...walk(path.join(repoRoot, ".agents", "dependency-upgrade")),
 ].sort();
 
 let errors = 0;

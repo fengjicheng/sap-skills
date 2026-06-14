@@ -899,7 +899,7 @@ const response = await client.chatCompletion({
       {
         type: 'image_url',
         image_url: {
-          url: '[https://example.com/image.jpg',](https://example.com/image.jpg',)
+          url: 'https://example.com/image.jpg',
           detail: 'auto' // 'auto', 'low', or 'high'
         }
       }
@@ -928,16 +928,16 @@ const response = await client.chatCompletion({
 ```java
 // Basic image message
 var message = Message.user("Describe the following image");
-var newMessage = message.withImage("[https://url.to/image.jpg](https://url.to/image.jpg)");
+var newMessage = message.withImage("https://url.to/image.jpg");
 
 // With detail level (LOW, HIGH, AUTO)
 var messageWithDetail = message.withImage(
-    "[https://url.to/image.jpg",](https://url.to/image.jpg",)
+    "https://url.to/image.jpg",
     ImageItem.DetailLevel.LOW
 );
 
 // Using ImageItem directly
-var imageMessage = Message.user(new ImageItem("[https://url.to/image.jpg](https://url.to/image.jpg)"));
+var imageMessage = Message.user(new ImageItem("https://url.to/image.jpg"));
 
 // Note: Only user messages support image attachments currently
 ```

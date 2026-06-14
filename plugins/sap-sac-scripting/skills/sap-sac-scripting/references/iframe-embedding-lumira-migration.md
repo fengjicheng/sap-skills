@@ -50,7 +50,7 @@ The `origin` parameter contains the domain of the host application.
 **Security Best Practice**:
 ```javascript
 // onPostMessageReceived event
-if (origin !== "[https://trusted-domain.com](https://trusted-domain.com)") {
+if (origin !== "https://trusted-domain.com") {
     console.log("Unauthorized origin: " + origin);
     return;  // Reject messages from unknown origins
 }
@@ -94,7 +94,7 @@ The structured clone algorithm has some limitations on what can be cloned:
 // Parameters: origin, message
 
 // Security check
-if (origin !== "[https://my-portal.company.com](https://my-portal.company.com)") {
+if (origin !== "https://my-portal.company.com") {
     console.log("Rejected message from: " + origin);
     return;
 }
@@ -135,12 +135,12 @@ sacFrame.contentWindow.postMessage({
     type: "filter",
     dimension: "Region",
     value: "EMEA"
-}, "[https://your-tenant.sapanalytics.cloud](https://your-tenant.sapanalytics.cloud)");
+}, "https://your-tenant.sapanalytics.cloud");
 
 // Send refresh command
 sacFrame.contentWindow.postMessage({
     type: "refresh"
-}, "[https://your-tenant.sapanalytics.cloud](https://your-tenant.sapanalytics.cloud)");
+}, "https://your-tenant.sapanalytics.cloud");
 ```
 
 ### Security Recommendations
@@ -154,8 +154,8 @@ sacFrame.contentWindow.postMessage({
 ```javascript
 // Recommended: Origin allowlist pattern
 var trustedOrigins = [
-    "[https://portal.company.com",](https://portal.company.com",)
-    "[https://intranet.company.com"](https://intranet.company.com")
+    "https://portal.company.com",
+    "https://intranet.company.com"
 ];
 
 // In onPostMessageReceived

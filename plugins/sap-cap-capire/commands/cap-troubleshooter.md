@@ -1,6 +1,12 @@
 ---
 name: cap-troubleshooter
 description: Diagnostic guide for common CAP errors and issues with solutions
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
+argument-hint: "[syntax|deployment|database|auth|performance]"
 arguments:
   - name: error_category
     description: "Error category: syntax, deployment, database, auth, or performance"
@@ -12,6 +18,10 @@ arguments:
 - Shell snippets assume Bash on Linux/macOS, WSL2, or Git Bash.
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
+
+## Output Contract
+
+Return the likely root cause, evidence, diagnostic steps, safe local commands, and pending runtime checks. Default to read-only troubleshooting and ask before changing project or tenant state.
 
 
 # CAP Troubleshooter

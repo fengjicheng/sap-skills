@@ -413,7 +413,7 @@ public static final constant_type constant_name = constant_value;
 ```javascript
 @see setObject
 @see {@link setObject} for more information
-@see {@link [http://sap.help.com|the](http://sap.help.com|the) SAP Help Portal}
+@see {@link http://sap.help.com|the SAP Help Portal}
 ```
 
 #### @deprecated Tag

@@ -1,7 +1,15 @@
 ---
 name: ui5-lint
 description: Run UI5 linter on project with optional auto-fix and code quality analysis
-args:
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
+  - Edit
+  - mcp__plugin_sapui5_ui5-tooling__run_ui5_linter
+argument-hint: "[--fix] [file] [severity]"
+arguments:
   - name: fix
     description: Apply automatic fixes (true/false). Default is false - shows issues only.
     required: false
@@ -19,6 +27,10 @@ args:
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
 
+## Output Contract
+
+Return lint findings, severity, file references, safe fix suggestions, and tool availability. Default to analysis-only unless `--fix` is explicitly requested.
+
 
 # UI5 Code Linting{{#if file}} for {{file}}{{/if}}
 
@@ -34,7 +46,7 @@ Reporting issues of severity: **{{severity}}** and above
 
 ## Code Quality Analysis
 
-I'll invoke the **ui5-code-quality-advisor agent** to analyze your code.
+Use the **ui5-code-quality-advisor agent** to analyze the code when available.
 
 The agent will:
 
@@ -72,30 +84,30 @@ The agent will:
 
 ---
 
-**Invoking ui5-code-quality-advisor agent...**
+**Route to ui5-code-quality-advisor when available.**
 
-*Agent will analyze your code and provide a detailed quality report.*
+Expected output: a detailed quality report with findings, locations, severity, and fix recommendations.
 
 ---
 
 ## Manual Linting (If Agent Unavailable)
 
-If the agent cannot be invoked, you can run these manual commands:
+If the agent is unavailable, run these manual commands:
 
 ### Using @ui5/mcp-server (Recommended)
 
 ```bash
 # Lint entire project
-npx @ui5/mcp-server run_ui5_linter --config=ui5-linter.config.js
+npx @ui5/mcp-server@0.2.11 run_ui5_linter --config=ui5-linter.config.js
 
 # Lint specific file
-npx @ui5/mcp-server run_ui5_linter --files={{file}}
+npx @ui5/mcp-server@0.2.11 run_ui5_linter --files={{file}}
 
 # Lint with auto-fix
-npx @ui5/mcp-server run_ui5_linter --fix
+npx @ui5/mcp-server@0.2.11 run_ui5_linter --fix
 ```
 
-### Using @ui5/linter (Official CLI)
+### Using @ui5/linter CLI
 
 ```bash
 # Install linter

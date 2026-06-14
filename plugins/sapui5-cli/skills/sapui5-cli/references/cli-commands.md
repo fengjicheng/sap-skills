@@ -259,8 +259,8 @@ ui5 serve --verbose
 ```
 
 **Server URLs**:
-- HTTP: `[http://localhost:8080`](http://localhost:8080`) (or custom port)
-- HTTPS: `[https://localhost:8443`](https://localhost:8443`) (when using --h2)
+- HTTP: `http://localhost:8080` (or custom port)
+- HTTPS: `https://localhost:8443` (when using --h2)
 
 **SSL Certificates**:
 When using `--h2`, UI5 CLI automatically generates self-signed SSL certificates stored in `~/.ui5/server/`. You may need to trust these certificates in your browser.

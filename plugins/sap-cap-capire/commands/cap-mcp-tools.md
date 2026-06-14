@@ -1,6 +1,11 @@
 ---
 name: cap-mcp-tools
 description: Complete reference for CAP MCP server tools (search_model, search_docs) with usage examples
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 ---
 
 ## Shell Snippet Notes
@@ -9,10 +14,14 @@ description: Complete reference for CAP MCP server tools (search_model, search_d
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
 
+## Output Contract
+
+Return the relevant CAP MCP tool path, configuration checks, fallback local commands, and unresolved MCP availability questions. Default to read-only guidance and do not change MCP config unless explicitly requested.
+
 
 # CAP MCP Tools Reference
 
-Complete reference for the official @cap-js/mcp-server tools that provide AI agents with live access to your CAP project.
+Complete reference for the published @cap-js/mcp-server tools that provide AI agents with live access to your CAP project.
 
 ## Overview
 
@@ -21,7 +30,7 @@ The CAP MCP (Model Context Protocol) server exposes two powerful tools:
 2. **search_docs** - Semantic search through CAP documentation
 
 **Package**: `@cap-js/mcp-server`
-**Installation**: `npx -y @cap-js/mcp-server`
+**Installation**: `npx -y @cap-js/mcp-server@0.0.5`
 **License**: Apache-2.0
 
 ---
@@ -77,7 +86,7 @@ User: "Add a bound action to Books entity to mark as bestseller"
 Agent: Let me check the Books entity structure first.
 [Calls: search_model(query="Books", type="entity")]
 Result: Books entity has ID, title, author_ID, stock fields
-Agent: Now I'll check how to define bound actions.
+Agent: Next, check how to define bound actions.
 [Calls: search_docs(query="define bound action in CDS")]
 Result: Bound action syntax documentation
 Agent: Here's how to add the action...
@@ -198,20 +207,20 @@ Agent: Here are two approaches for validation...
 {
   "sap-cap-capire": {
     "command": "npx",
-    "args": ["-y", "@cap-js/mcp-server"],
+    "args": ["-y", "@cap-js/mcp-server@0.0.5"],
     "env": {}
   }
 }
 ```
 
-### 2. Configure Claude Code (VS Code - Cline)
+### 2. Configure Code CLI (VS Code - Cline)
 
 ```json
 {
   "mcpServers": {
     "cap-mcp": {
       "command": "npx",
-      "args": ["-y", "@cap-js/mcp-server"],
+      "args": ["-y", "@cap-js/mcp-server@0.0.5"],
       "env": {}
     }
   }
@@ -225,7 +234,7 @@ Agent: Here are two approaches for validation...
   "mcp": {
     "cap-mcp": {
       "type": "local",
-      "command": ["npx", "-y", "@cap-js/mcp-server"],
+      "command": ["npx", "-y", "@cap-js/mcp-server@0.0.5"],
       "enabled": true
     }
   }
@@ -239,7 +248,7 @@ Agent: Here are two approaches for validation...
   "servers": {
     "cap-mcp": {
       "command": "npx",
-      "args": ["-y", "@cap-js/mcp-server"],
+      "args": ["-y", "@cap-js/mcp-server@0.0.5"],
       "env": {},
       "type": "stdio"
     }
@@ -268,10 +277,10 @@ Agent: Here are two approaches for validation...
 **Solution**:
 ```bash
 # Install globally for faster access
-npm install -g @cap-js/mcp-server
+npm install -g @cap-js/mcp-server@0.0.5
 
 # Or use npx (auto-installs)
-npx -y @cap-js/mcp-server
+npx -y @cap-js/mcp-server@0.0.5
 ```
 
 ### Issue: search_model returns no results
@@ -299,7 +308,7 @@ You can also use MCP tools directly from command line:
 
 ```bash
 # Install globally
-npm i -g @cap-js/mcp-server
+npm i -g @cap-js/mcp-server@0.0.5
 
 # Search compiled model
 cds-mcp search_model . Books entity

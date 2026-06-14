@@ -13,7 +13,7 @@ description: |
   Cloud Connector, cf-eu10, CA-SIT-ATM, business situations, situation types, situation actions
 license: GPL-3.0
 metadata:
-  version: "1.1.0"
+  version: "2.3.0"
   last_verified: "2025-11-27"
   status: "ARCHIVED"
   deprecation_date: "2025-09-24"
@@ -21,6 +21,13 @@ metadata:
 ---
 
 # SAP BTP Intelligent Situation Automation
+
+## Related Skills
+
+- **sap-btp-cloud-platform**: Use for subaccount, subscription, and role collection context
+- **sap-btp-integration-suite**: Use for Event Mesh and integration alternatives during migration planning
+- **sap-btp-cloud-transport-management**: Use if archived ISA-related artifacts must be moved across landscapes
+- **sap-btp-best-practices**: Use for decommissioning governance and operational planning
 
 ## ⚠️ DEPRECATION NOTICE
 
@@ -39,7 +46,7 @@ SAP Intelligent Situation Automation was a BTP service that enabled automatic ha
 
 **Documentation Source**: [https://github.com/SAP-docs/btp-intelligent-situation-automation](https://github.com/SAP-docs/btp-intelligent-situation-automation)
 
-**Last Verified**: 2026-05-31
+**Last Verified**: 2025-11-27 (metadata). Re-verify archived-service details before advancing this date.
 
 ## Table of Contents
 - [Overview (For Reference)](#overview-for-reference)
@@ -51,8 +58,6 @@ SAP Intelligent Situation Automation was a BTP service that enabled automatic ha
 - [Core Components](#core-components)
 - [Role Templates](#role-templates)
 - [Bundled Resources](#bundled-resources)
-
-## When to Use This Skill
 
 ## When to Use This Skill
 
@@ -240,7 +245,7 @@ Use the *Manage Situation Actions* application to create custom actions beyond s
 
 Export all stored data using the endpoint:
 ```
-[https://<subdomain>.<region>.intelligent-situation-automation.cloud.sap/exportdata](https://<subdomain>.<region>.intelligent-situation-automation.cloud.sap/exportdata)
+https://<subdomain>.<region>.intelligent-situation-automation.cloud.sap/exportdata
 ```
 
 ## Audit Logging
@@ -350,7 +355,7 @@ For any questions or concerns about the deprecation:
 
 ---
 
-**Skill Version**: 1.1.0
+**Skill Version**: 2.3.0
 **Status**: ARCHIVED / DEPRECATED
 **Last Updated**: 2026-05-31
 **License**: GPL-3.0

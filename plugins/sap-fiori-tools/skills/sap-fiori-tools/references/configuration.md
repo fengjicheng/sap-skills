@@ -212,7 +212,7 @@ server:
       configuration:
         backend:
           - path: /sap
-            url: [https://my.backend.com:1234](https://my.backend.com:1234)
+            url: https://my.backend.com:1234
 ```
 
 **Multiple Backends**:
@@ -220,9 +220,9 @@ server:
 configuration:
   backend:
     - path: /sap/opu/odata/sap/SERVICE1
-      url: [https://system1.com](https://system1.com)
+      url: https://system1.com
     - path: /sap/opu/odata/sap/SERVICE2
-      url: [https://system2.com](https://system2.com)
+      url: https://system2.com
 ```
 
 **Special Options**:
@@ -241,7 +241,7 @@ configuration:
     path:
       - /resources
       - /test-resources
-    url: [https://sapui5.hana.ondemand.com](https://sapui5.hana.ondemand.com)
+    url: https://sapui5.hana.ondemand.com
     version: 1.78.0
 ```
 
@@ -303,7 +303,7 @@ Updates:
 
 **Custom Configuration**: Create custom run configuration
 
-**Source**: `[https://ui5.sap.com`](https://ui5.sap.com`) (default)
+**Source**: `https://ui5.sap.com` (default)
 
 **Fallback**: Next higher version if requested unavailable
 

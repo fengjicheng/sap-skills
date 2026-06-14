@@ -1,6 +1,11 @@
 ---
 name: seamless-planning-guide
 description: Quick guidance on implementing Seamless Planning with SAP Datasphere
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+argument-hint: "[model-or-scenario]"
 ---
 
 ## Shell Snippet Notes
@@ -8,6 +13,10 @@ description: Quick guidance on implementing Seamless Planning with SAP Dataspher
 - Shell snippets assume Bash on Linux/macOS, WSL2, or Git Bash.
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
+
+## Output Contract
+
+Return Seamless Planning guidance, architecture prerequisites, modeling tradeoffs, validation steps, and unresolved tenant checks. Default to read-only analysis and do not change models.
 
 
 # Seamless Planning Implementation Guide

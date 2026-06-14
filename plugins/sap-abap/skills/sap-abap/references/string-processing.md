@@ -129,7 +129,7 @@ DATA(bytes) = xstrlen( xstr ).
 ```abap
 " && operator
 DATA(full) = first && ` ` && last.
-DATA(url) = `[https://`](https://`) && domain && `/` && path.
+DATA(url) = `https://` && domain && `/` && path.
 
 " &&= assignment operator
 text &&= ` additional`.

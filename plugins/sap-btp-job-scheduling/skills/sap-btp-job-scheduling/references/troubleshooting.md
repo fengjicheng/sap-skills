@@ -208,10 +208,10 @@ Convert local times to UTC before scheduling.
 **Solution:**
 Grant permissions at UAA login route:
 ```
-[https://uaa.cf.<region>.hana.ondemand.com/profile](https://uaa.cf.<region>.hana.ondemand.com/profile)
+https://uaa.cf.<region>.hana.ondemand.com/profile
 ```
 
-Example: `[https://uaa.cf.eu10.hana.ondemand.com/profile`](https://uaa.cf.eu10.hana.ondemand.com/profile`)
+Example: `https://uaa.cf.eu10.hana.ondemand.com/profile`
 
 ---
 

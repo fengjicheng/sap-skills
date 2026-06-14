@@ -293,7 +293,7 @@ Call external services.
 ```xml
 <ServiceCallout name="CallService">
   <HTTPTargetConnection>
-    <URL>[https://service.example.com</URL>](https://service.example.com</URL>)
+    <URL>https://service.example.com</URL>
   </HTTPTargetConnection>
 </ServiceCallout>
 ```

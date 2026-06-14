@@ -29,27 +29,27 @@ Complete reference for the JSON metadata file that defines custom widgets.
   "description": "A feature-rich custom widget with data binding",
   "vendor": "Company Name",
   "license": "MIT",
-  "icon": "[https://example.com/icon.png",](https://example.com/icon.png",)
+  "icon": "https://example.com/icon.png",
   "newInstancePrefix": "advWidget",
   "webcomponents": [
     {
       "kind": "main",
       "tag": "advanced-widget",
-      "url": "[https://host.com/widget.js",](https://host.com/widget.js",)
+      "url": "https://host.com/widget.js",
       "integrity": "sha256-abc123...",
       "ignoreIntegrity": false
     },
     {
       "kind": "styling",
       "tag": "advanced-widget-styling",
-      "url": "[https://host.com/styling.js",](https://host.com/styling.js",)
+      "url": "https://host.com/styling.js",
       "integrity": "sha256-def456...",
       "ignoreIntegrity": false
     },
     {
       "kind": "builder",
       "tag": "advanced-widget-builder",
-      "url": "[https://host.com/builder.js",](https://host.com/builder.js",)
+      "url": "https://host.com/builder.js",
       "integrity": "sha256-ghi789...",
       "ignoreIntegrity": false
     }
@@ -186,7 +186,7 @@ Each widget can have up to three web components:
 {
   "kind": "main",
   "tag": "my-widget",
-  "url": "[https://host.com/widget.js",](https://host.com/widget.js",)
+  "url": "https://host.com/widget.js",
   "integrity": "sha256-abc123...",
   "ignoreIntegrity": false
 }
@@ -198,7 +198,7 @@ Each widget can have up to three web components:
 {
   "kind": "styling",
   "tag": "my-widget-styling",
-  "url": "[https://host.com/styling.js",](https://host.com/styling.js",)
+  "url": "https://host.com/styling.js",
   "integrity": "sha256-def456...",
   "ignoreIntegrity": false
 }
@@ -210,7 +210,7 @@ Each widget can have up to three web components:
 {
   "kind": "builder",
   "tag": "my-widget-builder",
-  "url": "[https://host.com/builder.js",](https://host.com/builder.js",)
+  "url": "https://host.com/builder.js",
   "integrity": "sha256-ghi789...",
   "ignoreIntegrity": false
 }

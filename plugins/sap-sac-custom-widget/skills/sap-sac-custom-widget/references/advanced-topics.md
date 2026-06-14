@@ -395,11 +395,11 @@ Common libraries used with SAC widgets:
 
 | Library | Use Case | CDN |
 |---------|----------|-----|
-| ECharts | Charts | `[https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js`](https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js`) |
-| D3.js | Data viz | `[https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js`](https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js`) |
-| Chart.js | Charts | `[https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.js`](https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.js`) |
-| Leaflet | Maps | `[https://unpkg.com/leaflet@1.9/dist/leaflet.js`](https://unpkg.com/leaflet@1.9/dist/leaflet.js`) |
-| Moment.js | Dates | `[https://cdn.jsdelivr.net/npm/moment@2/moment.min.js`](https://cdn.jsdelivr.net/npm/moment@2/moment.min.js`) |
+| ECharts | Charts | `https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js` |
+| D3.js | Data viz | `https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js` |
+| Chart.js | Charts | `https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.js` |
+| Leaflet | Maps | `https://unpkg.com/leaflet@1.9/dist/leaflet.js` |
+| Moment.js | Dates | `https://cdn.jsdelivr.net/npm/moment@2/moment.min.js` |
 
 ### Integration Pattern
 
@@ -407,7 +407,7 @@ Common libraries used with SAC widgets:
 (function() {
   // Library URLs
   const LIBS = {
-    echarts: "[https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"](https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js")
+    echarts: "https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"
   };
 
   // Track loading state

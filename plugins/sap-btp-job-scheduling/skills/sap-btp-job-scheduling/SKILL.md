@@ -12,7 +12,7 @@ description: |
   SAP Cloud ALM, Alert Notification Service, multitenancy, tenant-aware, BC-CP-CF-JBS
 license: GPL-3.0
 metadata:
-  version: "1.0.1"
+  version: "2.3.0"
   last_verified: "2025-11-27"
 ---
 
@@ -20,7 +20,7 @@ metadata:
 
 ## Related Skills
 
-- **dependency-upgrade**: Use for secure dependency and workflow hardening when your job scheduling microservices maintain npm/CLI dependency stacks
+- **sap-dependency-security**: Use for secure dependency and workflow hardening when your job scheduling microservices maintain npm/CLI dependency stacks
 
 ## Table of Contents
 
@@ -232,7 +232,7 @@ curl -X POST "<uaa_url>/oauth/token" \
   -d "grant_type=client_credentials"
 
 # Use token in API calls
-curl -X GET "[https://jobscheduler-rest.<landscape>/scheduler/jobs"](https://jobscheduler-rest.<landscape>/scheduler/jobs") \
+curl -X GET "https://jobscheduler-rest.<landscape>/scheduler/jobs" \
   -H "Authorization: Bearer <access_token>" \
   -H "Content-Type: application/json"
 ```
@@ -257,7 +257,7 @@ POST /scheduler/jobs
 {
   "name": "myJob",
   "description": "Process daily reports",
-  "action": "[https://myapp.cfapps.eu10.hana.ondemand.com/api/process",](https://myapp.cfapps.eu10.hana.ondemand.com/api/process",)
+  "action": "https://myapp.cfapps.eu10.hana.ondemand.com/api/process",
   "active": true,
   "httpMethod": "POST",
   "schedules": [{
@@ -284,7 +284,7 @@ const scheduler = new JobSchedulerClient.Scheduler();
 // Create job
 scheduler.createJob({ url: vcapServices.jobscheduler[0].credentials.url }, {
   name: 'myJob',
-  action: '[https://myapp.../process',](https://myapp.../process',)
+  action: 'https://myapp.../process',
   active: true,
   httpMethod: 'GET',
   schedules: [{ cron: '* * * * 0 0 0', active: true }]

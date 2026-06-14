@@ -122,7 +122,7 @@ Claude: [Uses sap-fiori-tools and sapui5 skills]
 
 | Skill | Description |
 |-------|-------------|
-| `dependency-upgrade` | Secure dependency upgrades, cooldown policies, lockfile hardening, and supply-chain safeguards |
+| `sap-dependency-security` | SAP dependency security, MCP executable trust, cooldown policies, lockfile hardening, and supply-chain safeguards |
 
 ---
 
@@ -254,7 +254,7 @@ This project is licensed under the GNU General Public License v3.0 (GPL-3.0) - s
 
 ---
 
-**Last Updated**: 2026-05-31
-**Marketplace Version**: 2.2.2
-**Skills**: 33
+**Last Updated**: 2026-06-14
+**Marketplace Version**: 2.3.0
+**Skills**: 35
 **Maintainer**: SAP Skills Maintainers

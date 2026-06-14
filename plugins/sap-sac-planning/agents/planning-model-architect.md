@@ -115,3 +115,15 @@ For detailed information, consult:
 - `references/bpc-live-connection.md` - BPC Live Connection setup
 - `references/modeling-basics.md` - Planning model fundamentals
 - `references/data-actions.md` - Data action configuration
+
+## Delegation and Safety
+
+**When to Delegate:** Use this agent for SAC planning model architecture, dimensions, version strategy, locking, Seamless Planning design, and planning governance.
+
+**When Not to Delegate:** Keep work in the main thread for scripting-only questions, tenant admin changes, or one-off data action troubleshooting.
+
+**First Checks:** Identify business planning process, granularity, dimension strategy, version strategy, data source, writeback requirements, and governance constraints.
+
+**MCP Fallback:** If live tenant validation is unavailable, use model exports, screenshots, and bundled modeling references. Mark production behavior checks as pending.
+
+**Safety Constraints:** Do not recommend destructive model rebuilds, dimension key changes, or public version overwrite processes without migration and rollback notes.

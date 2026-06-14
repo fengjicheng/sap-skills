@@ -9,7 +9,7 @@ description: |
   Technologies: SAP Fiori Elements, SAPUI5, OData V2/V4, CAP, SAP BTP, ABAP, Cloud Foundry, fiori-mcp-server (MCP tools for AI-assisted generation).
 license: GPL-3.0
 metadata:
-  version: "1.0.1"
+  version: "2.3.0"
   last_verified: "2026-02-26"
 ---
 
@@ -22,7 +22,11 @@ metadata:
 - **sap-abap-cds**: Use when consuming ABAP CDS views as OData services or working with ABAP backends
 - **sap-btp-cloud-platform**: Use for deployment targets, BTP destination configuration, and Cloud Foundry deployment
 - **sap-api-style**: Use when documenting OData APIs or following API documentation standards for Fiori apps
-- **dependency-upgrade**: Use when tightening npm/JavaScript supply-chain controls for UI tooling and dependency updates
+- **sap-dependency-security**: Use when tightening npm/JavaScript supply-chain controls, exact MCP server pins, and dependency updates
+
+## When to Use This Skill
+
+Use this skill when generating Fiori Elements or Freestyle SAPUI5 applications, configuring Page Editor/List Report/Object Page behavior, editing annotations, previewing with mock or live data, deploying to ABAP or Cloud Foundry, building adaptation projects, or using Fiori MCP/generation tooling.
 
 Comprehensive guidance for developing SAP Fiori applications using SAP Fiori tools extensions.
 
@@ -67,7 +71,7 @@ Official SAP sample repository with Fiori Elements applications built using SAP 
 
 **Quick Start**:
 ```bash
-git clone [https://github.com/SAP-samples/fiori-tools-samples](https://github.com/SAP-samples/fiori-tools-samples)
+git clone https://github.com/SAP-samples/fiori-tools-samples
 cd fiori-tools-samples/V4/apps/salesorder
 npm install
 npm start
@@ -409,7 +413,7 @@ The `fiori-tools` MCP server (`@sap-ux/fiori-mcp-server`) integrates AI coding a
 directly with Fiori development, providing semantic documentation search and programmatic
 app generation.
 
-**Prerequisite**: Node.js 20+. No authentication required.
+**Prerequisite**: Node.js 20+. No authentication required. The bundled MCP config pins `@sap-ux/fiori-mcp-server@1.4.0`; MCP package pins are governed by **sap-dependency-security** and validated by `npm run validate:mcp-security`.
 
 ### Available Tools
 

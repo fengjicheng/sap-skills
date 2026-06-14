@@ -14,6 +14,10 @@ argument-hint: [widget-name]
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
 
+## Output Contract
+
+Return the planned widget structure, files to create or change, security/accessibility notes, and confirmation points before writes. Generate files only when the user explicitly requests generation.
+
 
 # SAC Custom Widget Generator Command
 
