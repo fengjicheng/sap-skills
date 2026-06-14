@@ -19,5 +19,8 @@
     "sql",
     "sqlscript"
   ],
-  "category": "hana"
+  "category": "hana",
+  "commands": [
+    "./commands/hana-ml-experiment-plan.md"
+  ]
 }

@@ -82,7 +82,7 @@ Feature icons: ⌘ = commands · 🤖 = agents · 🛡 = hooks · 🔌 = MCP · 
 
 | Plugin | Features | Description |
 |--------|----------|-------------|
-| **sap-api-style** | | API documentation standards following SAP guidelines |
+| **sap-api-style** | ⌘1 · 🤖1 | API documentation standards following SAP guidelines |
 | **sap-dependency-security** | ⌘1 · 🛡 | SAP dependency security, MCP executable trust, cooldown policies, lockfile hardening, supply-chain safeguards |
 | **sap-hana-cli** | ⌘2 · 🤖1 · 🔌MCP | SAP HANA Developer CLI for database operations |
 
@@ -90,20 +90,20 @@ Feature icons: ⌘ = commands · 🤖 = agents · 🛡 = hooks · 🔌 = MCP · 
 
 | Plugin | Features | Description |
 |--------|----------|-------------|
-| **sap-btp-best-practices** | | SAP BTP development best practices and patterns |
-| **sap-btp-build-work-zone-advanced** | | SAP Build Work Zone (Advanced Edition) development |
-| **sap-btp-business-application-studio** | | SAP Business Application Studio (BAS) development |
-| **sap-btp-cias** | | Cloud Integration Automation Service (CIAS) integration |
+| **sap-btp-best-practices** | ⌘1 | SAP BTP development best practices and patterns |
+| **sap-btp-build-work-zone-advanced** | ⌘1 | SAP Build Work Zone (Advanced Edition) development |
+| **sap-btp-business-application-studio** | ⌘1 | SAP Business Application Studio (BAS) development |
+| **sap-btp-cias** | ⌘1 | Cloud Integration Automation Service (CIAS) integration |
 | **sap-btp-cloud-logging** | ⌘1 | SAP BTP Cloud Logging service |
-| **sap-btp-cloud-identity-services** | | SAP Cloud Identity Services: IAS, IPS, AMS, XSUAA migration |
-| **sap-btp-cloud-platform** | | SAP Business Technology Platform core services |
+| **sap-btp-cloud-identity-services** | ⌘1 · 🤖1 | SAP Cloud Identity Services: IAS, IPS, AMS, XSUAA migration |
+| **sap-btp-cloud-platform** | ⌘1 · 🤖1 | SAP Business Technology Platform core services |
 | **sap-btp-cloud-transport-management** | ⌘1 | Cloud Transport Management (CTM) service |
 | **sap-btp-connectivity** | ⌘1 | SAP BTP Connectivity service |
-| **sap-btp-developer-guide** | | Comprehensive SAP BTP developer guide |
-| **sap-btp-integration-suite** | | SAP Integration Suite development |
-| **sap-btp-intelligent-situation-automation** | | Deprecated Intelligent Situation Automation data export, unsubscription, and legacy reference |
-| **sap-btp-job-scheduling** | | SAP BTP Job Scheduling service |
-| **sap-btp-master-data-integration** | | Master Data Integration service |
+| **sap-btp-developer-guide** | ⌘1 | Comprehensive SAP BTP developer guide |
+| **sap-btp-integration-suite** | ⌘1 · 🤖1 | SAP Integration Suite development |
+| **sap-btp-intelligent-situation-automation** | ⌘1 | Deprecated Intelligent Situation Automation data export, unsubscription, and legacy reference |
+| **sap-btp-job-scheduling** | ⌘1 | SAP BTP Job Scheduling service |
+| **sap-btp-master-data-integration** | ⌘1 | Master Data Integration service |
 | **sap-btp-service-manager** | ⌘1 | SAP BTP Service Manager operations |
 
 ### 🎨 UI Development (4)
@@ -120,7 +120,7 @@ Feature icons: ⌘ = commands · 🤖 = agents · 🛡 = hooks · 🔌 = MCP · 
 | Plugin | Features | Description |
 |--------|----------|-------------|
 | **sap-datasphere** | ⌘5 · 🤖3 · 🛡 · 🔌MCP | SAP Datasphere data modeling and management |
-| **sap-hana-cloud-data-intelligence** | | SAP HANA Cloud Data Intelligence |
+| **sap-hana-cloud-data-intelligence** | ⌘1 | SAP HANA Cloud Data Intelligence |
 | **sap-sac-custom-widget** | ⌘3 · 🤖3 · 🛡 | SAP Analytics Cloud custom widget development |
 | **sap-sac-planning** | ⌘3 · 🤖3 · 🛡 | SAP Analytics Cloud planning applications |
 | **sap-sac-scripting** | ⌘4 · 🤖4 · 🛡 · 🔌MCP | SAP Analytics Cloud scripting API |
@@ -135,7 +135,7 @@ Feature icons: ⌘ = commands · 🤖 = agents · 🛡 = hooks · 🔌 = MCP · 
 | **sap-cap-capire** | ⌘5 · 🤖4 · 🛡 · 🔌MCP · LSP | SAP Cloud Application Programming Model (CAP) |
 | **sap-cloud-sdk-ai** | ⌘1 | SAP Cloud SDK for AI development |
 | **sap-cloud-sdk-ai-python** | ⌘1 | SAP Cloud SDK for AI for Python (generative AI hub SDK) |
-| **sap-hana-ml** | | SAP HANA Machine Learning (ML) library |
+| **sap-hana-ml** | ⌘1 | SAP HANA Machine Learning (ML) library |
 | **sap-sqlscript** | ⌘4 · 🤖3 · 🛡 | SAP HANA SQLScript development |
 
 ---
@@ -163,7 +163,7 @@ sap-skills/
         └── hooks/                # Optional: Event hooks
 ```
 
-**Key features**: 18 plugins include commands (47 total), 8 with agents (26 total), 8 with hooks, 6 with MCP integration, and 1 with LSP support. 14 plugins cross-reference related plugins.
+**Key features**: 35 plugins include commands (61 total), 13 with agents (30 total), 8 with hooks, 6 with MCP integration, and 1 with LSP support. 14 plugins cross-reference related plugins.
 
 ---
 
@@ -184,6 +184,7 @@ sap-skills/
 4. **Test and verify**:
    - Check [Workflow Checklist](docs/contributor-guide/workflow-checklist.md)
    - Run `npm run audit:skills` for capability inventory and stale verification reporting
+   - Run `npm run audit:effectiveness` for README drift, routing, command-contract, and skill-effectiveness reporting
    - Run `npm run validate` before opening a PR
 
 5. **Submit**:

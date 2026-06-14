@@ -7,6 +7,18 @@
 
 ---
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 1: `/btp-destination-diagnose` |
+| Agents | 0 |
+| Hooks | No |
+| MCP | No |
+| LSP | No |
+| Source Freshness | `last_verified`: 2025-11-27; live destination and Cloud Connector checks pending. |
+| Verification | `npm run validate`; live connectivity tests require tenant/network access. |
+
 ## Overview
 
 This skill provides comprehensive knowledge for SAP BTP Connectivity, covering all components needed for secure cloud-to-cloud, cloud-to-on-premise, and on-premise-to-cloud connectivity.

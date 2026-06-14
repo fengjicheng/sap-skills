@@ -24,5 +24,11 @@
     "tools",
     "xml"
   ],
-  "category": "tooling"
+  "category": "tooling",
+  "agents": [
+    "./agents/api-style-reviewer.md"
+  ],
+  "commands": [
+    "./commands/api-style-review.md"
+  ]
 }

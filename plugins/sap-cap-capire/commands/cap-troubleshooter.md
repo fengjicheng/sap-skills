@@ -19,6 +19,10 @@ arguments:
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
 
+## Output Contract
+
+Return the likely root cause, evidence, diagnostic steps, safe local commands, and pending runtime checks. Default to read-only troubleshooting and ask before changing project or tenant state.
+
 
 # CAP Troubleshooter
 

@@ -14,6 +14,10 @@ argument-hint: "[project-scope]"
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
 
+## Output Contract
+
+Return a planning implementation checklist tailored to the provided scope, open assumptions, risk areas, and tenant-only validation items. Default to read-only guidance.
+
 
 # SAC Planning Implementation Checklist
 

@@ -18,6 +18,10 @@ arguments:
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
 
+## Output Contract
+
+Return the likely script error cause, reproduction questions, API/version caveats, safe code suggestions, and pending SAC runtime checks. Default to read-only debugging.
+
 
 Provide guided SAC script debugging assistance.
 

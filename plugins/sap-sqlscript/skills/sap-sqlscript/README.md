@@ -2,6 +2,18 @@
 
 Comprehensive SQLScript development skill for SAP HANA database programming.
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 4: `/sqlscript-convert`, `/sqlscript-optimize`, `/sqlscript-setup`, `/sqlscript-validate` |
+| Agents | 3: `amdp-helper`, `procedure-generator`, `sqlscript-analyzer` |
+| Hooks | Yes: `hooks/hooks.json` |
+| MCP | No |
+| LSP | No |
+| Source Freshness | `last_verified`: 2026-05-31; SQLScript setup command and hook behavior validated locally. |
+| Verification | `npm run validate`; live HANA execution-plan checks pending. |
+
 ## Overview
 
 This skill provides complete guidance for SQLScript development, including:

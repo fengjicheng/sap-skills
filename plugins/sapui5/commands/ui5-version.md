@@ -19,6 +19,10 @@ arguments:
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
 
+## Output Contract
+
+Return detected or requested UI5 version details, support status, upgrade notes, local evidence, and unresolved package/source checks. Default to read-only reporting.
+
 
 # UI5 Version Information{{#if version}} for {{version}}{{/if}}
 

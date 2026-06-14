@@ -32,6 +32,10 @@ arguments:
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
 
+## Output Contract
+
+Return project choices, files to create, package/version assumptions, and confirmation points before writes. Scaffold only when the user explicitly requests generation.
+
 
 # Scaffold UI5 Project
 

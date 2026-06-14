@@ -219,6 +219,17 @@ See `references/java-javascript-dotnet-guide.md` for complete tag reference.
 
 See `references/deprecation-policy.md` for complete timeline and process requirements.
 
+## Large Reference Search Routing
+
+Search large references before loading them. Use `rg -n "<resource|operation|parameter|description|template|deprecation|x-sap-stateInfo>" references/*.md` to locate the exact rule, then open only the relevant excerpt.
+
+- Use `references/manual-templates-guide.md` for manually written REST/OData documentation templates. Search for `REST API Template`, `OData Operation Template`, `field requirements`, `method`, or the resource name.
+- Use `references/rest-odata-openapi-guide.md` for OpenAPI, OData, operation descriptions, responses, parameters, and SAP API Business Hub publication checks.
+- Use `references/naming-conventions.md` for resource, operation, package, class, method, parameter, enum, and constant naming.
+- Use `references/java-javascript-dotnet-guide.md` for Javadoc, JSDoc, XML doc comments, and native SDK documentation tags.
+- Use `references/deprecation-policy.md` for lifecycle state, migration guidance, and `x-sap-stateInfo`.
+- Use `references/quality-processes.md` for review checklists, gates, and documentation quality workflows.
+
 ## Templates Available
 
 Ready-to-use templates in `templates/` directory:

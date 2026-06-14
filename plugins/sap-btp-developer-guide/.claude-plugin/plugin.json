@@ -28,5 +28,8 @@
     "sap",
     "sap-btp-developer-guide"
   ],
-  "category": "btp"
+  "category": "btp",
+  "commands": [
+    "./commands/btp-app-readiness-review.md"
+  ]
 }

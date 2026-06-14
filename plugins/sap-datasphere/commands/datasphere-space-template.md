@@ -19,6 +19,10 @@ arguments:
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
 
+## Output Contract
+
+Return a space design template, role/quota/data access assumptions, setup sequence, and confirmation points before tenant changes. Default to planning and read-only validation.
+
 
 Generate a Datasphere space configuration template based on the requested type.
 

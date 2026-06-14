@@ -23,5 +23,8 @@
     "sql",
     "sqlscript"
   ],
-  "category": "hana"
+  "category": "hana",
+  "commands": [
+    "./commands/data-intelligence-pipeline-check.md"
+  ]
 }

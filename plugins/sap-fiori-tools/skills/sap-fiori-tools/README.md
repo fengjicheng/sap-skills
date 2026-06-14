@@ -2,6 +2,18 @@
 
 Comprehensive Claude Code skill for SAP Fiori application development using SAP Fiori tools extensions.
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 2: `/fiori-app-generate`, `/fiori-preview-deploy` |
+| Agents | 1: `fiori-app-advisor` |
+| Hooks | No |
+| MCP | Yes: `.mcp.json` |
+| LSP | No |
+| Source Freshness | `last_verified`: 2026-02-26; Fiori MCP package evidence tracked in audit report. |
+| Verification | `npm run validate`; live BAS/Fiori deployment checks pending. |
+
 ## Overview
 
 This skill provides guidance for developing SAP Fiori applications using SAP Fiori tools - the official SAP development toolkit for VS Code and SAP Business Application Studio.

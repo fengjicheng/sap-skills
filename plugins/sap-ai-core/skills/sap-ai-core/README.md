@@ -2,6 +2,18 @@
 
 A comprehensive Claude Code skill for SAP AI Core and SAP AI Launchpad development on SAP Business Technology Platform (BTP).
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 1: `/ai-core-deployment-check` |
+| Agents | 0 |
+| Hooks | No |
+| MCP | No |
+| LSP | No |
+| Source Freshness | `last_verified`: 2026-06-12; live SAP AI Core deployment behavior remains tenant-verified only. |
+| Verification | `npm run validate`; tenant runtime checks pending unless deployment evidence is provided. |
+
 ## Overview
 
 This skill provides guidance for:

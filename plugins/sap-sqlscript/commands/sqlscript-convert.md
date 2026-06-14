@@ -14,6 +14,10 @@ argument-hint: "<file_path> --to <amdp|standalone|cds-function>"
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
 
+## Output Contract
+
+Return a conversion plan, compatibility risks, generated snippet if requested, validation checklist, and confirmation points before writes. Default to read-only conversion guidance.
+
 
 # SQLScript Conversion Command
 

@@ -2,6 +2,18 @@
 
 Comprehensive SAP Business Technology Platform reference for cloud development, deployment, and operations.
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 1: `/btp-subaccount-readiness` |
+| Agents | 1: `btp-platform-advisor` |
+| Hooks | No |
+| MCP | No |
+| LSP | No |
+| Source Freshness | `last_verified`: 2025-11-27; live BTP account and entitlement checks pending. |
+| Verification | `npm run validate`; tenant/subaccount checks require BTP access. |
+
 ## Overview
 
 This skill provides production-ready guidance for all aspects of SAP BTP, covering the three runtime environments (Cloud Foundry, Kyma, ABAP), account management, security, connectivity, and operations.

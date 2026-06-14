@@ -15,6 +15,10 @@ argument-hint: "<file_path|--all> [--fix]"
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
 
+## Output Contract
+
+Return syntax, security, performance, and style findings with file references and suggested fixes. Default to read-only validation; use `--fix` only when explicitly requested.
+
 
 # SQLScript Validation Command
 

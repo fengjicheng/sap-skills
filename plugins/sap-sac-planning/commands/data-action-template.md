@@ -15,6 +15,10 @@ argument-hint: "[data-action-name]"
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
 
+## Output Contract
+
+Return a data action design template, dimension/member assumptions, validation checklist, and performance caveats. Default to read-only planning and do not create SAC artifacts.
+
 
 # Data Action Configuration Template
 

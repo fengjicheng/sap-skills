@@ -14,6 +14,10 @@ allowed-tools:
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
 
+## Output Contract
+
+Return the relevant CAP MCP tool path, configuration checks, fallback local commands, and unresolved MCP availability questions. Default to read-only guidance and do not change MCP config unless explicitly requested.
+
 
 # CAP MCP Tools Reference
 

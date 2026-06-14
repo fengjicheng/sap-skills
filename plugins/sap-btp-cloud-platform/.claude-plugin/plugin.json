@@ -22,5 +22,11 @@
     "sap-btp-cloud-platform",
     "serverless"
   ],
-  "category": "btp"
+  "category": "btp",
+  "agents": [
+    "./agents/btp-platform-advisor.md"
+  ],
+  "commands": [
+    "./commands/btp-subaccount-readiness.md"
+  ]
 }

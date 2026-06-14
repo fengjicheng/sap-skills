@@ -23,6 +23,10 @@ arguments:
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
 
+## Output Contract
+
+Return a setup plan, selected stack/runtime assumptions, generated-file checklist, safe commands, and confirmation points before writes. Default to planning unless the user explicitly requests project generation.
+
 
 # CAP Project Setup Wizard
 

@@ -22,6 +22,10 @@ arguments:
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
 
+## Output Contract
+
+Return a view/modeling template, source assumptions, performance considerations, validation checklist, and pending tenant checks. Default to guidance and avoid modifying Datasphere artifacts unless explicitly requested.
+
 
 Generate a Datasphere view template based on the requested type and purpose.
 

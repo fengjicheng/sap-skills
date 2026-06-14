@@ -23,6 +23,10 @@ arguments:
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
 
+## Output Contract
+
+Return UI5 API details, version compatibility, examples, related controls, and fallback lookup links. Default to read-only lookup and do not modify project files.
+
 
 # UI5 API Reference: {{control}}{{#if member}}.{{member}}{{/if}}
 

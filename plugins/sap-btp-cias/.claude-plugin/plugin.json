@@ -19,5 +19,8 @@
     "sap",
     "sap-btp-cias"
   ],
-  "category": "btp"
+  "category": "btp",
+  "commands": [
+    "./commands/cias-scenario-check.md"
+  ]
 }

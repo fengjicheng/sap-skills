@@ -15,6 +15,10 @@ argument-hint: "[script-file-or-symptom]"
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
 
+## Output Contract
+
+Return performance findings, backend-call risks, caching or batching suggestions, and validation steps. Default to read-only analysis and do not edit scripts.
+
 
 Analyze SAC scripts for performance issues and provide optimization recommendations.
 

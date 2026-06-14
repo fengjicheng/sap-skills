@@ -2,6 +2,18 @@
 
 A comprehensive Claude Code skill for configuring and integrating SAP Master Data Integration (MDI) service on SAP Business Technology Platform.
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 1: `/mdi-replication-check` |
+| Agents | 0 |
+| Hooks | No |
+| MCP | No |
+| LSP | No |
+| Source Freshness | `last_verified`: 2025-11-27; live replication behavior remains pending. |
+| Verification | `npm run validate`; tenant subscription and replication checks require access. |
+
 ## Keywords
 
 **Service Names**:

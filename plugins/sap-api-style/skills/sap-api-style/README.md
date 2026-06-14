@@ -5,6 +5,18 @@
 
 ---
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 1: `/api-style-review` |
+| Agents | 1: `api-style-reviewer` |
+| Hooks | No |
+| MCP | No |
+| LSP | No |
+| Source Freshness | `last_verified`: 2026-02-25; large reference routing added, upstream re-verification pending. |
+| Verification | `npm run validate`; API owner/runtime catalog checks pending unless documented. |
+
 ## Attribution & License
 
 ### Upstream Content
@@ -431,4 +443,4 @@ GPL-3.0 License - See LICENSE file for details
 
 **Maintainer**: SAP Skills Team | [https://github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills)
 **Skill Version**: 1.1.0
-**Last Verified Against SAP Standards**: 2025-11-27
+**Last Verified Against SAP Standards**: 2026-02-25

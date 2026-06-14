@@ -14,6 +14,10 @@ allowed-tools:
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
 
+## Output Contract
+
+Return the relevant MCP tool category, configuration checks, local fallback approach, and unresolved tenant/MCP availability items. Default to read-only guidance and avoid changing MCP config.
+
 
 Display available MCP tools for SAP Datasphere integration.
 

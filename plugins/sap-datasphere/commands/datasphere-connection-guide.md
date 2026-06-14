@@ -18,6 +18,10 @@ arguments:
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
 
+## Output Contract
+
+Return connection prerequisites, required credentials or certificates without exposing secrets, safe validation steps, and tenant-only checks. Default to read-only setup guidance and do not create connections.
+
 
 Generate a connection setup guide for the specified source system.
 

@@ -2,6 +2,18 @@
 
 Comprehensive Claude Code skill for the **UI5 Linter** (@ui5/linter) - static code analysis for SAPUI5 and OpenUI5 projects.
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 2: `/ui5-linter-check`, `/ui5-linter-fix-plan` |
+| Agents | 0 |
+| Hooks | No |
+| MCP | No |
+| LSP | No |
+| Source Freshness | `last_verified`: 2026-06-14; README and audit docs reference `@ui5/linter` 1.22.0. |
+| Verification | `npm run validate`; project-specific lint runs require target app evidence. |
+
 ## Auto-Trigger Keywords
 
 This skill automatically triggers when working with:

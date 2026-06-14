@@ -128,6 +128,15 @@ This skill integrates with the official CAP MCP (Model Context Protocol) server,
 
 **Agent Integration**: The specialized agents (cap-cds-modeler, cap-service-developer, cap-project-architect, cap-performance-debugger) automatically use these MCP tools as part of their workflows.
 
+### CAP MCP and LSP Routing
+
+Use MCP first for local model and docs questions, then fall back to direct file search when MCP is unavailable. Use `rg -n "<entity|service|aspect|annotation|handler|cds compile|deployment>" references/*.md srv db app` to locate the narrowest reference before loading long CAP guides.
+
+- Use `references/mcp-integration.md` for MCP configuration and package pin checks.
+- Use `references/mcp-use-cases.md` only for workflow selection and ROI examples.
+- Use `.lsp.json` as a sidecar for editor integration; it is intentionally not exposed as a manifest field.
+- Mark live deployment, HANA, XSUAA, and multitenancy verification pending unless the target project or tenant evidence is available.
+
 ## Project Structure
 ```
 project/

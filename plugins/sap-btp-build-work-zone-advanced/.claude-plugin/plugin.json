@@ -23,5 +23,8 @@
     "work",
     "zone"
   ],
-  "category": "btp"
+  "category": "btp",
+  "commands": [
+    "./commands/work-zone-content-check.md"
+  ]
 }

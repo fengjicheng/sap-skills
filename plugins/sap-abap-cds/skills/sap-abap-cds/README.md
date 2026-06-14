@@ -2,6 +2,18 @@
 
 Comprehensive Claude Code skill for SAP ABAP CDS view development, annotations, expressions, and access control.
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 1: `/abap-cds-model-check` |
+| Agents | 0 |
+| Hooks | No |
+| MCP | No |
+| LSP | No |
+| Source Freshness | `last_verified`: 2026-04-02; CDS activation and ATC behavior still require system verification. |
+| Verification | `npm run validate`; production ABAP system checks pending unless explicitly documented. |
+
 ## Overview
 
 This skill provides complete reference material for developing CDS views in SAP ABAP, from basic view creation to advanced topics like associations, access control, and performance optimization.
@@ -264,7 +276,7 @@ define role Z_EXAMPLE_DCL {
 ## Version
 
 - **Skill Version**: 1.0.0
-- **Last Verified**: 2025-11-23
+- **Last Verified**: 2026-04-02
 - **ABAP Release**: 7.4 SP8+ / ABAP Cloud
 
 ## License

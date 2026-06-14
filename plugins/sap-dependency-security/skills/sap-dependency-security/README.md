@@ -2,6 +2,18 @@
 
 SAP dependency security and upgrade orchestration guidance for JavaScript, Node.js, MCP servers, and multi-language projects.
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 1: `/sap-dependency-upgrade-plan` |
+| Agents | 0 |
+| Hooks | Yes: `hooks/hooks.json` |
+| MCP | No |
+| LSP | No |
+| Source Freshness | `last_verified`: 2026-06-14; dependency-security hook behavior validated locally. |
+| Verification | `npm run validate`; package registry freshness depends on current lockfile evidence. |
+
 ## Trigger Keywords
 
 - dependency upgrades

@@ -2,6 +2,18 @@
 
 Comprehensive skill for developing business applications on SAP Business Technology Platform using CAP (Node.js/Java) or ABAP Cloud.
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 1: `/btp-app-readiness-review` |
+| Agents | 0 |
+| Hooks | No |
+| MCP | No |
+| LSP | No |
+| Source Freshness | `last_verified`: 2025-11-27; app readiness guidance requires project/tenant evidence for final verification. |
+| Verification | `npm run validate`; deployment checks pending unless target evidence is provided. |
+
 ## Auto-Trigger Keywords
 
 This skill triggers when discussing:

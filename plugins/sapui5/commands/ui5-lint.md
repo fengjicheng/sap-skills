@@ -27,6 +27,10 @@ arguments:
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
 
+## Output Contract
+
+Return lint findings, severity, file references, safe fix suggestions, and tool availability. Default to analysis-only unless `--fix` is explicitly requested.
+
 
 # UI5 Code Linting{{#if file}} for {{file}}{{/if}}
 

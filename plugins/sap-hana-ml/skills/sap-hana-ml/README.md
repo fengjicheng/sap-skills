@@ -12,6 +12,18 @@ This skill provides comprehensive guidance for building machine learning solutio
 - **hana-ml Version**: 2.22.241011
 - **Last Verified**: 2025-11-27
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 1: `/hana-ml-experiment-plan` |
+| Agents | 0 |
+| Hooks | No |
+| MCP | No |
+| LSP | No |
+| Source Freshness | `last_verified`: 2025-11-27; package/source freshness noted in third-pass audit. |
+| Verification | `npm run validate`; HANA connection, PAL, and APL checks pending. |
+
 ## Auto-Trigger Keywords
 
 This skill activates when working with:

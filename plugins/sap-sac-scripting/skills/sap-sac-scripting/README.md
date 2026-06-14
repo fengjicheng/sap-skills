@@ -10,6 +10,18 @@ This skill provides guidance, API references, and ready-to-use templates for dev
 **SAC Version**: 2025.23
 **Last Updated**: 2025-11-27
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 4: `/sac-debug`, `/sac-optimize`, `/sac-planning`, `/sac-script-template` |
+| Agents | 4: `sac-api-helper`, `sac-performance-optimizer`, `sac-planning-assistant`, `sac-script-debugger` |
+| Hooks | Yes: `hooks/hooks.json` |
+| MCP | Yes: `.mcp.json` |
+| LSP | No |
+| Source Freshness | `last_verified`: 2026-06-11; oversized OSE references now require search routing from SKILL.md. |
+| Verification | `npm run validate`; live SAC story/runtime checks pending. |
+
 ## Installation
 
 Copy this skill folder to your Claude Code skills directory:

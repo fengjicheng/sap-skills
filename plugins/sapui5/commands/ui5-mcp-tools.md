@@ -14,6 +14,10 @@ allowed-tools:
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
 
+## Output Contract
+
+Return the relevant UI5 MCP tool, expected inputs, fallback local commands, and unresolved MCP availability checks. Default to read-only guidance.
+
 
 # UI5 MCP Server Tools
 

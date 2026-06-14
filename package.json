@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "validate": "./scripts/validate-json-schemas.sh && ./scripts/validate-reserved-words.sh && ./scripts/validate-bundled-resources.mjs && ./scripts/validate-command-agent-frontmatter.mjs && ./scripts/validate-inventory.sh && ./scripts/validate-mcp-security.mjs && ./scripts/validate-skill-quality.mjs && ./scripts/test-hooks.sh",
+    "validate": "./scripts/validate-json-schemas.sh && ./scripts/validate-reserved-words.sh && ./scripts/validate-bundled-resources.mjs && ./scripts/validate-command-agent-frontmatter.mjs && ./scripts/validate-inventory.sh && ./scripts/validate-mcp-security.mjs && ./scripts/validate-skill-quality.mjs && ./scripts/audit-effectiveness.mjs --validate && ./scripts/test-hooks.sh",
     "validate:marketplace": "ajv validate -s schemas/marketplace.schema.json -d .claude-plugin/marketplace.json --strict=false -c ajv-formats --all-errors",
     "validate:plugins": "./scripts/validate-json-schemas.sh",
     "validate:resources": "./scripts/validate-bundled-resources.mjs",
@@ -12,6 +12,8 @@
     "validate:mcp-security": "./scripts/validate-mcp-security.mjs",
     "validate:skill-quality": "./scripts/validate-skill-quality.mjs",
     "audit:skills": "./scripts/audit-skills.mjs",
+    "audit:effectiveness": "./scripts/audit-effectiveness.mjs",
+    "validate:effectiveness": "./scripts/audit-effectiveness.mjs --validate",
     "test:hooks": "./scripts/test-hooks.sh"
   },
   "devDependencies": {

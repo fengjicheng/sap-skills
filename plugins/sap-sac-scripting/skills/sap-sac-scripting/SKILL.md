@@ -146,6 +146,17 @@ Do not ask again after the user answers.
 - **OSE** → `references/ose-api-*.md` (8 files, Q2 2026, v2025.20)
 - **Analytics Designer** → `references/api-*.md` (existing files)
 
+## Large Reference Search Routing
+
+Search large OSE API references with `rg` before opening them. Use patterns such as `rg -n "class Chart|interface DataSource|enum Feed|setDimensionFilter|getPlanning|PlanningModel" references/ose-api-*.md`, then read only the matching section.
+
+- Use `references/ose-api-datasource.md` for DataSource, DataAction, DataBinding, DataLocking, DataChangeInsights, and result-set methods.
+- Use `references/ose-api-chart-viz.md` for Chart, Table, GeoMap, RVisualization, ValueDriverTree, feeds, and visualization APIs.
+- Use `references/ose-api-planning-calendar.md` for Planning, PlanningModel, versions, calendars, data actions, and planning workflows.
+- Use `references/ose-api-application-core.md` for Application, PageBook, Panel, Popup, Widget, and lifecycle or container APIs.
+- Use `references/ose-api-types-enums.md` for enum/type lookup when a method signature mentions `Feed`, `Layout`, `NumberFormat`, `VariableValue`, or other SAC-specific types.
+- Use smaller `references/api-*.md` files first for Analytics Designer unless the user explicitly says Optimized Story Experience.
+
 ## Quick Start
 
 ### Script Editor Access

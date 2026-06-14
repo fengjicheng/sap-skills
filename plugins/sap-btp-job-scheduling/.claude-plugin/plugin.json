@@ -22,5 +22,8 @@
     "sap-btp-job-scheduling",
     "scheduling"
   ],
-  "category": "btp"
+  "category": "btp",
+  "commands": [
+    "./commands/job-schedule-check.md"
+  ]
 }

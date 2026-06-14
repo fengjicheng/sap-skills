@@ -23,5 +23,11 @@
     "sap-btp-integration-suite",
     "suite"
   ],
-  "category": "btp"
+  "category": "btp",
+  "agents": [
+    "./agents/integration-flow-advisor.md"
+  ],
+  "commands": [
+    "./commands/integration-flow-review.md"
+  ]
 }

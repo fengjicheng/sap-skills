@@ -18,6 +18,10 @@ arguments:
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
 
+## Output Contract
+
+Return a script template, required widget/model assumptions, API references, and validation notes. Default to generating text only unless the user explicitly asks to write files.
+
 
 Generate a SAC script template based on the requested type.
 

@@ -21,5 +21,8 @@
     "sap",
     "sap-btp-best-practices"
   ],
-  "category": "btp"
+  "category": "btp",
+  "commands": [
+    "./commands/btp-architecture-review.md"
+  ]
 }

@@ -7,6 +7,18 @@
 
 ---
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 1: `/btp-service-manager-troubleshoot` |
+| Agents | 0 |
+| Hooks | No |
+| MCP | No |
+| LSP | No |
+| Source Freshness | `last_verified`: 2025-11-27; SMCTL/BTP CLI source freshness pending docs-only recheck. |
+| Verification | `npm run validate`; live service-manager checks require access. |
+
 ## Overview
 
 Comprehensive Claude Code skill for managing SAP BTP services across Cloud Foundry, Kyma, Kubernetes, and other environments using SAP Service Manager.

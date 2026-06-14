@@ -28,5 +28,8 @@
     "sap-btp-business-application-studio",
     "studio"
   ],
-  "category": "btp"
+  "category": "btp",
+  "commands": [
+    "./commands/bas-dev-space-diagnose.md"
+  ]
 }

@@ -6,6 +6,18 @@
 
 ---
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 1: `/btp-logging-ingestion-check` |
+| Agents | 0 |
+| Hooks | No |
+| MCP | No |
+| LSP | No |
+| Source Freshness | `last_verified`: 2025-11-27; tenant ingestion verification remains pending. |
+| Verification | `npm run validate`; live log ingestion checks pending. |
+
 ## Overview
 
 Comprehensive Claude Code skill for SAP Cloud Logging service on SAP Business Technology Platform (BTP). This skill provides guidance for setting up, configuring, and operating Cloud Logging instances for observability across Cloud Foundry, Kyma, and Kubernetes environments.

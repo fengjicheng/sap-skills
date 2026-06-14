@@ -22,5 +22,11 @@
     "sap-btp-cloud-identity-services",
     "services"
   ],
-  "category": "btp"
+  "category": "btp",
+  "agents": [
+    "./agents/identity-security-advisor.md"
+  ],
+  "commands": [
+    "./commands/identity-trust-check.md"
+  ]
 }

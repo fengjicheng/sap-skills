@@ -2,6 +2,18 @@
 
 Comprehensive guidance for SAP Business Application Studio (BAS), the cloud-based IDE on SAP BTP.
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 1: `/bas-dev-space-diagnose` |
+| Agents | 0 |
+| Hooks | No |
+| MCP | No |
+| LSP | No |
+| Source Freshness | `last_verified`: 2025-11-27; BAS dev-space/runtime checks require tenant evidence. |
+| Verification | `npm run validate`; live BAS dev-space checks pending. |
+
 ## When to Use This Skill
 
 Use this skill when:

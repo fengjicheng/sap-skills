@@ -606,6 +606,14 @@ For transport procedures, see `references/content-transport.md`.
 16. **`references/mcp-tools-reference.md`** - Complete MCP tool reference, 45 tools across 8 categories, API documentation, authentication patterns
 17. **`references/mcp-use-cases.md`** - 8 real-world use cases with personas, time savings, and ROI analysis ($159K+/year savings)
 
+### MCP Reference Routing
+
+Search MCP references before loading them. Use `rg -n "<space|view|connection|task|lineage|marketplace|governance|admin>" references/mcp-*.md` to locate the exact tool or scenario, then open only that excerpt.
+
+- Use `references/mcp-tools-reference.md` for tool names, inputs, and direct tenant-operation boundaries.
+- Use `references/mcp-use-cases.md` only when choosing a workflow pattern or estimating ROI; do not load the full use-case guide for ordinary tool lookup.
+- If MCP access is unavailable, fall back to the matching CLI/reference command and mark tenant checks pending.
+
 ### Plugin Components
 
 This plugin includes 3 specialized agents, 5 slash commands, and validation hooks:

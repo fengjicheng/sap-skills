@@ -19,6 +19,10 @@ arguments:
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
 
+## Output Contract
+
+Return a deployment readiness checklist, blockers, environment assumptions, safe validation commands, and pending tenant/system checks. Default to read-only guidance and do not deploy or modify services.
+
 
 # CAP Deployment Checklist
 

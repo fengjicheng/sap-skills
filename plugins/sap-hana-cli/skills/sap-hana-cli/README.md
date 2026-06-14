@@ -12,6 +12,18 @@ This skill provides guidance for using the **hana-cli** npm package - a develope
 
 ---
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 2: `/hana-connect-check`, `/hana-inspect-object` |
+| Agents | 1: `hana-database-advisor` |
+| Hooks | No |
+| MCP | Yes: `.mcp.json` |
+| LSP | No |
+| Source Freshness | `last_verified`: 2025-11-26; hana-cli and hana-client package evidence tracked in audit report. |
+| Verification | `npm run validate`; live database checks pending unless a safe connection is provided. |
+
 ## Keywords
 
 ### Tool & Package Names

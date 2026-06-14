@@ -15,6 +15,10 @@ argument-hint: "<file_path> [--fix|--explain]"
 - Install the command-specific tooling shown near each snippet before running it.
 - Confirm before running commands that delete files, change ownership, deploy, or modify remote systems.
 
+## Output Contract
+
+Return performance findings, evidence, suggested rewrites, risk level, and validation steps. Default to analysis-only; apply edits only with an explicit fix request and file confirmation.
+
 
 # SQLScript Performance Optimization Command
 

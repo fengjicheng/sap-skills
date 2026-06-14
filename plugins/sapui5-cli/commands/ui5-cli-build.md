@@ -18,7 +18,7 @@ arguments:
 
 # UI5 CLI Build
 
-Check UI5 CLI build readiness and optionally run safe local build commands when requested.
+Check UI5 CLI build readiness and optionally run safe local build commands when requested. Default to read-only inspection and do not alter project files.
 
 ## Workflow
 

@@ -110,7 +110,13 @@
         "tools",
         "xml"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "agents": [
+        "./agents/api-style-reviewer.md"
+      ],
+      "commands": [
+        "./commands/api-style-review.md"
+      ]
     },
     {
       "name": "sap-btp-best-practices",
@@ -131,7 +137,10 @@
         "sap",
         "sap-btp-best-practices"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "commands": [
+        "./commands/btp-architecture-review.md"
+      ]
     },
     {
       "name": "sap-btp-build-work-zone-advanced",
@@ -154,7 +163,10 @@
         "work",
         "zone"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "commands": [
+        "./commands/work-zone-content-check.md"
+      ]
     },
     {
       "name": "sap-btp-business-application-studio",
@@ -182,7 +194,10 @@
         "sap-btp-business-application-studio",
         "studio"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "commands": [
+        "./commands/bas-dev-space-diagnose.md"
+      ]
     },
     {
       "name": "sap-btp-cias",
@@ -201,7 +216,10 @@
         "sap",
         "sap-btp-cias"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "commands": [
+        "./commands/cias-scenario-check.md"
+      ]
     },
     {
       "name": "sap-btp-cloud-identity-services",
@@ -223,7 +241,13 @@
         "sap-btp-cloud-identity-services",
         "services"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "agents": [
+        "./agents/identity-security-advisor.md"
+      ],
+      "commands": [
+        "./commands/identity-trust-check.md"
+      ]
     },
     {
       "name": "sap-btp-cloud-logging",
@@ -270,7 +294,13 @@
         "sap-btp-cloud-platform",
         "serverless"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "agents": [
+        "./agents/btp-platform-advisor.md"
+      ],
+      "commands": [
+        "./commands/btp-subaccount-readiness.md"
+      ]
     },
     {
       "name": "sap-btp-cloud-transport-management",
@@ -346,7 +376,10 @@
         "sap",
         "sap-btp-developer-guide"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "commands": [
+        "./commands/btp-app-readiness-review.md"
+      ]
     },
     {
       "name": "sap-btp-integration-suite",
@@ -369,7 +402,13 @@
         "sap-btp-integration-suite",
         "suite"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "agents": [
+        "./agents/integration-flow-advisor.md"
+      ],
+      "commands": [
+        "./commands/integration-flow-review.md"
+      ]
     },
     {
       "name": "sap-btp-intelligent-situation-automation",
@@ -390,7 +429,10 @@
         "sap-btp-intelligent-situation-automation",
         "situation"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "commands": [
+        "./commands/isa-export-readiness.md"
+      ]
     },
     {
       "name": "sap-btp-job-scheduling",
@@ -412,7 +454,10 @@
         "sap-btp-job-scheduling",
         "scheduling"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "commands": [
+        "./commands/job-schedule-check.md"
+      ]
     },
     {
       "name": "sap-btp-master-data-integration",
@@ -435,7 +480,10 @@
         "sap",
         "sap-btp-master-data-integration"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "commands": [
+        "./commands/mdi-replication-check.md"
+      ]
     },
     {
       "name": "sap-btp-service-manager",
@@ -697,7 +745,10 @@
         "sql",
         "sqlscript"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "commands": [
+        "./commands/data-intelligence-pipeline-check.md"
+      ]
     },
     {
       "name": "sap-hana-ml",
@@ -716,7 +767,10 @@
         "sql",
         "sqlscript"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "commands": [
+        "./commands/hana-ml-experiment-plan.md"
+      ]
     },
     {
       "name": "sap-sac-custom-widget",

@@ -2,6 +2,18 @@
 
 Comprehensive ABAP development skill for SAP systems covering classic ABAP and modern ABAP Cloud development patterns.
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 1: `/abap-cloud-review` |
+| Agents | 0 |
+| Hooks | No |
+| MCP | No |
+| LSP | No |
+| Source Freshness | `last_verified`: 2026-04-02; ABAP Cloud released API checks require project/system evidence. |
+| Verification | `npm run validate`; production ABAP system checks pending unless explicitly documented. |
+
 ## Skill Overview
 
 This skill provides extensive knowledge for ABAP development including:

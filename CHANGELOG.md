@@ -10,17 +10,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Added 18 targeted slash commands for ABAP Cloud review, ABAP CDS model checks, AI Core deployment checks, Cloud SDK AI chat templates, BTP destination/logging/service-manager/transport diagnostics, dependency upgrade planning, Fiori generation/preview checks, HANA connection/object inspection, UI5 CLI build/troubleshooting, and UI5 Linter check/fix planning.
 - Added 2 specialist agents: `fiori-app-advisor` and `hana-database-advisor`.
+- Added 14 third-pass slash commands for API style, BTP architecture/readiness, Work Zone, BAS, CIAS, Cloud Identity Services, Integration Suite, ISA export, Job Scheduling, MDI, Data Intelligence, and HANA ML planning checks.
+- Added 4 third-pass advisory agents: `api-style-reviewer`, `btp-platform-advisor`, `identity-security-advisor`, and `integration-flow-advisor`.
 - Added the `sap-dependency-security` hook profile to flag unpinned executable package specs, `@latest`, and credential-like literals in dependency and MCP configuration files.
 - Added `npm run audit:skills` as a read-only per-plugin capability and verification-status report.
+- Added `npm run audit:effectiveness` as a read-only report for trigger quality, README drift, oversized references, command contracts, capability inventory, and next recommended artifacts.
+- Added `docs/project/plugin-skills-third-pass-audit-2026-06-14.md` documenting per-plugin findings, docs-only evidence, and unresolved production-only checks.
 
 ### Changed
 - Renamed `dependency-upgrade` to `sap-dependency-security` as the canonical SAP dependency security and MCP executable trust policy plugin.
 - Added SAP/MCP dependency policy coverage for MCP server pins, SAP Node tooling, Java/Maven, Gradle, Python, containers, BTP/CF/mbt, and ABAP/gCTS review workflows.
 - Exposed plugin sidecar capabilities in generated public interfaces: plugin manifests and marketplace entries now carry `hooks` and `mcpServers` when present.
 - Standardized command and agent metadata, including explicit tool scopes, input hints, trigger-rich descriptions, MCP fallback guidance, and tenant/write safety constraints.
-- Strengthened validation for packaged artifacts, hook/MCP manifest consistency, command/agent quality, nested manifests, and dependency-security hook cases.
+- Standardized all slash commands with an `Output Contract` and read-only/non-mutating defaults unless explicitly generation or fix-planning commands.
+- Added compact capability indexes to all plugin-local README files and routed oversized references through SKILL.md search guidance.
+- Strengthened validation for packaged artifacts, hook/MCP manifest consistency, command/agent quality, nested manifests, dependency-security hook cases, README capability drift, oversized-reference routing, command output contracts, and mutating-default safeguards.
 - Bumped the marketplace and all generated plugin manifests to version 2.3.0.
-- Documented final second-pass inventory: 35 plugins, 47 commands, 26 agents, 8 hook-enabled plugins, 6 MCP configs, and 1 LSP config.
+- Documented final third-pass inventory: 35 plugins, 61 commands, 30 agents, 8 hook-enabled plugins, 6 MCP configs, and 1 LSP config.
 - Removed the local `.agents` mirror check from active validation; `.agents/skills/dependency-upgrade` remains a local mirror only.
 
 ### Fixed

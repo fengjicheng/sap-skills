@@ -2,6 +2,18 @@
 
 Comprehensive skill for developing enterprise web applications with SAP UI5 framework.
 
+## Capability Index
+
+| Capability | Status |
+|------------|--------|
+| Commands | 5: `/ui5-api`, `/ui5-lint`, `/ui5-mcp-tools`, `/ui5-scaffold`, `/ui5-version` |
+| Agents | 4: `ui5-api-explorer`, `ui5-app-scaffolder`, `ui5-code-quality-advisor`, `ui5-migration-specialist` |
+| Hooks | Yes: `hooks/hooks.json` |
+| MCP | Yes: `.mcp.json` |
+| LSP | No |
+| Source Freshness | `last_verified`: 2026-05-31; UI5 MCP/tooling package evidence tracked in audit report. |
+| Verification | `npm run validate`; app-specific preview/build checks require a target UI5 app. |
+
 ## Auto-Trigger Keywords
 
 This skill is automatically triggered when Claude Code detects these keywords in user requests:
