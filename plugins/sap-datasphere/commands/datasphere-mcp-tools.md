@@ -17,7 +17,7 @@ Display available MCP tools for SAP Datasphere integration.
 The SAP Datasphere MCP Server (@mariodefe/sap-datasphere-mcp) provides 45 tools for direct tenant interaction.
 
 **GitHub:** https://github.com/MarioDeFelipe/sap-datasphere-mcp
-**Package:** npm install -g @mariodefe/sap-datasphere-mcp
+**Package:** npm install -g @mariodefe/sap-datasphere-mcp@1.2.1
 
 ---
 
@@ -340,7 +340,7 @@ Common errors and solutions:
 
 Run diagnostics:
 ```bash
-npx @mariodefe/sap-datasphere-mcp --test
+npx @mariodefe/sap-datasphere-mcp@1.2.1 --test
 ```
 
 Enable debug mode (add to .env):

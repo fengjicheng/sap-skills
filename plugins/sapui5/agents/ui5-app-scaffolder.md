@@ -481,10 +481,10 @@ If MCP tools fail:
 3. Provide installation instructions for MCP server if user wants to enable it:
    ```bash
    # Install MCP server globally
-   npm install -g @ui5/mcp-server
+   npm install -g @ui5/mcp-server@0.2.11
 
    # Or use npx (no installation)
-   npx @ui5/mcp-server
+   npx @ui5/mcp-server@0.2.11
    ```
 
 ### Invalid Project Name

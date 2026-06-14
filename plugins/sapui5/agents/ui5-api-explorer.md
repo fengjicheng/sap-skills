@@ -919,7 +919,7 @@ I couldn't fetch complete API documentation for `{{control}}` (MCP unavailable a
 3. **Search project**: Let me search your codebase for existing usage
 4. **Install MCP**: Enable full API access with:
    ```bash
-   npm install -g @ui5/mcp-server
+   npm install -g @ui5/mcp-server@0.2.11
    ```
 
 Would you like me to search your project files for `{{control}}` usage patterns?

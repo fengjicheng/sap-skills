@@ -11,7 +11,7 @@ metadata:
   version: "2.1.2"
   last_verified: "2026-02-22"
   cap_version: "@sap/cds 9.7.x"
-  mcp_version: "@cap-js/mcp-server 0.0.3+"
+  mcp_version: "@cap-js/mcp-server 0.0.5"
   lsp_version: "@sap/cds-lsp 9.7.x"
 ---
 
@@ -29,7 +29,7 @@ metadata:
 - **sap-cloud-sdk-ai**: Use for SDK-level AI integration (chat completion, streaming, tool calling) in CAP event handlers
 - **sap-cloud-sdk-ai-python**: Use for Python-based AI integration with CAP Java or standalone BTP services
 - **sap-api-style**: Use when documenting CAP OData services or following API documentation standards
-- **dependency-upgrade**: Use for secure dependency, lockfile, and supply-chain upgrade controls in CAP service repos
+- **dependency-upgrade**: Use for secure dependency, lockfile, supply-chain, and exact MCP server pin controls in CAP service repos
 
 ## Table of Contents
 - [Quick Start](#quick-start)
@@ -109,7 +109,7 @@ This skill integrates with the official CAP MCP (Model Context Protocol) server,
 - **Zero Configuration**: No credentials or environment variables required
 - **Offline-Capable**: All searches are local (model) or cached (docs)
 
-**Setup**: See [MCP Integration Guide](references/mcp-integration.md) for configuration with Claude Code, opencode, or GitHub Copilot.
+**Setup**: See [MCP Integration Guide](references/mcp-integration.md) for configuration with Claude Code, opencode, or GitHub Copilot. MCP package pins are governed by **dependency-upgrade** and validated by `npm run validate:mcp-security`.
 
 **Use Cases**: See [MCP Use Cases](references/mcp-use-cases.md) for real-world examples with quantified ROI (~$131K/developer/year time savings).
 
@@ -462,7 +462,7 @@ cds version               # Show version info
 ## Version Information
 - **Skill Version**: 2.1.2
 - **CAP Version**: @sap/cds 9.7.x
-- **MCP Version**: @cap-js/mcp-server 0.0.3+
+- **MCP Version**: @cap-js/mcp-server 0.0.5
 - **LSP Version**: @sap/cds-lsp 9.7.x
 - **Last Verified**: 2026-02-22
 - **License**: GPL-3.0

@@ -217,7 +217,7 @@ sap-cap-capire/
 
 - **Skill Version**: 2.1.0
 - **CAP Version**: @sap/cds 9.4.x
-- **MCP Version**: @cap-js/mcp-server 0.0.3+
+- **MCP Version**: @cap-js/mcp-server 0.0.5
 - **Last Verified**: 2025-12-28
 
 ## License

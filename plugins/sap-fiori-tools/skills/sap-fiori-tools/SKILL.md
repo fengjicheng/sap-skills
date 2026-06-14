@@ -22,7 +22,7 @@ metadata:
 - **sap-abap-cds**: Use when consuming ABAP CDS views as OData services or working with ABAP backends
 - **sap-btp-cloud-platform**: Use for deployment targets, BTP destination configuration, and Cloud Foundry deployment
 - **sap-api-style**: Use when documenting OData APIs or following API documentation standards for Fiori apps
-- **dependency-upgrade**: Use when tightening npm/JavaScript supply-chain controls for UI tooling and dependency updates
+- **dependency-upgrade**: Use when tightening npm/JavaScript supply-chain controls, exact MCP server pins, and dependency updates
 
 Comprehensive guidance for developing SAP Fiori applications using SAP Fiori tools extensions.
 
@@ -409,7 +409,7 @@ The `fiori-tools` MCP server (`@sap-ux/fiori-mcp-server`) integrates AI coding a
 directly with Fiori development, providing semantic documentation search and programmatic
 app generation.
 
-**Prerequisite**: Node.js 20+. No authentication required.
+**Prerequisite**: Node.js 20+. No authentication required. The bundled MCP config pins `@sap-ux/fiori-mcp-server@1.4.0`; MCP package pins are governed by **dependency-upgrade** and validated by `npm run validate:mcp-security`.
 
 ### Available Tools
 

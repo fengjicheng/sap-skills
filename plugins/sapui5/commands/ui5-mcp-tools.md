@@ -259,12 +259,12 @@ get_integration_cards_guidelines({
 
 ### Install Globally (Recommended)
 ```bash
-npm install -g @ui5/mcp-server
+npm install -g @ui5/mcp-server@0.2.11
 ```
 
 ### Use with npx (No Installation)
 ```bash
-npx -y @ui5/mcp-server <tool-name> <arguments>
+npx -y @ui5/mcp-server@0.2.11 <tool-name> <arguments>
 ```
 
 ### Configure for Claude Code
@@ -275,7 +275,7 @@ The sapui5 plugin automatically configures MCP via `.mcp.json`:
 {
   "ui5-tooling": {
     "command": "npx",
-    "args": ["-y", "@ui5/mcp-server"],
+    "args": ["-y", "@ui5/mcp-server@0.2.11"],
     "env": {
       "UI5_PROJECT_DIR": "${cwd}",
       "UI5_VERSION": "1.120.0",
@@ -354,7 +354,7 @@ To check if MCP tools are available:
 
 ```bash
 # Test MCP server
-npx -y @ui5/mcp-server --help
+npx -y @ui5/mcp-server@0.2.11 --help
 
 # Expected output: List of available tools
 ```
@@ -368,10 +368,10 @@ If this works, all agents will automatically use MCP tools for faster, more accu
 ### MCP Server Not Found
 ```bash
 # Install globally
-npm install -g @ui5/mcp-server
+npm install -g @ui5/mcp-server@0.2.11
 
 # Or use npx (automatic download)
-npx -y @ui5/mcp-server --version
+npx -y @ui5/mcp-server@0.2.11 --version
 ```
 
 ### Permission Errors

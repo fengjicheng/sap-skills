@@ -89,16 +89,16 @@ If the agent cannot be invoked, you can use these manual commands:
 
 ```bash
 # Install MCP server globally
-npm install -g @ui5/mcp-server
+npm install -g @ui5/mcp-server@0.2.11
 
 # Create freestyle JavaScript app
-npx @ui5/mcp-server create_ui5_app \
+npx @ui5/mcp-server@0.2.11 create_ui5_app \
   --template="freestyle-js" \
   --projectName="my-ui5-app" \
   --namespace="com.mycompany.myapp"
 
 # Create Fiori Elements TypeScript app
-npx @ui5/mcp-server create_ui5_app \
+npx @ui5/mcp-server@0.2.11 create_ui5_app \
   --template="fiori-elements-list-report-ts" \
   --projectName="my-fiori-app" \
   --namespace="com.mycompany.fiori" \

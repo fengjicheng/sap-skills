@@ -17,3 +17,9 @@ Dependency security and upgrade orchestration guidance for JavaScript, Node.js, 
 - Yarn
 - Deno
 - CI security
+- SAP dependency security
+- SAP MCP server pins
+- CAP/UI5/Fiori dependency policy
+- HANA/Datasphere/SAC MCP trust
+- BTP/CF/mbt dependency review
+- ABAP/gCTS transport review

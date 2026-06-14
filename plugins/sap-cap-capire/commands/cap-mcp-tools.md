@@ -21,7 +21,7 @@ The CAP MCP (Model Context Protocol) server exposes two powerful tools:
 2. **search_docs** - Semantic search through CAP documentation
 
 **Package**: `@cap-js/mcp-server`
-**Installation**: `npx -y @cap-js/mcp-server`
+**Installation**: `npx -y @cap-js/mcp-server@0.0.5`
 **License**: Apache-2.0
 
 ---
@@ -198,7 +198,7 @@ Agent: Here are two approaches for validation...
 {
   "sap-cap-capire": {
     "command": "npx",
-    "args": ["-y", "@cap-js/mcp-server"],
+    "args": ["-y", "@cap-js/mcp-server@0.0.5"],
     "env": {}
   }
 }
@@ -211,7 +211,7 @@ Agent: Here are two approaches for validation...
   "mcpServers": {
     "cap-mcp": {
       "command": "npx",
-      "args": ["-y", "@cap-js/mcp-server"],
+      "args": ["-y", "@cap-js/mcp-server@0.0.5"],
       "env": {}
     }
   }
@@ -225,7 +225,7 @@ Agent: Here are two approaches for validation...
   "mcp": {
     "cap-mcp": {
       "type": "local",
-      "command": ["npx", "-y", "@cap-js/mcp-server"],
+      "command": ["npx", "-y", "@cap-js/mcp-server@0.0.5"],
       "enabled": true
     }
   }
@@ -239,7 +239,7 @@ Agent: Here are two approaches for validation...
   "servers": {
     "cap-mcp": {
       "command": "npx",
-      "args": ["-y", "@cap-js/mcp-server"],
+      "args": ["-y", "@cap-js/mcp-server@0.0.5"],
       "env": {},
       "type": "stdio"
     }
@@ -268,10 +268,10 @@ Agent: Here are two approaches for validation...
 **Solution**:
 ```bash
 # Install globally for faster access
-npm install -g @cap-js/mcp-server
+npm install -g @cap-js/mcp-server@0.0.5
 
 # Or use npx (auto-installs)
-npx -y @cap-js/mcp-server
+npx -y @cap-js/mcp-server@0.0.5
 ```
 
 ### Issue: search_model returns no results
@@ -299,7 +299,7 @@ You can also use MCP tools directly from command line:
 
 ```bash
 # Install globally
-npm i -g @cap-js/mcp-server
+npm i -g @cap-js/mcp-server@0.0.5
 
 # Search compiled model
 cds-mcp search_model . Books entity

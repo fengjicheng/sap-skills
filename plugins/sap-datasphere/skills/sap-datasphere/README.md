@@ -49,7 +49,7 @@ This plugin integrates with the SAP Datasphere MCP Server for direct tenant inte
 
 1. **Install MCP Server:**
    ```bash
-   npm install -g @mariodefe/sap-datasphere-mcp
+   npm install -g @mariodefe/sap-datasphere-mcp@1.2.1
    ```
 
 2. **Configure Environment Variables:**

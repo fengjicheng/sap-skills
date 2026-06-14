@@ -97,7 +97,7 @@ plugins/sapui5/
 {
   "ui5-tooling": {
     "command": "npx",
-    "args": ["-y", "@ui5/mcp-server"],
+    "args": ["-y", "@ui5/mcp-server@0.2.11"],
     "env": {
       "UI5_PROJECT_DIR": "${cwd}",
       "UI5_VERSION": "1.120.0",
@@ -110,7 +110,7 @@ plugins/sapui5/
 **Analysis**:
 - ✅ Proper server name: "ui5-tooling"
 - ✅ Command: npx (automatic version resolution)
-- ✅ Args: Correct package name @ui5/mcp-server
+- ✅ Args: Correct package name @ui5/mcp-server@0.2.11
 - ✅ Environment variables properly configured:
   - `UI5_PROJECT_DIR`: Uses `${cwd}` for current working directory
   - `UI5_VERSION`: Pinned to 1.120.0 (stable version)

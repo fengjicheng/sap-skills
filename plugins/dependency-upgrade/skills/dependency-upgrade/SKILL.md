@@ -1,6 +1,6 @@
 ---
 name: dependency-upgrade
-description: "Secure dependency upgrades with supply chain protection, cooldowns, and staged rollout. Use when upgrading deps, configuring security policies, or preventing supply chain attacks."
+description: "Secure dependency upgrades with supply chain protection, cooldowns, staged rollout, and SAP/MCP executable trust policy. Use when upgrading deps, configuring security policies, preventing supply chain attacks, pinning SAP MCP servers, or reviewing SAP CAP/UI5/Fiori/HANA/Datasphere/SAC/BTP/ABAP dependency workflows."
 license: GPL-3.0
 ---
 
@@ -11,6 +11,9 @@ license: GPL-3.0
 - **sap-hana-cli**: For dependency-aware database tooling workflows and upgrade guidance
 - **sap-cap-capire**: For CAP dependency-safe runtime and service configuration guidance
 - **sap-fiori-tools**: For secure UI5/Fiori dependency strategy when tooling touches frontend packages
+- **sapui5**: For SAPUI5/OpenUI5 frontend dependency and MCP tooling review
+- **sap-datasphere**: For tenant-connected Datasphere MCP and CLI dependency review
+- **sap-sac-scripting**: For source-pinned SAC MCP setup and local install records
 
 Manage dependency upgrades with supply chain security, compatibility analysis, staged rollout, and comprehensive testing across all major package managers.
 
@@ -24,12 +27,30 @@ Manage dependency upgrades with supply chain security, compatibility analysis, s
 - Automating dependency updates with Renovate, Dependabot, or Snyk
 - Auditing dependencies for vulnerabilities
 - Setting up CI/CD dependency security workflows
+- Pinning or reviewing SAP MCP servers in `.mcp.json`
+- Reviewing SAP CAP, UI5/Fiori, HANA, Datasphere, SAC, SAP Cloud SDK, BTP/CF/mbt, or ABAP/gCTS dependency workflows
 
 ## Two Modes of Operation
 
 **Interactive** — Walk through setup questions to generate tailored config. Use for fresh setup.
 
 **Default** — Apply recommended defaults immediately: 7-day cooldown, block all scripts, frozen-lockfile, lockfile-lint, Dependabot with cooldown. Customization optional.
+
+**SAP Development Mode** — Use a stricter SAP posture: 14-day cooldown, exact pins for MCP servers and executable tooling, no floating `@latest`, source commit pins for local MCP servers, and manual review for tenant-connected tools.
+
+## SAP Development Mode
+
+Use SAP Development Mode when dependency work touches SAP projects, SAP BTP deployment tooling, SAP SDKs, or any MCP server shipped by this repository.
+
+Core rules:
+
+1. **Default to 14-day cooldown** for SAP enterprise projects. Record explicit exceptions in the SAP MCP inventory or project review notes.
+2. **Treat MCP servers as executable dependencies**. In `.mcp.json`, use exact npm pins such as `@ui5/mcp-server@0.2.11`, never `@latest` or bare package names.
+3. **Pin local-source MCPs by commit**. SAC uses the trusted `secondsky/sap_analytics_cloud_mcp` fork and must record commit `2020235505d98111c2889598ab2217c1619b6943`.
+4. **Keep runtime authorization separate**. This skill covers package/source/executable trust; use the relevant SAP skill for tenant role design and business authorization.
+5. **Validate MCP drift** with `npm run validate:mcp-security` after any `.mcp.json` or SAP MCP inventory change.
+
+Load `references/sap-dependency-risk-matrix.md` for SAP stack coverage and `references/sap-mcp-security.md` for MCP update workflow and SAC source-install policy. Use `references/sap-mcp-inventory.json` as the machine-readable approved MCP package/source list.
 
 ## Interactive Setup Flow
 
@@ -138,7 +159,7 @@ Load `references/socket-cli-guide.md` for full Socket CLI setup including authen
 
 ## Security-First Upgrade Principles
 
-1. **Cooldown before installing** — Wait 7 days for new package versions to be vetted by the community
+1. **Cooldown before installing** — Wait 7 days for general projects or 14 days for SAP enterprise/MCP workflows so new package versions are vetted by the community
 2. **Block post-install scripts** — Prevent arbitrary code execution during `npm install`
 3. **Freeze lockfiles in CI** — Use deterministic installs (`npm ci`, `--frozen-lockfile`)
 4. **Validate lockfile integrity** — Use `lockfile-lint` to detect injection
@@ -146,6 +167,7 @@ Load `references/socket-cli-guide.md` for full Socket CLI setup including authen
 6. **Upgrade incrementally** — One major version at a time with testing between each
 7. **Never blindly upgrade** — Avoid `npm update` or `npm-check-updates -u` without review
 8. **Scan before and after** — Use `socket scan` to detect supply chain issues beyond CVEs
+9. **Pin SAP MCP executables** — Use exact npm versions or source commit pins before letting MCP servers access SAP projects or tenants
 
 ## Cooldown Period: Prevent Supply Chain Attacks
 
@@ -515,6 +537,7 @@ Pre-Upgrade:
 - [ ] Tag current state (git tag pre-upgrade)
 - [ ] Run full test suite (baseline)
 - [ ] Verify cooldown period is configured
+- [ ] For SAP MCP changes, verify exact package/source pins against `references/sap-mcp-inventory.json`
 
 Security Pre-Checks:
 - [ ] Post-install scripts are disabled
@@ -556,6 +579,7 @@ Post-Upgrade:
 - Trusting npmjs.org displayed source code (can differ from actual tarball)
 - Leaving post-install scripts enabled (most common attack vector)
 - Not configuring a cooldown period for new package versions
+- Shipping SAP MCP configs with `@latest`, bare `npx` packages, or unpinned local source paths
 
 ## When to Load References
 
@@ -571,6 +595,9 @@ Load these reference files when the user needs detailed information beyond the q
 | `references/compatibility-matrix.md` | Checking version compatibility for React, Next.js, TypeScript, Tailwind upgrades |
 | `references/staged-upgrades.md` | Codemod automation, custom migration scripts, peer dependency handling, workspace upgrades |
 | `references/testing-strategy.md` | Full testing pyramid, CI integration, bundle analysis, performance testing |
+| `references/sap-dependency-risk-matrix.md` | SAP stack-specific dependency review across Node, Java, Python, containers, BTP/CF/mbt, ABAP/gCTS, and MCP |
+| `references/sap-mcp-security.md` | SAP MCP exact-pin policy, SAC source-install policy, and MCP update workflow |
+| `references/sap-mcp-inventory.json` | Machine-readable approved SAP MCP package/source pins used by `npm run validate:mcp-security` |
 
 ## Template Files
 
@@ -587,3 +614,10 @@ Ready-to-use config files in `templates/`:
 | `devcontainer-security.tmpl` | Hardened dev container with security options |
 | `socket-fix-ci.tmpl` | GitHub Actions: Socket Fix autopilot with cooldown-aligned CVE remediation |
 | `socket-scan-ci.tmpl` | GitHub Actions: Socket CI security gate for every push/PR |
+| `sap-mcp-config.tmpl` | Review-ready SAP MCP config candidate with exact-pin checklist |
+| `maven-security.tmpl` | Maven checksum/enforcer/dependency scan fragment for SAP Java projects |
+| `gradle-security.tmpl` | Gradle dependency locking and verification fragment |
+| `python-security.tmpl` | Python lock/audit workflow for SAP AI SDK, HANA ML, and data tooling |
+| `container-trivy.tmpl` | Container image scan workflow with Trivy and digest-pin reminders |
+| `btp-cf-mbt-review.tmpl` | BTP, Cloud Foundry, and MBT dependency/deployment review checklist |
+| `abap-gcts-review.tmpl` | ABAP, gCTS, and transport dependency review checklist |

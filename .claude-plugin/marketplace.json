@@ -9,7 +9,7 @@
   },
   "metadata": {
     "version": "2.2.3",
-    "last_updated": "2026-06-12",
+    "last_updated": "2026-06-14",
     "total_skills": 35,
     "categories": [
       "abap",
@@ -26,15 +26,20 @@
     {
       "name": "dependency-upgrade",
       "source": "./plugins/dependency-upgrade",
-      "description": "Secure dependency upgrades with supply chain protection, cooldowns, and staged rollout. Use when upgrading deps, configuring security policies, or preventing supply chain attacks.",
+      "description": "Secure dependency upgrades with supply chain protection, cooldowns, staged rollout, and SAP/MCP executable trust policy. Use when upgrading deps, configuring security policies, preventing supply chain attacks, pinning SAP MCP servers, or reviewing SAP CAP/UI5/Fiori/HANA/Datasphere/SAC/BTP/ABAP dependency workflows.",
       "version": "2.2.3",
       "category": "tooling",
       "keywords": [
+        "abap",
         "automation",
+        "btp",
+        "cap",
         "cli",
         "dependency",
         "dependency-upgrade",
         "development",
+        "fiori",
+        "hana",
         "productivity",
         "tools",
         "upgrade"

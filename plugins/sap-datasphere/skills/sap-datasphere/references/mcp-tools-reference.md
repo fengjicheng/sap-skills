@@ -16,10 +16,10 @@ This document provides comprehensive technical reference for all 45 MCP tools pr
 
 ```bash
 # Global installation
-npm install -g @mariodefe/sap-datasphere-mcp
+npm install -g @mariodefe/sap-datasphere-mcp@1.2.1
 
 # Verify installation
-npx @mariodefe/sap-datasphere-mcp --version
+npx @mariodefe/sap-datasphere-mcp@1.2.1 --version
 ```
 
 ## Configuration
@@ -1408,7 +1408,7 @@ Quick find: "fact_sal*"
 
 ```bash
 # Test connection
-npx @mariodefe/sap-datasphere-mcp --test
+npx @mariodefe/sap-datasphere-mcp@1.2.1 --test
 
 # Enable debug logging
 export LOG_LEVEL=debug

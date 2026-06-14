@@ -21,7 +21,7 @@ metadata:
 - **sap-btp-cloud-platform**: Use for HANA Cloud operations, BTP integration, and cloud instance management
 - **sap-abap-cds**: Use for comparing CDS syntax between CAP and ABAP or understanding HANA CDS features
 - **sap-datasphere**: Use when working with SAP Datasphere integration or data warehousing scenarios
-- **dependency-upgrade**: Use for secure dependency upgrades (npm package hardening, lockfile linting, and cooldown policy) when projects include hana-cli dependencies
+- **dependency-upgrade**: Use for secure dependency upgrades, exact MCP server pins, npm package hardening, lockfile linting, and cooldown policy when projects include hana-cli dependencies
 
 A developer-centric command-line interface for SAP HANA database development, particularly useful in non-SAP tooling environments like VS Code.
 
@@ -73,6 +73,8 @@ hana-cli connectViaServiceKey
 The hana-mcp-server integration enables natural language database operations through Claude's Model Context Protocol. Use conversational queries alongside traditional CLI commands for a complete development workflow.
 
 ### Setup
+
+The bundled MCP config pins `hana-mcp-server@0.3.1`. Use **dependency-upgrade** before changing this pin because the server receives HANA tenant connection environment variables.
 
 #### 1. Environment Variables
 Required configuration (add to ~/.zshrc, ~/.bashrc, or project .env):

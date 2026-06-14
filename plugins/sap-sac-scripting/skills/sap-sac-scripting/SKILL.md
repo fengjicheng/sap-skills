@@ -21,7 +21,7 @@ metadata:
 
 ## Related Skills
 
-- **dependency-upgrade**: Use when securing dependency and SDK/tooling upgrades used in story automation pipelines that integrate with external script tooling
+- **dependency-upgrade**: Use when securing dependency, SDK/tooling, and source-pinned SAC MCP upgrades used in story automation pipelines
 
 Comprehensive skill for scripting in SAP Analytics Cloud (SAC) Analytics Designer and Optimized Story Experience.
 
@@ -63,10 +63,12 @@ This plugin provides specialized tools for SAC development:
 
 ## MCP Setup
 
-This plugin ships with a `.mcp.json` that connects to the community `sap_analytics_cloud_mcp`
+This plugin ships with a `.mcp.json` that connects to the trusted `secondsky/sap_analytics_cloud_mcp`
 server, exposing 90 SAC REST API tools across 11 service areas (Content, Data Export, Data Import,
 Multi Actions, Calendar, Content Transport, User Management, Monitoring, Schedule & Publication,
 Translation, Smart Query).
+
+The SAC MCP is source-installed, not npm-installed. Use **dependency-upgrade** before changing the trusted fork or commit pin because this server receives SAC OAuth credentials and exposes tenant API tools.
 
 **Before using MCP tools**, check if the server is already installed:
 - Look for `.claude/sac-mcp.local.md` in the project
@@ -79,11 +81,15 @@ If not installed, ask the user once: **"Would you like help setting up the SAC M
 1. Clone and build:
    ```bash
    git clone https://github.com/secondsky/sap_analytics_cloud_mcp
-   cd sap_analytics_cloud_mcp && npm install && npm run build
+   cd sap_analytics_cloud_mcp
+   git checkout 2020235505d98111c2889598ab2217c1619b6943
+   npm ci --ignore-scripts
+   npm run build
    ```
 
 2. Configure environment variables:
    - `SAC_MCP_PATH` — absolute path to the cloned repo (e.g. `/home/user/sap_analytics_cloud_mcp`)
+   - `SAC_MCP_COMMIT` — `2020235505d98111c2889598ab2217c1619b6943`
    - `SAC_BASE_URL` — SAC tenant root URL (e.g. `https://mytenant.eu10.hanacloudservices.cloud.sap`)
    - `SAC_TOKEN_URL` — OAuth token endpoint
    - `SAC_CLIENT_ID` / `SAC_CLIENT_SECRET` — from SAC OAuth client configuration
@@ -92,8 +98,11 @@ If not installed, ask the user once: **"Would you like help setting up the SAC M
    ```markdown
    # SAC MCP Installation Record
    - Installed: [date]
+   - Repository: https://github.com/secondsky/sap_analytics_cloud_mcp
+   - Commit: 2020235505d98111c2889598ab2217c1619b6943
    - Path: [absolute path to build/index.js]
-   - Env vars configured: SAC_MCP_PATH, SAC_BASE_URL, SAC_TOKEN_URL, SAC_CLIENT_ID, SAC_CLIENT_SECRET
+   - Build command: npm ci --ignore-scripts && npm run build
+   - Env vars configured: SAC_MCP_PATH, SAC_MCP_COMMIT, SAC_BASE_URL, SAC_TOKEN_URL, SAC_CLIENT_ID, SAC_CLIENT_SECRET
    ```
 
 This prevents re-prompting in future sessions.

@@ -3,7 +3,7 @@
     "command": "npx",
     "args": [
       "-y",
-      "@mariodefe/sap-datasphere-mcp"
+      "@mariodefe/sap-datasphere-mcp@1.2.1"
     ],
     "env": {
       "DATASPHERE_BASE_URL": "${DATASPHERE_BASE_URL}",

@@ -113,9 +113,11 @@ npm scripts for local development:
 ```json
 {
   "scripts": {
-    "validate": "./scripts/validate-json-schemas.sh && ./scripts/validate-reserved-words.sh && ./scripts/validate-bundled-resources.mjs && ./scripts/validate-command-agent-frontmatter.mjs && ./scripts/validate-inventory.sh && ./scripts/sync-dependency-upgrade-mirror.sh --check && ./scripts/test-hooks.sh",
+    "validate": "./scripts/validate-json-schemas.sh && ./scripts/validate-reserved-words.sh && ./scripts/validate-bundled-resources.mjs && ./scripts/validate-command-agent-frontmatter.mjs && ./scripts/validate-inventory.sh && ./scripts/validate-mcp-security.mjs && ./scripts/test-hooks.sh",
     "validate:marketplace": "ajv validate -s schemas/marketplace.schema.json -d .claude-plugin/marketplace.json --all-errors",
-    "validate:plugins": "./scripts/validate-json-schemas.sh"
+    "validate:plugins": "./scripts/validate-json-schemas.sh",
+    "validate:mcp-security": "./scripts/validate-mcp-security.mjs",
+    "validate:mirror": "./scripts/sync-dependency-upgrade-mirror.sh --check"
   }
 }
 ```
