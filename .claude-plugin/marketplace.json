@@ -41,7 +41,10 @@
         "sap-abap",
         "sql"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "commands": [
+        "./commands/abap-cloud-review.md"
+      ]
     },
     {
       "name": "sap-abap-cds",
@@ -59,7 +62,10 @@
         "sap",
         "sap-abap-cds"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "commands": [
+        "./commands/abap-cds-model-check.md"
+      ]
     },
     {
       "name": "sap-ai-core",
@@ -77,7 +83,10 @@
         "sap",
         "sap-ai-core"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "commands": [
+        "./commands/ai-core-deployment-check.md"
+      ]
     },
     {
       "name": "sap-api-style",
@@ -236,7 +245,10 @@
         "sap",
         "sap-btp-cloud-logging"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "commands": [
+        "./commands/btp-logging-ingestion-check.md"
+      ]
     },
     {
       "name": "sap-btp-cloud-platform",
@@ -281,7 +293,10 @@
         "sap-btp-cloud-transport-management",
         "transport"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "commands": [
+        "./commands/btp-transport-check.md"
+      ]
     },
     {
       "name": "sap-btp-connectivity",
@@ -300,7 +315,10 @@
         "sap",
         "sap-btp-connectivity"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "commands": [
+        "./commands/btp-destination-diagnose.md"
+      ]
     },
     {
       "name": "sap-btp-developer-guide",
@@ -440,7 +458,10 @@
         "sap-btp-service-manager",
         "service"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "commands": [
+        "./commands/btp-service-manager-troubleshoot.md"
+      ]
     },
     {
       "name": "sap-cap-capire",
@@ -480,7 +501,9 @@
         "./commands/cap-mcp-tools.md",
         "./commands/cap-cds-reference.md",
         "./commands/cap-deployment-checklist.md"
-      ]
+      ],
+      "hooks": "./hooks/hooks.json",
+      "mcpServers": "./.mcp.json"
     },
     {
       "name": "sap-cloud-sdk-ai",
@@ -502,7 +525,10 @@
         "streaming",
         "typescript"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "commands": [
+        "./commands/cloud-sdk-ai-chat-template.md"
+      ]
     },
     {
       "name": "sap-cloud-sdk-ai-python",
@@ -522,7 +548,10 @@
         "sdk",
         "streaming"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "commands": [
+        "./commands/cloud-sdk-ai-python-chat-template.md"
+      ]
     },
     {
       "name": "sap-datasphere",
@@ -553,7 +582,9 @@
         "./commands/datasphere-space-template.md",
         "./commands/datasphere-view-template.md",
         "./commands/datasphere-mcp-tools.md"
-      ]
+      ],
+      "hooks": "./hooks/hooks.json",
+      "mcpServers": "./.mcp.json"
     },
     {
       "name": "sap-dependency-security",
@@ -577,7 +608,11 @@
         "security",
         "tools"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "commands": [
+        "./commands/sap-dependency-upgrade-plan.md"
+      ],
+      "hooks": "./hooks/hooks.json"
     },
     {
       "name": "sap-fiori-tools",
@@ -601,7 +636,15 @@
         "sapui5",
         "tools"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "agents": [
+        "./agents/fiori-app-advisor.md"
+      ],
+      "commands": [
+        "./commands/fiori-app-generate.md",
+        "./commands/fiori-preview-deploy.md"
+      ],
+      "mcpServers": "./.mcp.json"
     },
     {
       "name": "sap-hana-cli",
@@ -623,7 +666,15 @@
         "sql",
         "sqlscript"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "agents": [
+        "./agents/hana-database-advisor.md"
+      ],
+      "commands": [
+        "./commands/hana-inspect-object.md",
+        "./commands/hana-connect-check.md"
+      ],
+      "mcpServers": "./.mcp.json"
     },
     {
       "name": "sap-hana-cloud-data-intelligence",
@@ -696,7 +747,8 @@
         "./commands/widget-validate.md",
         "./commands/widget-lint.md",
         "./commands/widget-generate.md"
-      ]
+      ],
+      "hooks": "./hooks/hooks.json"
     },
     {
       "name": "sap-sac-planning",
@@ -727,7 +779,8 @@
         "./commands/sac-planning-checklist.md",
         "./commands/data-action-template.md",
         "./commands/seamless-planning-guide.md"
-      ]
+      ],
+      "hooks": "./hooks/hooks.json"
     },
     {
       "name": "sap-sac-scripting",
@@ -758,7 +811,9 @@
         "./commands/sac-debug.md",
         "./commands/sac-script-template.md",
         "./commands/sac-planning.md"
-      ]
+      ],
+      "hooks": "./hooks/hooks.json",
+      "mcpServers": "./.mcp.json"
     },
     {
       "name": "sap-sqlscript",
@@ -790,7 +845,8 @@
         "./commands/sqlscript-convert.md",
         "./commands/sqlscript-optimize.md",
         "./commands/sqlscript-setup.md"
-      ]
+      ],
+      "hooks": "./hooks/hooks.json"
     },
     {
       "name": "sapui5",
@@ -822,7 +878,9 @@
         "./commands/ui5-lint.md",
         "./commands/ui5-api.md",
         "./commands/ui5-version.md"
-      ]
+      ],
+      "hooks": "./hooks/hooks.json",
+      "mcpServers": "./.mcp.json"
     },
     {
       "name": "sapui5-cli",
@@ -841,7 +899,11 @@
         "sapui5-cli",
         "yaml"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "commands": [
+        "./commands/ui5-cli-build.md",
+        "./commands/ui5-cli-troubleshoot.md"
+      ]
     },
     {
       "name": "sapui5-linter",
@@ -860,7 +922,11 @@
         "sapui5",
         "sapui5-linter"
       ],
-      "license": "GPL-3.0"
+      "license": "GPL-3.0",
+      "commands": [
+        "./commands/ui5-linter-check.md",
+        "./commands/ui5-linter-fix-plan.md"
+      ]
     }
   ]
 }

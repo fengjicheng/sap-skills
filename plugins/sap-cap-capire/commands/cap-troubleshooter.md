@@ -1,6 +1,12 @@
 ---
 name: cap-troubleshooter
 description: Diagnostic guide for common CAP errors and issues with solutions
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
+argument-hint: "[syntax|deployment|database|auth|performance]"
 arguments:
   - name: error_category
     description: "Error category: syntax, deployment, database, auth, or performance"

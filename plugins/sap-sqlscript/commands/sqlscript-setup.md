@@ -6,6 +6,7 @@ allowed-tools:
   - Read
   - Write
   - Edit
+argument-hint: "[workspace-path]"
 ---
 
 ## Shell Snippet Notes

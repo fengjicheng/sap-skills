@@ -1,6 +1,11 @@
 ---
 name: cap-cds-reference
 description: Quick CDS syntax reference for entities, services, annotations, and queries
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+argument-hint: "[topic]"
 arguments:
   - name: topic
     description: "Topic: entities, services, annotations, queries, or types"

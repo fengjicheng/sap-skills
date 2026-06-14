@@ -1,7 +1,13 @@
 ---
 name: ui5-version
 description: Display UI5 version information, support status, release notes, and upgrade paths
-args:
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
+argument-hint: "[version]"
+arguments:
   - name: version
     description: Optional UI5 version to query (e.g., 1.120.0, 1.108, latest). Defaults to project version.
     required: false
@@ -56,7 +62,7 @@ Using detected project version (or latest if no project found)
 
 ## Fetching Version Information
 
-I'll use the **ui5-migration-specialist agent** or MCP tools to fetch:
+Use the **ui5-migration-specialist agent** or MCP tools to fetch:
 
 1. **Version Details**:
    - Release date
@@ -80,7 +86,7 @@ I'll use the **ui5-migration-specialist agent** or MCP tools to fetch:
 
 **Querying version information...**
 
-*Agent or MCP tool will provide comprehensive version details.*
+Expected output: comprehensive version details from the agent or MCP tool.
 
 ---
 

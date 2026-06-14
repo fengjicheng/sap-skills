@@ -1,6 +1,11 @@
 ---
 name: sac-script-template
 description: Generate SAC script templates for common Analytics Designer and Optimized Story Experience scenarios
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+argument-hint: "<filter|planning|export|navigation|chart|table|dropdown|popup|timer|bookmark>"
 arguments:
   - name: type
     description: "Template type: filter, planning, export, navigation, chart, table, dropdown, popup, timer, bookmark"

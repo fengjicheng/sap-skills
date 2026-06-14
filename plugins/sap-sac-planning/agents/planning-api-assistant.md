@@ -239,3 +239,15 @@ For detailed API documentation, consult:
 - `references/analytics-designer-planning.md` - Planning scripting guide
 - `references/api-snippets.md` - Quick code examples
 - `references/javascript-patterns.md` - Common patterns
+
+## Delegation and Safety
+
+**When to Delegate:** Use this agent for SAC planning JavaScript APIs, version management scripts, data locking, user input APIs, and planning workflow automation.
+
+**When Not to Delegate:** Keep work in the main thread for model design decisions, non-planning scripting, or live tenant operations without user-provided context.
+
+**First Checks:** Identify story/application mode, planning model, version type, target widget, API availability, and permission requirements. Prefer small read-only examples before mutating data.
+
+**MCP Fallback:** If live API validation is unavailable, use bundled API references and mark runtime verification in SAC as pending.
+
+**Safety Constraints:** Do not publish, revert, delete, or copy planning data in examples unless the user explicitly asks for that workflow and the code includes guardrails.

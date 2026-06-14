@@ -1,6 +1,11 @@
 ---
 name: sac-debug
 description: Debug SAC script issues with guided analysis and common error resolution
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+argument-hint: "[error-or-widget]"
 arguments:
   - name: error
     description: "Error message or description of the issue (optional)"

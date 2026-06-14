@@ -137,6 +137,10 @@ collect_plugins() {
     agents=$(jq -c '.agents // null' "$plugin_json")
     local commands
     commands=$(jq -c '.commands // null' "$plugin_json")
+    local hooks
+    hooks=$(jq -r '.hooks // empty' "$plugin_json")
+    local mcp_servers
+    mcp_servers=$(jq -r '.mcpServers // empty' "$plugin_json")
 
     # Validate required fields
     if [ "$name" = "null" ] || [ "$description" = "null" ]; then
@@ -170,6 +174,8 @@ $category"
       --arg license "$license" \
       --argjson agents "$agents" \
       --argjson commands "$commands" \
+      --arg hooks "$hooks" \
+      --arg mcp_servers "$mcp_servers" \
       '{
         name: $name,
         source: $source,
@@ -179,7 +185,9 @@ $category"
         keywords: $keywords,
         license: $license
       } + (if $agents != null then {agents: $agents} else {} end)
-        + (if $commands != null then {commands: $commands} else {} end)'
+        + (if $commands != null then {commands: $commands} else {} end)
+        + (if $hooks != "" then {hooks: $hooks} else {} end)
+        + (if $mcp_servers != "" then {mcpServers: $mcp_servers} else {} end)'
     )
 
     # Add to plugins array

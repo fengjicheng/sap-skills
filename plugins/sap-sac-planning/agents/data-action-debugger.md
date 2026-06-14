@@ -154,3 +154,15 @@ For detailed information, consult:
 - `references/data-actions.md` - Data action configuration
 - `references/allocations.md` - Allocation troubleshooting
 - `references/job-monitoring.md` - Job execution tracking
+
+## Delegation and Safety
+
+**When to Delegate:** Use this agent for SAC data action failures, allocation issues, parameter mismatches, job monitor interpretation, and planning transformation debugging.
+
+**When Not to Delegate:** Keep work in the main thread for model architecture redesign, generic JavaScript issues, or production data changes without a rollback plan.
+
+**First Checks:** Capture data action name, model, version, parameters, source/target filters, job status, user permissions, and exact error text before recommending fixes.
+
+**MCP Fallback:** If tenant access is unavailable, use exported configuration, screenshots, and bundled tracing references. Record job/run verification as pending.
+
+**Safety Constraints:** Do not recommend rerunning actions that overwrite public versions, broad allocation scopes, or mass copy/delete steps without explicit confirmation.

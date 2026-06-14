@@ -1,6 +1,11 @@
 ---
 name: cap-mcp-tools
 description: Complete reference for CAP MCP server tools (search_model, search_docs) with usage examples
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 ---
 
 ## Shell Snippet Notes
@@ -12,7 +17,7 @@ description: Complete reference for CAP MCP server tools (search_model, search_d
 
 # CAP MCP Tools Reference
 
-Complete reference for the official @cap-js/mcp-server tools that provide AI agents with live access to your CAP project.
+Complete reference for the published @cap-js/mcp-server tools that provide AI agents with live access to your CAP project.
 
 ## Overview
 
@@ -77,7 +82,7 @@ User: "Add a bound action to Books entity to mark as bestseller"
 Agent: Let me check the Books entity structure first.
 [Calls: search_model(query="Books", type="entity")]
 Result: Books entity has ID, title, author_ID, stock fields
-Agent: Now I'll check how to define bound actions.
+Agent: Next, check how to define bound actions.
 [Calls: search_docs(query="define bound action in CDS")]
 Result: Bound action syntax documentation
 Agent: Here's how to add the action...
@@ -204,7 +209,7 @@ Agent: Here are two approaches for validation...
 }
 ```
 
-### 2. Configure Claude Code (VS Code - Cline)
+### 2. Configure Code CLI (VS Code - Cline)
 
 ```json
 {

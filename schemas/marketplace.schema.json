@@ -155,6 +155,16 @@
           },
           "uniqueItems": true,
           "description": "Optional: paths to command definitions"
+        },
+        "hooks": {
+          "type": "string",
+          "pattern": "^\\./hooks/hooks\\.json$",
+          "description": "Optional: path to plugin hook configuration"
+        },
+        "mcpServers": {
+          "type": "string",
+          "pattern": "^\\./\\.mcp\\.json$",
+          "description": "Optional: path to plugin MCP server configuration"
         }
       }
     }

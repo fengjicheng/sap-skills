@@ -1,6 +1,12 @@
 ---
 name: datasphere-view-template
 description: Generate SAP Datasphere view templates for different modeling scenarios
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - AskUserQuestion
+argument-hint: "<graphical|sql|sqlscript> [dimension|fact|analytic|staging]"
 arguments:
   - name: type
     description: "View type: graphical, sql, sqlscript"

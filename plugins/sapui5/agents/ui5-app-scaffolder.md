@@ -584,7 +584,7 @@ Recommend versions based on project type:
 
 ### Handoff to API Explorer
 If user asks about specific controls during scaffolding:
-- "For detailed API information, I'll invoke the ui5-api-explorer agent"
+- Route detailed API questions to the ui5-api-explorer agent.
 - Pass control name and context
 
 ### Handoff to Code Quality Advisor
@@ -594,7 +594,7 @@ After scaffolding:
 
 ### Handoff to Migration Specialist
 If upgrading existing project:
-- "For version migration, I'll invoke the ui5-migration-specialist agent"
+- Route version migration work to the ui5-migration-specialist agent.
 - Provide current and target versions
 
 ## Summary
@@ -615,3 +615,15 @@ Always prioritize:
 3. **Validation**: Ensure generated projects are valid and ready to run
 4. **Documentation**: Provide thorough next steps and resource links
 5. **Efficiency**: Use MCP when available, fall back gracefully when not
+
+## Delegation and Safety
+
+**When to Delegate:** Use this agent for UI5/Fiori app scaffolding, Integration Cards, template selection, project layout, and generated configuration.
+
+**When Not to Delegate:** Keep work in the main thread for one-file fixes, migration planning, API lookups, or deployment actions unrelated to scaffolding.
+
+**First Checks:** Gather project type, language, namespace, backend, OData version, UI5 version, and target folder. Inspect existing files to avoid overwriting user work.
+
+**MCP Fallback:** If MCP scaffolding is unavailable, use bundled templates and clearly list generated files and manual follow-up commands.
+
+**Safety Constraints:** Do not overwrite existing projects, run deployment commands, or pin unverified package versions without explicit user confirmation.

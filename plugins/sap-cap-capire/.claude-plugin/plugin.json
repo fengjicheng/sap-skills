@@ -40,5 +40,7 @@
     "./commands/cap-mcp-tools.md",
     "./commands/cap-cds-reference.md",
     "./commands/cap-deployment-checklist.md"
-  ]
+  ],
+  "hooks": "./hooks/hooks.json",
+  "mcpServers": "./.mcp.json"
 }

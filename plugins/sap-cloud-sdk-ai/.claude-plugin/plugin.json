@@ -22,5 +22,8 @@
     "streaming",
     "typescript"
   ],
-  "category": "ai"
+  "category": "ai",
+  "commands": [
+    "./commands/cloud-sdk-ai-chat-template.md"
+  ]
 }

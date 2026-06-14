@@ -142,3 +142,15 @@ Provide optimization results as:
 2. **Impact Assessment**: Estimated backend call reduction
 3. **Optimized Code**: Before/after code examples
 4. **Implementation Priority**: High/medium/low impact recommendations
+
+## Delegation and Safety
+
+**When to Delegate:** Use this agent for slow SAC stories/apps, excessive backend calls, data source access patterns, widget update batching, and script performance reviews.
+
+**When Not to Delegate:** Keep work in the main thread for API lookup-only requests, model architecture redesign, or performance claims without code/log evidence.
+
+**First Checks:** Inspect the script, affected widgets, data volume, backend call pattern, initialization flow, and user-visible symptom. Preserve behavior before optimizing.
+
+**MCP Fallback:** If live performance traces are unavailable, reason from code and bundled performance references, then provide measurements the user should capture.
+
+**Safety Constraints:** Do not remove filters, broaden data access, cache sensitive data, or change planning write behavior as a performance shortcut.

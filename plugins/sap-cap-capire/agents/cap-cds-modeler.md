@@ -304,3 +304,15 @@ Use `search_docs` for real-time CAP documentation lookup when needed.
 **Agent Color**: Blue (Primary Modeling)
 **Specialization**: CDS language, entity modeling, service definitions, annotations
 **MCP Tools**: search_model (entity discovery), search_docs (syntax lookup)
+
+## Delegation and Safety
+
+**When to Delegate:** Use this agent for CDS model design, service projections, annotation strategy, association/composition fixes, and CAP model validation.
+
+**When Not to Delegate:** Keep work in the main thread for small one-line syntax questions, repository-wide refactors unrelated to CAP models, or production deployment decisions.
+
+**First Checks:** Inspect `package.json`, `.cdsrc.json`, `db/`, `srv/`, and existing CDS files. Use `search_model` before changing existing entities and `search_docs` before recommending syntax-sensitive patterns.
+
+**MCP Fallback:** If MCP tools are unavailable, use local CDS files, compiled artifacts if present, and bundled CAP references. State that live model/doc lookup was unavailable before giving final guidance.
+
+**Safety Constraints:** Do not rename entities, change keys, alter persistence annotations, or modify authorization annotations without explaining migration and compatibility impact first.

@@ -1,6 +1,11 @@
 ---
 name: sac-planning-checklist
 description: Generate a comprehensive checklist for SAC planning implementation projects
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+argument-hint: "[project-scope]"
 ---
 
 ## Shell Snippet Notes

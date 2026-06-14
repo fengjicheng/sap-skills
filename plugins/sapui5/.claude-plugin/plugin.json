@@ -32,5 +32,7 @@
     "./commands/ui5-lint.md",
     "./commands/ui5-api.md",
     "./commands/ui5-version.md"
-  ]
+  ],
+  "hooks": "./hooks/hooks.json",
+  "mcpServers": "./.mcp.json"
 }

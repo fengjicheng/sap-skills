@@ -24,5 +24,13 @@
     "sapui5",
     "tools"
   ],
-  "category": "ui-development"
+  "category": "ui-development",
+  "agents": [
+    "./agents/fiori-app-advisor.md"
+  ],
+  "commands": [
+    "./commands/fiori-app-generate.md",
+    "./commands/fiori-preview-deploy.md"
+  ],
+  "mcpServers": "./.mcp.json"
 }

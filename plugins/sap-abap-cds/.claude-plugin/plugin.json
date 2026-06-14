@@ -18,5 +18,8 @@
     "sap",
     "sap-abap-cds"
   ],
-  "category": "abap"
+  "category": "abap",
+  "commands": [
+    "./commands/abap-cds-model-check.md"
+  ]
 }

@@ -20,5 +20,8 @@
     "sap-abap",
     "sql"
   ],
-  "category": "abap"
+  "category": "abap",
+  "commands": [
+    "./commands/abap-cloud-review.md"
+  ]
 }

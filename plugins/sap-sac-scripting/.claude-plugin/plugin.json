@@ -31,5 +31,7 @@
     "./commands/sac-debug.md",
     "./commands/sac-script-template.md",
     "./commands/sac-planning.md"
-  ]
+  ],
+  "hooks": "./hooks/hooks.json",
+  "mcpServers": "./.mcp.json"
 }

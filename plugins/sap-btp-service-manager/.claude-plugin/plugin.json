@@ -23,5 +23,8 @@
     "sap-btp-service-manager",
     "service"
   ],
-  "category": "btp"
+  "category": "btp",
+  "commands": [
+    "./commands/btp-service-manager-troubleshoot.md"
+  ]
 }

@@ -1,6 +1,12 @@
 ---
 name: sac-optimize
 description: Analyze SAC scripts for performance optimization opportunities
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Edit
+argument-hint: "[script-file-or-symptom]"
 ---
 
 ## Shell Snippet Notes

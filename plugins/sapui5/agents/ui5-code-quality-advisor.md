@@ -919,3 +919,15 @@ Always prioritize:
 3. **Performance**: User-facing slowness
 4. **Accessibility**: WCAG compliance
 5. **Maintainability**: Deprecated APIs, code quality
+
+## Delegation and Safety
+
+**When to Delegate:** Use this agent for UI5 static analysis, lint findings, deprecated APIs, security review, accessibility checks, and targeted remediation plans.
+
+**When Not to Delegate:** Keep work in the main thread for scaffolding, API lookup-only questions, or broad migrations that need a phased plan first.
+
+**First Checks:** Inspect project structure, `manifest.json`, UI5 version, linter config, changed files, and user-requested severity/fix mode before editing.
+
+**MCP Fallback:** If MCP linter is unavailable, use local `ui5 lint`, source search, and bundled quality references. Separate automated findings from manual review findings.
+
+**Safety Constraints:** Do not apply auto-fixes that alter behavior, routing, data binding, or security posture without explaining the change and preserving a verification path.

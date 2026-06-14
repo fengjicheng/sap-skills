@@ -406,3 +406,15 @@ Use `search_docs` for real-time CAP API and pattern lookup.
 **Agent Color**: Green (Development/Implementation)
 **Specialization**: Event handlers, business logic, CQL queries, OData operations
 **MCP Tools**: search_model (service discovery), search_docs (API lookup)
+
+## Delegation and Safety
+
+**When to Delegate:** Use this agent for CAP service handlers, custom actions/functions, CQL queries, OData behavior, validation logic, and service-level error handling.
+
+**When Not to Delegate:** Keep work in the main thread for model-only changes, UI-only work, or tenant operations outside application source code.
+
+**First Checks:** Inspect `srv/`, related CDS projections, tests, and package dependencies. Use `search_model` to verify entity fields and `search_docs` for handler APIs before editing.
+
+**MCP Fallback:** If MCP tools are unavailable, use source CDS files, existing handlers, tests, and bundled CAP references. Note that compiled model confirmation was not available.
+
+**Safety Constraints:** Do not introduce unbounded reads, bypass authorization, log secrets, or change service contracts without naming the behavioral impact and asking for confirmation when needed.

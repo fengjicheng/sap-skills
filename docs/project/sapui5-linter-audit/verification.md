@@ -18,7 +18,7 @@
 
 ### ✅ RESEARCH CHECKLIST
 - ✅ Reviewed official UI5 Linter documentation
-- ✅ Verified latest package version: 1.21.1 (verified 2026-05-31)
+- ✅ Verified latest package version: 1.22.0 (verified via npm registry on 2026-06-14)
 - ✅ Extracted complete information from 8 documentation sources
 - ✅ Documented all 19 rules, autofix capabilities, CLI options
 
@@ -86,7 +86,7 @@
 - ⏳ All templates work: To be verified by users
 - ⏳ All scripts execute: N/A (no scripts in this skill)
 - ✅ Configuration files valid: ESM/CJS syntax verified
-- ✅ Package versions correct: 1.21.1 verified from npm
+- ✅ Package versions correct: 1.22.0 verified from npm
 
 ### ✅ COMPLIANCE CHECKLIST
 - ✅ Compared against [https://github.com/anthropics/skills/blob/main/agent_skills_spec.md](https://github.com/anthropics/skills/blob/main/agent_skills_spec.md)
@@ -102,7 +102,7 @@
 - ✅ Templates tested and documented (5 templates)
 - ✅ References accurate and current (verified 2025-11-21)
 - ✅ Links to official docs work (8 GitHub links verified)
-- ✅ Version numbers current (1.21.1)
+- ✅ Version numbers current (1.22.0)
 - ✅ "Last Updated" date accurate (2025-11-21)
 
 ### ✅ QUALITY GATES CHECKLIST

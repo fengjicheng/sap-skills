@@ -1,6 +1,12 @@
 ---
 name: data-action-template
 description: Generate a data action configuration template based on requirements
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - AskUserQuestion
+argument-hint: "[data-action-name]"
 ---
 
 ## Shell Snippet Notes

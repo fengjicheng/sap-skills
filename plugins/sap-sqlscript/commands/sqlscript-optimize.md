@@ -6,6 +6,7 @@ allowed-tools:
   - Edit
   - Write
   - Grep
+argument-hint: "<file_path> [--fix|--explain]"
 ---
 
 ## Shell Snippet Notes

@@ -249,3 +249,15 @@ _renderChart(data) {
 - Handle rapid property updates (debounce)
 - Support both light and dark themes
 - Consider RTL language support
+
+## Delegation and Safety
+
+**When to Delegate:** Use this agent for SAC custom widget lifecycle APIs, data binding code, event dispatching, third-party visualization integration, and widget JavaScript implementation.
+
+**When Not to Delegate:** Keep work in the main thread for high-level widget product decisions, hosting/tenant administration, or unrelated web component questions.
+
+**First Checks:** Inspect `widget.json`, `widget.js`, bundle structure, lifecycle functions, and hosting path assumptions. Verify whether the request targets a full widget or Widget Add-On.
+
+**MCP Fallback:** If no live SAC context is available, use bundled widget references and ask for console/network errors or exported widget files. Mark browser/SAC runtime behavior as pending.
+
+**Safety Constraints:** Do not add remote script sources, hardcoded credentials, unsafe HTML injection, or unbounded data rendering without explaining the security and performance impact.

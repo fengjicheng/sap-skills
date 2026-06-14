@@ -1,7 +1,14 @@
 ---
 name: ui5-api
 description: Quick API reference lookup for UI5 controls, methods, events, and properties
-args:
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
+  - mcp__plugin_sapui5_ui5-tooling__get_ui5_api
+argument-hint: "<control> [member]"
+arguments:
   - name: control
     description: Control name (e.g., sap.m.Table, Button, List)
     required: true
@@ -23,9 +30,9 @@ Looking up API documentation for `{{control}}`{{#if member}} member `{{member}}`
 
 ## Quick Reference Lookup
 
-I'll search for API documentation using the ui5-api-explorer agent, which will:
+Use the ui5-api-explorer agent or MCP tooling to gather:
 
-1. **Check MCP availability**: Try official @ui5/mcp-server first
+1. **Check MCP availability**: Try @ui5/mcp-server first
 2. **Determine version**: Use your project's UI5 version or latest
 3. **Fetch documentation**: Get complete API reference
 4. **Generate examples**: Show working code examples
@@ -35,9 +42,9 @@ This provides faster access than visiting ui5.sap.com manually.
 
 ---
 
-**Invoking ui5-api-explorer agent...**
+**Route to ui5-api-explorer when available.**
 
-*Agent will provide:*
+Expected output:
 - Full control documentation (if no member specified)
 - Specific method/event/property documentation (if member specified)
 - Code examples
@@ -49,7 +56,7 @@ This provides faster access than visiting ui5.sap.com manually.
 
 ## Fallback (If Agent Unavailable)
 
-If the agent cannot be invoked, here's manual lookup information:
+If the agent is unavailable, use this manual lookup information:
 
 ### Online Documentation
 

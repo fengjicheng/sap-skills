@@ -18,5 +18,8 @@
     "sap",
     "sap-ai-core"
   ],
-  "category": "ai"
+  "category": "ai",
+  "commands": [
+    "./commands/ai-core-deployment-check.md"
+  ]
 }

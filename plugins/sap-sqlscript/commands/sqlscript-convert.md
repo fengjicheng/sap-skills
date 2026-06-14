@@ -5,6 +5,7 @@ allowed-tools:
   - Read
   - Write
   - Grep
+argument-hint: "<file_path> --to <amdp|standalone|cds-function>"
 ---
 
 ## Shell Snippet Notes

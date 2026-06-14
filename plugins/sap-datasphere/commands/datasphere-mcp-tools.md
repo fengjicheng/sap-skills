@@ -1,6 +1,11 @@
 ---
 name: datasphere-mcp-tools
 description: List all available SAP Datasphere MCP tools with descriptions and usage examples
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 ---
 
 ## Shell Snippet Notes
@@ -350,7 +355,7 @@ LOG_LEVEL=debug
 
 Check MCP server status:
 ```bash
-# From Claude Code, use:
+# From the Code CLI, use:
 /mcp
 ```
 

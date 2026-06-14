@@ -1,6 +1,11 @@
 ---
 name: sac-planning
 description: Generate SAC planning operation templates and workflows
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+argument-hint: "<publish|copy|lock|workflow|version|dataaction>"
 arguments:
   - name: operation
     description: "Planning operation: publish, copy, lock, workflow, version, dataaction"

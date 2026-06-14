@@ -1,7 +1,17 @@
 ---
 name: ui5-scaffold
 description: Interactive project scaffolding for UI5 applications and Integration Cards
-args:
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+  - AskUserQuestion
+  - mcp__plugin_sapui5_ui5-tooling__create_ui5_app
+  - mcp__plugin_sapui5_ui5-tooling__create_integration_card
+  - mcp__plugin_sapui5_ui5-tooling__get_project_info
+argument-hint: "[type] [lang] [backend] [name]"
+arguments:
   - name: type
     description: Project type (freestyle, fiori-elements, integration-card, cap)
     required: false
@@ -33,7 +43,7 @@ Starting interactive project scaffolding...
 
 ## Project Scaffolding
 
-I'll invoke the **ui5-app-scaffolder agent** to create your UI5 project.
+Use the **ui5-app-scaffolder agent** to create the UI5 project when available.
 
 The agent will:
 
@@ -75,15 +85,15 @@ The agent will use these as defaults and may ask for additional details.
 
 ---
 
-**Invoking ui5-app-scaffolder agent...**
+**Route to ui5-app-scaffolder when available.**
 
-*Agent will scaffold your project and provide complete setup instructions.*
+Expected output: generated project files, validation notes, and complete setup instructions.
 
 ---
 
 ## Manual Scaffolding (If Agent Unavailable)
 
-If the agent cannot be invoked, you can use these manual commands:
+If the agent is unavailable, use these manual commands:
 
 ### Using @ui5/mcp-server (Recommended)
 

@@ -148,3 +148,15 @@ After gathering requirements, provide:
 - For table functions, ensure READS SQL DATA is included
 - For complex requirements, suggest breaking into multiple procedures
 - If requirements are unclear, ask specific clarifying questions
+
+## Delegation and Safety
+
+**When to Delegate:** Use this agent for creating SQLScript procedures, functions, table functions, parameter contracts, and reusable HANA database routines.
+
+**When Not to Delegate:** Keep work in the main thread for quick validation, DBA-only deployment choices, or migrations that require production data knowledge.
+
+**First Checks:** Clarify procedure purpose, inputs/outputs, target HANA version, schema strategy, data volume, error handling, and execution role before generating code.
+
+**MCP Fallback:** If HANA validation is unavailable, use bundled references and provide syntax/activation checks for the user to run in their target environment.
+
+**Safety Constraints:** Do not generate destructive DML, dynamic SQL, or broad schema changes without explicit requirements and protective WHERE/transaction guidance.

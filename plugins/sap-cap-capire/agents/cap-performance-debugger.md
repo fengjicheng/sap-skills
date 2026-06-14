@@ -463,3 +463,15 @@ Use `search_docs` for real-time CAP performance and debugging lookup.
 **Agent Color**: Orange (Performance/Alert)
 **Specialization**: Query optimization, debugging, monitoring, performance tuning
 **MCP Tools**: search_model (relationship analysis), search_docs (optimization patterns)
+
+## Delegation and Safety
+
+**When to Delegate:** Use this agent for slow CAP services, CQL query analysis, N+1 detection, HANA pushdown review, and structured logging/monitoring recommendations.
+
+**When Not to Delegate:** Keep work in the main thread for simple syntax fixes, non-CAP Node.js profiling, or changes that require production traces the user has not provided.
+
+**First Checks:** Inspect service handlers, CDS projections, generated SQL/log snippets, `package.json`, and any test or trace output. Confirm entity shape with `search_model` before proposing query changes.
+
+**MCP Fallback:** If MCP tools are unavailable, reason from local handlers, CDS files, SQL logs, and bundled references. Call out that compiled model lookup was not available.
+
+**Safety Constraints:** Do not apply broad query rewrites, caching, pagination behavior changes, or logging changes that may expose sensitive data without explicit user approval.

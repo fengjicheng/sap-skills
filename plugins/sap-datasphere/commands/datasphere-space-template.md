@@ -1,6 +1,12 @@
 ---
 name: datasphere-space-template
 description: Generate SAP Datasphere space configuration templates with best practices
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - AskUserQuestion
+argument-hint: "<development|analytics|integration|sandbox>"
 arguments:
   - name: type
     description: "Space type: development, analytics, integration, sandbox"

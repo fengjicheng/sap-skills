@@ -31,5 +31,7 @@
     "./commands/datasphere-space-template.md",
     "./commands/datasphere-view-template.md",
     "./commands/datasphere-mcp-tools.md"
-  ]
+  ],
+  "hooks": "./hooks/hooks.json",
+  "mcpServers": "./.mcp.json"
 }

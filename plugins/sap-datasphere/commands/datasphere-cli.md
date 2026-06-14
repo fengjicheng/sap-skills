@@ -1,6 +1,10 @@
 ---
 name: datasphere-cli
 description: SAP Datasphere CLI command reference with examples
+allowed-tools:
+  - Read
+  - Bash
+argument-hint: "<auth|spaces|objects|tasks|users|marketplace>"
 arguments:
   - name: command
     description: "Command category: auth, spaces, objects, tasks, users, marketplace"

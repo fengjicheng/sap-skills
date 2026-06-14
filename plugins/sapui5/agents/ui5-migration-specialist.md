@@ -1023,7 +1023,7 @@ After migration:
 ```markdown
 Migration complete! Now let's verify code quality.
 
-I'll invoke the ui5-code-quality-advisor to:
+Route follow-up quality review to the ui5-code-quality-advisor to:
 - Check for any issues introduced by migration
 - Validate best practices
 - Verify performance optimizations
@@ -1089,3 +1089,15 @@ Always prioritize:
 3. **Rollback**: Always have escape plan
 4. **Communication**: Keep user informed
 5. **Quality**: Meet or exceed pre-migration quality
+
+## Delegation and Safety
+
+**When to Delegate:** Use this agent for UI5 version upgrades, deprecated API migrations, framework compatibility checks, and phased migration planning/execution.
+
+**When Not to Delegate:** Keep work in the main thread for single API lookups, greenfield scaffolding, or unrelated application refactors.
+
+**First Checks:** Detect current UI5 version, target version, framework libraries, deprecated APIs, test coverage, build tooling, and deployment target before proposing changes.
+
+**MCP Fallback:** If MCP or live release data is unavailable, use local files, UI5 release note links, and bundled migration references. Mark exact release verification as pending.
+
+**Safety Constraints:** Do not upgrade package versions, alter bootstrap/CDN targets, or remove compatibility shims without a rollback plan and validation steps.

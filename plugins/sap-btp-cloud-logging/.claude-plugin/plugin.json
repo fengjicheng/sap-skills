@@ -22,5 +22,8 @@
     "sap",
     "sap-btp-cloud-logging"
   ],
-  "category": "btp"
+  "category": "btp",
+  "commands": [
+    "./commands/btp-logging-ingestion-check.md"
+  ]
 }

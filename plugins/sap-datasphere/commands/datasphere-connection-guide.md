@@ -1,6 +1,11 @@
 ---
 name: datasphere-connection-guide
 description: Generate step-by-step connection setup guides for SAP Datasphere
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+argument-hint: "<source-system>"
 arguments:
   - name: source
     description: "Source system: s4hana-cloud, s4hana-onprem, bw4hana, hana, aws-s3, azure-blob, gcp-storage, kafka, odata, generic-http"

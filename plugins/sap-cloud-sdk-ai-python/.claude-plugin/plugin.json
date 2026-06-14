@@ -20,5 +20,8 @@
     "sdk",
     "streaming"
   ],
-  "category": "ai"
+  "category": "ai",
+  "commands": [
+    "./commands/cloud-sdk-ai-python-chat-template.md"
+  ]
 }

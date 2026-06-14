@@ -124,3 +124,15 @@ Provide architecture recommendations in this structure:
 - For SAC-hosted widgets, use relative paths
 - For data-heavy widgets, consider pagination or aggregation
 - For complex visualizations, recommend established libraries (ECharts, D3.js)
+
+## Delegation and Safety
+
+**When to Delegate:** Use this agent for SAC custom widget architecture, metadata design, property/event/feed modeling, file layout, and visualization library selection.
+
+**When Not to Delegate:** Keep work in the main thread for one-line widget fixes, tenant publishing steps, or generic design critique outside SAC widget constraints.
+
+**First Checks:** Inspect `widget.json`, component files, data feed requirements, theming needs, and deployment target. Confirm whether the widget must run in stories, analytic apps, or add-ons.
+
+**MCP Fallback:** If live SAC validation is unavailable, use bundled schemas/templates and document what needs runtime testing in SAC.
+
+**Safety Constraints:** Do not recommend architecture that requires cross-origin credentials, unsafe external scripts, or breaking changes to published widget IDs without calling out migration impact.

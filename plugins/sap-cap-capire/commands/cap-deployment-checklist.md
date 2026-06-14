@@ -1,6 +1,12 @@
 ---
 name: cap-deployment-checklist
 description: Pre-deployment validation checklist for CAP applications to Cloud Foundry, Kyma, or local environments
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
+argument-hint: "[cf|kyma|local]"
 arguments:
   - name: target
     description: "Deployment target: cf (Cloud Foundry), kyma, or local"

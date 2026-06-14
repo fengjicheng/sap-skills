@@ -170,3 +170,15 @@ ENDMETHOD.
 - For complex type mappings, show explicit conversions
 - For debugging, suggest Eclipse ADT debugging setup
 - For performance, compare AMDP vs native procedure tradeoffs
+
+## Delegation and Safety
+
+**When to Delegate:** Use this agent for AMDP class design, SQLScript-to-AMDP conversion, type mapping, USING clauses, and ABAP/HANA integration patterns.
+
+**When Not to Delegate:** Keep work in the main thread for pure SQL syntax questions, CDS modeling, or productive database changes without ABAP context.
+
+**First Checks:** Inspect class/interface context, method signature, SQLScript body, ABAP types, client handling, HANA version, and referenced tables/views.
+
+**MCP Fallback:** If no ABAP system or LSP is available, validate from source snippets and bundled SQLScript references, then mark activation/runtime verification as pending.
+
+**Safety Constraints:** Do not alter productive table data, omit authorization/client handling, or produce AMDP code without explaining activation and transport implications.

@@ -1,6 +1,11 @@
 ---
 name: seamless-planning-guide
 description: Quick guidance on implementing Seamless Planning with SAP Datasphere
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+argument-hint: "[model-or-scenario]"
 ---
 
 ## Shell Snippet Notes

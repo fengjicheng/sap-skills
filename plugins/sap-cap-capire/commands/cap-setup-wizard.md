@@ -1,6 +1,13 @@
 ---
 name: cap-setup-wizard
 description: Interactive guide for setting up new CAP projects with framework and database selection
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+  - AskUserQuestion
+argument-hint: "[nodejs|java|typescript] [sqlite|hana|postgres]"
 arguments:
   - name: framework
     description: "Target framework: nodejs, java, or typescript"

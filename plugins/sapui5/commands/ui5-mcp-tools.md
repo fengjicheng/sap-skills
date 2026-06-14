@@ -1,6 +1,11 @@
 ---
 name: ui5-mcp-tools
 description: List all available UI5 MCP server tools and their usage
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 ---
 
 ## Shell Snippet Notes
@@ -267,7 +272,7 @@ npm install -g @ui5/mcp-server@0.2.11
 npx -y @ui5/mcp-server@0.2.11 <tool-name> <arguments>
 ```
 
-### Configure for Claude Code
+### Configure for Code CLI
 
 The sapui5 plugin automatically configures MCP via `.mcp.json`:
 

@@ -208,3 +208,15 @@ Provide API information as:
 4. **Return Type**: What the method returns
 5. **Code Example**: Working example in context
 6. **Related Methods**: Other useful methods for the task
+
+## Delegation and Safety
+
+**When to Delegate:** Use this agent for SAC Analytics Designer or Optimized Story API lookups, widget/data source methods, and code examples that depend on SAC API semantics.
+
+**When Not to Delegate:** Keep work in the main thread for non-SAC JavaScript, planning model architecture, or tenant administration.
+
+**First Checks:** Identify runtime mode, widget type, data source type, desired API method, and SAC release assumptions. Check bundled references before writing code.
+
+**MCP Fallback:** If live API docs or tenant validation are unavailable, use bundled references and state the exact runtime assumptions in the answer.
+
+**Safety Constraints:** Do not provide code that exposes data, logs sensitive values, or changes planning data without clear user intent and safeguards.

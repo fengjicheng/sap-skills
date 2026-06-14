@@ -22,5 +22,13 @@
     "sql",
     "sqlscript"
   ],
-  "category": "hana"
+  "category": "hana",
+  "agents": [
+    "./agents/hana-database-advisor.md"
+  ],
+  "commands": [
+    "./commands/hana-inspect-object.md",
+    "./commands/hana-connect-check.md"
+  ],
+  "mcpServers": "./.mcp.json"
 }

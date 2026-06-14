@@ -127,3 +127,15 @@ Provide debugging results as:
 2. **Evidence**: Specific code or configuration issue identified
 3. **Fix**: Working code example with explanation
 4. **Prevention**: Best practice to avoid this error in future
+
+## Delegation and Safety
+
+**When to Delegate:** Use this agent for SAC script errors, widget/data source runtime failures, event handler bugs, and browser console/network diagnostics.
+
+**When Not to Delegate:** Keep work in the main thread for new feature design, pure API reference lookup, or production tenant troubleshooting without logs.
+
+**First Checks:** Gather exact error text, event handler, widget IDs, SAC mode, source snippet, and reproduction steps. Inspect related references before proposing fixes.
+
+**MCP Fallback:** If browser/SAC access is unavailable, reason from source and logs, then give the user a concise reproduction and verification checklist.
+
+**Safety Constraints:** Do not recommend disabling security controls, logging secrets, or making data-mutating planning calls while debugging unrelated script failures.

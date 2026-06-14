@@ -19,5 +19,9 @@
     "sapui5",
     "sapui5-linter"
   ],
-  "category": "ui-development"
+  "category": "ui-development",
+  "commands": [
+    "./commands/ui5-linter-check.md",
+    "./commands/ui5-linter-fix-plan.md"
+  ]
 }

@@ -11,6 +11,7 @@
     "validate:inventory": "./scripts/validate-inventory.sh",
     "validate:mcp-security": "./scripts/validate-mcp-security.mjs",
     "validate:skill-quality": "./scripts/validate-skill-quality.mjs",
+    "audit:skills": "./scripts/audit-skills.mjs",
     "test:hooks": "./scripts/test-hooks.sh"
   },
   "devDependencies": {

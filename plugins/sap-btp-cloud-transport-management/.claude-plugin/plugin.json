@@ -23,5 +23,8 @@
     "sap-btp-cloud-transport-management",
     "transport"
   ],
-  "category": "btp"
+  "category": "btp",
+  "commands": [
+    "./commands/btp-transport-check.md"
+  ]
 }

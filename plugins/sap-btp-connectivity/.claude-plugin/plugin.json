@@ -19,5 +19,8 @@
     "sap",
     "sap-btp-connectivity"
   ],
-  "category": "btp"
+  "category": "btp",
+  "commands": [
+    "./commands/btp-destination-diagnose.md"
+  ]
 }

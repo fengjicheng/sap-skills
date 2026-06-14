@@ -181,3 +181,15 @@ For detailed information, consult:
 - `references/data-acquisition-preparation.md` - Replication flows
 - `references/data-integration-monitor.md` - Monitoring
 - `references/administration.md` - Cloud Connector and DPA setup
+
+## Delegation and Safety
+
+**When to Delegate:** Use this agent for Datasphere connections, replication flows, Cloud Connector/DPA setup, source onboarding, and ingestion troubleshooting.
+
+**When Not to Delegate:** Keep work in the main thread for model-only changes, generic network debugging, or production connection edits without operator context.
+
+**First Checks:** Determine source type, authentication mode, network path, space, required privileges, and whether data movement is read-only or mutating. Inspect connection references before proposing setup.
+
+**MCP Fallback:** If MCP is unavailable, use CLI/reference workflows and ask the user for tenant error messages or screenshots. Record live connection verification as pending.
+
+**Safety Constraints:** Do not create, rotate, or expose credentials. Avoid starting large replication loads or changing schedules without explicit confirmation.

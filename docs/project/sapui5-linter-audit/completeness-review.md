@@ -134,7 +134,7 @@
 - ✅ CI/CD patterns
 
 **Version History**:
-- ✅ Current version (1.21.1)
+- ✅ Current version (1.22.0)
 - ✅ Recent major versions (1.14-1.20)
 - ✅ Feature additions timeline
 
