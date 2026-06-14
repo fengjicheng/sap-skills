@@ -1,35 +1,17 @@
 {
   "version": 1,
   "skills": {
-    "cloudflare": {
-      "source": "cloudflare/skills",
-      "sourceType": "github",
-      "skillPath": "skills/cloudflare/SKILL.md",
-      "computedHash": "3db237b77d15da8ee3ee87b73f2d4b2bce1c43e4f066613fb3c7ea2ad626390c"
-    },
     "grill-me": {
       "source": "mattpocock/skills",
       "sourceType": "github",
       "skillPath": "skills/productivity/grill-me/SKILL.md",
       "computedHash": "784f0dbb7403b0f00324bce9a112f715342777a0daee7bbb7385f9c6f0a170ea"
     },
-    "next-best-practices": {
-      "source": "vercel-labs/next-skills",
-      "sourceType": "github",
-      "skillPath": "skills/next-best-practices/SKILL.md",
-      "computedHash": "f4678aef4ffc10a5ea64a91e57abe5a5081af813b06d58d565caf3e8ef56e26c"
-    },
     "web-perf": {
       "source": "cloudflare/skills",
       "sourceType": "github",
       "skillPath": "skills/web-perf/SKILL.md",
       "computedHash": "7ae53856c320574f7440f50aef7892f96837eec9fd49d329d049d432fb4b299a"
-    },
-    "wrangler": {
-      "source": "cloudflare/skills",
-      "sourceType": "github",
-      "skillPath": "skills/wrangler/SKILL.md",
-      "computedHash": "11edeb37eedb91deedde694b2bb1cc4ff4e8b5a8f1836c217a8c871fe39abcb5"
     }
   }
 }
