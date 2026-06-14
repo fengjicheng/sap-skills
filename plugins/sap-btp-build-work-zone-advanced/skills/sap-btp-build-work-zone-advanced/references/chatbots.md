@@ -108,10 +108,10 @@ Webhooks enable chatbots to invoke SAP Build Work Zone services.
 ### Webhook URL Format
 
 ```
-[https://<host-url>/api/v2/ai/webhook](https://<host-url>/api/v2/ai/webhook)
+https://<host-url>/api/v2/ai/webhook
 ```
 
-Example: `[https://dwpdev1.sapjam-integration.com/api/v2/ai/webhook`](https://dwpdev1.sapjam-integration.com/api/v2/ai/webhook`)
+Example: `https://dwpdev1.sapjam-integration.com/api/v2/ai/webhook`
 
 ### Authorization
 

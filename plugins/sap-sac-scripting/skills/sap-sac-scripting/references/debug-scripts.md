@@ -14,6 +14,6 @@ Source: `help-portal-704272da511143d686ca6949040b9a68.md`.
 ## Debug mode
 - Add `debugger;` statements in scripts.
 - Launch app with URL parameter `debug=true` to pause automatically at those statements:
-  `[https://<TENANT>/.../application/<APP_ID>/?mode=present&debug=true`](https://<TENANT>/.../application/<APP_ID>/?mode=present&debug=true`)
+  `https://<TENANT>/.../application/<APP_ID>/?mode=present&debug=true`
 - Comments are preserved in transformed JS to aid identification.
 

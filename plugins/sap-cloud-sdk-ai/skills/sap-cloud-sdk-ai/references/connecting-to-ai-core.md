@@ -50,9 +50,9 @@ The SDK automatically reads credentials from `VCAP_SERVICES`:
     "credentials": {
       "clientid": "...",
       "clientsecret": "...",
-      "url": "[https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com",](https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com",)
+      "url": "https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com",
       "serviceurls": {
-        "AI_API_URL": "[https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com/v2"](https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com/v2")
+        "AI_API_URL": "https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com/v2"
       }
     }
   }]
@@ -103,7 +103,7 @@ Set `AICORE_SERVICE_KEY` with service credentials JSON.
 Create `.env` file:
 
 ```bash
-AICORE_SERVICE_KEY='{"clientid":"sb-abc123","clientsecret":"secret123","url":"[https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com","serviceurls":{"AI_API_URL":"https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com/v2"}}'](https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com","serviceurls":{"AI_API_URL":"https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com/v2"}}')
+AICORE_SERVICE_KEY='{"clientid":"sb-abc123","clientsecret":"secret123","url":"https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com","serviceurls":{"AI_API_URL":"https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com/v2"}}'
 ```
 
 Load in application:
@@ -284,11 +284,11 @@ import { registerDestination } from '@sap-cloud-sdk/connectivity';
 // Register custom destination
 registerDestination({
   name: 'custom-aicore',
-  url: '[https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com',](https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com',)
+  url: 'https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com',
   authentication: 'OAuth2ClientCredentials',
   clientId: 'my-client-id',
   clientSecret: 'my-client-secret',
-  tokenServiceUrl: '[https://auth.ai.prod.eu-central-1.aws.ml.hana.ondemand.com/oauth/token'](https://auth.ai.prod.eu-central-1.aws.ml.hana.ondemand.com/oauth/token')
+  tokenServiceUrl: 'https://auth.ai.prod.eu-central-1.aws.ml.hana.ondemand.com/oauth/token'
 });
 
 // Use registered destination
@@ -306,10 +306,10 @@ import com.sap.cloud.sdk.cloudplatform.connectivity.HttpDestination;
 
 // Build custom destination
 HttpDestination destination = OAuth2DestinationBuilder.forTargetUrl(
-    "[https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com"](https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com")
+    "https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com"
 )
     .withClient("my-client-id", "my-client-secret")
-    .withTokenEndpoint("[https://auth.ai.../oauth/token](https://auth.ai.../oauth/token)")
+    .withTokenEndpoint("https://auth.ai.../oauth/token")
     .build();
 
 // Use with AI Core service

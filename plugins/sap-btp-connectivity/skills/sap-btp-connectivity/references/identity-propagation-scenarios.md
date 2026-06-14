@@ -185,12 +185,12 @@ When using a custom IDP for Cloud Connector subaccount configuration:
 
 **Step 1: Construct SSO URL**
 ```
-[https://<subdomain>.authentication.<region>.hana.ondemand.com/passcode](https://<subdomain>.authentication.<region>.hana.ondemand.com/passcode)
+https://<subdomain>.authentication.<region>.hana.ondemand.com/passcode
 ```
 
 Example:
 ```
-[https://mycompany.authentication.eu10.hana.ondemand.com/passcode](https://mycompany.authentication.eu10.hana.ondemand.com/passcode)
+https://mycompany.authentication.eu10.hana.ondemand.com/passcode
 ```
 
 **Step 2: Obtain Passcode**
@@ -230,12 +230,12 @@ Cloud Connector 2.17+ supports authentication data file import:
 {
   "Name": "ias-saml-destination",
   "Type": "HTTP",
-  "URL": "[https://target-system.example.com",](https://target-system.example.com",)
+  "URL": "https://target-system.example.com",
   "Authentication": "OAuth2SAMLBearerAssertion",
   "ProxyType": "Internet",
-  "audience": "[https://target-system.example.com",](https://target-system.example.com",)
+  "audience": "https://target-system.example.com",
   "clientKey": "<service-key>",
-  "tokenServiceURL": "[https://target.authentication.region.hana.ondemand.com/oauth/token",](https://target.authentication.region.hana.ondemand.com/oauth/token",)
+  "tokenServiceURL": "https://target.authentication.region.hana.ondemand.com/oauth/token",
   "KeyStoreLocation": "ias-signing-cert.p12",
   "KeyStorePassword": "<password>"
 }
@@ -308,7 +308,7 @@ Chain multiple authentication methods for complex SSO scenarios.
 {
   "Name": "sequential-chain-dest",
   "Type": "HTTP",
-  "URL": "[https://onprem.internal:443",](https://onprem.internal:443",)
+  "URL": "https://onprem.internal:443",
   "Authentication": "OAuth2SAMLBearerAssertion",
   "ProxyType": "OnPremise",
   "chainConfig": {

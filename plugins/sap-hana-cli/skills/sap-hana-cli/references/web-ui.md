@@ -178,7 +178,7 @@ OData and REST endpoints include Swagger UI:
 
 ```bash
 # Access API documentation
-[http://localhost:3010/api-docs](http://localhost:3010/api-docs)
+http://localhost:3010/api-docs
 ```
 
 ### GraphQL Endpoint
@@ -186,7 +186,7 @@ OData and REST endpoints include Swagger UI:
 GraphQL support available at:
 
 ```bash
-[http://localhost:3010/graphql](http://localhost:3010/graphql)
+http://localhost:3010/graphql
 ```
 
 ---

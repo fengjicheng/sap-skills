@@ -228,7 +228,7 @@ Call external HTTP APIs.
 
 **Configuration**:
 ```
-URL: [https://api.example.com/endpoint](https://api.example.com/endpoint)
+URL: https://api.example.com/endpoint
 Method: POST
 Headers:
   Content-Type: application/json

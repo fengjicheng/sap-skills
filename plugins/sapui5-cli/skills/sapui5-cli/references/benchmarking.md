@@ -59,8 +59,8 @@ brew install hyperfine
 
 **Ubuntu/Debian**:
 ```bash
-# Check [https://github.com/sharkdp/hyperfine/releases](https://github.com/sharkdp/hyperfine/releases) for latest version
-wget [https://github.com/sharkdp/hyperfine/releases/download/v1.18.0/hyperfine_1.18.0_amd64.deb](https://github.com/sharkdp/hyperfine/releases/download/v1.18.0/hyperfine_1.18.0_amd64.deb)
+# Check https://github.com/sharkdp/hyperfine/releases for latest version
+wget https://github.com/sharkdp/hyperfine/releases/download/v1.18.0/hyperfine_1.18.0_amd64.deb
 sudo dpkg -i hyperfine_1.18.0_amd64.deb
 ```
 
@@ -101,7 +101,7 @@ hyperfine --version
 
 **Clone Sample App**:
 ```bash
-git clone [https://github.com/SAP/openui5-sample-app.git](https://github.com/SAP/openui5-sample-app.git)
+git clone https://github.com/SAP/openui5-sample-app.git
 cd openui5-sample-app
 npm install
 ```
@@ -120,8 +120,8 @@ For testing UI5 CLI changes:
 **Clone and Link UI5 CLI**:
 ```bash
 # Clone repositories
-git clone [https://github.com/SAP/ui5-cli.git](https://github.com/SAP/ui5-cli.git)
-git clone [https://github.com/SAP/ui5-builder.git](https://github.com/SAP/ui5-builder.git)
+git clone https://github.com/SAP/ui5-cli.git
+git clone https://github.com/SAP/ui5-builder.git
 
 # Install and link
 cd ui5-cli

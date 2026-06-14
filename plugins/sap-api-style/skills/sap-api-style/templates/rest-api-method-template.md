@@ -251,7 +251,7 @@ Additional method-specific headers:
 | Content-Type | Media type of response body | `application/json` |
 | X-Total-Count | Total available records (for paginated responses) | `5000` |
 | X-RateLimit-Remaining | API calls remaining in rate limit window | `998` |
-| Location | URL of created/modified resource (201, 200 responses) | `[https://api.example.com/v1/employees/E12346`](https://api.example.com/v1/employees/E12346`) |
+| Location | URL of created/modified resource (201, 200 responses) | `https://api.example.com/v1/employees/E12346` |
 | ETag | Entity tag for caching and optimistic locking | `"abc123def456"` |
 
 ### Response Body
@@ -383,7 +383,7 @@ ETag: "abc123def456"
 ```http
 HTTP/1.1 201 Created
 Content-Type: application/json
-Location: [https://api.example.com/v1/employees/E12346](https://api.example.com/v1/employees/E12346)
+Location: https://api.example.com/v1/employees/E12346
 
 {
   "employeeId": "E12346",

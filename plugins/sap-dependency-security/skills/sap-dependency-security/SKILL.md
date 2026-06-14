@@ -34,6 +34,15 @@ Manage SAP dependency security and upgrades with supply chain protection, compat
 - Pinning or reviewing SAP MCP servers in `.mcp.json`
 - Reviewing SAP CAP, UI5/Fiori, HANA, Datasphere, SAC, SAP Cloud SDK, BTP/CF/mbt, or ABAP/gCTS dependency workflows
 
+## Common Issues
+
+| Issue | Recommended response |
+|-------|----------------------|
+| Floating MCP package or `@latest` in `.mcp.json` | Replace with an exact version or approved source commit and run `npm run validate:mcp-security`. |
+| Lockfile changed unexpectedly | Review package manager config, block lifecycle scripts, and regenerate only after dependency intent is clear. |
+| Dependency is too new for cooldown policy | Hold the upgrade unless a documented security exception justifies immediate adoption. |
+| Tenant-connected tool changed source | Verify the source URL, commit, and build steps before using credentials. |
+
 ## Two Modes of Operation
 
 **Interactive** — Walk through setup questions to generate tailored config. Use for fresh setup.

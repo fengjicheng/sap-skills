@@ -611,7 +611,7 @@ x-sap-stateInfo:
   deprecationDate: "YYYY-MM-DD"
   successorApi: "NewAPIName"
   plannedDecommissionDate: "YYYY-MM-DD"
-  moreInformation: "[https://help.sap.com/..."](https://help.sap.com/...")
+  moreInformation: "https://help.sap.com/..."
 ```
 
 **State Values**:
@@ -633,7 +633,7 @@ x-sap-stateInfo:
 # Beta API
 x-sap-stateInfo:
   state: "beta"
-  moreInformation: "[https://api.sap.com/feedback/employee-central-v2"](https://api.sap.com/feedback/employee-central-v2")
+  moreInformation: "https://api.sap.com/feedback/employee-central-v2"
 
 # Deprecated API
 x-sap-stateInfo:
@@ -641,7 +641,7 @@ x-sap-stateInfo:
   deprecationDate: "2024-01-15"
   successorApi: "Employee Central v2"
   plannedDecommissionDate: "2025-01-15"
-  moreInformation: "[https://help.sap.com/migration-guide"](https://help.sap.com/migration-guide")
+  moreInformation: "https://help.sap.com/migration-guide"
 ```
 
 #### Complete Info Object Example
@@ -660,12 +660,12 @@ info:
 
   contact:
     name: "SAP SuccessFactors Support"
-    url: "[https://help.sap.com/successfactors"](https://help.sap.com/successfactors")
+    url: "https://help.sap.com/successfactors"
     email: "support@sap.com"
 
   license:
     name: "SAP Developer License"
-    url: "[https://www.sap.com/legal"](https://www.sap.com/legal")
+    url: "https://www.sap.com/legal"
 
   x-sap-stateInfo:
     state: "active"
@@ -1645,8 +1645,8 @@ components:
       description: "OAuth 2.0 Client Credentials flow for server-to-server authentication"
       flows:
         clientCredentials:
-          tokenUrl: "[https://auth.sap.com/oauth/token"](https://auth.sap.com/oauth/token")
-          refreshUrl: "[https://auth.sap.com/oauth/refresh"](https://auth.sap.com/oauth/refresh")
+          tokenUrl: "https://auth.sap.com/oauth/token"
+          refreshUrl: "https://auth.sap.com/oauth/refresh"
           scopes:
             "employees:read": "Read employee data"
             "employees:write": "Create/modify employee data"
@@ -1695,7 +1695,7 @@ components:
   securitySchemes:
     OpenIDConnect:
       type: openIdConnect
-      openIdConnectUrl: "[https://auth.sap.com/.well-known/openid-configuration"](https://auth.sap.com/.well-known/openid-configuration")
+      openIdConnectUrl: "https://auth.sap.com/.well-known/openid-configuration"
       description: "OpenID Connect authentication for enterprise environments"
 ```
 
@@ -1734,7 +1734,7 @@ paths:
 
 ```
 "OAuth 2.0 Client Credentials flow for server-to-server authentication.
-Obtain access token from [https://auth.sap.com/oauth/token](https://auth.sap.com/oauth/token) using your client credentials.
+Obtain access token from https://auth.sap.com/oauth/token using your client credentials.
 Include token in Authorization header: Authorization: Bearer <token>"
 ```
 
@@ -1767,13 +1767,13 @@ tags:
     description: "Operations for managing employee records including creation, retrieval, updates, and deletions"
     externalDocs:
       description: "Employee Management Guide"
-      url: "[https://help.sap.com/employees"](https://help.sap.com/employees")
+      url: "https://help.sap.com/employees"
 
   - name: "Departments"
     description: "Operations for querying and managing department structures and assignments"
     externalDocs:
       description: "Organization Guide"
-      url: "[https://help.sap.com/departments"](https://help.sap.com/departments")
+      url: "https://help.sap.com/departments"
 
   - name: "Compensation"
     description: "Operations for managing salary, benefits, and compensation-related data"
@@ -1900,7 +1900,7 @@ tags:
 ```yaml
 externalDocs:
   description: "Complete API documentation and guides"
-  url: "[https://help.sap.com/employee-central"](https://help.sap.com/employee-central")
+  url: "https://help.sap.com/employee-central"
 ```
 
 #### 2. Operation-Level External Documentation
@@ -1915,7 +1915,7 @@ paths:
     post:
       externalDocs:
         description: "Step-by-step guide to onboarding new employees"
-        url: "[https://help.sap.com/guides/employee-onboarding"](https://help.sap.com/guides/employee-onboarding")
+        url: "https://help.sap.com/guides/employee-onboarding"
 ```
 
 ### External Documentation Best Practices
@@ -1924,26 +1924,26 @@ paths:
 
 ```
 Description: "Employee creation workflow"
-URL: "[https://help.sap.com/employee-central/guide/create-employee"](https://help.sap.com/employee-central/guide/create-employee")
+URL: "https://help.sap.com/employee-central/guide/create-employee"
 
 Description: "API rate limiting and quotas"
-URL: "[https://help.sap.com/employee-central/guide/rate-limits"](https://help.sap.com/employee-central/guide/rate-limits")
+URL: "https://help.sap.com/employee-central/guide/rate-limits"
 
 Description: "Error codes and troubleshooting"
-URL: "[https://help.sap.com/employee-central/guide/errors"](https://help.sap.com/employee-central/guide/errors")
+URL: "https://help.sap.com/employee-central/guide/errors"
 ```
 
 #### ❌ Poor Links
 
 ```
 Description: "Documentation"                          # Too vague
-URL: "[https://help.sap.com"](https://help.sap.com")                          # Root-level, not specific
+URL: "https://help.sap.com"                          # Root-level, not specific
 
 Description: "Click here"                             # Not descriptive
-URL: "[https://help.sap.com/some-page"](https://help.sap.com/some-page")               # No context
+URL: "https://help.sap.com/some-page"               # No context
 
 Description: "Employee API"                           # Obvious
-URL: "[https://help.sap.com/different-product"](https://help.sap.com/different-product")       # Wrong product
+URL: "https://help.sap.com/different-product"       # Wrong product
 ```
 
 ### Common External Documentation Topics
@@ -1978,14 +1978,14 @@ info:
 
   contact:
     name: "SAP Support"
-    url: "[https://help.sap.com"](https://help.sap.com")
+    url: "https://help.sap.com"
 
 externalDocs:
   description: "Employee Central Guide"
-  url: "[https://help.sap.com/employee-central"](https://help.sap.com/employee-central")
+  url: "https://help.sap.com/employee-central"
 
 servers:
-  - url: "[https://api.sap.com/employeecentral"](https://api.sap.com/employeecentral")
+  - url: "https://api.sap.com/employeecentral"
     description: "Production environment"
 
 components:
@@ -1994,7 +1994,7 @@ components:
       type: oauth2
       flows:
         clientCredentials:
-          tokenUrl: "[https://auth.sap.com/oauth/token"](https://auth.sap.com/oauth/token")
+          tokenUrl: "https://auth.sap.com/oauth/token"
           scopes:
             "employees:read": "Read employee data"
             "employees:write": "Create/modify employee data"
@@ -2211,10 +2211,10 @@ info:
 
 externalDocs:
   description: "Purchase Order Documentation"
-  url: "[https://help.sap.com/purchase-orders"](https://help.sap.com/purchase-orders")
+  url: "https://help.sap.com/purchase-orders"
 
 servers:
-  - url: "[https://api.sap.com/s4hana/odata/v4/purchaseorders"](https://api.sap.com/s4hana/odata/v4/purchaseorders")
+  - url: "https://api.sap.com/s4hana/odata/v4/purchaseorders"
     description: "S/4HANA OData v4 endpoint"
 
 components:
@@ -2711,11 +2711,11 @@ Operation Summary: "Creates a new order"
 ```
 ❌ externalDocs:
     description: "Documentation"
-    url: "[https://help.sap.com"](https://help.sap.com")
+    url: "https://help.sap.com"
 
 ✅ externalDocs:
     description: "Employee onboarding workflow guide"
-    url: "[https://help.sap.com/guides/employee-onboarding"](https://help.sap.com/guides/employee-onboarding")
+    url: "https://help.sap.com/guides/employee-onboarding"
 ```
 
 ---

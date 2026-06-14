@@ -330,7 +330,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 | Header Name | Description | Possible Values |
 |---|---|---|
 | Content-Type | Response body media type | application/json |
-| Location | URL of created/modified resource | [https://api.example.com/odata/v4/Employees('E12346](https://api.example.com/odata/v4/Employees('E12346)') |
+| Location | URL of created/modified resource | https://api.example.com/odata/v4/Employees('E12346') |
 | ETag | Entity tag for caching and concurrency control | "abc123def456" |
 | OData-Version | OData protocol version used | 4.0 |
 | Preference-Applied | Which Prefer preference was applied | return=representation, return=minimal |
@@ -475,7 +475,7 @@ OData-Version: 4.0
 ```http
 HTTP/1.1 201 Created
 Content-Type: application/json
-Location: [https://api.example.com/odata/v4/Employees('E12346](https://api.example.com/odata/v4/Employees('E12346)')
+Location: https://api.example.com/odata/v4/Employees('E12346')
 ETag: "def789ghi123"
 OData-Version: 4.0
 

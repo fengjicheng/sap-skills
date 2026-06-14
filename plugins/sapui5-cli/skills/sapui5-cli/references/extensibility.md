@@ -333,7 +333,7 @@ server:
       mountPath: /api                     # Optional: only handle /api/* requests
       afterMiddleware: compression        # Ordering
       configuration:                      # Custom configuration
-        target: [https://api.example.com](https://api.example.com)
+        target: https://api.example.com
         pathRewrite:
           "^/api": ""
 

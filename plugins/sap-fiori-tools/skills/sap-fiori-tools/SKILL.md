@@ -9,7 +9,7 @@ description: |
   Technologies: SAP Fiori Elements, SAPUI5, OData V2/V4, CAP, SAP BTP, ABAP, Cloud Foundry, fiori-mcp-server (MCP tools for AI-assisted generation).
 license: GPL-3.0
 metadata:
-  version: "1.0.1"
+  version: "2.3.0"
   last_verified: "2026-02-26"
 ---
 
@@ -23,6 +23,10 @@ metadata:
 - **sap-btp-cloud-platform**: Use for deployment targets, BTP destination configuration, and Cloud Foundry deployment
 - **sap-api-style**: Use when documenting OData APIs or following API documentation standards for Fiori apps
 - **sap-dependency-security**: Use when tightening npm/JavaScript supply-chain controls, exact MCP server pins, and dependency updates
+
+## When to Use This Skill
+
+Use this skill when generating Fiori Elements or Freestyle SAPUI5 applications, configuring Page Editor/List Report/Object Page behavior, editing annotations, previewing with mock or live data, deploying to ABAP or Cloud Foundry, building adaptation projects, or using Fiori MCP/generation tooling.
 
 Comprehensive guidance for developing SAP Fiori applications using SAP Fiori tools extensions.
 
@@ -67,7 +71,7 @@ Official SAP sample repository with Fiori Elements applications built using SAP 
 
 **Quick Start**:
 ```bash
-git clone [https://github.com/SAP-samples/fiori-tools-samples](https://github.com/SAP-samples/fiori-tools-samples)
+git clone https://github.com/SAP-samples/fiori-tools-samples
 cd fiori-tools-samples/V4/apps/salesorder
 npm install
 npm start

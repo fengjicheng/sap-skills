@@ -79,7 +79,7 @@ go.bat   # Windows
 ### Access Administration UI
 
 ```
-URL: [https://<hostname>:8443](https://<hostname>:8443)
+URL: https://<hostname>:8443
 Default Port: 8443 (HTTPS)
 ```
 
@@ -311,7 +311,7 @@ Cloud Connector exposes REST APIs for external monitoring tools:
 
 **Via REST API:**
 ```bash
-curl -X GET "[https://localhost:8443/api/v1/configuration/backup"](https://localhost:8443/api/v1/configuration/backup") \
+curl -X GET "https://localhost:8443/api/v1/configuration/backup" \
   -H "Authorization: Basic <credentials>" \
   --output backup.zip
 ```

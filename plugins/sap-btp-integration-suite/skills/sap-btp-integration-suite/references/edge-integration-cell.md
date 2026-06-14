@@ -303,7 +303,7 @@ kubectl get pv,pvc -n sap-integration
 # Test outbound connectivity
 kubectl run -it --rm test --image=curlimages/curl \
   --restart=Never -n sap-integration -- \
-  curl -v [https://your-btp-url.hana.ondemand.com](https://your-btp-url.hana.ondemand.com)
+  curl -v https://your-btp-url.hana.ondemand.com
 ```
 
 **Documentation**: [https://github.com/SAP-docs/sap-btp-integration-suite/blob/main/docs/ISuite/troubleshooting-for-edge-integration-cell-816d9e4.md](https://github.com/SAP-docs/sap-btp-integration-suite/blob/main/docs/ISuite/troubleshooting-for-edge-integration-cell-816d9e4.md)

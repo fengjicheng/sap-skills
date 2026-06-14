@@ -46,7 +46,7 @@ cds watch mtx/sidecar
 cds watch --with-mtx
 
 # Terminal 3: Subscribe tenant
-curl -X PUT [http://localhost:4005/-/cds/saas-provisioning/tenant/t1](http://localhost:4005/-/cds/saas-provisioning/tenant/t1)
+curl -X PUT http://localhost:4005/-/cds/saas-provisioning/tenant/t1
 ```
 
 ### Configuration
@@ -159,7 +159,7 @@ cds add extensibility
 
 **1. Pull Base Model:**
 ```sh
-cds pull --from [https://my-saas-app.cfapps.eu10.hana.ondemand.com](https://my-saas-app.cfapps.eu10.hana.ondemand.com) -u developer:
+cds pull --from https://my-saas-app.cfapps.eu10.hana.ondemand.com -u developer:
 npm install
 ```
 
@@ -185,12 +185,12 @@ cds watch --port 4006
 
 **4. Push to Test Tenant:**
 ```sh
-cds push --to [https://my-saas-app.cfapps.eu10.hana.ondemand.com](https://my-saas-app.cfapps.eu10.hana.ondemand.com) -u test-dev:
+cds push --to https://my-saas-app.cfapps.eu10.hana.ondemand.com -u test-dev:
 ```
 
 **5. Push to Production:**
 ```sh
-cds push --to [https://my-saas-app.cfapps.eu10.hana.ondemand.com](https://my-saas-app.cfapps.eu10.hana.ondemand.com) -u prod-user:
+cds push --to https://my-saas-app.cfapps.eu10.hana.ondemand.com -u prod-user:
 ```
 
 ### Extension Types
@@ -238,7 +238,7 @@ annotate AdminService.Books with @UI.LineItem: [
 
 ```sh
 # Login and store credentials
-cds login [https://my-saas-app.cfapps.eu10.hana.ondemand.com](https://my-saas-app.cfapps.eu10.hana.ondemand.com)
+cds login https://my-saas-app.cfapps.eu10.hana.ondemand.com
 
 # Subsequent commands use stored credentials
 cds pull

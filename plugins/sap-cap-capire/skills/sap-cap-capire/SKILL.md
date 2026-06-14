@@ -8,7 +8,7 @@ description: |
   Node.js and Java runtimes, event handlers, OData services, and CAP plugins.
 license: GPL-3.0
 metadata:
-  version: "2.1.2"
+  version: "2.3.0"
   last_verified: "2026-02-22"
   cap_version: "@sap/cds 9.7.x"
   mcp_version: "@cap-js/mcp-server 0.0.5"
@@ -30,6 +30,19 @@ metadata:
 - **sap-cloud-sdk-ai-python**: Use for Python-based AI integration with CAP Java or standalone BTP services
 - **sap-api-style**: Use when documenting CAP OData services or following API documentation standards
 - **sap-dependency-security**: Use for secure dependency, lockfile, supply-chain, and exact MCP server pin controls in CAP service repos
+
+## When to Use This Skill
+
+Use this skill when creating CAP projects, modeling CDS entities/services, implementing Node.js or Java event handlers, configuring HANA/SQLite/PostgreSQL persistence, deploying to BTP Cloud Foundry or Kyma, adding Fiori UIs, configuring authorization/multitenancy/messaging, or using CAP MCP/LSP tooling.
+
+## Common Issues
+
+| Issue | First check |
+|-------|-------------|
+| `cds watch` or `cds serve` fails | Verify `@sap/cds-dk`, Node.js version, and project `package.json` scripts. |
+| Entity/service not found | Use CAP MCP `search_model` when available, then inspect `db/` and `srv/` CDS files. |
+| HANA deployment fails | Check HDI service binding, `mta.yaml`, and the HANA deployment references. |
+| Authorization behaves unexpectedly | Review `@requires`, `@restrict`, XSUAA/IAS bindings, and user role mappings. |
 
 ## Table of Contents
 - [Quick Start](#quick-start)

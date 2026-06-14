@@ -344,7 +344,7 @@ srv:
       service: srv
     ui5:
       external: true
-      url: [https://ui5.sap.com](https://ui5.sap.com)
+      url: https://ui5.sap.com
 ```
 
 ---

@@ -79,7 +79,7 @@ my-app/
 ```
 Source:  webapp/controller/Main.controller.js
 Runtime: /controller/Main.controller.js
-URL:     [http://localhost:8080/controller/Main.controller.js](http://localhost:8080/controller/Main.controller.js)
+URL:     http://localhost:8080/controller/Main.controller.js
 ```
 
 ### Component Requirement
@@ -196,11 +196,11 @@ src/my/company/library/
 ```
 Source:  src/my/company/library/Component1.js
 Runtime: /resources/my/company/library/Component1.js
-URL:     [http://localhost:8080/resources/my/company/library/Component1.js](http://localhost:8080/resources/my/company/library/Component1.js)
+URL:     http://localhost:8080/resources/my/company/library/Component1.js
 
 Test:    test/my/company/library/qunit/Component1.qunit.html
 Runtime: /test-resources/my/company/library/qunit/Component1.qunit.html
-URL:     [http://localhost:8080/test-resources/my/company/library/qunit/Component1.qunit.html](http://localhost:8080/test-resources/my/company/library/qunit/Component1.qunit.html)
+URL:     http://localhost:8080/test-resources/my/company/library/qunit/Component1.qunit.html
 ```
 
 ### library.js (Required)
@@ -243,7 +243,7 @@ XML library metadata.
 **Example**:
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
-<library xmlns="[http://www.sap.com/sap.ui.library.xsd">](http://www.sap.com/sap.ui.library.xsd">)
+<library xmlns="http://www.sap.com/sap.ui.library.xsd">
     <name>my.company.library</name>
     <vendor>My Company</vendor>
     <version>1.0.0</version>
@@ -256,7 +256,7 @@ XML library metadata.
     </dependencies>
 
     <appData>
-        <packaging xmlns="[http://www.sap.com/ui5/buildext/packaging"](http://www.sap.com/ui5/buildext/packaging")
+        <packaging xmlns="http://www.sap.com/ui5/buildext/packaging"
                    version="2.0">
             <module-infos>
                 <module-info name="my/company/library/library-preload.js"

@@ -172,7 +172,7 @@ Track platform events and send notifications to external applications.
 ### Webhook URL Format
 
 ```
-[https://<host-url>/api/v2/ai/webhook](https://<host-url>/api/v2/ai/webhook)
+https://<host-url>/api/v2/ai/webhook
 ```
 
 ### Configuration

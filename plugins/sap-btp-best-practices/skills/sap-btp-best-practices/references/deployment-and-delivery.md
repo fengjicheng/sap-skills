@@ -395,12 +395,12 @@ node {
 
 ```bash
 # Using Cloud Transport Management API
-curl -X POST "[https://[ctms-url]/v2/files/upload"](https://[ctms-url]/v2/files/upload") \
+curl -X POST "https://[ctms-url]/v2/files/upload" \
   -H "Authorization: Bearer $TOKEN" \
   -F "file=@my-app.mtar"
 
 # Create transport request
-curl -X POST "[https://[ctms-url]/v2/nodes/[node-id]/transportRequests"](https://[ctms-url]/v2/nodes/[node-id]/transportRequests") \
+curl -X POST "https://[ctms-url]/v2/nodes/[node-id]/transportRequests" \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"fileId": "[file-id]", "description": "Deploy version 1.0.0"}'

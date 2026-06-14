@@ -183,9 +183,9 @@ Required for programmatic/API access.
     "uaa": {
         "clientid": "sb-xxxxxx",
         "clientsecret": "xxxxxx",
-        "url": "[https://<domain>.authentication.sap.hana.ondemand.com"](https://<domain>.authentication.sap.hana.ondemand.com")
+        "url": "https://<domain>.authentication.sap.hana.ondemand.com"
     },
-    "uri": "[https://transport-service-app-backend.ts.cfapps.sap.hana.ondemand.com"](https://transport-service-app-backend.ts.cfapps.sap.hana.ondemand.com")
+    "uri": "https://transport-service-app-backend.ts.cfapps.sap.hana.ondemand.com"
 }
 ```
 

@@ -2,7 +2,7 @@
 
 **Source**: [https://github.com/UI5/linter/blob/main/SUPPORT.md](https://github.com/UI5/linter/blob/main/SUPPORT.md)
 **Last Updated**: 2025-11-21
-**UI5 Linter Version**: 1.21.1
+**UI5 Linter Version**: 1.22.0
 
 ---
 
@@ -79,7 +79,7 @@ export default {
 ```
 
 ## Environment
-- UI5 Linter: 1.21.1
+- UI5 Linter: 1.22.0
 - Node.js: 20.11.0
 - OS: Windows 11
 
@@ -137,7 +137,7 @@ export default {
 };
 ```
 
-UI5 Linter: 1.21.1
+UI5 Linter: 1.22.0
 Node: 20.11.0
 
 Any ideas? 🤔
@@ -363,7 +363,7 @@ Use ignore patterns, lint specific directories, and check benchmarks.
 ### Step 2: Search Existing Issues
 
 ```
-[https://github.com/UI5/linter/issues?q=is%3Aissue+YOUR+SEARCH+TERMS](https://github.com/UI5/linter/issues?q=is%3Aissue+YOUR+SEARCH+TERMS)
+https://github.com/UI5/linter/issues?q=is%3Aissue+YOUR+SEARCH+TERMS
 ```
 
 **Common Searches**:

@@ -215,10 +215,10 @@ Bind external services
 
 ```sh
 # Bind to external OData service
-cds bind ExternalService --to [https://api.example.com](https://api.example.com)
+cds bind ExternalService --to https://api.example.com
 
 # Bind with credentials
-cds bind ExternalService --to-cred '{"url":"[https://api.example.com"}'](https://api.example.com"}')
+cds bind ExternalService --to-cred '{"url":"https://api.example.com"}'
 ```
 
 ### cds tunnel
@@ -334,7 +334,7 @@ cds watch --profile development,hana
 export CDS_requires_db_credentials_url=postgresql://user:pass@host:5432/db
 
 # Set service bindings
-export CDS_requires_myService_credentials='{"url":"[https://api.example.com"}'](https://api.example.com"}')
+export CDS_requires_myService_credentials='{"url":"https://api.example.com"}'
 
 # Set profile
 export NODE_ENV=production
@@ -455,7 +455,7 @@ npm install @cap-js/graphql
 # Run GraphQL server
 cds watch --graphql
 
-# GraphQL endpoint: [http://localhost:4004/graphql](http://localhost:4004/graphql)
+# GraphQL endpoint: http://localhost:4004/graphql
 ```
 
 ### Fiori Tools

@@ -85,7 +85,7 @@ curl -X GET "${destinationUri}/destination-configuration/v1/subaccountDestinatio
   {
     "Name": "my-destination",
     "Type": "HTTP",
-    "URL": "[https://api.example.com",](https://api.example.com",)
+    "URL": "https://api.example.com",
     "Authentication": "OAuth2ClientCredentials",
     "ProxyType": "Internet"
   }
@@ -112,7 +112,7 @@ curl -X POST "${destinationUri}/destination-configuration/v1/subaccountDestinati
   -d '{
     "Name": "new-destination",
     "Type": "HTTP",
-    "URL": "[https://api.example.com",](https://api.example.com",)
+    "URL": "https://api.example.com",
     "Authentication": "BasicAuthentication",
     "ProxyType": "Internet",
     "User": "username",
@@ -131,7 +131,7 @@ curl -X PUT "${destinationUri}/destination-configuration/v1/subaccountDestinatio
   -d '{
     "Name": "my-destination",
     "Type": "HTTP",
-    "URL": "[https://api.updated.example.com",](https://api.updated.example.com",)
+    "URL": "https://api.updated.example.com",
     "Authentication": "BasicAuthentication",
     "ProxyType": "Internet",
     "User": "newuser",
@@ -188,7 +188,7 @@ curl -X GET "${destinationUri}/destination-configuration/v1/destinations/my-dest
   "destinationConfiguration": {
     "Name": "my-destination",
     "Type": "HTTP",
-    "URL": "[https://api.example.com",](https://api.example.com",)
+    "URL": "https://api.example.com",
     "Authentication": "OAuth2ClientCredentials",
     "ProxyType": "Internet",
     "clientId": "...",
@@ -332,7 +332,7 @@ curl -X POST "${destinationUri}/destination-configuration/v1/subscriptionDestina
   -d '{
     "Name": "tenant-destination",
     "Type": "HTTP",
-    "URL": "[https://tenant-api.example.com",](https://tenant-api.example.com",)
+    "URL": "https://tenant-api.example.com",
     "Authentication": "BasicAuthentication",
     "User": "tenant-user",
     "Password": "tenant-password"

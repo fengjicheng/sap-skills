@@ -299,7 +299,7 @@ Configure user access:
 ### Service URL Pattern
 
 ```
-[https://<tenant>.integrationsuite.cfapps.<region>.hana.ondemand.com](https://<tenant>.integrationsuite.cfapps.<region>.hana.ondemand.com)
+https://<tenant>.integrationsuite.cfapps.<region>.hana.ondemand.com
   /odata/v4/<service-name>/<entity-set>
 ```
 

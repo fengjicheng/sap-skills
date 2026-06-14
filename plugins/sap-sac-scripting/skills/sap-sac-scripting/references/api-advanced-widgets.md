@@ -257,7 +257,7 @@ NavigationUtils.openStory("STORY_ID", {
 });
 
 // Open URL
-NavigationUtils.openUrl("[https://example.com",](https://example.com",) true);  // true = new window
+NavigationUtils.openUrl("https://example.com", true);  // true = new window
 ```
 
 ### Create Application URL with Parameters

@@ -119,7 +119,7 @@ C4C does not support reflexive partner functions (sold to party, ship to party, 
 
 **Solution**: Upload partner determination configuration via REST API
 
-**Endpoint**: `POST [https://one-mds.cfapps.{region}.hana.ondemand.com/businesspartner/v0/configuration/ConfigurationUpload`](https://one-mds.cfapps.{region}.hana.ondemand.com/businesspartner/v0/configuration/ConfigurationUpload`)
+**Endpoint**: `POST `https://one-mds.cfapps.{region}.hana.ondemand.com/businesspartner/v0/configuration/ConfigurationUpload`
 
 **Template**: SAP Note 2987243
 

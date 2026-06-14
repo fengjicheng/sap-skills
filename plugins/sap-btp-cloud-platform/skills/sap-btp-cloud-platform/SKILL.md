@@ -3,9 +3,9 @@ name: sap-btp-cloud-platform
 description: "Comprehensive SAP Business Technology Platform (BTP) reference for cloud development, deployment, and operations. Use when setting up BTP accounts, working with Cloud Foundry environment, deploying to Kyma (Kubernetes, serverless), developing in ABAP environment (RAP, CDS), managing entitlements and quotas, configuring identity providers (XSUAA), using btp CLI or CF CLI, deploying multi-target applications (MTA), setting up connectivity (destinations, Cloud Connector), implementing CI/CD pipelines, extending SAP solutions, or troubleshooting BTP services. Covers all three runtime environments."
 license: GPL-3.0
 metadata:
-  version: "1.1.0"
+  version: "2.3.0"
   last_verified: "2025-11-27"
-  source: "[https://github.com/SAP-docs/sap-btp-cloud-platform"](https://github.com/SAP-docs/sap-btp-cloud-platform")
+  source: "https://github.com/SAP-docs/sap-btp-cloud-platform"
   keywords: [SAP BTP, Business Technology Platform, Cloud Foundry, Kyma, ABAP environment, subaccount, global account, entitlements, btp CLI, CF CLI, MTA, multi-target application, XSUAA, Cloud Identity Services, destinations, Cloud Connector, service binding, Kubernetes, serverless, RAP, CDS, CAP, CI/CD, extensions, trial account, free tier, enterprise account, CPEA, BTPEA, role collections, Neo environment, Helm, Docker, Istio, API Gateway, Eventing]
 ---
 
@@ -20,6 +20,18 @@ metadata:
 - **sap-abap**: Use when working with ABAP Environment on BTP or extending S/4HANA Cloud
 - **sap-btp-connectivity**: Use for setting up secure connections to on-premise systems via Cloud Connector
 - **sap-btp-service-manager**: Use for programmatic service instance management on BTP
+
+## When to Use This Skill
+
+Use this skill when setting up or operating SAP BTP accounts, directories, subaccounts, Cloud Foundry, Kyma, ABAP Environment, entitlements, quotas, role collections, CLI tooling, MTA deployments, connectivity, CI/CD, extensions, or platform troubleshooting.
+
+## Quick Start
+
+1. Identify the target commercial account type, region, and subaccount.
+2. Enable the runtime environment: Cloud Foundry, Kyma, ABAP Environment, or trial/free tier.
+3. Configure identity, roles, entitlements, and quotas before deploying workloads.
+4. Use `btp` and `cf` CLI examples in [Tools](#8-tools) for repeatable setup.
+5. Switch to related skills for implementation depth: `sap-cap-capire`, `sap-fiori-tools`, `sap-btp-connectivity`, or `sap-btp-service-manager`.
 
 Comprehensive reference for SAP Business Technology Platform covering all runtime environments, account management, security, and operations.
 
@@ -83,7 +95,7 @@ SAP BTP offers four runtime environments at the subaccount level:
 ### Cloud Foundry Environment
 Open PaaS with polyglot support. Features: multiple buildpacks (Java, Node.js, Python, Go, PHP), spaces for separation, auto-scaling, SAP HANA integration.
 ```bash
-cf login -a [https://api.cf.<region>.hana.ondemand.com](https://api.cf.<region>.hana.ondemand.com)
+cf login -a https://api.cf.<region>.hana.ondemand.com
 cf push my-app
 cf bind-service my-app my-service-instance
 ```
@@ -199,13 +211,13 @@ Application/Service Access
 ### Essential CLI Commands
 ```bash
 # btp CLI
-btp login --url [https://cpcli.cf.<region>.hana.ondemand.com](https://cpcli.cf.<region>.hana.ondemand.com)
+btp login --url https://cpcli.cf.<region>.hana.ondemand.com
 btp list accounts/subaccount
 btp create accounts/subaccount --display-name "Dev"
 btp assign security/role-collection "Subaccount Administrator" --to-user user@example.com
 
 # CF CLI
-cf login -a [https://api.cf.<region>.hana.ondemand.com](https://api.cf.<region>.hana.ondemand.com)
+cf login -a https://api.cf.<region>.hana.ondemand.com
 cf target -o my-org -s my-space
 cf push my-app
 cf bind-service my-app my-service

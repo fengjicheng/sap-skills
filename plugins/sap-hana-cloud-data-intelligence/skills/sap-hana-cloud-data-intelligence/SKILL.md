@@ -4,11 +4,18 @@ description: |
   Develops data processing pipelines, integrations, and machine learning scenarios in SAP Data Intelligence Cloud. Use when building graphs/pipelines with operators, integrating ABAP/S4HANA systems, creating replication flows, developing ML scenarios with JupyterLab, or using Data Transformation Language functions. Covers Gen1/Gen2 operators, subengines (Python, Node.js, C++), structured data operators, and repository objects.
 license: GPL-3.0
 metadata:
-  version: "1.0.0"
+  version: "2.3.0"
   last_verified: "2025-11-27"
 ---
 
 # SAP HANA Cloud Data Intelligence Skill
+
+## Related Skills
+
+- **sap-hana-ml**: Use for Python ML client workflows that run against SAP HANA
+- **sap-datasphere**: Use for Datasphere modeling, replication, and analytics data warehousing
+- **sap-btp-connectivity**: Use for cloud-to-on-premise connection and destination prerequisites
+- **sap-btp-integration-suite**: Use for integration scenarios that should move out of Data Intelligence pipelines
 
 This skill provides comprehensive guidance for developing with SAP Data Intelligence Cloud, including pipeline creation, operator development, data integration, and machine learning scenarios.
 
@@ -32,6 +39,14 @@ Use this skill when:
 - Using Data Transformation Language (DTL) functions
 - Configuring subengines (Python, Node.js, C++)
 - Working with structured data operators
+
+## Common Issues
+
+| Issue | First check |
+|-------|-------------|
+| Graph fails after operator change | Confirm all operators use the same generation and compatible subengine. |
+| ABAP/S4HANA connection fails | Verify Cloud Connector, destination, and credential configuration. |
+| Python or Node operator behaves differently in runtime | Check subengine version, package availability, and serialization boundaries. |
 
 ## Core Concepts
 

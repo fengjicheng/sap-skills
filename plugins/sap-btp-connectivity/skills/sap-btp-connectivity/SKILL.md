@@ -3,7 +3,7 @@ name: sap-btp-connectivity
 description: "SAP BTP Connectivity skill covering Destination Service, Connectivity Service, Cloud Connector, Connectivity Proxy, and Transparent Proxy for Kubernetes. Use when configuring destinations (HTTP, RFC, LDAP, MAIL, TCP), setting up cloud-to-on-premise connectivity, implementing OAuth and principal propagation, deploying connectivity proxies in Kubernetes/Kyma, troubleshooting connectivity errors (405, 407, 503), or configuring multitenancy."
 license: GPL-3.0
 metadata:
-  version: "1.1.0"
+  version: "2.3.0"
   last_verified: "2025-11-27"
   keywords: [SAP BTP, Connectivity, Destination Service, Cloud Connector, Connectivity Proxy, Transparent Proxy, Kyma, Kubernetes, OAuth, Principal Propagation, RFC, LDAP, on-premise, hybrid connectivity, service channels, SOCKS5, reverse proxy, tunnel]
 ---
@@ -17,6 +17,10 @@ metadata:
 - **sap-cap-capire**: Use for CAP service connectivity, destination consumption, and secure API access
 - **sap-fiori-tools**: Use for configuring Fiori app destinations and frontend connectivity
 - **sap-abap**: Use when connecting to ABAP systems via RFC or implementing principal propagation
+
+## When to Use This Skill
+
+Use this skill when configuring BTP destinations, Cloud Connector, OAuth flows, principal propagation, RFC/LDAP/MAIL/TCP connectivity, Kubernetes/Kyma connectivity proxies, multitenant destination access, or troubleshooting connectivity errors such as 405, 407, 503, and proxy failures.
 
 ## Table of Contents
 
@@ -63,18 +67,18 @@ SAP BTP Connectivity provides secure access from SAP BTP applications to remote 
    ```
    Name: my-destination
    Type: HTTP
-   URL: [https://api.example.com](https://api.example.com)
+   URL: https://api.example.com
    ProxyType: Internet
    Authentication: OAuth2ClientCredentials
    clientId: <your-client-id>
    clientSecret: <your-client-secret>
-   tokenServiceURL: [https://auth.example.com/oauth/token](https://auth.example.com/oauth/token)
+   tokenServiceURL: https://auth.example.com/oauth/token
    ```
 
 ### Set Up Cloud Connector
 
 1. Download from [SAP Tools](https://tools.hana.ondemand.com/#cloud)
-2. Access: `[https://localhost:8443`](https://localhost:8443`)
+2. Access: `https://localhost:8443`
 3. Login: `Administrator` / `manage` (change immediately)
 4. Add subaccount connection
 
@@ -128,7 +132,7 @@ For on-premise systems accessing SAP BTP services via Cloud Connector.
 Authentication: OAuth2ClientCredentials
 clientId: <client-id>
 clientSecret: <client-secret>
-tokenServiceURL: [https://auth.example.com/oauth/token](https://auth.example.com/oauth/token)
+tokenServiceURL: https://auth.example.com/oauth/token
 ```
 
 ### OAuth2SAMLBearerAssertion (User Propagation)
@@ -136,7 +140,7 @@ tokenServiceURL: [https://auth.example.com/oauth/token](https://auth.example.com
 Authentication: OAuth2SAMLBearerAssertion
 audience: <target-audience>
 clientKey: <client-key>
-tokenServiceURL: [https://auth.example.com/oauth2/token](https://auth.example.com/oauth2/token)
+tokenServiceURL: https://auth.example.com/oauth2/token
 KeyStoreLocation: <certificate-location>
 ```
 
@@ -158,7 +162,7 @@ Requires Cloud Connector X.509 certificate generation.
 - **Development**: Portable archive (manual execution)
 
 ### Initial Configuration
-1. Access UI: `[https://<hostname>:8443`](https://<hostname>:8443`)
+1. Access UI: `https://<hostname>:8443`
 2. Login: `Administrator` / `manage`
 3. **Change password immediately**
 4. Select mode: Master or Shadow
@@ -213,7 +217,7 @@ helm install transparent-proxy \
 |------|-------|----------|
 | **400** | Malformed request | Check request syntax |
 | **401** | Authentication failure | Verify credentials/tokens |
-| **405** | HTTPS instead of HTTP | Use `[http://`](http://`) with port 20003 |
+| **405** | HTTPS instead of HTTP | Use `http://` with port 20003 |
 | **407** | Missing authorization | Add `Proxy-Authorization: Bearer <token>` |
 | **503** | Cloud Connector offline | Check CC connection and Location ID |
 

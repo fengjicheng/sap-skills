@@ -201,7 +201,7 @@ const pipeline = await PipelinesApi.createPipeline(
   {
     type: 'MSSharePoint',
     configuration: {
-      siteUrl: '[https://company.sharepoint.com/sites/docs',](https://company.sharepoint.com/sites/docs',)
+      siteUrl: 'https://company.sharepoint.com/sites/docs',
       clientId: 'client-id',
       clientSecret: 'client-secret',
       tenantId: 'tenant-id'

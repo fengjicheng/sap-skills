@@ -158,7 +158,7 @@ mail.pop3.host: <pop3-server-address>
   "Authentication": "OAuth2ClientCredentials",
   "clientId": "<client-id>",
   "clientSecret": "<client-secret>",
-  "tokenServiceURL": "[https://auth.example.com/oauth/token",](https://auth.example.com/oauth/token",)
+  "tokenServiceURL": "https://auth.example.com/oauth/token",
   "tokenServiceURLType": "Dedicated",
   "mail.smtp.host": "smtp.example.com",
   "mail.smtp.port": "587"
@@ -175,7 +175,7 @@ mail.pop3.host: <pop3-server-address>
   "Authentication": "OAuth2RefreshToken",
   "clientId": "<client-id>",
   "clientSecret": "<client-secret>",
-  "tokenServiceURL": "[https://auth.example.com/oauth/token",](https://auth.example.com/oauth/token",)
+  "tokenServiceURL": "https://auth.example.com/oauth/token",
   "refreshToken": "<refresh-token>",
   "mail.imap4.host": "imap.example.com"
 }

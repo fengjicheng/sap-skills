@@ -192,7 +192,7 @@ Sharing destinations enable direct content transfer between tenants.
 ```yaml
 destination:
   name: production_tenant
-  url: [https://prod.datasphere.cloud.sap](https://prod.datasphere.cloud.sap)
+  url: https://prod.datasphere.cloud.sap
   authentication: OAuth 2.0
   client_id: xxx
   client_secret: xxx
@@ -277,7 +277,7 @@ npm install -g @sap/datasphere-cli
 
 ```bash
 # Login
-datasphere login --url [https://tenant.datasphere.cloud.sap](https://tenant.datasphere.cloud.sap)
+datasphere login --url https://tenant.datasphere.cloud.sap
 
 # Using service key
 datasphere login --service-key key.json

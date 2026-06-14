@@ -168,7 +168,7 @@ Export all data stored by Intelligent Situation Automation.
 ### Export Endpoint
 
 ```
-[https://<subdomain>.<region>.intelligent-situation-automation.cloud.sap/exportdata](https://<subdomain>.<region>.intelligent-situation-automation.cloud.sap/exportdata)
+https://<subdomain>.<region>.intelligent-situation-automation.cloud.sap/exportdata
 ```
 
 ### URL Components
@@ -181,7 +181,7 @@ Export all data stored by Intelligent Situation Automation.
 ### Example
 
 ```
-[https://mycompany-dev.eu10.intelligent-situation-automation.cloud.sap/exportdata](https://mycompany-dev.eu10.intelligent-situation-automation.cloud.sap/exportdata)
+https://mycompany-dev.eu10.intelligent-situation-automation.cloud.sap/exportdata
 ```
 
 ### Export Content

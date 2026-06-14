@@ -54,7 +54,7 @@ SAP Cloud Logging strongly recommends integrating with SAP Cloud Identity Servic
 ## Prerequisites
 
 1. **SAP Cloud Identity Services tenant** (Identity Authentication)
-2. **Administrator access** to Identity Authentication admin console: `[https://<tenantID>.accounts.ondemand.com/admin`](https://<tenantID>.accounts.ondemand.com/admin`)
+2. **Administrator access** to Identity Authentication admin console: `https://<tenantID>.accounts.ondemand.com/admin`
 3. **Cloud Logging instance** ready for SAML configuration
 
 ---
@@ -67,7 +67,7 @@ From your Identity Authentication tenant:
 
 **Metadata URL:**
 ```
-[https://<tenant-id>.accounts.ondemand.com/saml2/metadata](https://<tenant-id>.accounts.ondemand.com/saml2/metadata)
+https://<tenant-id>.accounts.ondemand.com/saml2/metadata
 ```
 
 **Entity ID:**
@@ -75,7 +75,7 @@ Extract from metadata file - look for `entityID` attribute in the root element.
 
 Example:
 ```xml
-<EntityDescriptor entityID="[https://mytenant.accounts.ondemand.com">](https://mytenant.accounts.ondemand.com">)
+<EntityDescriptor entityID="https://mytenant.accounts.ondemand.com">
 ```
 
 ---
@@ -110,8 +110,8 @@ Configure the service provider settings:
 
 | Setting | Value |
 |---------|-------|
-| Assertion Consumer Service | `[https://<dashboards-url>/_opendistro/_security/saml/acs`](https://<dashboards-url>/_opendistro/_security/saml/acs`) |
-| Single Logout Service | `[https://<dashboards-url>/_opendistro/_security/saml/logout`](https://<dashboards-url>/_opendistro/_security/saml/logout`) |
+| Assertion Consumer Service | `https://<dashboards-url>/_opendistro/_security/saml/acs` |
+| Single Logout Service | `https://<dashboards-url>/_opendistro/_security/saml/logout` |
 | SP Entity ID | `cloud-logging-<instance-id>` |
 
 ---
@@ -180,8 +180,8 @@ Update your Cloud Logging instance with SAML parameters using the official neste
     "admin_group": "CLS-Administrators",
     "roles_key": "groups",
     "idp": {
-      "metadata_url": "[https://<tenant-id>.accounts.ondemand.com/saml2/metadata",](https://<tenant-id>.accounts.ondemand.com/saml2/metadata",)
-      "entity_id": "[https://<tenant-id>.accounts.ondemand.com"](https://<tenant-id>.accounts.ondemand.com")
+      "metadata_url": "https://<tenant-id>.accounts.ondemand.com/saml2/metadata",
+      "entity_id": "https://<tenant-id>.accounts.ondemand.com"
     },
     "sp": {
       "entity_id": "cloud-logging-<unique-identifier>"
@@ -200,8 +200,8 @@ Update your Cloud Logging instance with SAML parameters using the official neste
     "admin_group": "CLS-Administrators",
     "roles_key": "groups",
     "idp": {
-      "metadata_url": "[https://<tenant-id>.accounts.ondemand.com/saml2/metadata",](https://<tenant-id>.accounts.ondemand.com/saml2/metadata",)
-      "entity_id": "[https://<tenant-id>.accounts.ondemand.com"](https://<tenant-id>.accounts.ondemand.com")
+      "metadata_url": "https://<tenant-id>.accounts.ondemand.com/saml2/metadata",
+      "entity_id": "https://<tenant-id>.accounts.ondemand.com"
     },
     "sp": {
       "entity_id": "cloud-logging-<unique-identifier>",
@@ -327,7 +327,7 @@ index_permissions:
 |---------|-------|
 | Application Type | SAML 2.0 |
 | Name ID Format | E-mail |
-| Assertion Consumer Service | `[https://dashboards.cls.example.com/_opendistro/_security/saml/acs`](https://dashboards.cls.example.com/_opendistro/_security/saml/acs`) |
+| Assertion Consumer Service | `https://dashboards.cls.example.com/_opendistro/_security/saml/acs` |
 | SP Entity ID | `cloud-logging-prod-001` |
 | Sign SAML Requests | Enabled |
 | Groups Attribute | `groups` |
@@ -343,8 +343,8 @@ index_permissions:
     "admin_group": "CLS-Administrators",
     "roles_key": "groups",
     "idp": {
-      "metadata_url": "[https://mytenant.accounts.ondemand.com/saml2/metadata",](https://mytenant.accounts.ondemand.com/saml2/metadata",)
-      "entity_id": "[https://mytenant.accounts.ondemand.com"](https://mytenant.accounts.ondemand.com")
+      "metadata_url": "https://mytenant.accounts.ondemand.com/saml2/metadata",
+      "entity_id": "https://mytenant.accounts.ondemand.com"
     },
     "sp": {
       "entity_id": "cloud-logging-prod-001",

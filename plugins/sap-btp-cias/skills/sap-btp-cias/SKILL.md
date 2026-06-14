@@ -5,7 +5,7 @@ description: |
   Use when: setting up CIAS subscriptions, configuring destinations, assigning roles (CIASIntegrationAdministrator, CIASIntegrationExpert, CIASIntegrationMonitor), planning integration scenarios, working with My Inbox tasks, monitoring scenario execution, troubleshooting CIAS errors, creating OAuth2 instances, configuring identity providers for CIAS, understanding CIAS security architecture, or integrating SAP products (S/4HANA, SuccessFactors, BTP services, SAP Build, IBP).
 license: GPL-3.0
 metadata:
-  version: "1.0.1"
+  version: "2.3.0"
   last_verified: "2025-11-27"
   sap_product: "Cloud Integration Automation Service"
   source_docs: "https://github.com/SAP-docs/btp-cloud-integration-automation-service"
@@ -14,6 +14,17 @@ metadata:
 # SAP BTP Cloud Integration Automation Service (CIAS)
 
 Cloud Integration Automation Service provides guided workflows to integrate SAP cloud solutions with on-premise and other SAP cloud solutions. It offers both manual task instructions and automated configuration capabilities.
+
+## Related Skills
+
+- **sap-btp-cloud-platform**: Use for subaccount, subscription, entitlement, and role collection setup
+- **sap-btp-connectivity**: Use for destinations, OAuth2 service instances, and Cloud Connector dependencies
+- **sap-btp-integration-suite**: Use when CIAS scenarios produce or depend on Integration Suite artifacts
+- **sap-btp-cloud-identity-services**: Use for identity-provider and trust configuration that affects CIAS access
+
+## When to Use This Skill
+
+Use this skill when subscribing to CIAS, assigning CIAS role collections, planning guided integration scenarios, working My Inbox tasks, monitoring scenario execution, configuring OAuth2 API access, or troubleshooting CIAS workflow/task failures.
 
 ## Table of Contents
 - [Quick Reference](#quick-reference)

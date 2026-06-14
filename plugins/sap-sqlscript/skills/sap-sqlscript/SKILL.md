@@ -6,7 +6,7 @@ description: |
   Comprehensive SQLScript development guidance for SAP HANA database programming including syntax patterns, built-in functions, exception handling, performance optimization, cursor management, and ABAP Managed Database Procedure (AMDP) integration.
 license: GPL-3.0
 metadata:
-  version: "2.1.0"
+  version: "2.3.0"
   last_verified: "2026-05-31"
   production_tested: "Yes, referenced in SAP Community projects"
   sap_hana_version: "2.0 SPS08"
@@ -15,6 +15,10 @@ metadata:
 ---
 
 # SAP SQLScript Development Guide
+
+## When to Use This Skill
+
+Use this skill when writing SQLScript procedures, anonymous blocks, table/scalar functions, AMDP methods, exception handlers, cursor logic, bulk operations, or HANA performance-sensitive database logic that should run close to the data.
 
 ## Overview
 

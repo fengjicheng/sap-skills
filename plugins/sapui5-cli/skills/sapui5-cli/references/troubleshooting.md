@@ -110,7 +110,7 @@ ui5 serve --accept-remote-connections
 
 **Access from other devices**:
 ```
-[http://<your-ip-address>:8080](http://<your-ip-address>:8080)
+http://<your-ip-address>:8080
 ```
 
 ---
@@ -392,7 +392,7 @@ UI5 CLI validates configuration against the official schema automatically (Spec 
 ```json
 {
   "yaml.schemas": {
-    "[https://ui5.github.io/cli/schema/ui5.yaml.json":](https://ui5.github.io/cli/schema/ui5.yaml.json":) "ui5.yaml"
+    "https://ui5.github.io/cli/schema/ui5.yaml.json": "ui5.yaml"
   }
 }
 ```

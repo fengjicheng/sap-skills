@@ -213,9 +213,9 @@ Enable developer access to Cloud Foundry:
 
 | Resource | Pattern |
 |----------|---------|
-| BAS Access | `[https://<subaccount>.eu10.applicationstudio.cloud.sap`](https://<subaccount>.eu10.applicationstudio.cloud.sap`) (varies by region) |
-| BTP Cockpit | `[https://cockpit.btp.cloud.sap`](https://cockpit.btp.cloud.sap`) |
-| Discovery Center | `[https://discovery-center.cloud.sap/serviceCatalog/business-application-studio`](https://discovery-center.cloud.sap/serviceCatalog/business-application-studio`) |
+| BAS Access | `https://<subaccount>.eu10.applicationstudio.cloud.sap` (varies by region) |
+| BTP Cockpit | `https://cockpit.btp.cloud.sap` |
+| Discovery Center | `https://discovery-center.cloud.sap/serviceCatalog/business-application-studio` |
 
 ### Key Commands
 

@@ -4,11 +4,22 @@ description: |
   Configures and integrates SAP Master Data Integration (MDI) service on SAP Business Technology Platform. Use when setting up MDI tenants, connecting applications (S/4HANA, SuccessFactors, Ariba, Fieldglass, etc.), configuring distribution models, SOAP APIs for business partners, extensibility, or troubleshooting master data replication. Covers One Domain Model integration, Business Data Orchestration, client authentication (OAuth2, mTLS), and security configurations.
 license: GPL-3.0
 metadata:
-  version: "1.1.0"
+  version: "2.3.0"
   last_verified: "2025-11-27"
 ---
 
 # SAP BTP Master Data Integration
+
+## Related Skills
+
+- **sap-btp-cloud-platform**: Use for subaccount, entitlement, and service instance setup
+- **sap-btp-connectivity**: Use for destination and authentication configuration around connected systems
+- **sap-btp-integration-suite**: Use for MDI Adapter and broader integration orchestration scenarios
+- **sap-api-style**: Use when documenting MDI SOAP/API contracts and integration behavior
+
+## When to Use This Skill
+
+Use this skill when setting up MDI tenants, connecting SAP applications, configuring distribution models, choosing MDI service plans, integrating business partner SOAP APIs, handling One Domain Model versions, or troubleshooting master data replication.
 
 ## Table of Contents
 - [Quick Reference](#quick-reference)
@@ -168,7 +179,7 @@ Master data type is Business Partner?
 
 ## SOAP Endpoints
 
-Base URL: `[https://one-mds.cfapps.{region}.hana.ondemand.com/businesspartner/v0/soap/`](https://one-mds.cfapps.{region}.hana.ondemand.com/businesspartner/v0/soap/`)
+Base URL: `https://one-mds.cfapps.{region}.hana.ondemand.com/businesspartner/v0/soap/`
 
 | Purpose | Endpoint |
 |---------|----------|

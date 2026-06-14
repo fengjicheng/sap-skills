@@ -211,7 +211,7 @@ Data Space Integration is built on Eclipse Dataspace Connector (EDC), an open-so
   },
   "dataAddress": {
     "type": "HttpData",
-    "baseUrl": "[https://api.example.com/products"](https://api.example.com/products")
+    "baseUrl": "https://api.example.com/products"
   }
 }
 ```

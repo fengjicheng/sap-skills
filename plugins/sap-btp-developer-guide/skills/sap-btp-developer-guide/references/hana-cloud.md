@@ -208,8 +208,8 @@ END;
 
 ```xml
 <!-- db/src/views/SalesAnalytics.hdbcalculationview -->
-<Calculation:scenario xmlns:xsi="[http://www.w3.org/2001/XMLSchema-instance"](http://www.w3.org/2001/XMLSchema-instance")
-  xmlns:Calculation="[http://www.sap.com/ndb/BiModelCalculation.ecore"](http://www.sap.com/ndb/BiModelCalculation.ecore")
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore"
   id="SalesAnalytics"
   applyPrivilegeType="NONE">
   <!-- View definition -->

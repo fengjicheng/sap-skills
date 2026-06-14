@@ -127,7 +127,7 @@ SAP Cloud Transport Management Service provides automated transport across lands
   "name": "DEV_Integration",
   "description": "Development tenant",
   "type": "SAP_CPI",
-  "url": "[https://dev-tenant.it-cpitrial.cfapps.eu10.hana.ondemand.com",](https://dev-tenant.it-cpitrial.cfapps.eu10.hana.ondemand.com",)
+  "url": "https://dev-tenant.it-cpitrial.cfapps.eu10.hana.ondemand.com",
   "credentials": {
     "type": "OAuth",
     "clientId": "...",

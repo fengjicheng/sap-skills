@@ -2,7 +2,7 @@
 
 **Source**: [https://github.com/UI5/linter/blob/main/docs/Performance.md](https://github.com/UI5/linter/blob/main/docs/Performance.md)
 **Last Updated**: 2025-11-21
-**UI5 Linter Version**: 1.21.1
+**UI5 Linter Version**: 1.22.0
 
 ---
 

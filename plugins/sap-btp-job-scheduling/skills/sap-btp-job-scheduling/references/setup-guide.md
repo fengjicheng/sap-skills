@@ -185,9 +185,9 @@ Check `VCAP_SERVICES` for `jobscheduler` credentials.
 {
   "jobscheduler": [{
     "credentials": {
-      "url": "[https://jobscheduler-rest.cfapps.eu10.hana.ondemand.com",](https://jobscheduler-rest.cfapps.eu10.hana.ondemand.com",)
+      "url": "https://jobscheduler-rest.cfapps.eu10.hana.ondemand.com",
       "uaa": {
-        "url": "[https://xxx.authentication.eu10.hana.ondemand.com",](https://xxx.authentication.eu10.hana.ondemand.com",)
+        "url": "https://xxx.authentication.eu10.hana.ondemand.com",
         "clientid": "sb-xxx",
         "clientsecret": "xxx"
       }
@@ -202,9 +202,9 @@ Check `VCAP_SERVICES` for `jobscheduler` credentials.
 {
   "jobscheduler": [{
     "credentials": {
-      "url": "[https://jobscheduler-rest.cfapps.eu10.hana.ondemand.com",](https://jobscheduler-rest.cfapps.eu10.hana.ondemand.com",)
+      "url": "https://jobscheduler-rest.cfapps.eu10.hana.ondemand.com",
       "uaa": {
-        "certurl": "[https://xxx.authentication.cert.eu10.hana.ondemand.com",](https://xxx.authentication.cert.eu10.hana.ondemand.com",)
+        "certurl": "https://xxx.authentication.cert.eu10.hana.ondemand.com",
         "clientid": "sb-xxx",
         "certificate": "-----BEGIN CERTIFICATE-----\n...",
         "key": "-----BEGIN RSA PRIVATE KEY-----\n..."

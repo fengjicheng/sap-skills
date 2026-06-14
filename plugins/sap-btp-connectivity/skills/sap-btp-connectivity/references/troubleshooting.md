@@ -17,15 +17,15 @@ This guide covers common issues and solutions for SAP BTP Connectivity component
 **Cause**: Using HTTPS instead of HTTP for Connectivity Proxy
 
 **Solution**:
-- Use `[http://`](http://`) protocol with port `20003`
+- Use `http://` protocol with port `20003`
 - The proxy handles TLS termination internally
 
 ```javascript
 // Wrong
-const proxyUrl = '[https://connectivity-proxy:20003';](https://connectivity-proxy:20003';)
+const proxyUrl = 'https://connectivity-proxy:20003';
 
 // Correct
-const proxyUrl = '[http://connectivity-proxy:20003';](http://connectivity-proxy:20003';)
+const proxyUrl = 'http://connectivity-proxy:20003';
 ```
 
 ### 407 Proxy Authentication Required
@@ -340,7 +340,7 @@ Check these headers in failed responses:
 
 ```bash
 # Include headers in curl
-curl -v [http://my-destination.namespace/api/resource](http://my-destination.namespace/api/resource) 2>&1 | grep "x-error"
+curl -v http://my-destination.namespace/api/resource 2>&1 | grep "x-error"
 ```
 
 ### Service Name Conflicts
@@ -412,7 +412,7 @@ kubectl logs --previous <pod-name> -n <namespace>
 cat /opt/sap/scc/config/version.txt
 
 # Check connectivity
-curl -v [https://connectivitycertsigning.<region>.hana.ondemand.com/](https://connectivitycertsigning.<region>.hana.ondemand.com/)
+curl -v https://connectivitycertsigning.<region>.hana.ondemand.com/
 ```
 
 ### Kubernetes

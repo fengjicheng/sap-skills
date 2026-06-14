@@ -83,7 +83,7 @@ cert-manager handles TLS certificates for operator communication.
 
 ```bash
 # Install cert-manager
-kubectl apply -f [https://github.com/cert-manager/cert-manager/releases/download/v1.12.0/cert-manager.yaml](https://github.com/cert-manager/cert-manager/releases/download/v1.12.0/cert-manager.yaml)
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.12.0/cert-manager.yaml
 
 # Verify installation
 kubectl get pods -n cert-manager
@@ -99,7 +99,7 @@ Wait for all cert-manager pods to be Running.
 
 ```bash
 # Login to Service Manager
-smctl login -a [https://service-manager.cfapps.<region>.hana.ondemand.com](https://service-manager.cfapps.<region>.hana.ondemand.com) \
+smctl login -a https://service-manager.cfapps.<region>.hana.ondemand.com \
   --param subdomain=<subdomain>
 
 # Create instance with service-operator-access plan
@@ -146,7 +146,7 @@ From the binding, extract:
 
 ```bash
 # Add Helm repository
-helm repo add sap-btp-operator [https://sap.github.io/sap-btp-service-operator/](https://sap.github.io/sap-btp-service-operator/)
+helm repo add sap-btp-operator https://sap.github.io/sap-btp-service-operator/
 helm repo update
 
 # Install operator
@@ -398,7 +398,7 @@ smctl curl -X PATCH "/v1/platforms/<platformID>" \
 
 ```bash
 # From GitHub releases
-# [https://github.com/SAP/sap-btp-service-operator/releases](https://github.com/SAP/sap-btp-service-operator/releases)
+# https://github.com/SAP/sap-btp-service-operator/releases
 
 # Or via Go
 go install github.com/SAP/sap-btp-service-operator/tools/btpmigrate@latest

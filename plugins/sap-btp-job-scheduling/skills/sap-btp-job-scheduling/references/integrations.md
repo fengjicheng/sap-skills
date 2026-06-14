@@ -68,7 +68,7 @@ POST /scheduler/jobs
 {
   "name": "monitoredJob",
   "description": "Job with Cloud ALM monitoring",
-  "action": "[https://myapp.../api/process",](https://myapp.../api/process",)
+  "action": "https://myapp.../api/process",
   "active": true,
   "httpMethod": "POST",
   "calmConfig": {
@@ -199,7 +199,7 @@ POST /scheduler/jobs
 {
   "name": "alertedJob",
   "description": "Job with alert notifications",
-  "action": "[https://myapp.../api/process",](https://myapp.../api/process",)
+  "action": "https://myapp.../api/process",
   "active": true,
   "httpMethod": "POST",
   "ansConfig": {

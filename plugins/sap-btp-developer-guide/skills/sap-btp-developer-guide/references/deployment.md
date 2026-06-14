@@ -216,7 +216,7 @@ serviceBindings:
 BTP_BOT_USER              = "technical-user@example.com"
 BTP_BOT_PASSWORD          = "***"
 BTP_GLOBAL_ACCOUNT        = "global-account-subdomain"
-BTP_BACKEND_URL           = "[https://cpcli.cf.sap.hana.ondemand.com"](https://cpcli.cf.sap.hana.ondemand.com")
+BTP_BACKEND_URL           = "https://cpcli.cf.sap.hana.ondemand.com"
 BTP_CUSTOM_IAS_TENANT     = "custom-ias-tenant"
 BTP_NEW_SUBACCOUNT_NAME   = "my-subaccount"
 BTP_NEW_SUBACCOUNT_REGION = "eu10"
@@ -242,7 +242,7 @@ provider "btp" {
 
 # Create Kyma environment using official module
 module "kyma" {
-  source = "git::[https://github.com/kyma-project/terraform-module.git?ref=v0.3.1"](https://github.com/kyma-project/terraform-module.git?ref=v0.3.1")
+  source = "git::https://github.com/kyma-project/terraform-module.git?ref=v0.3.1"
 
   subaccount_id = var.subaccount_id
   cluster_name  = var.BTP_NEW_SUBACCOUNT_NAME

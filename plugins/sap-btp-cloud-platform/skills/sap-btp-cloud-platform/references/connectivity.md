@@ -56,7 +56,7 @@ Public APIs without authentication:
 {
   "Name": "public-api",
   "Type": "HTTP",
-  "URL": "[https://api.example.com",](https://api.example.com",)
+  "URL": "https://api.example.com",
   "ProxyType": "Internet",
   "Authentication": "NoAuthentication"
 }
@@ -70,7 +70,7 @@ Username/password (testing only):
 {
   "Name": "basic-auth",
   "Type": "HTTP",
-  "URL": "[https://api.example.com",](https://api.example.com",)
+  "URL": "https://api.example.com",
   "ProxyType": "Internet",
   "Authentication": "BasicAuthentication",
   "User": "username",
@@ -86,12 +86,12 @@ Service-to-service:
 {
   "Name": "oauth2-client",
   "Type": "HTTP",
-  "URL": "[https://api.example.com",](https://api.example.com",)
+  "URL": "https://api.example.com",
   "ProxyType": "Internet",
   "Authentication": "OAuth2ClientCredentials",
   "clientId": "my-client-id",
   "clientSecret": "my-client-secret",
-  "tokenServiceURL": "[https://auth.example.com/oauth/token"](https://auth.example.com/oauth/token")
+  "tokenServiceURL": "https://auth.example.com/oauth/token"
 }
 ```
 
@@ -103,12 +103,12 @@ User propagation to cloud services:
 {
   "Name": "saml-bearer",
   "Type": "HTTP",
-  "URL": "[https://api.example.com",](https://api.example.com",)
+  "URL": "https://api.example.com",
   "ProxyType": "Internet",
   "Authentication": "OAuth2SAMLBearerAssertion",
-  "audience": "[https://audience.example.com",](https://audience.example.com",)
+  "audience": "https://audience.example.com",
   "clientKey": "my-client-id",
-  "tokenServiceURL": "[https://auth.example.com/oauth/token",](https://auth.example.com/oauth/token",)
+  "tokenServiceURL": "https://auth.example.com/oauth/token",
   "tokenServiceURLType": "Dedicated",
   "authnContextClassRef": "urn:oasis:names:tc:SAML:2.0:ac:classes:PreviousSession"
 }
@@ -122,12 +122,12 @@ Token exchange (preferred over OAuth2UserTokenExchange):
 {
   "Name": "jwt-bearer",
   "Type": "HTTP",
-  "URL": "[https://api.example.com",](https://api.example.com",)
+  "URL": "https://api.example.com",
   "ProxyType": "Internet",
   "Authentication": "OAuth2JWTBearer",
   "clientId": "my-client-id",
   "clientSecret": "my-client-secret",
-  "tokenServiceURL": "[https://auth.example.com/oauth/token"](https://auth.example.com/oauth/token")
+  "tokenServiceURL": "https://auth.example.com/oauth/token"
 }
 ```
 
@@ -139,7 +139,7 @@ On-premise with Cloud Connector:
 {
   "Name": "onprem-pp",
   "Type": "HTTP",
-  "URL": "[http://virtualhost:port",](http://virtualhost:port",)
+  "URL": "http://virtualhost:port",
   "ProxyType": "OnPremise",
   "Authentication": "PrincipalPropagation",
   "CloudConnectorLocationId": "location1"
@@ -154,7 +154,7 @@ mTLS:
 {
   "Name": "mtls",
   "Type": "HTTP",
-  "URL": "[https://api.example.com",](https://api.example.com",)
+  "URL": "https://api.example.com",
   "ProxyType": "Internet",
   "Authentication": "ClientCertificateAuthentication",
   "KeyStoreLocation": "keystore.p12",
@@ -317,7 +317,7 @@ const response = await executeHttpRequest(destination, {
 
 ```bash
 # Get single destination
-curl -X GET "[https://destination-configuration.cfapps.<region>.hana.ondemand.com/destination-configuration/v1/destinations/<name>"](https://destination-configuration.cfapps.<region>.hana.ondemand.com/destination-configuration/v1/destinations/<name>") \
+curl -X GET "https://destination-configuration.cfapps.<region>.hana.ondemand.com/destination-configuration/v1/destinations/<name>" \
   -H "Authorization: Bearer <token>"
 ```
 
@@ -332,7 +332,7 @@ curl -X GET "[https://destination-configuration.cfapps.<region>.hana.ondemand.co
   "destinationConfiguration": {
     "Name": "my-destination",
     "Type": "HTTP",
-    "URL": "[https://api.example.com",](https://api.example.com",)
+    "URL": "https://api.example.com",
     "Authentication": "OAuth2ClientCredentials",
     "ProxyType": "Internet"
   },

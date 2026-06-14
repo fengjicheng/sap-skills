@@ -496,7 +496,7 @@ sap.ui.getCore().applyTheme("sap_horizon_hcb");
 
 **In URL**:
 ```
-[http://myapp.com/index.html?sap-ui-theme=sap_horizon_hcb](http://myapp.com/index.html?sap-ui-theme=sap_horizon_hcb)
+http://myapp.com/index.html?sap-ui-theme=sap_horizon_hcb
 ```
 
 ### CSS Considerations

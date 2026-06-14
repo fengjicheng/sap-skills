@@ -234,7 +234,7 @@ server:
       configuration:
         backend:
           - path: /sap
-            url: [https://backend.system.com](https://backend.system.com)
+            url: https://backend.system.com
             destination: BACKEND_DESTINATION
 ```
 
@@ -435,7 +435,7 @@ server:
       configuration:
         backend:
           - path: /odata/v4
-            url: [http://localhost:4004](http://localhost:4004)
+            url: http://localhost:4004
 ```
 
 ---

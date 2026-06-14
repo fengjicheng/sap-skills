@@ -125,7 +125,7 @@ CustomWidget_1.onUserAction = function() {
     {
       "kind": "main",
       "tag": "my-widget",
-      "url": "[https://globally-accessible-host.com/widget.js",](https://globally-accessible-host.com/widget.js",)
+      "url": "https://globally-accessible-host.com/widget.js",
       "integrity": "sha256-...",
       "ignoreIntegrity": false
     }

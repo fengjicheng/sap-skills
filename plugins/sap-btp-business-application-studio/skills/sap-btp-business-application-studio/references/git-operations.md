@@ -81,7 +81,7 @@ Full-featured Git interface. Enable by right-clicking activity bar → deselect 
 
 **Method 1: Terminal**
 ```bash
-git clone [https://github.com/YOUR-USERNAME/YOUR-REPOSITORY](https://github.com/YOUR-USERNAME/YOUR-REPOSITORY)
+git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
 ```
 
 **Method 2: Command Palette**
@@ -325,7 +325,7 @@ Gerrit provides code review before commits reach the repository.
 After creating destinations, refresh in dev space:
 
 ```bash
-curl [http://localhost:8887/reload](http://localhost:8887/reload)
+curl http://localhost:8887/reload
 ```
 
 ### Use Correct URL

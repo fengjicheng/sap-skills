@@ -166,7 +166,7 @@ Security-relevant chronological records for compliance and security.
 
 **Via API**:
 ```bash
-curl -X GET "[https://auditlog.cf.<region>.hana.ondemand.com/v2/auditlogrecords"](https://auditlog.cf.<region>.hana.ondemand.com/v2/auditlogrecords") \
+curl -X GET "https://auditlog.cf.<region>.hana.ondemand.com/v2/auditlogrecords" \
   -H "Authorization: Bearer <token>" \
   -H "Accept: application/json"
 ```

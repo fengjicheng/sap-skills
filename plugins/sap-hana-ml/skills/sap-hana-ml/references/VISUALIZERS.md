@@ -700,5 +700,5 @@ apt-get install graphviz
 # macOS
 brew install graphviz
 
-# Windows: Download from [https://graphviz.org/download/](https://graphviz.org/download/)
+# Windows: Download from https://graphviz.org/download/
 ```

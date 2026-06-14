@@ -112,7 +112,7 @@ curl -X POST "$AI_API_URL/v2/admin/applications" \
   -H "Content-Type: application/json" \
   -d '{
     "applicationName": "my-workflows",
-    "repositoryUrl": "[https://github.com/org/ai-workflows",](https://github.com/org/ai-workflows",)
+    "repositoryUrl": "https://github.com/org/ai-workflows",
     "revision": "HEAD",
     "path": "workflows/"
   }'

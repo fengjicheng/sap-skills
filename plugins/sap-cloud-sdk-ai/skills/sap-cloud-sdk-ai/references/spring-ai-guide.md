@@ -558,7 +558,7 @@ spring:
         enabled: true
         servers:
           - name: "my-tools"
-            url: "[http://localhost:3000/mcp"](http://localhost:3000/mcp")
+            url: "http://localhost:3000/mcp"
 ```
 
 ---

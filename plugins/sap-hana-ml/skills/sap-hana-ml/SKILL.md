@@ -12,7 +12,7 @@ description: |
   time series, ARIMA, gradient boosting, AutoML, SHAP, model storage
 license: GPL-3.0
 metadata:
-  version: 1.1.0
+  version: "2.3.0"
   last_verified: 2025-11-27
   package_version: 2.22.241011
 ---
@@ -22,6 +22,18 @@ metadata:
 ## Related Skills
 
 - **sap-dependency-security**: Use for secure dependency pinning and upgrade workflows in Python/auxiliary tooling used alongside HANA ML stacks
+
+## When to Use This Skill
+
+Use this skill when building machine learning workflows with the `hana-ml` Python client, using PAL/APL algorithms, querying HANA DataFrames, training or scoring models in-database, using AutoML, visualizing model output, or troubleshooting Python-to-HANA ML connections.
+
+## Common Issues
+
+| Issue | First check |
+|-------|-------------|
+| Connection fails | Verify HANA host, port, TLS/encryption, user privileges, and network allowlists. |
+| PAL/APL algorithm missing | Confirm the HANA system has the required AFL/PAL/APL libraries installed and licensed. |
+| DataFrame collection is slow | Push filtering/projection into HANA and avoid collecting large frames into Python. |
 
 **Package Version**: 2.22.241011  
 **Last Verified**: 2025-11-27

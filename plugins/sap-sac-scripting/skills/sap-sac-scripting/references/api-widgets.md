@@ -449,7 +449,7 @@ Text_1.setText("Revenue: " + revenue.formattedValue);
 
 ```javascript
 // Set image source
-Image_1.setSrc("[https://example.com/image.png](https://example.com/image.png)");
+Image_1.setSrc("https://example.com/image.png");
 
 // From content network
 Image_1.setSrc("sap-icon://home");

@@ -124,9 +124,9 @@ Initialize SAPUI5 in index.html:
 - `data-sap-ui-onInit`: Module to run after initialization
 
 **CDN Options**:
-- SAP CDN: `[https://sapui5.hana.ondemand.com/resources/sap-ui-core.js`](https://sapui5.hana.ondemand.com/resources/sap-ui-core.js`)
-- OpenUI5 CDN: `[https://openui5.hana.ondemand.com/resources/sap-ui-core.js`](https://openui5.hana.ondemand.com/resources/sap-ui-core.js`)
-- Specific version: `[https://sapui5.hana.ondemand.com/1.120.0/resources/sap-ui-core.js`](https://sapui5.hana.ondemand.com/1.120.0/resources/sap-ui-core.js`)
+- SAP CDN: `https://sapui5.hana.ondemand.com/resources/sap-ui-core.js`
+- OpenUI5 CDN: `https://openui5.hana.ondemand.com/resources/sap-ui-core.js`
+- Specific version: `https://sapui5.hana.ondemand.com/1.120.0/resources/sap-ui-core.js`
 
 **Documentation**: [https://github.com/SAP-docs/sapui5/tree/main/docs/04_Essentials](https://github.com/SAP-docs/sapui5/tree/main/docs/04_Essentials) (search: bootstrap, initialization)
 

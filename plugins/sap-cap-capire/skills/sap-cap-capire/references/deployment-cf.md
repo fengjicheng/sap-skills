@@ -13,10 +13,10 @@ npm i -g @sap/cds-dk
 npm i -g mbt
 
 # Cloud Foundry CLI
-# Download from: [https://github.com/cloudfoundry/cli/releases](https://github.com/cloudfoundry/cli/releases)
+# Download from: https://github.com/cloudfoundry/cli/releases
 
 # Install CF plugins
-cf add-plugin-repo CF-Community [https://plugins.cloudfoundry.org](https://plugins.cloudfoundry.org)
+cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
 cf install-plugin -f multiapps
 cf install-plugin -f html5-plugin
 ```
@@ -162,7 +162,7 @@ resources:
   ],
   "oauth2-configuration": {
     "redirect-uris": [
-      "[https://*.cfapps.*.hana.ondemand.com/**"](https://*.cfapps.*.hana.ondemand.com/**")
+      "https://*.cfapps.*.hana.ondemand.com/**"
     ]
   }
 }
@@ -201,7 +201,7 @@ gen/
 
 ### Login to CF
 ```sh
-cf login -a [https://api.cf.<region>.hana.ondemand.com](https://api.cf.<region>.hana.ondemand.com)
+cf login -a https://api.cf.<region>.hana.ondemand.com
 # Select org and space
 
 # Or with SSO

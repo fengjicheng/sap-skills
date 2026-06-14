@@ -11,7 +11,7 @@ description: |
   API deprecation, x-sap-stateInfo, Entity Data Model, EDM, documentation tags, API quality, API templates
 license: GPL-3.0
 metadata:
-  version: "1.1.1"
+  version: "2.3.0"
   last_verified: "2026-02-25"
   source_version: "2025.01"
   source_commit: "902247f3afb6a0cb3fa110b284bb5d93a65c1268"
@@ -41,6 +41,7 @@ metadata:
 9. [Common Pitfalls to Avoid](#common-pitfalls-to-avoid)
 10. [External Resources](#external-resources)
 11. [Updates and Maintenance](#updates-and-maintenance)
+12. [Common Issues](#common-issues)
 
 ## Overview
 
@@ -376,6 +377,15 @@ Before publishing:
 
 See individual reference files for complete anti-patterns and fixes.
 
+## Common Issues
+
+| Issue | Correction |
+|-------|------------|
+| API names use verbs or redundant "API" suffixes | Apply the naming rules in `references/naming-conventions.md` before writing descriptions. |
+| OpenAPI descriptions are too generic | Use operation-specific outcomes, error cases, and state information from `references/rest-odata-openapi-guide.md`. |
+| Documentation contains sensitive sample data | Replace tenant, user, token, and customer data with neutral examples before publishing. |
+| Deprecation metadata is missing | Add `x-sap-stateInfo` and migration guidance from `references/deprecation-policy.md`. |
+
 ## External Resources
 
 ### Standards
@@ -417,7 +427,7 @@ See individual reference files for complete anti-patterns and fixes.
 
 ---
 
-**Skill Version**: 1.1.0
-**Last Updated**: 2025-11-27
+**Skill Version**: 2.3.0
+**Last Updated**: 2026-06-14
 **License**: GPL-3.0
 **Maintainer**: SAP Skills Team | [https://github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills)

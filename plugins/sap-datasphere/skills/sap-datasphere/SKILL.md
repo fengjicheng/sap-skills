@@ -3,7 +3,7 @@ name: sap-datasphere
 description: "SAP Datasphere development skill with 3 specialized agents, 5 slash commands, and validation hooks. Use when building data warehouses on SAP BTP, creating analytic models, configuring data flows and replication flows, setting up connections, managing spaces and users, implementing data access controls, or using the datasphere CLI. Covers Data Builder, Business Builder, analytic models, 40+ connection types, real-time replication, task chains, content transport, and data marketplace."
 license: GPL-3.0
 metadata:
-  version: 2.2.0
+  version: "2.3.0"
   last_verified: 2026-06-11
   keywords: [sap datasphere, data warehouse cloud, dwc, data builder, business builder, analytic model, graphical view, sql view, transformation flow, replication flow, data flow, task chain, remote table, local table, datasphere connection, datasphere space, data access control, elastic compute node, datasphere cli, data products, data marketplace, catalog, governance, business data cloud, bdc, sap databricks]
 ---
@@ -45,6 +45,8 @@ metadata:
 SAP Datasphere is SAP's cloud-native data warehouse solution on SAP Business Technology Platform (BTP). It serves as the **data foundation** within **SAP Business Data Cloud (BDC)**, SAP's unified data and analytics platform that also includes SAP Analytics Cloud, SAP HANA Cloud, SAP Databricks, and curated data products. See `references/business-data-cloud.md` for the BDC architecture and how Datasphere fits within it.
 
 This skill provides comprehensive guidance for data acquisition, preparation, modeling, administration, and integration.
+
+## When to Use This Skill
 
 **Use this skill when**:
 - Creating data warehouses on SAP BTP

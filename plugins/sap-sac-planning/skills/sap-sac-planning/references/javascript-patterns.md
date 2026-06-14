@@ -621,7 +621,7 @@ function openDetailStory(entityId) {
 // Open SAP documentation
 function openDocumentation() {
     NavigationUtils.openUrl(
-        "[https://help.sap.com/docs/SAP_ANALYTICS_CLOUD"](https://help.sap.com/docs/SAP_ANALYTICS_CLOUD")
+        "https://help.sap.com/docs/SAP_ANALYTICS_CLOUD"
     );
 }
 ```

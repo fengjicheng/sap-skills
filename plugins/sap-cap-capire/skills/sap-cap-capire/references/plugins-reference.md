@@ -537,7 +537,7 @@ Plugins auto-detect VCAP_SERVICES bindings.
     "requires": {
       "my-plugin": {
         "credentials": {
-          "url": "[https://api.example.com",](https://api.example.com",)
+          "url": "https://api.example.com",
           "apiKey": "..."
         }
       }

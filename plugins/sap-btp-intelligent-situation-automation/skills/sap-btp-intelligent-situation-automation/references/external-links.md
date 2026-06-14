@@ -47,18 +47,18 @@ The source documentation uses SAP Help Portal document IDs (loio* format). These
 **Preferred (Direct Access)**:
 Use the viewer format for direct document access:
 ```
-[https://help.sap.com/viewer/{loio_id}/en-US](https://help.sap.com/viewer/{loio_id}/en-US)
+https://help.sap.com/viewer/{loio_id}/en-US
 ```
 
 Example:
 ```
-[https://help.sap.com/viewer/loio4832a67a390d42ca9f876a1ded9ea84d/en-US](https://help.sap.com/viewer/loio4832a67a390d42ca9f876a1ded9ea84d/en-US)
+https://help.sap.com/viewer/loio4832a67a390d42ca9f876a1ded9ea84d/en-US
 ```
 
 **Alternative (Search-based)**:
 For discovery when exact document ID is uncertain, use search:
 ```
-[https://help.sap.com/docs/intelligent-situation-automation?locale=en-US&q=loio{ID}](https://help.sap.com/docs/intelligent-situation-automation?locale=en-US&q=loio{ID})
+https://help.sap.com/docs/intelligent-situation-automation?locale=en-US&q=loio{ID}
 ```
 
 Note: The viewer format provides direct access; the search format may return multiple results.
@@ -175,9 +175,9 @@ When SAP documentation changes:
 
 ### Link Patterns
 SAP Help Portal links follow these patterns:
-- Product docs: `[https://help.sap.com/docs/{PRODUCT}`](https://help.sap.com/docs/{PRODUCT}`)
-- Viewer format: `[https://help.sap.com/viewer/{loio_id}/{locale}`](https://help.sap.com/viewer/{loio_id}/{locale}`) (preferred for direct access)
-- New format: `[https://help.sap.com/docs/{product}/{doc_id}.html`](https://help.sap.com/docs/{product}/{doc_id}.html`)
+- Product docs: `https://help.sap.com/docs/{PRODUCT}`
+- Viewer format: `https://help.sap.com/viewer/{loio_id}/{locale}` (preferred for direct access)
+- New format: `https://help.sap.com/docs/{product}/{doc_id}.html`
 
 See "Direct Link Formats" section above for usage examples.
 

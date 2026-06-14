@@ -197,7 +197,7 @@ cf deploy my-app.mtar --strategy blue-green
   "destinations": [
     {
       "name": "srv-api",
-      "url": "[https://my-srv.cfapps.eu10.hana.ondemand.com",](https://my-srv.cfapps.eu10.hana.ondemand.com",)
+      "url": "https://my-srv.cfapps.eu10.hana.ondemand.com",
       "forwardAuthToken": true
     }
   ]

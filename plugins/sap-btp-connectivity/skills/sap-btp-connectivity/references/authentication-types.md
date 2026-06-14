@@ -40,7 +40,7 @@ No authentication required for the target endpoint.
 {
   "Name": "public-api",
   "Type": "HTTP",
-  "URL": "[https://api.public.example.com",](https://api.public.example.com",)
+  "URL": "https://api.public.example.com",
   "ProxyType": "Internet",
   "Authentication": "NoAuthentication"
 }
@@ -56,7 +56,7 @@ Username and password authentication.
 {
   "Name": "basic-auth-destination",
   "Type": "HTTP",
-  "URL": "[https://api.example.com",](https://api.example.com",)
+  "URL": "https://api.example.com",
   "ProxyType": "Internet",
   "Authentication": "BasicAuthentication",
   "User": "username",
@@ -80,7 +80,7 @@ X.509 client certificate authentication.
 {
   "Name": "cert-auth-destination",
   "Type": "HTTP",
-  "URL": "[https://api.example.com",](https://api.example.com",)
+  "URL": "https://api.example.com",
   "ProxyType": "Internet",
   "Authentication": "ClientCertificateAuthentication",
   "KeyStoreLocation": "cert.p12",
@@ -104,12 +104,12 @@ OAuth 2.0 client credentials flow for service-to-service communication.
 {
   "Name": "oauth-cc-destination",
   "Type": "HTTP",
-  "URL": "[https://api.example.com",](https://api.example.com",)
+  "URL": "https://api.example.com",
   "ProxyType": "Internet",
   "Authentication": "OAuth2ClientCredentials",
   "clientId": "my-client-id",
   "clientSecret": "my-client-secret",
-  "tokenServiceURL": "[https://auth.example.com/oauth/token"](https://auth.example.com/oauth/token")
+  "tokenServiceURL": "https://auth.example.com/oauth/token"
 }
 ```
 
@@ -140,12 +140,12 @@ Exchanges incoming user JWT for new access token.
 {
   "Name": "oauth-jwt-bearer",
   "Type": "HTTP",
-  "URL": "[https://api.example.com",](https://api.example.com",)
+  "URL": "https://api.example.com",
   "ProxyType": "Internet",
   "Authentication": "OAuth2JWTBearer",
   "clientId": "my-client-id",
   "clientSecret": "my-client-secret",
-  "tokenServiceURL": "[https://auth.example.com/oauth/token"](https://auth.example.com/oauth/token")
+  "tokenServiceURL": "https://auth.example.com/oauth/token"
 }
 ```
 
@@ -168,12 +168,12 @@ OAuth 2.0 SAML Bearer Assertion flow for user propagation between cloud systems.
 {
   "Name": "oauth-saml-bearer",
   "Type": "HTTP",
-  "URL": "[https://api.successfactors.com",](https://api.successfactors.com",)
+  "URL": "https://api.successfactors.com",
   "ProxyType": "Internet",
   "Authentication": "OAuth2SAMLBearerAssertion",
   "audience": "www.successfactors.com",
   "clientKey": "my-client-key",
-  "tokenServiceURL": "[https://api.successfactors.com/oauth/token",](https://api.successfactors.com/oauth/token",)
+  "tokenServiceURL": "https://api.successfactors.com/oauth/token",
   "KeyStoreLocation": "signing-cert.p12",
   "KeyStorePassword": "password"
 }
@@ -213,14 +213,14 @@ OAuth 2.0 Resource Owner Password flow.
 {
   "Name": "oauth-password",
   "Type": "HTTP",
-  "URL": "[https://api.example.com",](https://api.example.com",)
+  "URL": "https://api.example.com",
   "ProxyType": "Internet",
   "Authentication": "OAuth2Password",
   "User": "username",
   "Password": "password",
   "clientId": "my-client-id",
   "clientSecret": "my-client-secret",
-  "tokenServiceURL": "[https://auth.example.com/oauth/token"](https://auth.example.com/oauth/token")
+  "tokenServiceURL": "https://auth.example.com/oauth/token"
 }
 ```
 
@@ -236,12 +236,12 @@ Exchanges user token for new access token.
 {
   "Name": "oauth-ute",
   "Type": "HTTP",
-  "URL": "[https://api.example.com",](https://api.example.com",)
+  "URL": "https://api.example.com",
   "ProxyType": "Internet",
   "Authentication": "OAuth2UserTokenExchange",
   "clientId": "my-client-id",
   "clientSecret": "my-client-secret",
-  "tokenServiceURL": "[https://auth.example.com/oauth/token"](https://auth.example.com/oauth/token")
+  "tokenServiceURL": "https://auth.example.com/oauth/token"
 }
 ```
 
@@ -257,12 +257,12 @@ Generic OAuth 2.0 Token Exchange (RFC 8693).
 {
   "Name": "oauth-token-exchange",
   "Type": "HTTP",
-  "URL": "[https://api.example.com",](https://api.example.com",)
+  "URL": "https://api.example.com",
   "ProxyType": "Internet",
   "Authentication": "OAuth2TokenExchange",
   "clientId": "my-client-id",
   "clientSecret": "my-client-secret",
-  "tokenServiceURL": "[https://auth.example.com/oauth/token"](https://auth.example.com/oauth/token")
+  "tokenServiceURL": "https://auth.example.com/oauth/token"
 }
 ```
 
@@ -276,12 +276,12 @@ Propagates technical user identity via OAuth.
 {
   "Name": "oauth-tech-user",
   "Type": "HTTP",
-  "URL": "[https://api.example.com",](https://api.example.com",)
+  "URL": "https://api.example.com",
   "ProxyType": "Internet",
   "Authentication": "OAuth2TechnicalUserPropagation",
   "clientId": "my-client-id",
   "clientSecret": "my-client-secret",
-  "tokenServiceURL": "[https://auth.example.com/oauth/token"](https://auth.example.com/oauth/token")
+  "tokenServiceURL": "https://auth.example.com/oauth/token"
 }
 ```
 
@@ -295,12 +295,12 @@ Uses refresh token to obtain access tokens.
 {
   "Name": "oauth-refresh",
   "Type": "HTTP",
-  "URL": "[https://api.example.com",](https://api.example.com",)
+  "URL": "https://api.example.com",
   "ProxyType": "Internet",
   "Authentication": "OAuth2RefreshToken",
   "clientId": "my-client-id",
   "clientSecret": "my-client-secret",
-  "tokenServiceURL": "[https://auth.example.com/oauth/token",](https://auth.example.com/oauth/token",)
+  "tokenServiceURL": "https://auth.example.com/oauth/token",
   "refreshToken": "stored-refresh-token"
 }
 ```
@@ -315,12 +315,12 @@ OAuth 2.0 Authorization Code flow for interactive authorization.
 {
   "Name": "oauth-auth-code",
   "Type": "HTTP",
-  "URL": "[https://api.example.com",](https://api.example.com",)
+  "URL": "https://api.example.com",
   "ProxyType": "Internet",
   "Authentication": "OAuth2AuthorizationCode",
   "clientId": "my-client-id",
   "clientSecret": "my-client-secret",
-  "tokenServiceURL": "[https://auth.example.com/oauth/token"](https://auth.example.com/oauth/token")
+  "tokenServiceURL": "https://auth.example.com/oauth/token"
 }
 ```
 
@@ -334,7 +334,7 @@ SAML assertion authentication without OAuth token exchange.
 {
   "Name": "saml-destination",
   "Type": "HTTP",
-  "URL": "[https://api.example.com",](https://api.example.com",)
+  "URL": "https://api.example.com",
   "ProxyType": "Internet",
   "Authentication": "SAMLAssertion",
   "audience": "target-audience"
@@ -351,7 +351,7 @@ Cloud-to-on-premise user identity propagation via Cloud Connector.
 {
   "Name": "onprem-pp-destination",
   "Type": "HTTP",
-  "URL": "[http://virtual-host:443/api",](http://virtual-host:443/api",)
+  "URL": "http://virtual-host:443/api",
   "ProxyType": "OnPremise",
   "Authentication": "PrincipalPropagation"
 }
@@ -380,7 +380,7 @@ Alternative to client secret for OAuth flows using SAML or JWT assertions.
 {
   "Authentication": "OAuth2ClientCredentials",
   "clientId": "my-client-id",
-  "tokenServiceURL": "[https://auth.example.com/oauth/token",](https://auth.example.com/oauth/token",)
+  "tokenServiceURL": "https://auth.example.com/oauth/token",
   "clientAssertion.type": "urn:ietf:params:oauth:client-assertion-type:saml2-bearer",
   "clientAssertion.destinationName": "saml-provider-destination"
 }
@@ -391,7 +391,7 @@ Alternative to client secret for OAuth flows using SAML or JWT assertions.
 {
   "Authentication": "OAuth2ClientCredentials",
   "clientId": "my-client-id",
-  "tokenServiceURL": "[https://auth.example.com/oauth/token",](https://auth.example.com/oauth/token",)
+  "tokenServiceURL": "https://auth.example.com/oauth/token",
   "clientAssertion.type": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
   "clientAssertion.destinationName": "jwt-provider-destination"
 }
@@ -407,7 +407,7 @@ Combine OAuth flows with X.509 client certificate for token service.
 {
   "Authentication": "OAuth2ClientCredentials",
   "clientId": "my-client-id",
-  "tokenServiceURL": "[https://auth.example.com/oauth/token",](https://auth.example.com/oauth/token",)
+  "tokenServiceURL": "https://auth.example.com/oauth/token",
   "tokenService.KeyStoreLocation": "cert.p12",
   "tokenService.KeyStorePassword": "password"
 }

@@ -90,7 +90,7 @@ curl -X POST "$AI_API_URL/v2/admin/repositories" \
   -H "Content-Type: application/json" \
   -d '{
     "name": "training-repo",
-    "url": "[https://github.com/org/training-workflows",](https://github.com/org/training-workflows",)
+    "url": "https://github.com/org/training-workflows",
     "username": "<git-user>",
     "password": "<git-token>"
   }'

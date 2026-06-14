@@ -408,11 +408,11 @@ Customer-managed key encryption enabled by default since September 18, 2022.
 
 ### On-Premise System Access
 
-Built-in web proxy at `[http://localhost:8887`.](http://localhost:8887`.)
+Built-in web proxy at `http://localhost:8887`.
 
 **Refresh Destinations**:
 ```bash
-curl [http://localhost:8887/reload](http://localhost:8887/reload)
+curl http://localhost:8887/reload
 ```
 
 **Git Repositories**: Use exact host:port from destination URL.
@@ -435,11 +435,11 @@ npm config set @<scope>:registry <URL>
 Requires administrator access and REST API tool.
 
 **Process**:
-1. Get workspace list: `[https://<bas-url>/ws-manager/api/v1/workspace?all=true`](https://<bas-url>/ws-manager/api/v1/workspace?all=true`)
+1. Get workspace list: `https://<bas-url>/ws-manager/api/v1/workspace?all=true`
 2. Copy workspace `id` from `config` section
 3. Optionally export data first
-4. Get JWT: `[https://<bas-url>/jwt`](https://<bas-url>/jwt`)
-5. DELETE request: `[https://<bas-url>/ws-manager/api/v1/workspace/<ws-id>?all=true`](https://<bas-url>/ws-manager/api/v1/workspace/<ws-id>?all=true`)
+4. Get JWT: `https://<bas-url>/jwt`
+5. DELETE request: `https://<bas-url>/ws-manager/api/v1/workspace/<ws-id>?all=true`
 6. Header: `X-Approuter-Authorization: Bearer <JWT_Token>`
 
 ---

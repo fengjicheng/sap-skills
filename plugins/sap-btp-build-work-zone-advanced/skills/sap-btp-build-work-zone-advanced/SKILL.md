@@ -6,11 +6,18 @@ description: |
   Keywords: SAP Build Work Zone advanced edition, digital workplace, UI Integration Cards, content packages, workspace templates, SAP Business Application Studio, SAP Conversational AI, SCIM API, OData, Microsoft Teams integration, SSO, theming, Administration Console
 license: GPL-3.0
 metadata:
-  version: "1.1.0"
+  version: "2.3.0"
   last_verified: "2025-11-27"
 ---
 
 # SAP Build Work Zone, Advanced Edition
+
+## Related Skills
+
+- **sap-btp-business-application-studio**: Use for dev space setup and UI Integration Card development workflows
+- **sap-btp-cloud-platform**: Use for BTP subscriptions, destinations, role collections, and runtime setup
+- **sapui5**: Use for UI5 card/component development details
+- **sap-btp-connectivity**: Use for destinations, Cloud Connector, and OData business-record connectivity
 
 This skill provides comprehensive guidance for implementing SAP Build Work Zone, advanced edition - a digital workplace platform for unified access to business applications, processes, and collaboration.
 
@@ -29,6 +36,14 @@ Use this skill when:
 - Managing themes and branding
 - Configuring role-based access and SSO
 - Working with the Administration Console
+
+## Quick Start
+
+1. Confirm the subaccount has SAP Build Work Zone, advanced edition entitlement and subscription.
+2. Assign the required administrator role collections.
+3. Create or verify SAP Business Application Studio dev space support for UI Integration Cards.
+4. Configure destinations for content, cards, OData business records, or external systems.
+5. Use the content package and card templates in `templates/` for implementation.
 
 ## Table of Contents
 - [Platform Overview](#platform-overview)

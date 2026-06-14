@@ -245,7 +245,7 @@ service ExternalAPI {
       "ExternalAPI": {
         "kind": "odata-v2",
         "credentials": {
-          "url": "[https://api.example.com"](https://api.example.com")
+          "url": "https://api.example.com"
         }
       }
     }

@@ -108,7 +108,7 @@ Adapter → Authentication: Client Certificate
 #### OAuth 2.0 Client Credentials
 ```
 Adapter → Authentication: OAuth2 Client Credentials
-       → Token Service URL: [https://oauth.example.com/token](https://oauth.example.com/token)
+       → Token Service URL: https://oauth.example.com/token
        → Client ID: [from credential]
        → Client Secret: [from credential]
 ```

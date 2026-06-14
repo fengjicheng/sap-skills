@@ -372,7 +372,7 @@ const books = await SELECT.from(Books).where`author_ID = ${authorId}`
   "cds": {
     "server": {
       "cors": {
-        "origin": ["[https://myapp.example.com"],](https://myapp.example.com"],)
+        "origin": "https://myapp.example.com",
         "methods": ["GET", "POST", "PUT", "DELETE"],
         "credentials": true
       }

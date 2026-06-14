@@ -52,7 +52,7 @@ ui5 serve --serve-csp-reports       # Collect violation reports
 
 **Access Reports**:
 ```
-[http://localhost:8080/.ui5/csp/csp-reports.json](http://localhost:8080/.ui5/csp/csp-reports.json)
+http://localhost:8080/.ui5/csp/csp-reports.json
 ```
 
 **See**: [Content Security Policy section](#content-security-policy-csp) below
@@ -95,7 +95,7 @@ ui5 serve --serve-csp-reports       # Collect violation reports
 
 **Endpoint**:
 ```
-[http://localhost:8080/.ui5/discovery/](http://localhost:8080/.ui5/discovery/)
+http://localhost:8080/.ui5/discovery/
 ```
 
 ---
@@ -126,7 +126,7 @@ ui5 serve --serve-csp-reports       # Collect violation reports
 
 **Endpoint**:
 ```
-[http://localhost:8080/test-resources/sap/ui/qunit/testrunner.html](http://localhost:8080/test-resources/sap/ui/qunit/testrunner.html)
+http://localhost:8080/test-resources/sap/ui/qunit/testrunner.html
 ```
 
 **Usage**:
@@ -170,7 +170,7 @@ Serves:   Compiled CSS
 
 **Endpoint**:
 ```
-[http://localhost:8080/resources/sap-ui-version.json](http://localhost:8080/resources/sap-ui-version.json)
+http://localhost:8080/resources/sap-ui-version.json
 ```
 
 **Content Example**:
@@ -330,7 +330,7 @@ ui5 serve --sap-csp-policies --serve-csp-reports
 
 **Access Reports**:
 ```bash
-curl [http://localhost:8080/.ui5/csp/csp-reports.json](http://localhost:8080/.ui5/csp/csp-reports.json)
+curl http://localhost:8080/.ui5/csp/csp-reports.json
 ```
 
 **Report Format**:
@@ -338,11 +338,11 @@ curl [http://localhost:8080/.ui5/csp/csp-reports.json](http://localhost:8080/.ui
 [
   {
     "csp-report": {
-      "document-uri": "[http://localhost:8080/index.html",](http://localhost:8080/index.html",)
+      "document-uri": "http://localhost:8080/index.html",
       "violated-directive": "script-src",
       "blocked-uri": "inline",
       "line-number": 42,
-      "source-file": "[http://localhost:8080/index.html"](http://localhost:8080/index.html")
+      "source-file": "http://localhost:8080/index.html"
     },
     "timestamp": "2025-11-21T12:00:00.000Z"
   }
@@ -378,7 +378,7 @@ Content-Security-Policy-Report-Only:
 
 3. **Review violations**:
    ```bash
-   curl [http://localhost:8080/.ui5/csp/csp-reports.json](http://localhost:8080/.ui5/csp/csp-reports.json) | jq
+   curl http://localhost:8080/.ui5/csp/csp-reports.json | jq
    ```
 
 4. **Fix violations** in code
@@ -628,8 +628,8 @@ ui5 serve --accept-remote-connections
 
 **Access from Other Devices**:
 ```
-[http://<your-ip-address>:8080](http://<your-ip-address>:8080)
-[https://<your-ip-address>:8443](https://<your-ip-address>:8443)  # With --h2
+http://<your-ip-address>:8080
+https://<your-ip-address>:8443  # With --h2
 ```
 
 **Find Your IP**:
@@ -649,7 +649,7 @@ ipconfig
 
 **Access**:
 ```
-[http://localhost:8080/test-resources/sap/ui/qunit/testrunner.html](http://localhost:8080/test-resources/sap/ui/qunit/testrunner.html)
+http://localhost:8080/test-resources/sap/ui/qunit/testrunner.html
 ```
 
 **Open Automatically**:
@@ -684,7 +684,7 @@ The discovery middleware provides file listings for test integration:
 
 **Endpoint**:
 ```
-[http://localhost:8080/.ui5/discovery/all.json](http://localhost:8080/.ui5/discovery/all.json)
+http://localhost:8080/.ui5/discovery/all.json
 ```
 
 **Response**:

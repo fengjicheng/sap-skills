@@ -200,7 +200,7 @@ APIs must include changelog entries in `artifact.json`:
       "state": "deprecated",
       "date": "2024-01-15",
       "version": "1.5.0",
-      "notes": "Deprecated in favor of Employee Management API v2.0. Migration guide available at [https://help.sap.com/migration-guide"](https://help.sap.com/migration-guide")
+      "notes": "Deprecated in favor of Employee Management API v2.0. Migration guide available at https://help.sap.com/migration-guide"
     },
     {
       "state": "active",
@@ -325,7 +325,7 @@ x-sap-stateInfo:
     "state": "deprecated",
     "date": "2024-01-15",
     "version": "1.5.0",
-    "notes": "Deprecated. Use NewAPI v2.0. Migration guide: [https://..."](https://...")
+    "notes": "Deprecated. Use NewAPI v2.0. Migration guide: https://..."
   }]
 }
 ```
@@ -529,7 +529,7 @@ paths:
 
         This endpoint will be decommissioned on January 15, 2025.
 
-        Migration guide: [https://help.sap.com/order-api-migration](https://help.sap.com/order-api-migration)
+        Migration guide: https://help.sap.com/order-api-migration
       x-sap-stateInfo:
         state: deprecated
         deprecationDate: "2024-01-15"
@@ -564,7 +564,7 @@ public class CustomerService {
      *             supports additional customer types.
      *             This method will be removed in version 3.0.0
      *             (scheduled for January 15, 2025).
-     *             Migration guide: [https://help.sap.com/customer-api-migration](https://help.sap.com/customer-api-migration)
+     *             Migration guide: https://help.sap.com/customer-api-migration
      */
     @Deprecated(since = "2.0.0", forRemoval = true)
     public Customer getCustomer(int customerId) throws NotFoundException {

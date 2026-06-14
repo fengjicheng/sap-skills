@@ -119,7 +119,7 @@ Enable enhanced debugging features with debug mode.
 Append `;debug=true` to the application URL:
 
 ```
-[https://your-tenant.sapanalytics.cloud/app.html?story=STORY_ID;debug=true](https://your-tenant.sapanalytics.cloud/app.html?story=STORY_ID;debug=true)
+https://your-tenant.sapanalytics.cloud/app.html?story=STORY_ID;debug=true
 ```
 
 ### Debug Mode Features
