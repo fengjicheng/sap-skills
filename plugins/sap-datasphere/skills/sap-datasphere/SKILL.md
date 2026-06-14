@@ -12,7 +12,7 @@ metadata:
 
 ## Related Skills
 
-- **dependency-upgrade**: Use for secure dependency policy, lockfile hygiene, and exact MCP server pins when managing large connector or integration projects with package-managed tooling
+- **sap-dependency-security**: Use for secure dependency policy, lockfile hygiene, and exact MCP server pins when managing large connector or integration projects with package-managed tooling
 
 ## Table of Contents
 
@@ -626,7 +626,7 @@ This plugin includes 3 specialized agents, 5 slash commands, and validation hook
 
 ## MCP Integration
 
-This skill integrates with the **SAP Datasphere MCP Server** (`@mariodefe/sap-datasphere-mcp`) providing 45 tools for live tenant interaction. The bundled MCP config uses an exact package pin governed by **dependency-upgrade** and validated by `npm run validate:mcp-security`.
+This skill integrates with the **SAP Datasphere MCP Server** (`@mariodefe/sap-datasphere-mcp`) providing 45 tools for live tenant interaction. The bundled MCP config uses an exact package pin governed by **sap-dependency-security** and validated by `npm run validate:mcp-security`.
 
 ### MCP Tools
 

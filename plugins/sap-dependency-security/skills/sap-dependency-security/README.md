@@ -1,6 +1,6 @@
-# Dependency Upgrade Skill
+# SAP Dependency Security Skill
 
-Dependency security and upgrade orchestration guidance for JavaScript, Node.js, and multi-language projects.
+SAP dependency security and upgrade orchestration guidance for JavaScript, Node.js, MCP servers, and multi-language projects.
 
 ## Trigger Keywords
 

@@ -26,7 +26,7 @@ metadata:
 - **sap-btp-cloud-platform**: Use for deployment options, HTML5 Application Repository service, and BTP integration
 - **sap-abap**: Use when connecting to ABAP backends or consuming OData services from SAP systems
 - **sap-api-style**: Use when documenting UI5 application APIs or following REST/OData standards
-- **dependency-upgrade**: Use for secure dependency upgrades, lockfile policies, supply-chain controls, and exact MCP server pins in SAPUI5 frontend toolchains
+- **sap-dependency-security**: Use for secure dependency upgrades, lockfile policies, supply-chain controls, and exact MCP server pins in SAPUI5 frontend toolchains
 
 Comprehensive skill for building enterprise applications with SAP UI5 framework.
 
@@ -41,7 +41,7 @@ This skill integrates with the official **@ui5/mcp-server** for live development
 - **Version Info**: Check releases with `/ui5-version` command
 - **Tool Catalog**: List all MCP tools with `/ui5-mcp-tools` command
 
-For setup and troubleshooting, see [references/mcp-integration.md](references/mcp-integration.md). MCP package pins are governed by **dependency-upgrade** and validated by `npm run validate:mcp-security`.
+For setup and troubleshooting, see [references/mcp-integration.md](references/mcp-integration.md). MCP package pins are governed by **sap-dependency-security** and validated by `npm run validate:mcp-security`.
 
 **Graceful Fallback**: All features work without MCP by using reference files and built-in templates.
 

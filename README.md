@@ -4,7 +4,7 @@
 
 [![License: GPL-3.0](https://img.shields.io/badge/License-GPL%203.0-blue.svg)](LICENSE)
 [![Plugins](https://img.shields.io/badge/Plugins-35-brightgreen.svg)](.claude-plugin/marketplace.json)
-[![Version](https://img.shields.io/badge/Version-2.2.3-orange.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/Version-2.3.0-orange.svg)](CHANGELOG.md)
 
 Production-ready plugins for SAP development with AI coding assistants. Each plugin provides context-aware skills that activate automatically when you work with SAP BTP, CAP, Fiori, ABAP, Analytics, and more.
 
@@ -83,7 +83,7 @@ Feature icons: ⌘ = commands · 🤖 = agents · 🔌 = MCP · LSP = language s
 | Plugin | Features | Description |
 |--------|----------|-------------|
 | **sap-api-style** | | API documentation standards following SAP guidelines |
-| **dependency-upgrade** | | Secure dependency upgrades, cooldown policies, lockfile hardening, supply-chain safeguards |
+| **sap-dependency-security** | | SAP dependency security, MCP executable trust, cooldown policies, lockfile hardening, supply-chain safeguards |
 | **sap-hana-cli** | 🔌MCP | SAP HANA Developer CLI for database operations |
 
 ### ☁️ SAP BTP Platform (15)
@@ -222,4 +222,4 @@ Open source under **GPL-3.0**. Contributions welcome:
 
 ---
 
-**Maintained by**: E.J. · **Repository**: [github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills) · **Last Updated**: 2026-06-12 (v2.2.3)
+**Maintained by**: E.J. · **Repository**: [github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills) · **Last Updated**: 2026-06-14 (v2.3.0)

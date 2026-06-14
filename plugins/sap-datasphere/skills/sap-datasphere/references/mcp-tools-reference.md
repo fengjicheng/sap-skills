@@ -6,7 +6,7 @@ This document provides comprehensive technical reference for all 45 MCP tools pr
 
 **MCP Server Details:**
 - **Package:** @mariodefe/sap-datasphere-mcp
-- **Version:** Latest from npm
+- **Version:** 1.2.1 pinned
 - **GitHub:** https://github.com/MarioDeFelipe/sap-datasphere-mcp
 - **Authentication:** OAuth 2.0 Client Credentials
 - **Protocol:** Model Context Protocol (MCP)

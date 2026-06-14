@@ -12,7 +12,7 @@ metadata:
 
 ## Related Skills
 
-- **dependency-upgrade**: Use for secure CLI/toolchain upgrades, lockfile hardening, and deterministic installs in UI5 tooling workflows
+- **sap-dependency-security**: Use for secure CLI/toolchain upgrades, lockfile hardening, and deterministic installs in UI5 tooling workflows
 
 ## Table of Contents
 - [Overview](#overview)

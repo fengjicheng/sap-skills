@@ -5,7 +5,7 @@ import path from "node:path";
 const repoRoot = process.cwd();
 const inventoryPath = path.join(
   repoRoot,
-  "plugins/dependency-upgrade/skills/dependency-upgrade/references/sap-mcp-inventory.json",
+  "plugins/sap-dependency-security/skills/sap-dependency-security/references/sap-mcp-inventory.json",
 );
 const pluginsDir = path.join(repoRoot, "plugins");
 

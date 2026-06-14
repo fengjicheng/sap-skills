@@ -116,8 +116,7 @@ npm scripts for local development:
     "validate": "./scripts/validate-json-schemas.sh && ./scripts/validate-reserved-words.sh && ./scripts/validate-bundled-resources.mjs && ./scripts/validate-command-agent-frontmatter.mjs && ./scripts/validate-inventory.sh && ./scripts/validate-mcp-security.mjs && ./scripts/test-hooks.sh",
     "validate:marketplace": "ajv validate -s schemas/marketplace.schema.json -d .claude-plugin/marketplace.json --all-errors",
     "validate:plugins": "./scripts/validate-json-schemas.sh",
-    "validate:mcp-security": "./scripts/validate-mcp-security.mjs",
-    "validate:mirror": "./scripts/sync-dependency-upgrade-mirror.sh --check"
+    "validate:mcp-security": "./scripts/validate-mcp-security.mjs"
   }
 }
 ```
@@ -288,7 +287,7 @@ Fix the validation errors above, or bypass with: git commit --no-verify
 ### For Maintainers
 - **Prevents Invalid Data**: Bad data never enters Git history
 - **Automated Quality Gates**: No manual schema checking needed
-- **Consistent Standards**: All 33 plugins follow same structure
+- **Consistent Standards**: All 35 plugins follow same structure
 - **Self-Documenting**: Schemas serve as structure documentation
 
 ### For the Project

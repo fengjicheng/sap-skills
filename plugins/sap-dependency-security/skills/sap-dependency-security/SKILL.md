@@ -1,10 +1,14 @@
 ---
-name: dependency-upgrade
-description: "Secure dependency upgrades with supply chain protection, cooldowns, staged rollout, and SAP/MCP executable trust policy. Use when upgrading deps, configuring security policies, preventing supply chain attacks, pinning SAP MCP servers, or reviewing SAP CAP/UI5/Fiori/HANA/Datasphere/SAC/BTP/ABAP dependency workflows."
+name: sap-dependency-security
+description: "SAP dependency security and MCP executable trust policy with secure upgrades, cooldowns, staged rollout, and supply-chain protection. Use when upgrading deps, configuring security policies, preventing supply chain attacks, pinning SAP MCP servers, or reviewing SAP CAP/UI5/Fiori/HANA/Datasphere/SAC/BTP/ABAP dependency workflows."
 license: GPL-3.0
+metadata:
+  version: "2.3.0"
+  last_verified: "2026-06-14"
+  known_issues: []
 ---
 
-# Dependency Upgrade
+# SAP Dependency Security
 
 ## Related Skills
 
@@ -15,7 +19,7 @@ license: GPL-3.0
 - **sap-datasphere**: For tenant-connected Datasphere MCP and CLI dependency review
 - **sap-sac-scripting**: For source-pinned SAC MCP setup and local install records
 
-Manage dependency upgrades with supply chain security, compatibility analysis, staged rollout, and comprehensive testing across all major package managers.
+Manage SAP dependency security and upgrades with supply chain protection, compatibility analysis, staged rollout, and comprehensive testing across all major package managers.
 
 ## When to Use This Skill
 

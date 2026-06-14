@@ -2,7 +2,7 @@
 
 Comprehensive guide for developing, maintaining, and publishing SAP skills for Claude Code.
 
-**Version**: 2.2.2 | **Last Updated**: 2026-05-31
+**Version**: 2.3.0 | **Last Updated**: 2026-06-14
 
 ---
 
@@ -201,13 +201,13 @@ npm outdated  # Check for SAP package updates
 
 ### Overview
 
-The SAP skills repository manages **33 production plugins** using a marketplace system with:
-- Coordinated versioning (all at v2.2.2)
+The SAP skills repository manages **35 production plugins** using a marketplace system with:
+- Coordinated versioning (all at v2.3.0)
 - Cross-references between related skills
 - Central registry (.claude-plugin/marketplace.json)
 - Single root manifest architecture
 
-**Scale**: 33 plugins across 5 user-facing groups:
+**Scale**: 35 plugins across 5 user-facing groups:
 - Tooling & Development (2 plugins)
 - SAP BTP Platform (15 skills)
 - UI Development (4 skills)
@@ -240,7 +240,7 @@ This enables Claude to discover complementary skills automatically.
 
 **Single Source of Truth**: `marketplace.json` metadata.version field
 
-All plugins share the same version (currently 2.2.2) and are updated together:
+All plugins share the same version (currently 2.3.0) and are updated together:
 ```bash
 # Update version in marketplace.json
 vim .claude-plugin/marketplace.json
@@ -325,7 +325,7 @@ Every SAP skill must document SDK versions:
 ---
 name: sap-cap-capire
 metadata:
-  version: "2.2.2"
+  version: "2.3.0"
   cap_version: "@sap/cds 9.4.x"
   last_verified: "2025-12-28"
   sap_btp_compatible: true
@@ -671,8 +671,8 @@ NOT:
 ./scripts/generate-marketplace.sh --dry-run
 
 # Validate output
-jq '.plugins | length' .claude-plugin/marketplace.json  # Should be 33
-jq '.metadata.total_skills' .claude-plugin/marketplace.json  # Should be 33
+jq '.plugins | length' .claude-plugin/marketplace.json  # Should be 35
+jq '.metadata.total_skills' .claude-plugin/marketplace.json  # Should be 35
 ```
 
 ---
@@ -702,7 +702,7 @@ jq '.metadata.total_skills' .claude-plugin/marketplace.json  # Should be 33
 3. **Update skill metadata**:
    ```yaml
    metadata:
-     version: "2.2.2"
+     version: "2.3.0"
      cap_version: "@sap/cds 9.5.x"  # Updated
      last_verified: "2026-03-28"     # Updated
    ```
@@ -847,7 +847,7 @@ https://github.com/secondsky/sap-skills/issues
 
 ---
 
-**Last Updated**: 2026-05-31
+**Last Updated**: 2026-06-14
 **Next Review**: 2026-08-31 (Quarterly)
-**Version**: 2.2.2
+**Version**: 2.3.0
 **Maintainer**: SAP Skills Repository Team | [github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills)

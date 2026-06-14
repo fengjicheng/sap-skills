@@ -14,7 +14,7 @@ metadata:
 
 - **sap-cap-capire**: Use for building CAP applications that consume AI services, including event handler patterns and async LLM orchestration
 - **sap-ai-core**: Use for AI Core platform setup, orchestration configuration, and model deployment
-- **dependency-upgrade**: Hardening guidance for npm package upgrades, lockfile policies, and secure dependency workflows
+- **sap-dependency-security**: Hardening guidance for npm package upgrades, lockfile policies, and secure dependency workflows
 
 The official SDK for SAP AI Core, SAP Generative AI Hub, and Orchestration Service.
 

@@ -29,7 +29,7 @@ metadata:
 - **sap-cloud-sdk-ai**: Use for SDK-level AI integration (chat completion, streaming, tool calling) in CAP event handlers
 - **sap-cloud-sdk-ai-python**: Use for Python-based AI integration with CAP Java or standalone BTP services
 - **sap-api-style**: Use when documenting CAP OData services or following API documentation standards
-- **dependency-upgrade**: Use for secure dependency, lockfile, supply-chain, and exact MCP server pin controls in CAP service repos
+- **sap-dependency-security**: Use for secure dependency, lockfile, supply-chain, and exact MCP server pin controls in CAP service repos
 
 ## Table of Contents
 - [Quick Start](#quick-start)
@@ -109,7 +109,7 @@ This skill integrates with the official CAP MCP (Model Context Protocol) server,
 - **Zero Configuration**: No credentials or environment variables required
 - **Offline-Capable**: All searches are local (model) or cached (docs)
 
-**Setup**: See [MCP Integration Guide](references/mcp-integration.md) for configuration with Claude Code, opencode, or GitHub Copilot. MCP package pins are governed by **dependency-upgrade** and validated by `npm run validate:mcp-security`.
+**Setup**: See [MCP Integration Guide](references/mcp-integration.md) for configuration with Claude Code, opencode, or GitHub Copilot. MCP package pins are governed by **sap-dependency-security** and validated by `npm run validate:mcp-security`.
 
 **Use Cases**: See [MCP Use Cases](references/mcp-use-cases.md) for real-world examples with quantified ROI (~$131K/developer/year time savings).
 

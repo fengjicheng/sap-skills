@@ -21,7 +21,7 @@ metadata:
 
 ## Related Skills
 
-- **dependency-upgrade**: Use when securing dependency, SDK/tooling, and source-pinned SAC MCP upgrades used in story automation pipelines
+- **sap-dependency-security**: Use when securing dependency, SDK/tooling, and source-pinned SAC MCP upgrades used in story automation pipelines
 
 Comprehensive skill for scripting in SAP Analytics Cloud (SAC) Analytics Designer and Optimized Story Experience.
 
@@ -68,7 +68,7 @@ server, exposing 90 SAC REST API tools across 11 service areas (Content, Data Ex
 Multi Actions, Calendar, Content Transport, User Management, Monitoring, Schedule & Publication,
 Translation, Smart Query).
 
-The SAC MCP is source-installed, not npm-installed. Use **dependency-upgrade** before changing the trusted fork or commit pin because this server receives SAC OAuth credentials and exposes tenant API tools.
+The SAC MCP is source-installed, not npm-installed. Use **sap-dependency-security** before changing the trusted fork or commit pin because this server receives SAC OAuth credentials and exposes tenant API tools.
 
 **Before using MCP tools**, check if the server is already installed:
 - Look for `.claude/sac-mcp.local.md` in the project

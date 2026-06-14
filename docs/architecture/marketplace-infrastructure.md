@@ -8,13 +8,13 @@ Technical documentation for the SAP Skills marketplace system.
 
 ## Overview
 
-The SAP skills repository uses a **marketplace system** to manage 33 production plugins with:
-- Coordinated versioning (all at v2.2.2)
+The SAP skills repository uses a **marketplace system** to manage 35 production plugins with:
+- Coordinated versioning (all at v2.3.0)
 - Cross-references between related skills
 - Central registry (.claude-plugin/marketplace.json)
 - Single root manifest architecture
 
-**Scale**: 33 plugins across 8 manifest categories (`abap`, `ai`, `btp`, `cap`, `data-analytics`, `hana`, `tooling`, `ui-development`)
+**Scale**: 35 plugins across 8 manifest categories (`abap`, `ai`, `btp`, `cap`, `data-analytics`, `hana`, `tooling`, `ui-development`)
 
 ---
 
@@ -23,7 +23,7 @@ The SAP skills repository uses a **marketplace system** to manage 33 production 
 ### Skill Families
 
 **Tooling & Development** (2 plugins):
-- sap-api-style, dependency-upgrade
+- sap-api-style, sap-dependency-security
 
 **SAP BTP Platform** (14 skills):
 - sap-btp-best-practices, sap-btp-build-work-zone-advanced, sap-btp-business-application-studio,
@@ -69,8 +69,8 @@ This enables Claude to:
 3. Script propagates version to all plugin.json files
 4. Commit all changes together
 
-**Current Version**: 2.2.2
-**Last Updated**: 2026-05-31
+**Current Version**: 2.3.0
+**Last Updated**: 2026-06-14
 
 ---
 
@@ -108,18 +108,18 @@ plugins/sap-cap-capire/
 ### marketplace.json Structure
 
 **Location**: `.claude-plugin/marketplace.json`
-**Size**: ~48KB (33 plugins)
+**Size**: ~40KB (35 plugins)
 **Auto-Generated**: By `generate-marketplace.sh`
 
 **Structure**:
 ```json
 {
   "name": "sap-skills",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "metadata": {
-    "version": "2.2.2",
-    "last_updated": "2026-05-31",
-    "total_skills": 33,
+    "version": "2.3.0",
+    "last_updated": "2026-06-14",
+    "total_skills": 35,
     "categories": [
       "abap", "ai", "btp", "cap",
       "data-analytics", "hana",
@@ -130,7 +130,7 @@ plugins/sap-cap-capire/
     {
       "name": "sap-cap-capire",
       "description": "...",
-      "version": "2.2.2",
+      "version": "2.3.0",
       "source": "plugins/sap-cap-capire",
       "license": "GPL-3.0",
       "keywords": [...],
@@ -182,5 +182,5 @@ This enables portfolio-wide skill discovery.
 
 ---
 
-**Last Updated**: 2026-05-31
+**Last Updated**: 2026-06-14
 **Maintainer**: SAP Skills Repository Team

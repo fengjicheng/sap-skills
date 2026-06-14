@@ -17,7 +17,7 @@ jobs:
       - name: Build image
         run: docker build -t sap-app:${{ github.sha }} .
       - name: Scan image
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: sap-app:${{ github.sha }}
           format: table
@@ -25,8 +25,8 @@ jobs:
           vuln-type: os,library
           severity: CRITICAL,HIGH
 
-Review checklist:
-- [ ] Base image uses a digest pin
-- [ ] Runtime user is non-root
-- [ ] No service keys or `.env` files copied into the image
-- [ ] Kyma/Kubernetes manifests drop unnecessary capabilities
+# Review checklist:
+# - [ ] Base image uses a digest pin
+# - [ ] Runtime user is non-root
+# - [ ] No service keys or `.env` files copied into the image
+# - [ ] Kyma/Kubernetes manifests drop unnecessary capabilities

@@ -10,7 +10,6 @@
     "validate:frontmatter-extra": "./scripts/validate-command-agent-frontmatter.mjs",
     "validate:inventory": "./scripts/validate-inventory.sh",
     "validate:mcp-security": "./scripts/validate-mcp-security.mjs",
-    "validate:mirror": "./scripts/sync-dependency-upgrade-mirror.sh --check",
     "test:hooks": "./scripts/test-hooks.sh"
   },
   "devDependencies": {

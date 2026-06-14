@@ -675,10 +675,10 @@ run_ui5_linter({ projectPath: "/path/to/project" })
 
 | MCP Server | Release Date | UI5 Support | Status |
 |------------|--------------|-------------|--------|
-| v0.2.0 | 2025-12-12 | 1.84.0+ | **Current** |
+| v0.2.11 | 2025-12-12 | 1.84.0+ | **Current** |
 | v0.1.0 | 2025-09-03 | 1.84.0+ | Deprecated |
 
-**Recommended**: Use latest (v0.2.0)
+**Recommended**: Use pinned version `v0.2.11`
 
 ### UI5 Framework Versions
 
@@ -694,7 +694,7 @@ MCP server supports UI5 versions:
 
 | Plugin Version | MCP Server | Breaking Changes |
 |----------------|------------|------------------|
-| v3.0.0 | v0.2.0 | Initial MCP integration |
+| v3.0.0 | v0.2.11 | Initial MCP integration |
 | v2.1.0 | N/A | No MCP (reference files only) |
 
 ---
@@ -787,5 +787,5 @@ Catch error:
 ---
 
 **Last Updated**: 2025-12-28
-**MCP Server Version**: 0.2.0
+**MCP Server Version**: 0.2.11
 **Plugin Version**: 3.0.0

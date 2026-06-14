@@ -26,7 +26,7 @@ SAP AI Core with unified authentication.
 - **sap-ai-core**: Platform setup, deployments, resource groups, and model management in SAP AI Core
 - **sap-cloud-sdk-ai**: JavaScript/TypeScript and Java equivalents of this SDK
 - **sap-hana-ml**: HANA-side machine learning in Python
-- **dependency-upgrade**: Pip dependency hygiene and upgrade patterns
+- **sap-dependency-security**: Pip dependency hygiene and upgrade patterns
 
 ### Related external skills
 

@@ -4,7 +4,11 @@
 # pyproject.toml + uv.lock
 uv lock
 uv sync --frozen
-pip-audit --requirement requirements.txt
+uv audit
+
+# If your audit tooling requires requirements.txt output from uv:
+uv export --format requirements-txt --output-file requirements.txt
+pip-audit -r requirements.txt
 
 # requirements.txt with hashes when using pip-tools:
 pip-compile --generate-hashes --output-file requirements.txt pyproject.toml

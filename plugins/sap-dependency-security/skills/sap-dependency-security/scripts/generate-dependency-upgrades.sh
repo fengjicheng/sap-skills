@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Generate hardened dependency-upgrade configuration candidates from templates.
+# Generate hardened SAP dependency security configuration candidates from templates.
 # Defaults to dry-run output on stdout. Pass --write to write a selected
 # candidate into an output directory after manual review.
 
