@@ -1,0 +1,8 @@
+{
+  "hook_event_name": "PreToolUse",
+  "tool_name": "Write",
+  "tool_input": {
+    "file_path": "planning/app.js",
+    "content": "const version = Table_1.getPlanning().getPrivateVersion('Plan'); eval(userInput);"
+  }
+}

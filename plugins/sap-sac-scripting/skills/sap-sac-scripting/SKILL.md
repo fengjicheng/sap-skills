@@ -268,4 +268,4 @@ console.log("Selections:", JSON.stringify(Chart_1.getSelections()));
 
 ---
 
-**Version**: 3.1.0 | **Last Verified**: 2026-06-11 | **SAC Version**: Q2 2026 (2026.8) | **API Version**: 2025.20 (OSE Q2 2026)
+**SAC Version**: Q2 2026 (2026.8) | **API Version**: 2025.20 (OSE Q2 2026)

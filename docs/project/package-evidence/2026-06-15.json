@@ -3,6 +3,46 @@
   "observedAt": "2026-06-15",
   "collectionMethod": "Public package registry checks from npm view and pip index. This is package freshness evidence only, not live SAP tenant/runtime verification.",
   "npm": {
+    "@sap/cds": {
+      "latest": "9.9.1",
+      "command": "npm view @sap/cds version --json",
+      "repoDocumentedRange": "@sap/cds 9.7.x",
+      "status": "upgrade_candidate",
+      "notes": "Package registry freshness only; CAP runtime compatibility not validated."
+    },
+    "@sap/cds-dk": {
+      "latest": "9.9.2",
+      "command": "npm view @sap/cds-dk version --json",
+      "repoDocumentedRange": "@sap/cds-dk 9.7.x",
+      "status": "upgrade_candidate",
+      "notes": "Package registry freshness only; CAP tooling compatibility not validated."
+    },
+    "@cap-js/mcp-server": {
+      "latest": "0.0.5",
+      "command": "npm view @cap-js/mcp-server version --json",
+      "repoApprovedPin": "0.0.5",
+      "status": "current"
+    },
+    "@sap-ux/fiori-mcp-server": {
+      "latest": "1.4.0",
+      "command": "npm view @sap-ux/fiori-mcp-server version --json",
+      "repoApprovedPin": "1.4.0",
+      "status": "current"
+    },
+    "@ui5/cli": {
+      "latest": "4.0.56",
+      "command": "npm view @ui5/cli version --json",
+      "repoDocumentedVersion": "4.0.55",
+      "status": "upgrade_candidate",
+      "notes": "Package registry freshness only; project-specific UI5 build behavior remains fixture/smoke-only."
+    },
+    "@ui5/linter": {
+      "latest": "1.22.0",
+      "command": "npm view @ui5/linter version --json",
+      "repoDocumentedVersion": "1.22.0",
+      "status": "current",
+      "notes": "Package registry freshness only; project-specific lint behavior requires target app evidence."
+    },
     "@ui5/mcp-server": {
       "latest": "0.2.12",
       "command": "npm view @ui5/mcp-server version dist-tags --json",
@@ -15,17 +55,33 @@
       "repoApprovedPin": "1.2.1",
       "status": "upgrade_candidate"
     },
-    "@cap-js/mcp-server": {
-      "latest": "0.0.5",
-      "command": "npm view @cap-js/mcp-server version dist-tags --json",
-      "repoApprovedPin": "0.0.5",
-      "status": "current"
+    "hana-cli": {
+      "latest": "4.202605.2",
+      "command": "npm view hana-cli version --json",
+      "repoDocumentedVersion": "4.202605.2",
+      "status": "current",
+      "notes": "Package registry freshness only; HANA connection/object inspection remains pending without live system evidence."
     },
-    "@sap-ux/fiori-mcp-server": {
-      "latest": "1.4.0",
-      "command": "npm view @sap-ux/fiori-mcp-server version dist-tags --json",
-      "repoApprovedPin": "1.4.0",
-      "status": "current"
+    "@sap/hana-client": {
+      "latest": "2.28.22",
+      "command": "npm view @sap/hana-client version --json",
+      "repoDocumentedVersion": "2.28.22",
+      "status": "current",
+      "notes": "Package registry freshness only; database connectivity not validated."
+    },
+    "@sap/hdi-deploy": {
+      "latest": "5.6.1",
+      "command": "npm view @sap/hdi-deploy version --json",
+      "repoDocumentedVersion": "5.6.1",
+      "status": "current",
+      "notes": "Package registry freshness only; HDI deployment behavior not validated."
+    },
+    "@sap-ai-sdk/orchestration": {
+      "latest": "2.11.0",
+      "command": "npm view @sap-ai-sdk/orchestration version --json",
+      "repoDocumentedVersion": "2.11.0",
+      "status": "current",
+      "notes": "Package registry freshness only; SAP AI Core runtime behavior not validated."
     },
     "hana-mcp-server": {
       "latest": "0.3.1",
@@ -40,6 +96,13 @@
       "command": "python3 -m pip index versions sap-datasphere-mcp",
       "repoApprovedPin": "1.2.1",
       "status": "upgrade_candidate"
+    },
+    "hana-ml": {
+      "latest": "2.28.26042901",
+      "command": "python3 -m pip index versions hana-ml",
+      "repoDocumentedVersion": "2.28.26042901",
+      "status": "current",
+      "notes": "Package registry freshness only; HANA PAL/APL or runtime execution not validated."
     }
   }
 }

@@ -15,6 +15,8 @@
       "approvalReason": "Current approved exact pin remains aligned with public latest.",
       "owner": "CAP project",
       "usedBy": "plugins/sap-cap-capire/.mcp.json",
+      "operationClasses": ["local-only"],
+      "approvalRequired": false,
       "trust": "CAP model and documentation access; no tenant credentials in the bundled config.",
       "envContract": [],
       "scan": "npm view @cap-js/mcp-server@0.0.5 version dist.integrity && npm audit --package-lock-only"
@@ -28,6 +30,8 @@
       "approvalReason": "Upgrade candidate only; tenant-safe masking and tool compatibility must be reviewed before pin changes.",
       "owner": "Community package",
       "usedBy": "plugins/sap-datasphere/.mcp.json",
+      "operationClasses": ["read-only tenant", "mutating tenant", "destructive"],
+      "approvalRequired": true,
       "trust": "Datasphere tenant access through OAuth environment variables; update only after explicit review.",
       "envContract": [
         {"name": "DATASPHERE_BASE_URL", "secret": false, "required": true, "format": "https URL for the tenant", "access": "tenant metadata/API endpoint"},
@@ -46,6 +50,8 @@
       "approvalReason": "Current approved exact pin remains aligned with public latest.",
       "owner": "SAP Fiori tools / open-ux-tools",
       "usedBy": "plugins/sap-fiori-tools/.mcp.json",
+      "operationClasses": ["local-only"],
+      "approvalRequired": false,
       "trust": "Newest exact pin approved by maintainer request on 2026-06-14 despite the SAP 14-day cooldown default.",
       "envContract": [],
       "scan": "npm view @sap-ux/fiori-mcp-server@1.4.0 version dist.integrity && npm audit --package-lock-only"
@@ -59,6 +65,8 @@
       "approvalReason": "Upgrade candidate only; tool-name and lint/scaffold compatibility must be reviewed before pin changes.",
       "owner": "UI5 project",
       "usedBy": "plugins/sapui5/.mcp.json",
+      "operationClasses": ["local-only"],
+      "approvalRequired": false,
       "trust": "UI5 documentation, scaffolding, and lint tooling; no tenant credentials in the bundled config.",
       "envContract": [
         {"name": "UI5_MCP_SERVER_RESPONSE_NO_RESOURCES", "secret": false, "required": false, "format": "boolean string", "access": "response-size compatibility flag"}
@@ -74,6 +82,8 @@
       "approvalReason": "Current approved exact pin remains aligned with public latest.",
       "owner": "Community package",
       "usedBy": "plugins/sap-hana-cli/.mcp.json",
+      "operationClasses": ["read-only tenant", "mutating tenant", "destructive"],
+      "approvalRequired": true,
       "trust": "HANA database access through environment variables; update only after explicit review.",
       "envContract": [
         {"name": "HANA_HOST", "secret": false, "required": true, "format": "hostname", "access": "HANA endpoint"},
@@ -99,6 +109,8 @@
       "pathEnv": "SAC_MCP_PATH",
       "commitEnv": "SAC_MCP_COMMIT",
       "usedBy": "plugins/sap-sac-scripting/.mcp.json",
+      "operationClasses": ["read-only tenant", "mutating tenant", "destructive"],
+      "approvalRequired": true,
       "trust": "Trusted secondsky fork source install. This MCP uses SAC OAuth credentials and exposes read/write SAC REST API tools.",
       "envContract": [
         {"name": "SAC_MCP_PATH", "secret": false, "required": true, "format": "local path placeholder", "access": "local source checkout"},

@@ -1,10 +1,20 @@
 #!/usr/bin/env node
 import fs from "node:fs";
 import path from "node:path";
+import {
+  frontmatterMetadata,
+  parseFrontmatter,
+  readText,
+  relPath,
+  repoRootFrom,
+  stripCodeFences,
+  walk,
+} from "./lib/validation-utils.mjs";
 
-const repoRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const repoRoot = repoRootFrom(import.meta.url);
 const pluginsRoot = path.join(repoRoot, "plugins");
 const auditReport = path.join(repoRoot, "docs/project/plugin-skills-audit-2026-06-14.md");
+const ledgerPath = path.join(repoRoot, "docs/project/source-verification-ledger.json");
 const expectedVersion = "2.3.0";
 const staleAfterDays = 90;
 const allowedSkillRootEntries = new Set([
@@ -24,33 +34,12 @@ const requiredSkillSections = [
   ["Source or verification notes", /Official Sources|Sources|Documentation Source|source_docs|documentation_source|sap_help|Source/i],
 ];
 
-function walk(dir, out = []) {
-  if (!fs.existsSync(dir)) {
-    return out;
-  }
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) {
-      walk(full, out);
-    } else if (entry.isFile()) {
-      out.push(full);
-    }
-  }
-  return out;
-}
-
 function rel(file) {
-  return path.relative(repoRoot, file).replaceAll(path.sep, "/");
-}
-
-function parseFrontmatter(content) {
-  const match = content.match(/^---\n([\s\S]*?)\n---\n/);
-  return match ? match[1] : "";
+  return relPath(repoRoot, file);
 }
 
 function metadataValue(frontmatter, key) {
-  const match = frontmatter.match(new RegExp(`^  ${key}:\\s*["']?([^"'\\n]+)["']?\\s*$`, "m"));
-  return match ? match[1].trim() : "";
+  return frontmatterMetadata(frontmatter, key);
 }
 
 function daysSince(dateText, now = new Date()) {
@@ -62,7 +51,41 @@ function daysSince(dateText, now = new Date()) {
   return Math.floor((today.getTime() - parsed.getTime()) / 86_400_000);
 }
 
+function extractBodyMetadata(content) {
+  const parsed = parseFrontmatter(content);
+  const frontmatterLineCount = content.slice(0, content.length - parsed.body.length).split(/\r?\n/).length - 1;
+  const lines = stripCodeFences(parsed.body).split(/\r?\n/);
+  const items = [];
+
+  lines.forEach((line, index) => {
+    const lineNumber = frontmatterLineCount + index + 1;
+    const skillVersion = line.match(/\*\*Skill Version\*\*:\s*([^|*\r\n]+)/i);
+    if (skillVersion) {
+      items.push({ key: "version", label: "Skill Version", value: normalizedVersion(skillVersion[1]), lineNumber });
+    }
+
+    const footerVersion = line.match(/\*\*Version\*\*:\s*([^|*\r\n]+)/i);
+    if (footerVersion && /\b(Last Verified|Last Updated|Next Review|Skill Version)\b/i.test(line)) {
+      items.push({ key: "version", label: "Version", value: normalizedVersion(footerVersion[1]), lineNumber });
+    }
+
+    const lastVerified = line.match(/\*\*Last Verified\*\*:\s*([0-9]{4}-[0-9]{2}-[0-9]{2})|Last Verified[^0-9]*([0-9]{4}-[0-9]{2}-[0-9]{2})/i);
+    if (lastVerified) {
+      items.push({ key: "last_verified", label: "Last Verified", value: lastVerified[1] || lastVerified[2], lineNumber });
+    }
+  });
+
+  return items.filter((item) => item.value);
+}
+
+function normalizedVersion(value) {
+  const match = value.trim().match(/\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?/);
+  return match ? match[0] : value.trim();
+}
+
 const auditText = fs.existsSync(auditReport) ? fs.readFileSync(auditReport, "utf8") : "";
+const ledger = fs.existsSync(ledgerPath) ? JSON.parse(fs.readFileSync(ledgerPath, "utf8")) : { entries: [] };
+const ledgerByPlugin = new Map((ledger.entries ?? []).map((entry) => [entry.plugin, entry]));
 const markdownFiles = walk(pluginsRoot).filter((file) => file.endsWith(".md"));
 const allPluginFiles = walk(pluginsRoot);
 const errors = [];
@@ -113,8 +136,8 @@ for (const pluginName of pluginDirs) {
     }
   }
 
-  const content = fs.readFileSync(skillFile, "utf8");
-  const frontmatter = parseFrontmatter(content);
+  const content = readText(skillFile);
+  const frontmatter = parseFrontmatter(content).raw;
   if (!frontmatter) {
     errors.push(`${rel(skillFile)}: missing YAML frontmatter`);
     continue;
@@ -152,6 +175,19 @@ for (const pluginName of pluginDirs) {
       } else {
         warnings.push(`${pluginName}: metadata.last_verified is stale (${lastVerified}, ${ageDays} days) and documented in audit report`);
       }
+    }
+  }
+
+  const ledgerEntry = ledgerByPlugin.get(pluginName);
+  for (const item of extractBodyMetadata(content)) {
+    if (item.key === "version" && version && item.value !== version) {
+      errors.push(`${rel(skillFile)}:${item.lineNumber}: body/footer ${item.label} '${item.value}' conflicts with metadata.version '${version}'`);
+    }
+    if (item.key === "last_verified" && lastVerified && item.value !== lastVerified) {
+      errors.push(`${rel(skillFile)}:${item.lineNumber}: body/footer ${item.label} '${item.value}' conflicts with metadata.last_verified '${lastVerified}'`);
+    }
+    if (item.key === "last_verified" && ledgerEntry?.supportedLastVerified && item.value !== ledgerEntry.supportedLastVerified) {
+      errors.push(`${rel(skillFile)}:${item.lineNumber}: body/footer ${item.label} '${item.value}' conflicts with ledger supportedLastVerified '${ledgerEntry.supportedLastVerified}'`);
     }
   }
 }

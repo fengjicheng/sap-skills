@@ -1,20 +1,17 @@
 #!/usr/bin/env node
-import fs from "node:fs";
 import path from "node:path";
+import {
+  frontmatterList,
+  parseFrontmatter,
+  readText,
+  relPath,
+  repoRootFrom,
+  walk,
+} from "./lib/validation-utils.mjs";
 
-const repoRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const repoRoot = repoRootFrom(import.meta.url);
 const commandsRoot = path.join(repoRoot, "plugins");
 const errors = [];
-
-function walk(dir, out = []) {
-  if (!fs.existsSync(dir)) return out;
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) walk(full, out);
-    else if (entry.isFile() && entry.name.endsWith(".md")) out.push(full);
-  }
-  return out;
-}
 
 function section(text, heading) {
   const lines = text.split(/\r?\n/);
@@ -30,20 +27,18 @@ function section(text, heading) {
   return lines.slice(start, end).join("\n");
 }
 
-function frontmatter(text) {
-  const match = text.match(/^---\n([\s\S]*?)\n---\n/);
-  return match ? match[1] : "";
+function allowedTools(text) {
+  return frontmatterList(parseFrontmatter(text).raw, "allowed-tools");
 }
 
 function canWrite(text) {
-  const fm = frontmatter(text);
-  const allowedTools = fm.match(/^allowed-tools:\n([\s\S]*?)(?=^[A-Za-z][A-Za-z0-9_-]*:|\z)/m)?.[1] ?? "";
-  return /^\s+-\s+(Write|Edit|MultiEdit)\b/m.test(allowedTools);
+  const tools = new Set(allowedTools(text));
+  return ["Write", "Edit", "MultiEdit"].some((tool) => tools.has(tool));
 }
 
 for (const file of walk(commandsRoot).filter((item) => /\/commands\/[^/]+\.md$/.test(item))) {
-  const rel = path.relative(repoRoot, file).replaceAll(path.sep, "/");
-  const text = fs.readFileSync(file, "utf8");
+  const rel = relPath(repoRoot, file);
+  const text = readText(file);
   const contract = section(text, "Output Contract");
   if (!contract) {
     errors.push(`${rel}: missing ## Output Contract`);

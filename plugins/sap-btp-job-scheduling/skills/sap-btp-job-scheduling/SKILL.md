@@ -399,7 +399,5 @@ Limits stack - both can apply simultaneously.
 
 ---
 
-**Skill Version**: 1.0.1
-**Last Updated**: 2025-11-27
 **License**: GPL-3.0
 **Maintainer**: SAP Skills Team | [https://github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills)

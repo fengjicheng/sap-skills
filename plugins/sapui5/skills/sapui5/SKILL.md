@@ -504,6 +504,4 @@ When using this skill:
 ---
 
 **License**: GPL-3.0
-**Version**: 1.4.0
-**Last Verified**: 2025-11-27
 **Next Review**: 2026-02-27 (Quarterly)

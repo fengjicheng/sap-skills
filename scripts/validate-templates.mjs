@@ -2,8 +2,9 @@
 import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { repoRootFrom } from "./lib/validation-utils.mjs";
 
-const repoRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const repoRoot = repoRootFrom(import.meta.url);
 const pluginsRoot = path.join(repoRoot, "plugins");
 const errors = [];
 

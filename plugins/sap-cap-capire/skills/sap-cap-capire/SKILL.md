@@ -124,7 +124,7 @@ This skill integrates with the official CAP MCP (Model Context Protocol) server,
 
 **Setup**: See [MCP Integration Guide](references/mcp-integration.md) for configuration with Claude Code, opencode, or GitHub Copilot. MCP package pins are governed by **sap-dependency-security** and validated by `npm run validate:mcp-security`.
 
-**Use Cases**: See [MCP Use Cases](references/mcp-use-cases.md) for real-world examples with quantified ROI (~$131K/developer/year time savings).
+**Use Cases**: See [MCP Use Cases](references/mcp-use-cases.md) for illustrative local workflow examples and planning assumptions, not repository-verified ROI.
 
 **Agent Integration**: The specialized agents (cap-cds-modeler, cap-service-developer, cap-project-architect, cap-performance-debugger) automatically use these MCP tools as part of their workflows.
 
@@ -133,7 +133,7 @@ This skill integrates with the official CAP MCP (Model Context Protocol) server,
 Use MCP first for local model and docs questions, then fall back to direct file search when MCP is unavailable. Use `rg -n "<entity|service|aspect|annotation|handler|cds compile|deployment>" references/*.md srv db app` to locate the narrowest reference before loading long CAP guides.
 
 - Use `references/mcp-integration.md` for MCP configuration and package pin checks.
-- Use `references/mcp-use-cases.md` only for workflow selection and ROI examples.
+- Use `references/mcp-use-cases.md` only for workflow selection and illustrative impact examples.
 - Use `.lsp.json` as a sidecar for editor integration; it is intentionally not exposed as a manifest field.
 - Mark live deployment, HANA, XSUAA, and multitenancy verification pending unless the target project or tenant evidence is available.
 
@@ -431,7 +431,7 @@ entity Books { ... }
 19. **references/cql-patterns.md** - CQL usage patterns
 20. **references/cli-complete.md** - Complete CLI reference
 21. **references/mcp-integration.md** - MCP server setup and usage guide *(new)*
-22. **references/mcp-use-cases.md** - Real-world MCP scenarios with quantified ROI *(new)*
+22. **references/mcp-use-cases.md** - Illustrative MCP workflow scenarios *(new)*
 
 ### Templates (8 files)
 1. **templates/bookshop-schema.cds** - Complete data model example
@@ -482,9 +482,7 @@ cds version               # Show version info
 - Don't write custom OData providers
 
 ## Version Information
-- **Skill Version**: 2.1.2
 - **CAP Version**: @sap/cds 9.7.x
 - **MCP Version**: @cap-js/mcp-server 0.0.5
 - **LSP Version**: @sap/cds-lsp 9.7.x
-- **Last Verified**: 2026-02-22
 - **License**: GPL-3.0

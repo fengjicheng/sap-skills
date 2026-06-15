@@ -1,13 +1,25 @@
 #!/usr/bin/env node
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
+import {
+  readText,
+  relPath,
+  repoRootFrom,
+  walk,
+} from "./lib/validation-utils.mjs";
 
-const repoRoot = process.cwd();
+const repoRoot = repoRootFrom(import.meta.url);
 const inventoryPath = path.join(
   repoRoot,
   "plugins/sap-dependency-security/skills/sap-dependency-security/references/sap-mcp-inventory.json",
 );
 const pluginsDir = path.join(repoRoot, "plugins");
+const allowedOperationClasses = new Set([
+  "local-only",
+  "read-only tenant",
+  "mutating tenant",
+  "destructive",
+]);
 
 const errors = [];
 const referencedPackages = new Set();
@@ -66,6 +78,30 @@ function firstNpxPackageArg(args) {
   return args.find((arg) => typeof arg === "string" && !arg.startsWith("-"));
 }
 
+function validateOperationPolicy(label, policy) {
+  if (!Array.isArray(policy.operationClasses) || policy.operationClasses.length === 0) {
+    fail(`${label}: inventory entry must define non-empty operationClasses`);
+    return;
+  }
+
+  for (const operationClass of policy.operationClasses) {
+    if (!allowedOperationClasses.has(operationClass)) {
+      fail(`${label}: unsupported operation class '${operationClass}'`);
+    }
+  }
+
+  if (typeof policy.approvalRequired !== "boolean") {
+    fail(`${label}: inventory entry must define approvalRequired boolean`);
+  }
+
+  if (
+    policy.operationClasses.some((operationClass) => ["mutating tenant", "destructive"].includes(operationClass))
+    && policy.approvalRequired !== true
+  ) {
+    fail(`${label}: mutating/destructive operation classes require approvalRequired=true`);
+  }
+}
+
 function validateNpxServer(relPath, serverName, serverConfig, inventory) {
   const args = Array.isArray(serverConfig.args) ? serverConfig.args : [];
   for (const arg of args) {
@@ -88,6 +124,7 @@ function validateNpxServer(relPath, serverName, serverConfig, inventory) {
   }
 
   referencedPackages.add(name);
+  validateOperationPolicy(`${relPath}:${serverName}`, packagePolicy);
 
   if (!version) {
     fail(`${relPath}:${serverName}: ${name} must be exact-pinned, found bare package`);
@@ -114,6 +151,7 @@ function validateSourceServer(relPath, serverName, serverConfig, inventory) {
   }
 
   referencedSources.add(sourceKey);
+  validateOperationPolicy(sourceKey, sourcePolicy);
 
   const args = Array.isArray(serverConfig.args) ? serverConfig.args : [];
   const env = serverConfig.env && typeof serverConfig.env === "object" ? serverConfig.env : {};
@@ -162,6 +200,36 @@ for (const packageName of Object.keys(inventory.npmPackages ?? {})) {
 for (const sourceKey of Object.keys(inventory.sourceServers ?? {})) {
   if (!referencedSources.has(sourceKey)) {
     fail(`SAP MCP inventory source entry is stale or unused: ${sourceKey}`);
+  }
+}
+
+for (const file of listMcpDocs()) {
+  validateMcpDoc(file);
+}
+
+function listMcpDocs() {
+  return walk(pluginsDir).filter((file) => {
+    const rel = relPath(repoRoot, file);
+    return /\/commands\/[^/]*mcp[^/]*\.md$/i.test(rel)
+      || /\/references\/[^/]*mcp[^/]*\.md$/i.test(rel);
+  });
+}
+
+function validateMcpDoc(file) {
+  const rel = relPath(repoRoot, file);
+  const text = readText(file);
+  const hasOperationClass = [...allowedOperationClasses].some((operationClass) => text.includes(operationClass));
+  if (!hasOperationClass) {
+    fail(`${rel}: MCP docs must classify operation safety as local-only, read-only tenant, mutating tenant, or destructive`);
+  }
+
+  const tenantMutationTerms = /\b(create|update|delete|drop|deploy|publish|execute|start|stop|trigger|revoke|assign|unassign|reset)\b/i;
+  if (tenantMutationTerms.test(text) && !/\b(explicit (?:user )?(?:approval|confirmation)|confirm before|approval required|do not .*without explicit)\b/i.test(text)) {
+    fail(`${rel}: MCP docs with mutating/destructive terms must require explicit user approval`);
+  }
+
+  if (/\b(tenant|credential|token|secret|destination|OAuth)\b/i.test(text) && !/\b(live tenant|tenant-affecting|credentials?|tokens?|secrets?|environment variables?)\b/i.test(text)) {
+    fail(`${rel}: MCP docs mentioning tenant or credentials must state tenant/credential safety boundaries`);
   }
 }
 

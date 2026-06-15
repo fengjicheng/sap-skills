@@ -442,8 +442,6 @@ For partner details: See `references/partners.md`
 
 ## Version Information
 
-- **Skill Version**: 1.1.0
-- **Last Verified**: 2025-11-27
 - **Source Last Updated**: 2025-11-21
 - **Based On**: SAP BTP Developer Guide ([https://github.com/SAP-docs/btp-developer-guide](https://github.com/SAP-docs/btp-developer-guide))
 - **Next Review**: 2026-02-21

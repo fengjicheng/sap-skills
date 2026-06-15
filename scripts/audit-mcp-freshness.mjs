@@ -2,8 +2,9 @@
 import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
+import { repoRootFrom } from "./lib/validation-utils.mjs";
 
-const repoRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const repoRoot = repoRootFrom(import.meta.url);
 const inventoryPath = path.join(repoRoot, "plugins/sap-dependency-security/skills/sap-dependency-security/references/sap-mcp-inventory.json");
 const writeIndex = process.argv.indexOf("--write-evidence");
 const writePath = writeIndex === -1 ? null : process.argv[writeIndex + 1];

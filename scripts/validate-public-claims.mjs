@@ -9,9 +9,12 @@ const scanRoots = [
   "CLAUDE.md",
   ".claude-plugin/marketplace.json",
   "docs/project",
+  "plugins",
 ];
 const unsafeClaimPattern = /\b(production-ready|production-tested|ready for production|ready to ship|100%\s+(?:compliant|compliance|error prevention|backward compatible)|verified\s*-\s*ready to ship)\b/i;
+const quantifiedOutcomePattern = /\b(ROI|time savings|hours saved|minutes saved|days saved|annual value|productivity gains|cost reduction|total ROI|\$[0-9][0-9,]*(?:\+)?(?:\/year| per year)?|\d+(?:\.\d+)?\s*(?:minutes?|hours?|days?)\s+saved)\b/i;
 const historicalAllowPattern = /\bhistorical\/superseded claim\b/i;
+const illustrativeAllowPattern = /\b(illustrative|planning assumption|not repository-verified|not repo-verified|source material|example only|examples? for planning discussion)\b/i;
 const errors = [];
 
 function walk(fileOrDir, out = []) {
@@ -35,10 +38,15 @@ for (const root of scanRoots) {
   for (const file of walk(path.join(repoRoot, root))) {
     const text = fs.readFileSync(file, "utf8");
     const fileAllowsHistoricalClaims = historicalAllowPattern.test(text);
+    const fileAllowsIllustrativeClaims = illustrativeAllowPattern.test(text);
     const lines = text.split(/\r?\n/);
+    const relativePath = rel(file);
     lines.forEach((line, index) => {
-      if (unsafeClaimPattern.test(line) && !historicalAllowPattern.test(line) && !fileAllowsHistoricalClaims) {
-        errors.push(`${rel(file)}:${index + 1}: unsupported production/compliance claim must be evidence-scoped or marked as historical/superseded`);
+      if (!relativePath.startsWith("plugins/") && unsafeClaimPattern.test(line) && !historicalAllowPattern.test(line) && !fileAllowsHistoricalClaims) {
+        errors.push(`${relativePath}:${index + 1}: unsupported production/compliance claim must be evidence-scoped or marked as historical/superseded`);
+      }
+      if (quantifiedOutcomePattern.test(line) && !illustrativeAllowPattern.test(line) && !fileAllowsIllustrativeClaims) {
+        errors.push(`${relativePath}:${index + 1}: quantified ROI/time-savings claim must have provenance or be marked as illustrative`);
       }
     });
   }

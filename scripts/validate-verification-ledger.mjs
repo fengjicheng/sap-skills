@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 import fs from "node:fs";
 import path from "node:path";
+import { repoRootFrom } from "./lib/validation-utils.mjs";
 
-const repoRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const repoRoot = repoRootFrom(import.meta.url);
 const pluginsRoot = path.join(repoRoot, "plugins");
 const ledgerPath = path.join(repoRoot, "docs/project/source-verification-ledger.json");
 const allowedEvidenceTypes = new Set([

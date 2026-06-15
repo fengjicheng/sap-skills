@@ -181,4 +181,4 @@ ENDMETHOD.
 
 **MCP Fallback:** If no ABAP system or LSP is available, validate from source snippets and bundled SQLScript references, then mark activation/runtime verification as pending.
 
-**Safety Constraints:** Do not alter productive table data, omit authorization/client handling, or produce AMDP code without explaining activation and transport implications.
+**Safety Constraints:** Do not alter productive table data, omit authorization/client handling, or produce AMDP code without explaining activation and transport implications. Require explicit user approval before writing or changing AMDP source files.

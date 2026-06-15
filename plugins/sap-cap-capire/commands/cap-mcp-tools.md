@@ -21,6 +21,12 @@ Return the relevant CAP MCP tool path, configuration checks, fallback local comm
 
 # CAP MCP Tools Reference
 
+## Operation Safety
+
+- **Classification**: `local-only`
+- The bundled CAP MCP server operates on local CAP project model/docs and does not require tenant credentials.
+- Keep examples read-only by default; explicit user approval is required before changing MCP config or running commands that deploy, publish, or affect remote systems.
+
 Complete reference for the published @cap-js/mcp-server tools that provide AI agents with live access to your CAP project.
 
 ## Overview

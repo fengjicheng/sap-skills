@@ -1,5 +1,12 @@
 # SAP Datasphere MCP Tools - Complete Reference
 
+## Operation Safety
+
+- **Classification**: `read-only tenant`, `mutating tenant`, `destructive`
+- This MCP server uses tenant OAuth credentials from environment variables and can call live SAP Datasphere APIs.
+- Treat metadata, catalog, list, search, and query tools as read-only tenant operations. Require explicit user approval before create, update, delete, reset, deploy, publish, trigger, or destructive actions.
+- Do not claim live tenant verification unless matching evidence is recorded in the source verification ledger.
+
 ## Overview
 
 This document provides comprehensive technical reference for all 45 MCP tools provided by the SAP Datasphere MCP Server (@mariodefe/sap-datasphere-mcp).

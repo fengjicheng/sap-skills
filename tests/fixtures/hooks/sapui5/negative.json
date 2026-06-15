@@ -1,0 +1,8 @@
+{
+  "hook_event_name": "PreToolUse",
+  "tool_name": "Write",
+  "tool_input": {
+    "file_path": "webapp/controller/Main.controller.js",
+    "content": "sap.ui.define(['sap/m/MessageToast'], function (MessageToast) { return { onInit: function () { MessageToast.show('Ready'); } }; });"
+  }
+}

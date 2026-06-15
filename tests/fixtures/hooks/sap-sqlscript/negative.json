@@ -1,0 +1,8 @@
+{
+  "hook_event_name": "PostToolUse",
+  "tool_name": "Write",
+  "tool_input": {
+    "file_path": "db/procedures/cleanup.sql",
+    "content": "CREATE PROCEDURE cleanup LANGUAGE SQLSCRIPT AS BEGIN DELETE FROM BOOKS WHERE ID = :book_id; END;"
+  }
+}

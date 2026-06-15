@@ -49,8 +49,6 @@ This skill provides comprehensive guidance for documenting SAP APIs according to
 
 **Documentation Source**: [https://github.com/SAP-docs/api-style-guide](https://github.com/SAP-docs/api-style-guide) (76 files extracted)
 
-**Last Verified**: 2025-11-21
-
 ## When to Use This Skill
 
 Use this skill when:

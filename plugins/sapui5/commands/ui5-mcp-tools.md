@@ -21,6 +21,12 @@ Return the relevant UI5 MCP tool, expected inputs, fallback local commands, and 
 
 # UI5 MCP Server Tools
 
+## Operation Safety
+
+- **Classification**: `local-only`
+- The bundled UI5 MCP server supports local documentation, scaffolding, project inspection, and linting workflows without tenant credentials.
+- Require explicit user approval before creating project files, changing MCP config, or running commands that deploy, publish, or affect remote systems.
+
 This command lists all available tools provided by the **@ui5/mcp-server** (Model Context Protocol server for UI5 development).
 
 ## What is MCP?

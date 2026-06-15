@@ -292,6 +292,5 @@ Starter templates are available in `templates/`:
 
 ## Version Information
 
-- **Skill Version**: 1.0.0
 - **Last Updated**: 2025-11-27
 - **Documentation Source**: SAP-docs/sap-hana-cloud-data-intelligence (GitHub)
