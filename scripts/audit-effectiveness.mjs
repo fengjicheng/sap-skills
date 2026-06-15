@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const repoRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const pluginsRoot = path.join(repoRoot, "plugins");
 const validate = process.argv.includes("--validate");
 const staleAfterDays = 90;
@@ -38,7 +39,7 @@ function countWords(text) {
 }
 
 function parseFrontmatter(content) {
-  const match = content.match(/^---\n([\s\S]*?)\n---\n/);
+  const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n/);
   return match ? match[1] : "";
 }
 
@@ -63,8 +64,18 @@ function scalarValue(frontmatter, key) {
 }
 
 function metadataValue(frontmatter, key) {
-  const match = frontmatter.match(new RegExp(`^  ${key}:\\s*["']?([^"'\\n]+)["']?\\s*$`, "m"));
-  return match ? match[1].trim() : "";
+  const lines = frontmatter.split(/\r?\n/);
+  const metadataStart = lines.findIndex((line) => /^metadata:\s*$/.test(line));
+  if (metadataStart === -1) return "";
+
+  for (let index = metadataStart + 1; index < lines.length; index += 1) {
+    const line = lines[index];
+    if (/^\S/.test(line)) break;
+    const match = line.match(new RegExp(`^  ${key}:\\s*["']?([^"'\\r\\n]+)["']?\\s*$`));
+    if (match) return match[1].trim();
+  }
+
+  return "";
 }
 
 function daysSince(dateText, now = new Date()) {
@@ -119,7 +130,7 @@ function triggerQuality(frontmatter) {
   const description = scalarValue(frontmatter, "description");
   const hasWhen = /\bwhen\b|\buse this skill\b|\bshould be used\b/i.test(description);
   const hasSap = /\bSAP\b|\bBTP\b|\bUI5\b|\bCAP\b|\bHANA\b|\bSAC\b|\bABAP\b/i.test(description);
-  const hasAction = /\b(review|diagnos|build|generate|lint|check|troubleshoot|develop|implement|model|deploy|configure)\b/i.test(description);
+  const hasAction = /\b(review|diagnos(?:e|es|ed|ing|is|tic|tics)|build|generate|lint|check|troubleshoot|develop|implement|model|deploy|configure)\b/i.test(description);
   const score = [description.length >= 80, hasWhen, hasSap, hasAction].filter(Boolean).length;
   if (score >= 4) return "strong";
   if (score >= 2) return "adequate";
@@ -180,7 +191,10 @@ for (const pluginName of pluginNames) {
   const mutatingRiskCommands = commands.filter((name) => {
     if (/(generate|template|fix|plan|setup|scaffold|convert)/i.test(name)) return false;
     const body = read(path.join(pluginRoot, "commands", `${name}.md`));
-    return !/\b(default to|defaulting to|do not|non-mutating|read-only|analysis-only|inspection only)\b/i.test(body);
+    const hasSafeDefault = /\b(non-mutating|read-only|analysis-only|inspection only|inspect only|advisory only)\b/i.test(body)
+      || /\bdefault(?:s|ing)?\s+to\b[^.\n]*(?:read-only|non-mutating|analysis|inspection|advisory|planning|guidance)/i.test(body)
+      || /\bdo not\b[^.\n]*(?:write|edit|modify|change|create|delete|mutate|apply|deploy|execute|run|publish|upload|alter|trigger)/i.test(body);
+    return !hasSafeDefault;
   });
 
   const readmeDrift = [];

@@ -5,6 +5,12 @@
 **Builder**: E.J.
 **Status**: ✅ VERIFIED - Ready for Production
 
+> Historical/superseded claim notice: this report is retained as historical
+> project evidence. Any "ready for production", "100%", "compliant", or
+> "ready to ship" language below is a historical/superseded claim, not current
+> release evidence. Current verification status is tracked in
+> `docs/project/source-verification-ledger.json`.
+
 ---
 
 ## Checklist Verification Summary

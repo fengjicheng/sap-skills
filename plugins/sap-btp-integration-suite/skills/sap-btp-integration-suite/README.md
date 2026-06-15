@@ -12,7 +12,7 @@ Comprehensive skill for developing and operating enterprise integration solution
 | MCP | No |
 | LSP | No |
 | Source Freshness | `last_verified`: 2025-11-27; live Integration Suite runtime checks pending. |
-| Verification | `npm run validate`; tenant deployment/message processing checks require access. |
+| Verification | `npm run validate`; HTTPS-to-SFTP template has local structure/XML validation; tenant import still requires access. |
 
 ## Capabilities Covered
 
@@ -155,6 +155,13 @@ cloud connector, connectivity service
 
 This skill is automatically triggered when working with SAP Integration Suite topics.
 For deep-dive information, refer to the `references/` directory.
+
+## Bundled Resources
+
+- `references/iflow-package-authoring.md` - Importable iFlow package structure, ZIP rules, and HTTPS-to-SFTP placeholder policy.
+- `templates/https-to-sftp-iflow-package/` - Unzipped reviewable HTTPS sender to SFTP receiver iFlow package template.
+- `templates/groovy-script-template.groovy` - Common SAP Cloud Integration Groovy script patterns.
+- `templates/api-policy-template.xml` - SAP API Management policy starter template.
 
 ## License
 

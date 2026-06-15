@@ -141,6 +141,8 @@ collect_plugins() {
     hooks=$(jq -r '.hooks // empty' "$plugin_json")
     local mcp_servers
     mcp_servers=$(jq -r '.mcpServers // empty' "$plugin_json")
+    local lsp_servers
+    lsp_servers=$(jq -r '.lspServers // empty' "$plugin_json")
 
     # Validate required fields
     if [ "$name" = "null" ] || [ "$description" = "null" ]; then
@@ -176,6 +178,7 @@ $category"
       --argjson commands "$commands" \
       --arg hooks "$hooks" \
       --arg mcp_servers "$mcp_servers" \
+      --arg lsp_servers "$lsp_servers" \
       '{
         name: $name,
         source: $source,
@@ -187,7 +190,8 @@ $category"
       } + (if $agents != null then {agents: $agents} else {} end)
         + (if $commands != null then {commands: $commands} else {} end)
         + (if $hooks != "" then {hooks: $hooks} else {} end)
-        + (if $mcp_servers != "" then {mcpServers: $mcp_servers} else {} end)'
+        + (if $mcp_servers != "" then {mcpServers: $mcp_servers} else {} end)
+        + (if $lsp_servers != "" then {lspServers: $lsp_servers} else {} end)'
     )
 
     # Add to plugins array
@@ -250,7 +254,11 @@ $category"
 
 # Get current date in ISO format
 get_current_date() {
-  date -u +"%Y-%m-%d"
+  if [ -n "${MARKETPLACE_LAST_UPDATED:-}" ]; then
+    echo "$MARKETPLACE_LAST_UPDATED"
+  else
+    date -u +"%Y-%m-%d"
+  fi
 }
 
 # Determine global version from existing marketplace or default
@@ -301,10 +309,9 @@ generate_marketplace() {
   marketplace_content=$(jq -n \
     --arg name "sap-skills" \
     --arg version "$version" \
-    --arg description "Production-ready skills for SAP development and AI coding assistants" \
+    --arg description "SAP development skills with evidence-tracked public-source and package-registry verification" \
     --arg repository "https://github.com/secondsky/sap-skills" \
     --arg owner_name "E.J." \
-    --arg owner_email "secondsky@github.com" \
     --arg last_updated "$current_date" \
     --arg total_skills "$total_skills" \
     --argjson categories "$categories" \
@@ -315,8 +322,7 @@ generate_marketplace() {
       description: $description,
       repository: $repository,
       owner: {
-        name: $owner_name,
-        email: $owner_email
+        name: $owner_name
       },
       metadata: {
         version: $version,

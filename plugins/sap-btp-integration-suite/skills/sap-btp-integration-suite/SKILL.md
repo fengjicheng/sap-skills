@@ -100,6 +100,31 @@ Streamline B2B relationships with partner profiles, agreement templates, and aut
 
 ## Cloud Integration Development
 
+### Importable iFlow Generation
+
+When a user asks to generate an iFlow package, ZIP, importable archive, `.iflw`, or complete Cloud Integration artifact, use `references/iflow-package-authoring.md` before writing files. Do not invent a flat XML-only package.
+
+For HTTPS-to-SFTP scenarios, start from `templates/https-to-sftp-iflow-package/` and preserve its directory layout:
+
+```
+.project
+META-INF/MANIFEST.MF
+metainfo.prop
+src/main/resources/parameters.prop
+src/main/resources/parameters.propdef
+src/main/resources/scenarioflows/integrationflow/HTTPS_to_SFTP_Template.iflw
+```
+
+Customize only the externalized placeholders unless the user asks for a different design:
+- `{{HTTPS_ENDPOINT_PATH}}`
+- `{{SFTP_HOST}}`
+- `{{SFTP_PORT}}`
+- `{{SFTP_DIRECTORY}}`
+- `{{SFTP_FILENAME}}`
+- `{{SFTP_CREDENTIAL_ALIAS}}`
+
+Keep credentials, tenant URLs, private hostnames, certificates, and deployed runtime state out of generated artifacts. If no SAP Cloud Integration tenant is available for import testing, say that local package structure and XML validation passed but tenant import remains pending.
+
 ### Integration Flow Structure
 
 ```
@@ -289,6 +314,7 @@ Detailed guides available in `references/` directory:
 
 **Core Development**:
 - `cloud-integration.md` - iFlow development, steps, patterns, best practices
+- `iflow-package-authoring.md` - Importable iFlow package structure and HTTPS-to-SFTP generation rules
 - `adapters.md` - All 80+ adapter configurations (HTTP, SFTP, OData, RFC, etc.)
 - `scripting.md` - Groovy/JavaScript patterns, APIs, and templates
 - `api-management.md` - API proxy development, 34 policies, Developer Hub
@@ -309,6 +335,7 @@ Detailed guides available in `references/` directory:
 
 ### Templates
 Ready-to-use templates in `templates/` directory:
+- `https-to-sftp-iflow-package/` - Reviewable unzipped importable iFlow template for HTTPS sender to SFTP receiver scenarios
 - `groovy-script-template.groovy` - Common script patterns
 - `api-policy-template.xml` - Policy configuration template
 

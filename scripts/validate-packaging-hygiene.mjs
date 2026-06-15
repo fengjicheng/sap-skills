@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const repoRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const pluginsRoot = path.join(repoRoot, "plugins");
+const marketplaceRoot = path.join(repoRoot, ".claude-plugin");
 const errors = [];
 
 function walk(dir, out = []) {
@@ -16,7 +18,7 @@ function walk(dir, out = []) {
   return out;
 }
 
-for (const file of walk(pluginsRoot)) {
+for (const file of [...walk(pluginsRoot), ...walk(marketplaceRoot)]) {
   const rel = path.relative(repoRoot, file).replaceAll(path.sep, "/");
   const base = path.basename(file);
   if (/VALIDATION_REPORT\.md$/i.test(base)) errors.push(`${rel}: audit validation reports must live under docs/project`);

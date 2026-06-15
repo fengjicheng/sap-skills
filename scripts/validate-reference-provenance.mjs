@@ -1,21 +1,12 @@
 #!/usr/bin/env node
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const repoRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const pluginsRoot = path.join(repoRoot, "plugins");
-const provenanceLabels = [
-  "Official source excerpt",
-  "Derived summary",
-  "Synthetic example",
-  "Tenant-specific example",
-  "Historical/archived",
-  "Vendored; excluded from content review",
-  "Official Sources",
-  "Sources",
-  "Documentation Source",
-  "Source",
-];
+const provenanceMarkerPattern = /^(?:#{1,6}\s*)?(?:\*\*)?(?:Official source excerpt|Derived summary|Synthetic example|Tenant-specific example|Historical\/archived|Vendored; excluded from content review|Official Sources|Sources|Documentation Source|Source)(?:\*\*)?\b\s*:?\s*(?:\S.*)?$/im;
+const provenanceFrontmatterPattern = /^(?:source|sources|source_docs|documentation_source|full_api_docs|sap_help):\s*\S/im;
 const errors = [];
 const warnings = [];
 
@@ -29,10 +20,24 @@ function walk(dir, out = []) {
   return out;
 }
 
-for (const file of walk(pluginsRoot).filter((item) => item.includes("/references/"))) {
+function isReferenceMarkdown(file) {
+  const segments = path.relative(pluginsRoot, file).split(path.sep);
+  return segments.includes("references") && file.endsWith(".md");
+}
+
+function frontmatter(text) {
+  const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n/);
+  return match ? match[1] : "";
+}
+
+function hasProvenanceMarker(text) {
+  return provenanceMarkerPattern.test(text) || provenanceFrontmatterPattern.test(frontmatter(text));
+}
+
+for (const file of walk(pluginsRoot).filter(isReferenceMarkdown)) {
   const rel = path.relative(repoRoot, file).replaceAll(path.sep, "/");
   const text = fs.readFileSync(file, "utf8");
-  if (!provenanceLabels.some((label) => text.includes(label))) {
+  if (!hasProvenanceMarker(text)) {
     warnings.push(`${rel}: reference should include a source/provenance marker in a future manual pass`);
   }
   if (/READY FOR PRODUCTION|100% Compliant/i.test(text)) {

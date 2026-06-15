@@ -1,7 +1,7 @@
 ---
 name: sap-btp-best-practices
 description: |
-  Production-ready SAP BTP best practices for enterprise architecture, account management, security, and operations. Use when planning BTP implementations, setting up account hierarchies, configuring environments, implementing authentication, designing CI/CD pipelines, establishing governance, building Platform Engineering teams, implementing failover strategies, or managing application lifecycle on SAP BTP.
+  SAP BTP best practices for enterprise architecture, account management, security, and operations, with verification evidence tracked in the repository ledger. Use when planning BTP implementations, setting up account hierarchies, configuring environments, implementing authentication, designing CI/CD pipelines, establishing governance, building Platform Engineering teams, implementing failover strategies, or managing application lifecycle on SAP BTP.
 
   Keywords: SAP BTP, account hierarchy, global account, directory, subaccount, Cloud Foundry, Kyma, ABAP, SAP Identity Authentication, CI/CD, governance, Platform Engineering, failover, multi-region, SAP BTP best practices
 license: GPL-3.0

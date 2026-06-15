@@ -1,15 +1,14 @@
 {
   "name": "sap-skills",
   "version": "2.3.0",
-  "description": "Production-ready skills for SAP development and AI coding assistants",
+  "description": "SAP development skills with evidence-tracked public-source and package-registry verification",
   "repository": "https://github.com/secondsky/sap-skills",
   "owner": {
-    "name": "E.J.",
-    "email": "secondsky@github.com"
+    "name": "E.J."
   },
   "metadata": {
     "version": "2.3.0",
-    "last_updated": "2026-06-14",
+    "last_updated": "2026-06-15",
     "total_skills": 35,
     "categories": [
       "abap",
@@ -121,7 +120,7 @@
     {
       "name": "sap-btp-best-practices",
       "source": "./plugins/sap-btp-best-practices",
-      "description": "Production-ready SAP BTP best practices for enterprise architecture, account management, security, and operations. Use when planning BTP implementations, setting up account hierarchies, configuring environments, implementing authentication, designing CI/CD pipelines, establishing governance, building Platform Engineering teams, implementing failover strategies, or managing application lifecycle on SAP BTP. Keywords: SAP BTP, account hierarchy, global account, directory, subaccount, Cloud Foundry, Kyma, ABAP, SAP Identity Authentication, CI/CD, governance, Platform Engineering, failover, multi-region, SAP BTP best practices",
+      "description": "SAP BTP best practices for enterprise architecture, account management, security, and operations, with verification evidence tracked in the repository ledger. Use when planning BTP implementations, setting up account hierarchies, configuring environments, implementing authentication, designing CI/CD pipelines, establishing governance, building Platform Engineering teams, implementing failover strategies, or managing application lifecycle on SAP BTP. Keywords: SAP BTP, account hierarchy, global account, directory, subaccount, Cloud Foundry, Kyma, ABAP, SAP Identity Authentication, CI/CD, governance, Platform Engineering, failover, multi-region, SAP BTP best practices",
       "version": "2.3.0",
       "category": "btp",
       "keywords": [
@@ -131,9 +130,9 @@
         "btp",
         "cloud foundry",
         "cloud platform",
+        "edge",
         "kyma",
         "practices",
-        "production",
         "sap",
         "sap-btp-best-practices"
       ],
@@ -551,7 +550,8 @@
         "./commands/cap-deployment-checklist.md"
       ],
       "hooks": "./hooks/hooks.json",
-      "mcpServers": "./.mcp.json"
+      "mcpServers": "./.mcp.json",
+      "lspServers": "./.lsp.json"
     },
     {
       "name": "sap-cloud-sdk-ai",

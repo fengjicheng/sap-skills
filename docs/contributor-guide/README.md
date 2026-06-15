@@ -343,13 +343,13 @@ Every 3 months:
 1. Check npm registry for updates
 2. Review SAP release notes
 3. Update skill metadata
-4. Test in production
+4. Capture public-source/package evidence or live-system evidence as appropriate
 5. Perform manual quality review
 6. Commit changes
 
-### Production Testing
+### Verification Evidence
 
-**All SAP skills MUST be tested with real SAP systems/BTP.**
+**Live SAP system/BTP tests are required before claiming live validation.** Public-source and package-registry checks must be recorded separately, and live tenant/system evidence must be tracked in `docs/project/source-verification-ledger.json`.
 
 **For CAP Skills**:
 - Create new CAP project with templates

@@ -2,15 +2,17 @@
 # SAP Skills - Project Context
 
 **Repository**: https://github.com/secondsky/sap-skills
-**Purpose**: Production-ready skills for SAP development and AI coding assistants
+**Purpose**: SAP development skills for AI coding assistants with evidence-tracked verification
 **Version**: 2.3.0 | **Plugins**: 35 | **Last Updated**: 2026-06-14
 
 ---
 
 ## What This Repository Is
 
-35 production-tested skills for SAP technologies: BTP, CAP, Fiori,
-ABAP, Analytics, and more. Enables context-aware AI assistance for SAP development.
+35 SAP development skills for SAP technologies: BTP, CAP, Fiori, ABAP,
+Analytics, and more. Public-source/package-registry verification is tracked
+where available; live tenant/system validation is tracked per plugin in
+`docs/project/source-verification-ledger.json`.
 
 ---
 
@@ -72,13 +74,14 @@ For all general plugin development tasks:
 - Creating Python/shell scripts to refactor skills
 - Using sed/awk to programmatically rewrite sections
 - Batch processing without human review
-- Auto-generating content via scripts
+- Auto-generating skill prose, references, commands, agents, hooks, or docs via scripts
 
 **REQUIRED - Manual Refactoring**:
 - Use Read, Edit, Write tools manually
 - Review each change before applying
 - Human judgment for extraction decisions
 - Quality control via manual review
+- Deterministic manifest generation is allowed only through the checked-in sync scripts, followed by manual diff review
 
 **Why**: Skills require context-aware decisions. Automation introduces subtle
 errors that break functionality.
@@ -97,10 +100,20 @@ bun run oracle -- --dry-run summary --files-report -p "Review this plan" --file 
 ```
 
 Never include secrets, `.env` files, credentials, tokens, private browser
-profiles, or machine-local config paths in Oracle requests. Do not rerun long
-browser sessions blindly; check `bun run oracle:status` first, then reattach
-with `bun run oracle -- session <id> --render`. For MCP consults, prefer
-`preset: "chatgpt-pro-heavy"` or explicit `engine: "browser"`.
+profiles, or machine-local config paths in Oracle requests.
+
+For browser-backed Oracle runs, keep archiving disabled with
+`--browser-archive never`; the repo `bun run oracle` and `bun run oracle:review`
+scripts include this by default. Avoid `--browser-hide-window` for important
+long reviews. After completion, verify the session captured a useful response
+(`outputTokens` greater than 1 in `~/.oracle/sessions/<id>/meta.json`) and
+inspect `~/.oracle/sessions/<id>/artifacts/transcript.md` when the answer looks
+short. If capture is suspiciously short, recover the ChatGPT conversation before
+rerunning.
+
+Do not rerun long browser sessions blindly; check `bun run oracle:status` first,
+then reattach with `bun run oracle -- session <id> --render`. For MCP consults,
+prefer `preset: "chatgpt-pro-heavy"` or explicit `engine: "browser"`.
 
 ---
 
@@ -136,7 +149,7 @@ with `bun run oracle -- session <id> --render`. For MCP consults, prefer
 
 ### Quality Standards
 
-**Production Testing**: All skills tested with real SAP systems/BTP
+**Verification Evidence**: Skills track public-source/package-registry evidence where available. Live SAP system/BTP tenant validation must be recorded in `docs/project/source-verification-ledger.json` before it is claimed.
 
 **Version Tracking**: SAP SDK versions documented in metadata
 ```yaml

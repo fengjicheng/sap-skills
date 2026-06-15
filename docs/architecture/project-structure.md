@@ -11,8 +11,8 @@
 │ Top Extensions: .md (569), .json (100), .js (12), .sh (7), .sql (7)   │
 ╰───────────────────────────────────────────────────────────────────────╯
 [1msap-skills[0m
-├── [1;34m  .claude-plugin/[0m [2m(2 files, 90.0KB)[0m
-│   └── [31mmarketplace.json[0m[2m[0m        [37mmarketplace.json.backup[0m[2m[0m 
+├── [1;34m  .claude-plugin/[0m [2m(1 file)[0m
+│   └── [31mmarketplace.json[0m[2m[0m
 ├── [1;34m  .githooks/[0m [2m(2 files, 4.1KB)[0m
 │   └── [32mREADME.md[0m[2m[0m  [37mpre-commit[0m[2m[0m 
 ├── [1;34m  .github/[0m [2m(10 files, 20.2KB)[0m

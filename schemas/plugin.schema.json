@@ -118,6 +118,11 @@
       "type": "string",
       "pattern": "^\\./.*\\.json$",
       "description": "Custom path to MCP servers config (default: ./.mcp.json)"
+    },
+    "lspServers": {
+      "type": "string",
+      "pattern": "^\\./.*\\.json$",
+      "description": "Custom path to LSP servers config (default: ./.lsp.json)"
     }
   },
   "allOf": [
