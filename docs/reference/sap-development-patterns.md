@@ -414,9 +414,9 @@ metadata:
    git commit -m "Update sap-cap-capire: SAP CDS 9.4.x compatibility"
    ```
 
-### Production Testing Requirements
+### Verification Evidence Requirements
 
-**All SAP skills MUST be tested with real SAP systems/BTP before committing.**
+**Live SAP system/BTP tests are required before claiming live validation.** Public-source and package-registry checks must be recorded separately, and live tenant/system evidence must be tracked in `docs/project/source-verification-ledger.json`.
 
 #### What to Test
 

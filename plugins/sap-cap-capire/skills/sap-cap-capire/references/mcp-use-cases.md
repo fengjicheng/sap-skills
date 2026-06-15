@@ -1,10 +1,16 @@
-# CAP MCP Server: Real-World Use Cases & ROI
+# CAP MCP Server: Local Use Cases and Illustrative Impact
 
 ## Overview
 
 The CAP MCP server transforms AI-assisted CAP development by providing instant access to your compiled model and official documentation. Instead of manually searching files or navigating documentation, agents can semantically query your exact project structure and find relevant guidance in milliseconds.
 
-This document quantifies the time savings and productivity gains from MCP integration across common CAP development scenarios.
+This document uses illustrative local workflow scenarios. Time and value numbers are examples for planning discussion only; they are not repository-verified productivity, ROI, tenant, or customer outcome claims.
+
+## Operation Safety
+
+- **Classification**: `local-only`
+- These scenarios use local CAP model/docs lookup and do not require tenant credentials, destinations, tokens, or service keys.
+- Keep examples read-only by default; explicit user approval is required before changing MCP config or running commands that deploy, publish, or affect remote systems.
 
 ## Use Case 1: CDS Entity Discovery (Model Exploration)
 

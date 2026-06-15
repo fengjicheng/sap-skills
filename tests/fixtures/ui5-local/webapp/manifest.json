@@ -1,0 +1,24 @@
+{
+  "sap.app": {
+    "id": "sap.skills.fixture",
+    "type": "application",
+    "title": "SAP Skills UI5 Fixture",
+    "applicationVersion": {
+      "version": "0.0.0"
+    }
+  },
+  "sap.ui5": {
+    "dependencies": {
+      "minUI5Version": "1.120.0",
+      "libs": {
+        "sap.ui.core": {}
+      }
+    },
+    "rootView": {
+      "viewName": "sap.skills.fixture.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "app"
+    }
+  }
+}

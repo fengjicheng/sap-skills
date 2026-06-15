@@ -1,0 +1,8 @@
+{
+  "hook_event_name": "PreToolUse",
+  "tool_name": "Write",
+  "tool_input": {
+    "file_path": "srv/catalog.js",
+    "content": "const cds = require('@sap/cds'); cds.serve('CatalogService'); eval(req.data.filter);"
+  }
+}

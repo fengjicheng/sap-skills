@@ -28,7 +28,7 @@
     },
     "owner": {
       "type": "object",
-      "required": ["name", "email"],
+      "required": ["name"],
       "additionalProperties": false,
       "properties": {
         "name": {
@@ -165,6 +165,11 @@
           "type": "string",
           "pattern": "^\\./\\.mcp\\.json$",
           "description": "Optional: path to plugin MCP server configuration"
+        },
+        "lspServers": {
+          "type": "string",
+          "pattern": "^\\./\\.lsp\\.json$",
+          "description": "Optional: path to plugin LSP server configuration"
         }
       }
     }

@@ -437,4 +437,4 @@ See **`references/widget-addon-guide.md`** for complete implementation.
 
 ---
 
-**Last Verified**: 2026-06-12 | **SAC Version**: 2026.8 | **Skill Version**: 2.1.0
+**SAC Version**: 2026.8

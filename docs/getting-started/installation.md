@@ -1,6 +1,6 @@
 # SAP Skills Marketplace
 
-Welcome to the **sap-skills** marketplace - a curated collection of production-tested SAP skills for Claude Code CLI.
+Welcome to the **sap-skills** marketplace - a curated collection of SAP skills for Claude Code CLI with evidence-tracked verification.
 
 ## Quick Start
 
@@ -9,7 +9,7 @@ Welcome to the **sap-skills** marketplace - a curated collection of production-t
 **Step 1: Add the marketplace**
 
 ```bash
-/plugin marketplace add https://github.com/secondsky/sap-skills
+/plugin marketplace add secondsky/sap-skills
 ```
 
 **Step 2: Install skills**
@@ -137,8 +137,8 @@ Claude: [Uses sap-fiori-tools and sapui5 skills]
 
 ### For Projects
 
-- ✅ **Production-tested** patterns and templates
-- ✅ **Current packages** (verified quarterly)
+- ✅ **Evidence-tracked** patterns and templates
+- ✅ **Package evidence** reviewed quarterly where available
 - ✅ **SAP-specific** patterns and best practices
 
 ---
@@ -171,16 +171,24 @@ Claude: [Uses sap-fiori-tools and sapui5 skills]
 
 ## Team Deployment
 
-Add to `.claude/settings.json` for automatic marketplace availability:
+Add the marketplace at project scope:
+
+```bash
+claude plugin marketplace add secondsky/sap-skills --scope project
+```
+
+Or add to `.claude/settings.json` for automatic marketplace availability:
 
 ```json
 {
-  "extraKnownMarketplaces": [
-    {
-      "name": "sap-skills",
-      "url": "https://github.com/secondsky/sap-skills"
+  "extraKnownMarketplaces": {
+    "sap-skills": {
+      "source": {
+        "source": "github",
+        "repo": "secondsky/sap-skills"
+      }
     }
-  ]
+  }
 }
 ```
 

@@ -6,6 +6,7 @@
 - Excluded `.agents/skills`.
 - Used docs-only/package-registry verification. No SAP tenant, SAP system, or production behavior verification was performed.
 - Preserved existing user/repo changes and treated production-only checks as pending.
+- Any ROI or time-savings wording in this audit is illustrative prioritization language, not repository-verified customer outcome evidence.
 
 ## Implemented Capability Changes
 

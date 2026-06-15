@@ -103,9 +103,9 @@ All three agents have access to relevant MCP tools:
 
 - `/datasphere-mcp-tools` - List all MCP tools
 
-### Real-World Use Cases
+### Illustrative Use Cases
 
-See [mcp-use-cases.md](references/mcp-use-cases.md) for 8 comprehensive use cases demonstrating:
+See [mcp-use-cases.md](references/mcp-use-cases.md) for 8 illustrative source-material use cases. Time and ROI examples are planning assumptions, not repository-verified productivity outcomes:
 - **The Monday Morning Health Check**: 45 min/day saved for Data Operations Managers
 - **Data Lineage Inspection**: 3 hours saved per investigation for Data Engineers
 - **Pre-Analytics Data Quality Audit**: 2 hours saved per project for Data Analysts

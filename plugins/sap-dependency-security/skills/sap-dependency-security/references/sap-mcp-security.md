@@ -2,6 +2,15 @@
 
 Use this reference when configuring, updating, or reviewing SAP MCP servers. MCP servers are executable dependencies. Some only read local project metadata, while others use SAP tenant credentials and can call live APIs.
 
+## Operation Safety Classes
+
+- `local-only`: Operates on local files, local package metadata, local project models, or cached docs.
+- `read-only tenant`: Reads tenant/system metadata or data and must not mutate tenant state.
+- `mutating tenant`: Creates, updates, deploys, publishes, triggers, or otherwise changes tenant/system state.
+- `destructive`: Deletes, drops, revokes, removes, disables, resets, or risks irreversible tenant/system impact.
+
+Require explicit user approval before any `mutating tenant` or `destructive` MCP operation. Keep credentials, tokens, service keys, destinations, and tenant URLs in environment variables or local secret managers.
+
 ## Policy
 
 - Use exact npm package pins in `.mcp.json`; never use `@latest` or a bare package name.

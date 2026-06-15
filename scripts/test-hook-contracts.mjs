@@ -2,9 +2,11 @@
 import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { repoRootFrom } from "./lib/validation-utils.mjs";
 
-const repoRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const repoRoot = repoRootFrom(import.meta.url);
 const pluginsRoot = path.join(repoRoot, "plugins");
+const fixtureRoot = path.join(repoRoot, "tests/fixtures/hooks");
 const errors = [];
 
 function fail(message) {
@@ -46,6 +48,18 @@ function assertJsonObject(name, result) {
   } catch (error) {
     fail(`${name}: output is not JSON: ${error.message}`);
     return null;
+  }
+}
+
+function assertEmptyObject(name, parsed) {
+  if (parsed && Object.keys(parsed).length !== 0) {
+    fail(`${name}: expected empty JSON object`);
+  }
+}
+
+function assertNonEmptyObject(name, parsed) {
+  if (parsed && Object.keys(parsed).length === 0) {
+    fail(`${name}: expected fixture to trigger hook output`);
   }
 }
 
@@ -94,6 +108,21 @@ for (const dir of hookDirs()) {
   const secret = assertJsonObject(`${plugin} secret-looking input`, runHook(dir, secretPayload));
   if (secret && JSON.stringify(secret).includes("super-secret-value")) {
     fail(`${plugin}: hook output must not echo raw secret-looking literals`);
+  }
+
+  const pluginFixtureDir = path.join(fixtureRoot, plugin);
+  for (const fixtureName of ["positive.json", "negative.json", "malformed.json"]) {
+    if (!fs.existsSync(path.join(pluginFixtureDir, fixtureName))) {
+      fail(`${plugin}: missing hook fixture tests/fixtures/hooks/${plugin}/${fixtureName}`);
+    }
+  }
+
+  if (fs.existsSync(pluginFixtureDir)) {
+    const positive = assertJsonObject(`${plugin} positive fixture`, runHook(dir, fs.readFileSync(path.join(pluginFixtureDir, "positive.json"), "utf8")));
+    assertNonEmptyObject(`${plugin} positive fixture`, positive);
+    const negative = assertJsonObject(`${plugin} negative fixture`, runHook(dir, fs.readFileSync(path.join(pluginFixtureDir, "negative.json"), "utf8")));
+    assertEmptyObject(`${plugin} negative fixture`, negative);
+    assertJsonObject(`${plugin} malformed fixture`, runHook(dir, fs.readFileSync(path.join(pluginFixtureDir, "malformed.json"), "utf8")));
   }
 }
 

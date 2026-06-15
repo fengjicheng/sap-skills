@@ -537,7 +537,6 @@ UI5_DATA_DIR=/custom/.ui5 ui5 serve
 
 ## Version Information
 
-- **Skill Version**: 1.0.0
 - **CLI Version Covered**: 4.0.55+
 - **Last Updated**: 2026-05-31
 - **Next Review**: 2026-02-21 (Quarterly)

@@ -5,6 +5,12 @@
 **Builder**: E.J.
 **Status**: ✅ VERIFIED - Ready for Production
 
+> Historical/superseded claim notice: this report is retained as historical
+> project evidence. Any "ready for production", "100%", "compliant", or
+> "ready to ship" language below is a historical/superseded claim, not current
+> release evidence. Current verification status is tracked in
+> `docs/project/source-verification-ledger.json`.
+
 ---
 
 ## Checklist Verification Summary
@@ -217,6 +223,8 @@ Errors: 0 (all common pitfalls documented)
 ```
 
 ### Savings
+These estimates are illustrative setup comparisons for this audit, not repository-verified productivity outcomes.
+
 - **Tokens**: 10,800 saved (~64% reduction)
 - **Errors**: 2-3 prevented (100% error prevention)
 - **Time**: Estimated 30-60 minutes saved per setup

@@ -3,7 +3,7 @@
   "generatedForRepositoryVersion": "2.3.0",
   "policy": {
     "lastVerifiedRule": "metadata.last_verified in SKILL.md must not be advanced beyond the matching ledger entry's supportedLastVerified date.",
-    "productionRule": "Evidence type public_docs, package_registry, source_repo, or archival_status must not be used to claim live tenant or live system verification.",
+    "productionRule": "Evidence type public_docs, package_registry, source_repo, archival_status, or audit_only_pending must not be used to claim live tenant or live system verification.",
     "vendoredDocsRule": "Vendored documents are excluded from freshness claims unless an entry explicitly scopes them."
   },
   "evidenceTypes": [

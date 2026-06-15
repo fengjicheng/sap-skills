@@ -1,0 +1,9 @@
+{
+  "name": "sap-skills-ui5-local-fixture",
+  "private": true,
+  "version": "0.0.0",
+  "devDependencies": {
+    "@ui5/cli": "4.0.56",
+    "@ui5/linter": "1.22.0"
+  }
+}

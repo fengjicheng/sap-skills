@@ -3,21 +3,28 @@
 ## Table of Contents
 
 1. [Overview](#overview)
-2. [Installation](#installation)
-3. [Configuration](#configuration)
-4. [Available Tools](#available-tools)
-5. [Tool Usage Examples](#tool-usage-examples)
-6. [Integration with Agents](#integration-with-agents)
-7. [Integration with Commands](#integration-with-commands)
-8. [Fallback Behavior](#fallback-behavior)
-9. [Troubleshooting](#troubleshooting)
-10. [Version Compatibility](#version-compatibility)
+2. [Operation Safety](#operation-safety)
+3. [Installation](#installation)
+4. [Configuration](#configuration)
+5. [Available Tools](#available-tools)
+6. [Tool Usage Examples](#tool-usage-examples)
+7. [Integration with Agents](#integration-with-agents)
+8. [Integration with Commands](#integration-with-commands)
+9. [Fallback Behavior](#fallback-behavior)
+10. [Troubleshooting](#troubleshooting)
+11. [Version Compatibility](#version-compatibility)
 
 ---
 
 ## Overview
 
 The **@ui5/mcp-server** is the official Model Context Protocol (MCP) server from SAP that provides AI agents with comprehensive UI5 development tools and knowledge.
+
+## Operation Safety
+
+- **Classification**: `local-only`
+- The bundled UI5 MCP server supports local documentation, scaffolding, project inspection, and linting workflows without tenant credentials.
+- Require explicit user approval before creating project files, changing MCP config, or running commands that deploy, publish, or affect remote systems.
 
 ### What is MCP?
 

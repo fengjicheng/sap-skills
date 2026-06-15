@@ -21,6 +21,13 @@ Return the relevant MCP tool category, configuration checks, local fallback appr
 
 Display available MCP tools for SAP Datasphere integration.
 
+## Operation Safety
+
+- **Classification**: `read-only tenant`, `mutating tenant`, `destructive`
+- The Datasphere MCP server uses tenant OAuth credentials from environment variables and can expose tenant-affecting operations.
+- Treat read/list/search tools as read-only tenant operations. Require explicit user approval before create, update, delete, reset, deploy, publish, trigger, or other destructive actions.
+- Do not claim live tenant verification unless matching evidence is recorded in the source verification ledger.
+
 ## SAP Datasphere MCP Tools (45 total)
 
 The SAP Datasphere MCP Server (@mariodefe/sap-datasphere-mcp) provides 45 tools for direct tenant interaction.
@@ -365,8 +372,8 @@ Check MCP server status:
 
 ## See Also
 
-**Real-World Use Cases:**
-For comprehensive examples of how these MCP tools are used in practice, see:
+**Illustrative Use Cases:**
+For source-material examples of how these MCP tools can be used in practice, see:
 - **[mcp-use-cases.md](../skills/sap-datasphere/references/mcp-use-cases.md)** - 8 detailed use cases demonstrating:
   1. **The Monday Morning Health Check** - Operations monitoring (45 min/day saved)
   2. **Data Lineage Inspection** - Impact analysis (3 hours saved)
@@ -377,7 +384,7 @@ For comprehensive examples of how these MCP tools are used in practice, see:
   7. **The Performance Troubleshooter** - Performance debugging (1.5 hours saved)
   8. **Cross-Functional Collaboration** - Team collaboration (3 hours saved)
 
-**Total ROI:** $159,100+/year for mid-sized teams
+**Impact estimates:** Illustrative planning assumptions only; not repository-verified productivity outcomes.
 
 Each use case includes:
 - Persona and role

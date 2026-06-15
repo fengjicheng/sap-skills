@@ -5,6 +5,11 @@
 **Repository**: [https://github.com/UI5/linter](https://github.com/UI5/linter)
 **Status**: ✅ COMPREHENSIVE with minor enhancements needed
 
+> Historical/superseded claim notice: this report is retained as historical
+> project evidence. Any "production-ready", "100%", or completeness language
+> below is a historical/superseded claim, not current release evidence. Current
+> verification status is tracked in `docs/project/source-verification-ledger.json`.
+
 ---
 
 ## Repository File Inventory

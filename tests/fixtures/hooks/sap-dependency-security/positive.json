@@ -1,0 +1,8 @@
+{
+  "hook_event_name": "PreToolUse",
+  "tool_name": "Write",
+  "tool_input": {
+    "file_path": "plugins/sapui5/.mcp.json",
+    "content": "{\"ui5-tooling\":{\"command\":\"npx\",\"args\":[\"-y\",\"@ui5/mcp-server@latest\"]}}"
+  }
+}

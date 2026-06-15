@@ -1,0 +1,13 @@
+<mvc:View
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m">
+  <App>
+    <pages>
+      <Page title="SAP Skills Fixture">
+        <content>
+          <Text text="Ready"/>
+        </content>
+      </Page>
+    </pages>
+  </App>
+</mvc:View>

@@ -470,6 +470,11 @@ generate_plugin_json() {
     mcp_servers_path="./.mcp.json"
   fi
 
+  local lsp_servers_path=""
+  if [ -f "$plugin_dir/.lsp.json" ]; then
+    lsp_servers_path="./.lsp.json"
+  fi
+
   # Set default license if empty
   if [ -z "$license" ]; then
     license="GPL-3.0"
@@ -488,13 +493,13 @@ generate_plugin_json() {
     --argjson commands "$commands_json" \
     --arg hooks "$hooks_path" \
     --arg mcp_servers "$mcp_servers_path" \
+    --arg lsp_servers "$lsp_servers_path" \
     '{
       name: $name,
       description: $description,
       version: $version,
       author: {
-        name: "E.J.",
-        email: "maintainers@example.com"
+        name: "E.J."
       },
       license: $license,
       repository: "https://github.com/secondsky/sap-skills",
@@ -503,7 +508,8 @@ generate_plugin_json() {
     } + (if $agents != [] then {agents: $agents} else {} end)
       + (if $commands != [] then {commands: $commands} else {} end)
       + (if $hooks != "" then {hooks: $hooks} else {} end)
-      + (if $mcp_servers != "" then {mcpServers: $mcp_servers} else {} end)'
+      + (if $mcp_servers != "" then {mcpServers: $mcp_servers} else {} end)
+      + (if $lsp_servers != "" then {lspServers: $lsp_servers} else {} end)'
   )
 
   # Validate JSON

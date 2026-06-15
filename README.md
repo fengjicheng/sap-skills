@@ -1,16 +1,16 @@
 # SAP Skills for AI Coding Assistants
 
-35 production-ready plugins for SAP development
+35 SAP development plugins with evidence-tracked verification
 
 [![License: GPL-3.0](https://img.shields.io/badge/License-GPL%203.0-blue.svg)](LICENSE)
 [![Plugins](https://img.shields.io/badge/Plugins-35-brightgreen.svg)](.claude-plugin/marketplace.json)
 [![Version](https://img.shields.io/badge/Version-2.3.0-orange.svg)](CHANGELOG.md)
 
-Production-ready plugins for SAP development with AI coding assistants. Each plugin provides context-aware skills that activate automatically when you work with SAP BTP, CAP, Fiori, ABAP, Analytics, and more.
+SAP development plugins for AI coding assistants, with public-source or package-registry verification tracked where available. Live tenant and system validation is tracked per plugin in `docs/project/source-verification-ledger.json`.
 
 ## Contents
 
-- [Quick Start](#quick-start) — Install for any AI assistant
+- [Quick Start](#quick-start) — Install for supported AI coding assistants
 - [How It Works](#how-it-works) — Auto-activation examples
 - [Available Plugins](#available-plugins-35) — 35 plugins by category
 - [Repository Structure](#repository-structure) — Architecture overview
@@ -22,9 +22,9 @@ Production-ready plugins for SAP development with AI coding assistants. Each plu
 
 ## Quick Start
 
-### Universal (any AI assistant)
+### Supported agents via npx skills
 
-Install via [vercel-labs/skills](https://github.com/vercel-labs/skills) — works with Claude Code, OpenCode, Codex, Cursor, Gemini CLI, GitHub Copilot, and 60+ more:
+Install via [vercel-labs/skills](https://github.com/vercel-labs/skills). Supported agents are controlled by the upstream skills CLI; current examples include Claude Code, OpenCode, Codex, Cursor, Gemini CLI, GitHub Copilot, and other supported clients:
 
 ```bash
 npx skills add secondsky/sap-skills
@@ -34,7 +34,7 @@ npx skills add secondsky/sap-skills
 
 ```bash
 # Add the marketplace
-/plugin marketplace add https://github.com/secondsky/sap-skills
+/plugin marketplace add secondsky/sap-skills
 
 # Install individual plugins
 /plugin install sap-cap-capire@sap-skills
@@ -43,12 +43,24 @@ npx skills add secondsky/sap-skills
 /plugin install sap-cap-capire@sap-skills sap-fiori-tools@sap-skills
 ```
 
-**Team setup** — add to `.claude/settings.json`:
+**Team setup** — add at project scope:
+
+```bash
+claude plugin marketplace add secondsky/sap-skills --scope project
+```
+
+Or configure `.claude/settings.json` directly:
+
 ```json
 {
-  "extraKnownMarketplaces": [
-    { "name": "sap-skills", "url": "https://github.com/secondsky/sap-skills" }
-  ]
+  "extraKnownMarketplaces": {
+    "sap-skills": {
+      "source": {
+        "source": "github",
+        "repo": "secondsky/sap-skills"
+      }
+    }
+  }
 }
 ```
 
@@ -217,7 +229,7 @@ Open source under **GPL-3.0**. Contributions welcome:
 - Submit new plugins (use plugin-dev + [Contributor Guide](docs/contributor-guide/))
 - Improve existing plugins with updated docs or references
 
-**Quality standards**: All plugins must be production-tested. Package versions verified quarterly. Known issues documented with sources.
+**Quality standards**: Public-source and package-registry evidence is tracked per plugin. Live tenant/system validation is recorded only when evidence exists. Package versions are reviewed quarterly, and known issues are documented with sources.
 
 ### Support
 

@@ -1,0 +1,8 @@
+{
+  "hook_event_name": "PreToolUse",
+  "tool_name": "Write",
+  "tool_input": {
+    "file_path": "story/script.js",
+    "content": "const ds = Table_1.getDataSource(); Application.showMessage('Ready');"
+  }
+}

@@ -1,5 +1,11 @@
 # CAP MCP Server Integration Guide
 
+## Operation Safety
+
+- **Classification**: `local-only`
+- The CAP MCP server reads local CAP model/docs and has no bundled tenant credentials, destinations, tokens, or service keys.
+- Keep examples read-only by default; explicit user approval is required before changing MCP config or running commands that deploy, publish, or affect remote systems.
+
 ## Overview
 
 The CAP MCP (Model Context Protocol) server provides AI agents with live access to your CAP project's compiled model and documentation. This integration enables Claude Code agents to:
@@ -323,4 +329,4 @@ Each agent automatically leverages MCP tools as part of their workflow.
 - **License**: Apache-2.0
 - **Version**: 0.0.3+ (updated regularly)
 
-For real-world use cases with ROI quantification, see [MCP Use Cases](mcp-use-cases.md).
+For illustrative workflow scenarios and planning assumptions, see [MCP Use Cases](mcp-use-cases.md).

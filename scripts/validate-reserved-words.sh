@@ -2,11 +2,13 @@
 set -euo pipefail
 
 # validate-reserved-words.sh
-# Validates that marketplace.json and plugin.json files do not contain reserved words
-# that would cause CLI installation to fail.
+# Validates marketplace/plugin names for reserved-name compatibility and applies
+# this repository's stricter description style rule separately.
 #
-# Reserved words: "official", "anthropic", "claude" (case-insensitive)
-# These are blocked to prevent marketplace impersonation.
+# Name compatibility: marketplace/plugin names must not impersonate reserved
+# providers or documented marketplace names.
+# Description style: this repo avoids "official", "anthropic", and "claude" in
+# generated marketplace descriptions so public copy does not imply endorsement.
 #
 # Usage: ./scripts/validate-reserved-words.sh
 
@@ -19,8 +21,9 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-# Reserved words pattern (case-insensitive)
-RESERVED_PATTERN="(official|anthropic|claude)"
+# Reserved name and repo style patterns (case-insensitive)
+RESERVED_NAME_PATTERN="(^|[-_])(official|anthropic|claude)([-_]|$)"
+DESCRIPTION_STYLE_PATTERN="(official|anthropic|claude)"
 
 # Verify jq is installed
 if ! command -v jq &> /dev/null; then
@@ -29,42 +32,35 @@ if ! command -v jq &> /dev/null; then
     exit 1
 fi
 
-echo "🔍 Reserved Words Validation"
+echo "🔍 Reserved Name and Description Style Validation"
 echo "============================="
 echo ""
-echo "Checking for blocked words: official, anthropic, claude"
+echo "Checking names for reserved/impersonating terms and descriptions for repository style"
 echo ""
 
 ERRORS=0
 MARKETPLACE_CHECKED=false
 
-# Function to check a JSON file for reserved words in name and description fields
+# Function to check a JSON file for reserved names and description style.
 check_file() {
     local file="$1"
     local relpath="${file#$REPO_ROOT/}"
 
-    # Extract name and description fields, fail if JSON is invalid
-    local name_desc
-    if ! name_desc=$(jq -r '(.name // "") + " " + (.description // "")' "$file" 2>&1); then
+    local name_value desc_value
+    if ! name_value=$(jq -r '.name // ""' "$file" 2>&1); then
         echo -e "${RED}✗${NC} $relpath"
-        echo "  Failed to parse JSON: $name_desc"
+        echo "  Failed to parse JSON: $name_value"
         return 1
     fi
+    desc_value=$(jq -r '.description // ""' "$file")
 
-    if echo "$name_desc" | grep -iE "$RESERVED_PATTERN" > /dev/null 2>&1; then
+    if echo "$name_value" | grep -iE "$RESERVED_NAME_PATTERN" > /dev/null 2>&1; then
         echo -e "${RED}✗${NC} $relpath"
-        echo "  Reserved word found in name or description field"
-        # Show which field contains the reserved word
-        local name_value desc_value
-        name_value=$(jq -r '.name // ""' "$file")
-        desc_value=$(jq -r '.description // ""' "$file")
-
-        if echo "$name_value" | grep -iE "$RESERVED_PATTERN" > /dev/null 2>&1; then
-            echo "  name: $name_value"
-        fi
-        if echo "$desc_value" | grep -iE "$RESERVED_PATTERN" > /dev/null 2>&1; then
-            echo "  description: $desc_value"
-        fi
+        echo "  Reserved or impersonating term found in name: $name_value"
+        return 1
+    elif echo "$desc_value" | grep -iE "$DESCRIPTION_STYLE_PATTERN" > /dev/null 2>&1; then
+        echo -e "${RED}✗${NC} $relpath"
+        echo "  Repository description style violation (not a CLI reserved-name rule): $desc_value"
         return 1
     else
         echo -e "${GREEN}✓${NC} $relpath"
@@ -82,11 +78,11 @@ check_marketplace_entries() {
         .plugins // []
         | to_entries[]
         | select(
-            ((.value.name // "") | test($pattern; "i"))
-            or ((.value.description // "") | test($pattern; "i"))
+            ((.value.name // "") | test($namePattern; "i"))
+            or ((.value.description // "") | test($descriptionPattern; "i"))
           )
         | "\(.key)\t\(.value.name // "")\t\(.value.description // "")"
-      ' --arg pattern "$RESERVED_PATTERN" "$file" 2>&1); then
+      ' --arg namePattern "$RESERVED_NAME_PATTERN" --arg descriptionPattern "$DESCRIPTION_STYLE_PATTERN" "$file" 2>&1); then
         echo -e "${RED}✗${NC} $relpath"
         echo "  Failed to inspect marketplace plugin entries: $entries"
         return 1
@@ -96,12 +92,12 @@ check_marketplace_entries() {
         echo -e "${RED}✗${NC} $relpath plugins[]"
         while IFS=$'\t' read -r index name_value desc_value; do
             [ -z "$index" ] && continue
-            echo "  plugins[$index] contains reserved word in name or description"
-            if echo "$name_value" | grep -iE "$RESERVED_PATTERN" > /dev/null 2>&1; then
-                echo "    name: $name_value"
+            echo "  plugins[$index] contains a reserved name term or description style violation"
+            if echo "$name_value" | grep -iE "$RESERVED_NAME_PATTERN" > /dev/null 2>&1; then
+                echo "    reserved/impersonating name: $name_value"
             fi
-            if echo "$desc_value" | grep -iE "$RESERVED_PATTERN" > /dev/null 2>&1; then
-                echo "    description: $desc_value"
+            if echo "$desc_value" | grep -iE "$DESCRIPTION_STYLE_PATTERN" > /dev/null 2>&1; then
+                echo "    repository description style: $desc_value"
             fi
             failures=$((failures + 1))
         done <<< "$entries"
@@ -148,10 +144,10 @@ fi
 echo ""
 
 if [ $ERRORS -gt 0 ]; then
-    echo -e "${RED}❌ Validation failed: $ERRORS file(s) contain reserved words${NC}"
+    echo -e "${RED}❌ Validation failed: $ERRORS reserved-name/style issue(s) found${NC}"
     echo ""
-    echo "Reserved words (official, anthropic, claude) are not allowed in"
-    echo "name or description fields. Use alternatives like:"
+    echo "Marketplace/plugin names must not impersonate reserved providers."
+    echo "Descriptions also follow this repo's stricter style rule. Use alternatives like:"
     echo "  - 'AI coding assistant' instead of 'Claude'"
     echo "  - 'the Code CLI' instead of 'Claude Code CLI'"
     exit 1

@@ -203,7 +203,7 @@ sap-cap-capire/
 │   ├── cql-patterns.md             # CQL usage patterns
 │   ├── cli-complete.md             # Complete CLI reference
 │   ├── mcp-integration.md          # MCP server setup and usage guide (new)
-│   └── mcp-use-cases.md            # Real-world MCP scenarios with ROI (new)
+│   └── mcp-use-cases.md            # Illustrative MCP workflow scenarios (new)
 └── templates/                      # 8 practical template files
     ├── bookshop-schema.cds         # Complete data model example
     ├── catalog-service.cds         # Service definition template

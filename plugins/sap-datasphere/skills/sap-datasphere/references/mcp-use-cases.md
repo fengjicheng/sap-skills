@@ -1,12 +1,19 @@
-# SAP Datasphere MCP Server - Real-World Use Cases
+# SAP Datasphere MCP Server - Illustrative Use Cases
 
 ## Overview
 
-This document provides 8 comprehensive real-world use cases demonstrating how the SAP Datasphere MCP Server transforms data workflows through conversational interaction. These scenarios are based on actual implementations and show quantified time savings across different roles.
+This document provides 8 illustrative use cases for SAP Datasphere MCP-assisted workflows. Time and value numbers are examples from source material or planning assumptions only; they are not repository-verified productivity, ROI, tenant, or customer outcome claims.
 
 **Source**: SAP Datasphere MCP Server Release Blog (Dec 14, 2025)
 **Author**: Mario Defelipe
 **MCP Server**: @mariodefe/sap-datasphere-mcp
+
+## Operation Safety
+
+- **Classification**: `read-only tenant`, `mutating tenant`, `destructive`
+- These examples may involve live SAP Datasphere tenant APIs when MCP credentials are configured in environment variables.
+- Treat read/list/search/query examples as read-only tenant operations. Require explicit user approval before create, update, delete, reset, deploy, publish, trigger, or destructive actions.
+- Keep live tenant verification pending unless matching evidence is recorded in the source verification ledger.
 
 ## Common Patterns
 

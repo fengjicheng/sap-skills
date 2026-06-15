@@ -260,4 +260,4 @@ _renderChart(data) {
 
 **MCP Fallback:** If no live SAC context is available, use bundled widget references and ask for console/network errors or exported widget files. Mark browser/SAC runtime behavior as pending.
 
-**Safety Constraints:** Do not add remote script sources, hardcoded credentials, unsafe HTML injection, or unbounded data rendering without explaining the security and performance impact.
+**Safety Constraints:** Do not add remote script sources, hardcoded credentials, unsafe HTML injection, or unbounded data rendering without explaining the security and performance impact. Require explicit user approval before writing or changing widget files.
