@@ -8,6 +8,12 @@
 
 SAP development plugins for AI coding assistants, with public-source or package-registry verification tracked where available. Live tenant and system validation is tracked per plugin in `docs/project/source-verification-ledger.json`.
 
+The repository is packaged for the Claude marketplace, but the SAP skill content
+is written to be portable. In clients such as Codex, OpenCode, Cursor, or Gemini
+CLI, Claude-specific agents, hooks, slash commands, and MCP configs should be
+treated as role guidance, optional validators, prompt templates, and connection
+recipes unless that client supports them natively.
+
 ## Contents
 
 - [Quick Start](#quick-start) — Install for supported AI coding assistants
@@ -83,6 +89,12 @@ Once installed, plugins provide skills that automatically activate based on your
 - **"Create SAC planning model"** → `sap-sac-planning` activates
 
 No manual invocation needed — the AI assistant loads relevant skills when you need them.
+
+Claude-compatible clients may also activate bundled commands, agents, hooks, and
+MCP servers. Other harnesses can still use the same files as Markdown guidance:
+run hook validators manually when desired, follow command output contracts as
+prompt templates, and configure MCP servers using the documented command,
+arguments, environment variables, and safety notes.
 
 ---
 

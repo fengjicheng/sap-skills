@@ -13,8 +13,9 @@ metadata:
   template_patterns: 56
   agents: 4
   commands: 4
-  status: production
-  known_issues: []
+  status: docs_audited_runtime_pending
+  known_issues:
+    - Live SAC story/runtime checks require tenant evidence before claiming production validation.
 ---
 
 # SAP Analytics Cloud Scripting

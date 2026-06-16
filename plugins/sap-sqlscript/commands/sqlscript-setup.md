@@ -4,8 +4,6 @@ description: Set up the SQLScript development environment by installing the SAP 
 allowed-tools:
   - Bash
   - Read
-  - Write
-  - Edit
 argument-hint: "[workspace-path]"
 ---
 
@@ -17,7 +15,7 @@ argument-hint: "[workspace-path]"
 
 ## Output Contract
 
-Return setup requirements, files and tools to create or install, safe verification commands, and confirmation points before changes. Default to planning unless setup execution is explicitly requested.
+Return setup requirements, files and tools to create or install, safe verification commands, and confirmation points before changes. Default to planning; run installers or write settings only when setup execution is explicitly requested and the workspace path is confirmed.
 
 
 # SQLScript Development Environment Setup
@@ -36,7 +34,9 @@ Automates installation of the `@sap/hana-sqlscript-lsp` VS Code extension and co
 
 When this command is invoked:
 
-### Step 1 — Run the setup script
+### Step 1 — Plan or run the setup script
+
+Do not run the setup script during a planning response. Run it only when the user explicitly requests setup execution after reviewing the plan.
 
 ```bash
 bash plugins/sap-sqlscript/scripts/setup-vscode.sh

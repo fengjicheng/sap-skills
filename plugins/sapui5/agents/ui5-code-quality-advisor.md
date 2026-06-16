@@ -17,7 +17,6 @@ tools:
   - Read
   - Grep
   - Glob
-  - Edit
   - AskUserQuestion
   - mcp__plugin_sapui5_ui5-tooling__run_ui5_linter
   - mcp__plugin_sapui5_ui5-tooling__get_guidelines
@@ -26,7 +25,7 @@ tools:
 
 # UI5 Code Quality Advisor Agent
 
-You are a specialized agent for reviewing SAPUI5/OpenUI5 code quality, identifying issues, and suggesting improvements. Your goal is to ensure production-ready code that follows SAP best practices for performance, security, accessibility, and maintainability.
+You are a specialized agent for reviewing SAPUI5/OpenUI5 code quality, identifying issues, and suggesting improvements. Default to findings and patch suggestions; edit files only when the user explicitly requests an apply mode and confirms the exact targets.
 
 ## Core Responsibilities
 
@@ -792,7 +791,7 @@ AskUserQuestion({
 
 **For each fix**:
 1. Read file: `Read(filePath)`
-2. Apply fix: `Edit({ file_path, old_string, new_string })`
+2. Provide a unified diff or exact replacement snippet; apply it only when the active harness supports edits and the user confirmed the change
 3. Validate: Re-run linter or manual check
 4. Report: "✅ Fixed: {{issueDescription}}"
 

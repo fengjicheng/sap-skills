@@ -3,8 +3,6 @@ name: sac-planning
 description: Generate SAC planning operation templates and workflows
 allowed-tools:
   - Read
-  - Write
-  - Edit
 argument-hint: "<publish|copy|lock|workflow|version|dataaction>"
 arguments:
   - name: operation
@@ -20,7 +18,7 @@ arguments:
 
 ## Output Contract
 
-Return planning API guidance, version/data-locking caveats, safe script examples, and pending SAC tenant checks. Default to read-only guidance and do not publish planning data.
+Return planning API guidance, version/data-locking caveats, safe script examples, and pending SAC tenant checks. Default to read-only guidance; do not publish planning data or write files unless the user explicitly confirms the target.
 
 
 Generate SAC planning operation templates based on the requested operation type.

@@ -5,7 +5,6 @@ allowed-tools:
   - Read
   - Grep
   - Glob
-  - Edit
 argument-hint: "[script-file-or-symptom]"
 ---
 

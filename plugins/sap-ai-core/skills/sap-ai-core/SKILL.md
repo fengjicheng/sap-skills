@@ -6,7 +6,8 @@ license: GPL-3.0
 metadata:
   version: "2.3.0"
   last_verified: "2026-06-12"
-  production_tested: "Yes, examples verified against SAP documentation"
+  production_tested: "No; documentation-audited only, no live tenant/runtime evidence"
+  runtime_verification: "pending tenant evidence"
 ---
 
 # SAP AI Core & AI Launchpad Skill
@@ -157,14 +158,14 @@ curl -X POST "$ORCHESTRATION_URL/v2/completion" \
 
 ## Model Providers
 
-SAP AI Core provides access to models from multiple providers:
-- **Azure OpenAI**: GPT-5.5, GPT-5.4, GPT-5, GPT-4.1, o3, o4-mini, GPT Realtime
-- **SAP Open Source**: Llama 3.1/3.2/3.3/4, Falcon
-- **Google Vertex AI**: Gemini 2.5 Pro/Flash/Flash-Lite, Gemini 2.0 Flash
-- **AWS Bedrock**: Claude 4.7/4.6/4.5 Opus, Claude 4.5 Sonnet/Haiku
-- **Mistral AI**: Mistral Large, Medium, Small
+SAP AI Core provides access to model providers through a tenant-specific catalog. Treat exact model names and versions as examples until verified in the target tenant with `GET /v2/lm/scenarios/foundation-models/models` or SAP AI Launchpad Model Library.
+- **Azure OpenAI**: GPT-family chat, vision, reasoning, realtime, and embedding models where entitled
+- **SAP Open Source**: Llama/Falcon/Mistral-family open source models where enabled
+- **Google Vertex AI**: Gemini-family chat, vision, code, and embedding models where entitled
+- **AWS Bedrock**: Anthropic Claude and Amazon model families where entitled
+- **Mistral AI**: Mistral Large/Small/Codestral-family models where enabled
 - **IBM**: Granite models
-- **Perplexity**: Sonar, Sonar Pro, Sonar Deep Research
+- **Perplexity**: Sonar-family web-grounded models where enabled
 
 For detailed provider configurations and model lists, see `references/model-providers.md`.
 

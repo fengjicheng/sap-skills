@@ -104,11 +104,13 @@ for chunk in stream:
 
 The SDK supports OpenAI's Responses API (agentic-style calls):
 
+Replace the example model with a model ID returned by the target SAP AI Core tenant catalog.
+
 ```python
 from gen_ai_hub.proxy.native.openai import responses
 
 response = responses.create(
-    model="gpt-5",
+    model="gpt-4o-mini",
     instructions="You are a helpful assistant.",
     input="What is the capital of France?"
 )
@@ -136,7 +138,7 @@ print(person)
 
 # Via responses API
 response = responses.parse(
-    model="gpt-5",
+    model="gpt-4o-mini",
     input="Tell me about John Doe aged 30.",
     text_format=Person
 )

@@ -294,12 +294,17 @@ async function main() {
     "Use exact package pins for executable MCP/package tools, keep secrets out of config files, and document any exception in the dependency review notes."
   ].join("\n");
 
-  return printJson({
-    hookSpecificOutput: {
-      hookEventName: event,
-      additionalContext: context
-    }
-  });
+  const hookSpecificOutput = {
+    hookEventName: event,
+    additionalContext: context
+  };
+
+  if (event === "PreToolUse") {
+    hookSpecificOutput.permissionDecision = "deny";
+    hookSpecificOutput.permissionDecisionReason = "Dependency or MCP security risk detected; user confirmation is required before this tool call can proceed.";
+  }
+
+  return printJson({ hookSpecificOutput });
 }
 
 await main();

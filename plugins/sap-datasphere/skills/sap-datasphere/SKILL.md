@@ -597,7 +597,7 @@ For transport procedures, see `references/content-transport.md`.
 **Best Practices & Updates:**
 12. **`references/best-practices-patterns.md`** - Architecture patterns, naming conventions, performance optimization, checklists
 13. **`references/whats-new-2025.md`** - 2025 archive: Q1-Q4 2025 features, Generic HTTP, REST API tasks, deprecations
-14. **`references/whats-new-2026.md`** - Q1-Q2 2026 features, BDC data products, task chain enhancements, SAP Snowflake, SAPPHIRE announcements
+14. **`references/whats-new-2026.md`** - 2026 Datasphere/BDC features, including Q1-Q2 updates and 2026.11 items such as HANA Cloud calculation-view semantic onboarding, replication-flow scheduling, runtime-settings transport, SAP Snowflake, and SAPPHIRE announcements
 
 **Platform Context:**
 15. **`references/business-data-cloud.md`** - SAP Business Data Cloud architecture, Databricks integration, data products vs. marketplace, BDC Connect
@@ -636,7 +636,15 @@ This plugin includes 3 specialized agents, 5 slash commands, and validation hook
 
 ## MCP Integration
 
-This skill integrates with the **SAP Datasphere MCP Server** (`@mariodefe/sap-datasphere-mcp`) providing 45 tools for live tenant interaction. The bundled MCP config uses an exact package pin governed by **sap-dependency-security** and validated by `npm run validate:mcp-security`.
+This skill includes a connection recipe for the **SAP Datasphere MCP Server** (`@mariodefe/sap-datasphere-mcp`). The bundled MCP config uses the approved exact pin `1.2.1`, governed by **sap-dependency-security** and validated by `npm run validate:mcp-security`; package evidence records `1.4.0` as an upgrade candidate. Treat MCP behavior and live tenant tool counts as pending until your harness loads the server and verifies the available tools.
+
+| MCP detail | Value |
+|------------|-------|
+| Command | `npx` |
+| Args | `-y @mariodefe/sap-datasphere-mcp@1.2.1` |
+| Required env | `DATASPHERE_BASE_URL`, `DATASPHERE_CLIENT_ID`, `DATASPHERE_CLIENT_SECRET`, `DATASPHERE_TOKEN_URL` |
+| Operation safety | Tenant read tools plus mutating/destructive tools; ask before create, update, delete, reset, deploy, publish, or trigger operations |
+| Fallback | Use Datasphere CLI/reference guidance and mark live checks pending |
 
 ### MCP Tools
 
@@ -662,10 +670,10 @@ Required environment variables:
 
 ### Performance
 
-- Sub-100ms metadata queries (cached)
-- 100-500ms catalog operations
-- 500-2,000ms OData queries
-- Batch processing up to 50,000 records
+Performance depends on tenant size, network latency, payload size, permissions,
+and server version. Treat any example timings or batch limits in MCP reference
+material as illustrative until measured in the target tenant and recorded as
+evidence.
 
 ### File Structure
 ```

@@ -15,8 +15,6 @@ metadata:
   keywords: [sap analytics cloud, sac custom widget, web component sac, json metadata widget, widget lifecycle functions, onCustomWidgetBeforeUpdate, onCustomWidgetAfterUpdate, onCustomWidgetResize, onCustomWidgetDestroy, sac data binding, dataBindings feeds, styling panel widget, builder panel widget, sac echarts integration, sac d3js integration, third party library sac, widget hosting sac, integrity hash widget, sha256 integrity, widget security cors, sac widget debugging, sac analytics designer widget, optimized story experience widget, sac widget api, widget add-on, sac script api widget, shadow dom web component, sac tooltip customization, plot area addon]
 allowed-tools:
   - Read
-  - Write
-  - Edit
   - Bash
   - WebFetch
 ---
@@ -408,7 +406,7 @@ See **`references/widget-addon-guide.md`** for complete implementation.
 - Added 3 specialized agents: widget-architect, widget-debugger, widget-api-assistant
 - Added 3 slash commands: /widget-validate, /widget-generate, /widget-lint
 - Added validation hooks for automatic quality checks on Write/Edit
-- Added 5 production-ready templates in templates/ directory
+- Added 5 docs-audited templates in templates/ directory
 - Enhanced plugin structure to match comprehensive plugin pattern
 - Updated last verified date
 

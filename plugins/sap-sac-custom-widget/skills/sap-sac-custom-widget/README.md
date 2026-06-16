@@ -1,6 +1,6 @@
 # SAP SAC Custom Widget Plugin
 
-Comprehensive Claude Code plugin for developing custom widgets in SAP Analytics Cloud (SAC). Includes specialized agents, slash commands, validation hooks, and production-ready templates.
+Portable, documentation-audited plugin content for developing custom widgets in SAP Analytics Cloud (SAC). Claude agents, slash commands, and validation hooks are optional activation helpers; in Codex, OpenCode, and similar harnesses, use them as main-thread guidance and manual validators.
 
 ## Capability Index
 
@@ -34,7 +34,7 @@ Comprehensive Claude Code plugin for developing custom widgets in SAP Analytics 
 
 ### Templates
 
-Ready-to-use scaffolds in `templates/` directory:
+Docs-audited scaffolds in `templates/` directory:
 
 | Template | Description |
 |----------|-------------|
@@ -46,7 +46,7 @@ Ready-to-use scaffolds in `templates/` directory:
 
 ### Validation Hooks
 
-Automatic quality checks on Write/Edit operations:
+Claude activation hooks for quality checks on Write/Edit/MultiEdit operations; outside Claude, run the validators manually before committing widget files:
 - **widget.json**: Required fields, tag naming, property types, data binding config
 - **widget.js**: Lifecycle functions, Shadow DOM, propertiesChanged dispatch
 - **Performance**: Resize debouncing, chart disposal, XSS prevention

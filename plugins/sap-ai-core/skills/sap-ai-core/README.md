@@ -1,6 +1,6 @@
 # SAP AI Core & AI Launchpad Skill
 
-A comprehensive Claude Code skill for SAP AI Core and SAP AI Launchpad development on SAP Business Technology Platform (BTP).
+A portable AI coding assistant skill for SAP AI Core and SAP AI Launchpad development on SAP Business Technology Platform (BTP). Claude-specific command metadata is packaging support only; the skill content is intended to remain useful in Codex, OpenCode, and other Markdown-capable harnesses.
 
 ## Capability Index
 
@@ -11,8 +11,8 @@ A comprehensive Claude Code skill for SAP AI Core and SAP AI Launchpad developme
 | Hooks | No |
 | MCP | No |
 | LSP | No |
-| Source Freshness | `last_verified`: 2026-06-12; live SAP AI Core deployment behavior remains tenant-verified only. |
-| Verification | `npm run validate`; tenant runtime checks pending unless deployment evidence is provided. |
+| Source Freshness | `last_verified`: 2026-06-12; 2026-06-16 pass corrected portability and evidence wording. |
+| Verification | `npm run validate`; live deployment behavior and model availability remain tenant-verified only. |
 
 ## Overview
 
@@ -171,6 +171,14 @@ curl -X GET "$AI_API_URL/v2/lm/scenarios/foundation-models/models" \
 
 3. Create orchestration deployment and start using models
 
+Before using any model ID from examples or references, list the target tenant catalog:
+
+```bash
+curl -X GET "$AI_API_URL/v2/lm/scenarios/foundation-models/models" \
+  -H "Authorization: Bearer $AUTH_TOKEN" \
+  -H "AI-Resource-Group: default"
+```
+
 ## Documentation Sources
 
 | Resource | URL |
@@ -187,16 +195,15 @@ GPL-3.0
 
 ## Version
 
-**Current**: 1.1.0 (2025-11-27)
-- Added comprehensive metadata tracking
-- Optimized SKILL.md from 615 to 256 lines (58% reduction)
-- Added Table of Contents for better navigation
-- Improved progressive disclosure architecture
+**Current**: 2.3.0 (2026-06-16)
+- Documentation-audited AI Core guidance with tenant/runtime verification still pending.
+- Model names are examples and must be checked against the target tenant catalog.
+- Skill content is portable across Claude, Codex, OpenCode, and similar Markdown-capable harnesses.
 
 ## Last Updated
 
-2025-11-27
+2026-06-16
 
 ## Next Review
 
-2026-02-27 (Quarterly)
+Next source refresh and tenant verification remain pending until SAP Help/package evidence or live tenant evidence is available.

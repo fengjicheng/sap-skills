@@ -6,7 +6,6 @@ allowed-tools:
   - Grep
   - Glob
   - Bash
-  - Edit
   - mcp__plugin_sapui5_ui5-tooling__run_ui5_linter
 argument-hint: "[--fix] [file] [severity]"
 arguments:
@@ -29,7 +28,7 @@ arguments:
 
 ## Output Contract
 
-Return lint findings, severity, file references, safe fix suggestions, and tool availability. Default to analysis-only unless `--fix` is explicitly requested.
+Return lint findings, severity, file references, safe fix suggestions, and tool availability. Default to analysis-only unless `--fix` is explicitly requested and exact target files are confirmed.
 
 
 # UI5 Code Linting{{#if file}} for {{file}}{{/if}}

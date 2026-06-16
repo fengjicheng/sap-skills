@@ -3,8 +3,6 @@ name: sqlscript-optimize
 description: Analyzes SQLScript code for performance issues and suggests optimizations with auto-fix capability
 allowed-tools:
   - Read
-  - Edit
-  - Write
   - Grep
 argument-hint: "<file_path> [--fix|--explain]"
 ---
@@ -17,7 +15,7 @@ argument-hint: "<file_path> [--fix|--explain]"
 
 ## Output Contract
 
-Return performance findings, evidence, suggested rewrites, risk level, and validation steps. Default to analysis-only; apply edits only with an explicit fix request and file confirmation.
+Return performance findings, evidence, suggested rewrites, risk level, and validation steps. Default to analysis-only; apply edits only with an explicit fix request and exact file confirmation.
 
 
 # SQLScript Performance Optimization Command

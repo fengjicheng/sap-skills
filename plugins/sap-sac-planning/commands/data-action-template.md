@@ -3,8 +3,6 @@ name: data-action-template
 description: Generate a data action configuration template based on requirements
 allowed-tools:
   - Read
-  - Write
-  - Edit
   - AskUserQuestion
 argument-hint: "[data-action-name]"
 ---
@@ -17,7 +15,7 @@ argument-hint: "[data-action-name]"
 
 ## Output Contract
 
-Return a data action design template, dimension/member assumptions, validation checklist, and performance caveats. Default to read-only planning and do not create SAC artifacts.
+Return a data action design template, dimension/member assumptions, validation checklist, and performance caveats. Default to read-only planning and do not create SAC artifacts or local files unless the user explicitly confirms a target.
 
 
 # Data Action Configuration Template

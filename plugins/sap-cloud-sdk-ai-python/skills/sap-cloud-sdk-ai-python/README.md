@@ -3,7 +3,9 @@
 Python SDK for SAP Generative AI Hub and Orchestration Service. Package `sap-ai-sdk-gen`
 (formerly `generative-ai-hub-sdk`, now deprecated). Provides native client integrations
 for OpenAI, Amazon Bedrock, Google GenAI, LangChain support, and full Orchestration
-Service access including content filtering, data masking, and document grounding.
+Service access including content filtering, data masking, and document grounding. Package
+freshness is registry-verified; AI Core tenant execution and exact model availability still
+require target-tenant validation.
 
 ## Capability Index
 
@@ -14,8 +16,8 @@ Service access including content filtering, data masking, and document grounding
 | Hooks | No |
 | MCP | No |
 | LSP | No |
-| Source Freshness | `last_verified`: 2026-06-12; Python package/source evidence checked in docs-only audit notes. |
-| Verification | `npm run validate`; AI Core tenant execution checks pending. |
+| Source Freshness | `last_verified`: 2026-06-15; package registry evidence captured in `docs/project/package-evidence/2026-06-15.json`. |
+| Verification | `npm run validate`; AI Core tenant execution and exact model availability remain pending. |
 
 ## Quick Start
 

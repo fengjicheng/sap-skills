@@ -3,8 +3,6 @@ name: cloud-sdk-ai-chat-template
 description: Generate or review a JavaScript or TypeScript chat template for SAP Cloud SDK for AI with safe configuration boundaries
 allowed-tools:
   - Read
-  - Write
-  - Edit
   - Grep
   - Glob
 argument-hint: "[typescript|javascript] [orchestration|native] [target-file]"
@@ -22,7 +20,7 @@ arguments:
 
 # Cloud SDK AI Chat Template
 
-Prepare a minimal chat client template for SAP Cloud SDK for AI. Generate files only when the user explicitly asks for output in the workspace.
+Prepare a minimal chat client template for SAP Cloud SDK for AI. Default to a snippet and generate files only when the user explicitly asks for workspace output and provides or confirms the target file path.
 
 ## Workflow
 

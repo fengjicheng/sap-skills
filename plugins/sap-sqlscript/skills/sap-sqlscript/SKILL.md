@@ -8,7 +8,7 @@ license: GPL-3.0
 metadata:
   version: "2.3.0"
   last_verified: "2026-05-31"
-  production_tested: "Yes, referenced in SAP Community projects"
+  production_tested: "No; documentation and community references only, no live HANA runtime evidence"
   sap_hana_version: "2.0 SPS08"
   hana_cloud_version: "QRC 1/2026"
   errors_prevented: 15

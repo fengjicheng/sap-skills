@@ -1,6 +1,6 @@
 # SAP Analytics Cloud Planning Skill
 
-Production-ready skill for building SAP Analytics Cloud (SAC) planning applications with Claude Code.
+Portable, documentation-audited skill for building SAP Analytics Cloud (SAC) planning applications. Claude agents, commands, and hooks are optional activation helpers; in Codex, OpenCode, and similar harnesses, use them as main-thread guidance and manual validators.
 
 ---
 
@@ -13,7 +13,7 @@ Production-ready skill for building SAP Analytics Cloud (SAC) planning applicati
 | Hooks | Yes: `hooks/hooks.json` |
 | MCP | No |
 | LSP | No |
-| Source Freshness | `last_verified`: 2026-06-11; SKILL.md remains under 5k words with references routed progressively. |
+| Source Freshness | `last_verified`: 2026-06-11; 2026-06-16 pass corrected portability and deprecated S/4HANA export wording. |
 | Verification | `npm run validate`; live SAC planning/model checks pending. |
 
 ## Overview
@@ -130,19 +130,13 @@ This skill should be triggered when users mention:
 - Date dimension
 - planning enabled model
 
-### S/4HANA Integration & Export
-- SAC S/4HANA export
-- ACDOCP export
-- SAC data export service
-- API_PLPACDOCPDATA_SRV
-- planning data export S/4HANA
-- SAC Cloud Connector
-- export planning to ERP
-- native planning S/4HANA integration
-- legacy mode SAC
-- ACDOCP table
-- export planning data
-- S/4HANA plan data
+### Legacy S/4HANA Integration & Export
+- legacy SAC S/4HANA export
+- deprecated ACDOCP export path
+- existing API_PLPACDOCPDATA_SRV maintenance
+- legacy planning data export S/4HANA
+- native planning write-back alternative
+- S/4HANA plan data migration assessment
 
 ### Seamless Planning with Datasphere
 - Seamless Planning SAC
@@ -211,7 +205,7 @@ plugins/sap-sac-planning/
     │   ├── planning-workflows.md     # Calendar, Tasks, Approvals
     │   ├── version-management.md     # Versions, Publishing
     │   ├── javascript-patterns.md    # Code snippets & patterns
-    │   ├── s4hana-acdocp-export.md   # S/4HANA ACDOCP integration
+    │   ├── s4hana-acdocp-export.md   # Legacy/deprecated S/4HANA ACDOCP export
     │   ├── seamless-planning-datasphere.md  # NEW: Datasphere integration
     │   ├── bpc-live-connection.md    # NEW: BPC Live Connection
     │   ├── value-driver-trees.md     # NEW: VDT configuration
@@ -305,7 +299,7 @@ This skill is based on official SAP documentation and verified community resourc
 ### Community Resources
 - [Denis Reis - JavaScript API Code Snippets](https://www.denisreis.com/sap-analytics-cloud-javascript-api-code-snippets/)
 - [SAP Community - Analytics Cloud](https://community.sap.com/topics/sap-analytics-cloud)
-- [ZPARTNER - SAC Export to S/4HANA ACDOCP](https://www.zpartner.eu/sac-export-native-planning-to-sap-s-4hana-acdocp/) (S/4HANA Integration)
+- [ZPARTNER - SAC Export to S/4HANA ACDOCP](https://www.zpartner.eu/sac-export-native-planning-to-sap-s-4hana-acdocp/) (legacy/deprecated S/4HANA integration context)
 
 ---
 

@@ -7,7 +7,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "./hooks/dispatch.sh",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/dispatch.sh",
             "timeout": 30
           }
         ]
@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "./hooks/dispatch.sh",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/dispatch.sh",
             "timeout": 15
           }
         ]
@@ -29,7 +29,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "./hooks/dispatch.sh",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/dispatch.sh",
             "timeout": 15
           }
         ]

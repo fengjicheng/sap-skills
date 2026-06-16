@@ -1,6 +1,10 @@
 # SAP Datasphere Skill
 
-Comprehensive Claude Code plugin for SAP Datasphere development with 3 specialized agents, 5 slash commands, validation hooks, and 17 reference documents covering data warehouse creation, analytic modeling, data integration, CLI automation, data marketplace, governance, and SAP Business Data Cloud.
+Portable SAP Datasphere skill for AI coding assistants, packaged with 3
+specialized agent role guides, 5 command templates, validation hooks, and 17
+reference documents covering data warehouse creation, analytic modeling, data
+integration, CLI automation, data marketplace, governance, and SAP Business
+Data Cloud.
 
 ## Capability Index
 
@@ -16,7 +20,7 @@ Comprehensive Claude Code plugin for SAP Datasphere development with 3 specializ
 
 ## Overview
 
-SAP Datasphere is SAP's cloud-native data warehouse solution on SAP Business Technology Platform (BTP) and the data foundation of SAP Business Data Cloud (BDC). This plugin provides comprehensive guidance for building enterprise data warehouses with SAP Datasphere, including 2026 features like task chain ports, replication flow enhancements, SAP Snowflake integration, and BDC data products.
+SAP Datasphere is SAP's cloud-native data warehouse solution on SAP Business Technology Platform (BTP) and the data foundation of SAP Business Data Cloud (BDC). This plugin provides comprehensive guidance for building enterprise data warehouses with SAP Datasphere, including 2026 features such as task chain ports, replication flow enhancements, semantic onboarding from HANA Cloud calculation views, SAP Snowflake integration, and BDC data products.
 
 ## When to Use
 
@@ -55,7 +59,19 @@ This skill activates when working with:
 
 ## MCP Integration
 
-This plugin integrates with the SAP Datasphere MCP Server for direct tenant interaction.
+This plugin includes a Claude-compatible MCP connection recipe for the SAP
+Datasphere MCP Server. MCP use is optional and live-tenant behavior remains
+pending until the user configures credentials and verifies tool availability in
+their harness.
+
+| Item | Value |
+|------|-------|
+| Command | `npx` |
+| Args | `-y @mariodefe/sap-datasphere-mcp@1.2.1` |
+| Approved pin | `1.2.1` |
+| Latest observed | `1.4.0` in `docs/project/package-evidence/2026-06-15.json` |
+| Operation safety | Read-only, mutating tenant, and destructive tools; require confirmation before create/update/delete/reset/deploy/publish/trigger actions |
+| Fallback | Use CLI/reference guidance and mark live tenant checks pending |
 
 ### Setup
 
@@ -80,7 +96,9 @@ This plugin integrates with the SAP Datasphere MCP Server for direct tenant inte
 
 ### Available Tools
 
-The plugin provides access to 45 MCP tools across 8 categories:
+When the approved MCP server is installed and verified, the documented server
+version is expected to expose 45 MCP tools across 8 categories. Confirm the
+actual tool list in your harness before relying on a specific count:
 - **Foundation:** Connection testing, tenant info, space discovery
 - **Catalog:** Asset search, column analysis
 - **Analytics:** Query analytic models, smart queries
@@ -94,7 +112,9 @@ Use `/datasphere-mcp-tools` command to see all available tools.
 
 ### Usage in Agents
 
-All three agents have access to relevant MCP tools:
+In Claude-compatible clients, all three agents can be granted relevant MCP
+tools. In other harnesses, use the same agent files as role guidance and run MCP
+tools only if your client has been configured for them:
 - **datasphere-modeler:** Queries, metadata, data preview
 - **datasphere-integration-advisor:** Connection testing, space discovery
 - **datasphere-admin-helper:** User management, permissions
@@ -115,7 +135,8 @@ See [mcp-use-cases.md](references/mcp-use-cases.md) for 8 illustrative source-ma
 - **The Performance Troubleshooter**: 1.5 hours saved per incident for Data Platform Engineers
 - **Cross-Functional Collaboration**: 3 hours saved per issue for Business Analysts + Data Engineers
 
-**Total ROI**: $159,100+/year for mid-sized teams
+**Illustrative ROI model**: $159,100+/year for mid-sized teams. Treat this as
+planning material, not validated repository evidence.
 
 ## Keywords
 

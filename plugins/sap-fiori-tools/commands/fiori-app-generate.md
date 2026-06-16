@@ -3,8 +3,6 @@ name: fiori-app-generate
 description: Generate or plan a SAP Fiori app scaffold using Fiori tools conventions, templates, and safe project setup checks
 allowed-tools:
   - Read
-  - Write
-  - Edit
   - Grep
   - Glob
   - Bash
@@ -21,7 +19,7 @@ arguments:
 
 # Fiori App Generate
 
-Generate or plan a Fiori app scaffold using the existing repository conventions. Ask before overwriting files.
+Generate or plan a Fiori app scaffold using the existing repository conventions. Default to a plan; scaffold only when the user explicitly requests generation and confirms the target directory. Ask before overwriting files.
 
 ## Workflow
 

@@ -3,8 +3,6 @@ name: sac-script-template
 description: Generate SAC script templates for common Analytics Designer and Optimized Story Experience scenarios
 allowed-tools:
   - Read
-  - Write
-  - Edit
 argument-hint: "<filter|planning|export|navigation|chart|table|dropdown|popup|timer|bookmark>"
 arguments:
   - name: type
@@ -20,7 +18,7 @@ arguments:
 
 ## Output Contract
 
-Return a script template, required widget/model assumptions, API references, and validation notes. Default to generating text only unless the user explicitly asks to write files.
+Return a script template, required widget/model assumptions, API references, and validation notes. Default to generating text only unless the user explicitly asks to write files and confirms the target path.
 
 
 Generate a SAC script template based on the requested type.

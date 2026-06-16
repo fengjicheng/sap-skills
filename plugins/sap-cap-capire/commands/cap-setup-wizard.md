@@ -3,8 +3,6 @@ name: cap-setup-wizard
 description: Interactive guide for setting up new CAP projects with framework and database selection
 allowed-tools:
   - Read
-  - Write
-  - Edit
   - Bash
   - AskUserQuestion
 argument-hint: "[nodejs|java|typescript] [sqlite|hana|postgres]"
@@ -25,7 +23,7 @@ arguments:
 
 ## Output Contract
 
-Return a setup plan, selected stack/runtime assumptions, generated-file checklist, safe commands, and confirmation points before writes. Default to planning unless the user explicitly requests project generation.
+Return a setup plan, selected stack/runtime assumptions, generated-file checklist, safe commands, and confirmation points before writes. Default to planning unless the user explicitly requests project generation and provides or confirms a target directory.
 
 
 # CAP Project Setup Wizard

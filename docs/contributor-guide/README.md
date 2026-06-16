@@ -15,6 +15,7 @@ Comprehensive guide for developing, maintaining, and publishing SAP skills for C
 **Deep Dives**:
 - [Quality Assurance →](quality-assurance.md) - manual quality review process
 - [Common Mistakes →](common-mistakes.md) - Patterns to avoid
+- [Multi-Harness Portability →](multi-harness-portability.md) - keeping skills usable beyond one assistant runtime
 - [Marketplace Infrastructure →](../architecture/marketplace-infrastructure.md) - Technical architecture
 
 **External Resources**:
@@ -41,7 +42,10 @@ Comprehensive guide for developing, maintaining, and publishing SAP skills for C
 
 ### Purpose
 
-This guide covers **SAP-specific development patterns** for the Claude Code skills ecosystem. It complements the official **plugin-dev skills** from Anthropic with domain-specific guidance for SAP technologies.
+This guide covers **SAP-specific development patterns** for SAP skills packaged
+for the Claude marketplace and reused by Markdown-capable AI coding assistants.
+It complements the official **plugin-dev skills** from Anthropic with
+domain-specific guidance for SAP technologies.
 
 ### Who This Guide Is For
 
@@ -65,6 +69,9 @@ SAP skills require:
 - **Error catalog** documentation with SAP Notes
 - **Cross-references** to related skills in the portfolio
 - **Quarterly maintenance** cycles
+- **Multi-harness portability** so command bodies, references, and safety
+  guidance still work when Claude-specific agents, hooks, or MCP activation are
+  unavailable
 
 ---
 

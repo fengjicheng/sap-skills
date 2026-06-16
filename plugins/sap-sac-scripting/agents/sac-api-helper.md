@@ -174,9 +174,9 @@ var theme = Application.getTheme();
 | R Visualizations | Yes | Limited |
 | Planning Input | Yes | Yes |
 | Scripting Scope | Application-wide | Story-scoped |
-| API Doc Version | See SAP Help | 2025.14 (Q1 2026) |
+| API Doc Version | See SAP Help | 2025.20 (Q2 2026 / SAC 2026.8) |
 
-**OSE API Reference Files (Q1 2026, v2025.14) — Full method/parameter/return docs:**
+**OSE API Reference Files (Q2 2026, v2025.20) — Full method/parameter/return docs:**
 - `../skills/sap-sac-scripting/references/ose-api-application-core.md` — Application, PageBook, Panel, Popup, Widget base classes (15 classes)
 - `../skills/sap-sac-scripting/references/ose-api-widgets.md` — Button, Dropdown, InputField, Slider, Switch, Text, TextArea, Shape (15 classes)
 - `../skills/sap-sac-scripting/references/ose-api-datasource.md` — DataSource, DataAction, DataBinding, DataLocking, DataChangeInsights (39 classes)

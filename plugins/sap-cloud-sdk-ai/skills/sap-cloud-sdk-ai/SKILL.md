@@ -5,7 +5,8 @@ description: |
 license: GPL-3.0
 metadata:
   version: "2.3.0"
-  last_verified: 2026-05-31
+  last_verified: "2026-06-15"
+  package_evidence: "docs/project/package-evidence/2026-06-15.json"
 ---
 
 # SAP Cloud SDK for AI
@@ -16,14 +17,14 @@ metadata:
 - **sap-ai-core**: Use for AI Core platform setup, orchestration configuration, and model deployment
 - **sap-dependency-security**: Hardening guidance for npm package upgrades, lockfile policies, and secure dependency workflows
 
-The official SDK for SAP AI Core, SAP Generative AI Hub, and Orchestration Service.
+The official SDK for SAP AI Core, SAP Generative AI Hub, and Orchestration Service. Package versions are verified against public registries; AI Core tenant execution and exact model availability still require target-tenant validation.
 
 ## When to Use This Skill
 
 Use this skill when:
 - Integrating AI/LLM capabilities into SAP BTP applications
 - Building chat completion or embedding features
-- Using GPT-4o, Claude, Gemini, or other models via SAP AI Core
+- Using tenant-approved OpenAI, Claude, Gemini, Amazon, Mistral, or other model families via SAP AI Core
 - Implementing content filtering, data masking, or document grounding
 - Creating agentic workflows with LangChain or Spring AI
 - Managing prompts via Prompt Registry
@@ -40,7 +41,7 @@ Use this skill when:
 
 ## Quick Start
 
-> **Note**: This skill uses SAP Cloud SDK for AI JavaScript v2.11.0+ and Java v1.19.0+. If you're migrating from v1.x, see [V1 to V2 Migration Guide](references/v1-to-v2-migration.md) for breaking changes.
+> **Note**: This skill uses SAP Cloud SDK for AI JavaScript v2.11.0+ and Java v1.19.0+ based on public package registry evidence from 2026-06-15. If you're migrating from v1.x, see [V1 to V2 Migration Guide](references/v1-to-v2-migration.md) for breaking changes.
 
 ### JavaScript/TypeScript
 
@@ -134,12 +135,14 @@ For detailed connection options, see `references/connecting-to-ai-core.md`
 
 ## Supported Models
 
-### Recommended
-- **OpenAI**: gpt-4o, gpt-4o-mini, o1, o3-mini
-- **Anthropic (AWS)**: Claude 3.5 Sonnet, Claude 4
-- **Amazon**: Nova Pro, Nova Lite, Nova Micro
-- **Google**: Gemini 2.5 Flash, Gemini 2.0 Flash
-- **Mistral**: Medium, Large
+Model IDs and versions are tenant-specific. Before copying an example into application code, list the target catalog through SAP AI Launchpad Model Library or the AI Core model-list API.
+
+### Example Families
+- **OpenAI**: GPT-family chat, multimodal, reasoning, and embedding models where entitled
+- **Anthropic (AWS)**: Claude-family models where entitled
+- **Amazon**: Nova/Titan-family models where entitled
+- **Google**: Gemini-family models where entitled
+- **Mistral**: Mistral-family models where entitled
 
 ### Deprecated Models (Use Replacements)
 | Deprecated | Use Instead |
@@ -352,6 +355,8 @@ For detailed guidance:
 |-----|-----------------|----------------------|
 | JavaScript | 2.11.0+ | Node.js 20+ |
 | Java | 1.19.0+ | Java 17+ (21 LTS recommended) |
+
+Version evidence: `docs/project/package-evidence/2026-06-15.json`. This is package-registry evidence only, not live AI Core runtime evidence.
 
 **Note**: Generated model classes (in `...model` packages) may change in minor releases but are safe to use.
 

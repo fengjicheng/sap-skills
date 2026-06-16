@@ -3,8 +3,6 @@ name: sqlscript-validate
 description: Validates SQLScript code for syntax, patterns, and best practices with auto-fix capability
 allowed-tools:
   - Read
-  - Edit
-  - Write
   - Grep
 argument-hint: "<file_path|--all> [--fix]"
 ---
@@ -17,7 +15,7 @@ argument-hint: "<file_path|--all> [--fix]"
 
 ## Output Contract
 
-Return syntax, security, performance, and style findings with file references and suggested fixes. Default to read-only validation; use `--fix` only when explicitly requested.
+Return syntax, security, performance, and style findings with file references and suggested fixes. Default to read-only validation; use `--fix` only when explicitly requested and exact files are confirmed.
 
 
 # SQLScript Validation Command

@@ -5,7 +5,7 @@
  * Copy and adapt these patterns to your application.
  *
  * Source: SAP Analytics Cloud Scripting Skill
- * Version: 2025.14+
+ * Version: 2025.20+ for OSE references; Analytics Designer APIs use the current SAP Help release URL.
  */
 
 // =============================================================================

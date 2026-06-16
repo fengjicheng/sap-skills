@@ -13,7 +13,8 @@ This document provides comprehensive technical reference for all 45 MCP tools pr
 
 **MCP Server Details:**
 - **Package:** @mariodefe/sap-datasphere-mcp
-- **Version:** 1.2.1 pinned
+- **Approved Pin:** 1.2.1
+- **Latest Observed:** 1.4.0 in `docs/project/package-evidence/2026-06-15.json` (upgrade candidate, not automatically approved)
 - **GitHub:** https://github.com/MarioDeFelipe/sap-datasphere-mcp
 - **Authentication:** OAuth 2.0 Client Credentials
 - **Protocol:** Model Context Protocol (MCP)
@@ -22,7 +23,7 @@ This document provides comprehensive technical reference for all 45 MCP tools pr
 ## Installation
 
 ```bash
-# Global installation
+# Global installation with the approved pin
 npm install -g @mariodefe/sap-datasphere-mcp@1.2.1
 
 # Verify installation

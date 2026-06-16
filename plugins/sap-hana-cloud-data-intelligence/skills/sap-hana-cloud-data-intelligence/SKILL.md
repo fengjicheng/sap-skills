@@ -6,6 +6,7 @@ license: GPL-3.0
 metadata:
   version: "2.3.0"
   last_verified: "2025-11-27"
+  evidence_status: "stale_docs_only_pending_refresh"
 ---
 
 # SAP HANA Cloud Data Intelligence Skill
@@ -17,7 +18,7 @@ metadata:
 - **sap-btp-connectivity**: Use for cloud-to-on-premise connection and destination prerequisites
 - **sap-btp-integration-suite**: Use for integration scenarios that should move out of Data Intelligence pipelines
 
-This skill provides comprehensive guidance for developing with SAP Data Intelligence Cloud, including pipeline creation, operator development, data integration, and machine learning scenarios.
+This skill provides documentation-audited guidance for developing with SAP Data Intelligence Cloud, including pipeline creation, operator development, data integration, and machine learning scenarios. The `last_verified` date is intentionally stale until product lifecycle status and live graph/runtime behavior are checked against primary sources.
 
 ## Table of Contents
 - [When to Use This Skill](#when-to-use-this-skill)
@@ -293,4 +294,5 @@ Starter templates are available in `templates/`:
 ## Version Information
 
 - **Last Updated**: 2025-11-27
+- **Evidence Status**: Stale docs-only guidance; source refresh and live tenant/runtime checks pending
 - **Documentation Source**: SAP-docs/sap-hana-cloud-data-intelligence (GitHub)

@@ -1,6 +1,6 @@
 # SAP HANA Cloud Data Intelligence Skill
 
-Production-ready Claude Code skill for SAP Data Intelligence Cloud development.
+Portable, documentation-audited skill for SAP Data Intelligence Cloud development. The `last_verified` date is intentionally stale until product lifecycle status and live graph/runtime behavior are checked against primary sources.
 
 ## Capability Index
 
@@ -11,7 +11,7 @@ Production-ready Claude Code skill for SAP Data Intelligence Cloud development.
 | Hooks | No |
 | MCP | No |
 | LSP | No |
-| Source Freshness | `last_verified`: 2025-11-27; product lifecycle and docs-only verification pending. |
+| Source Freshness | `last_verified`: 2025-11-27; product lifecycle and source refresh remain pending. |
 | Verification | `npm run validate`; live graph/runtime checks require tenant access. |
 
 ## Overview
@@ -311,6 +311,7 @@ Contributions welcome! Please follow the skill creation guidelines in the main r
 
 ---
 
-**Last Updated**: 2025-11-27
+**Last Updated**: 2026-06-16
+**Evidence Status**: Stale docs-only guidance; live graph/runtime checks require tenant access.
 **Maintainer**: E.J.
 **Repository**: [https://github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills)
