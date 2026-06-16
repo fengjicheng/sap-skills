@@ -2,7 +2,7 @@
 
 Complete reference for Calendar integration, Bookmarks, Linked Analysis, and Timer APIs in SAP Analytics Cloud.
 
-**Source**: [Analytics Designer API Reference 2025.14](https://help.sap.com/doc/958d4c11261f42e992e8d01a4c0dde25/release/en-US/index.html)
+**Source**: [Analytics Designer API Reference (current release)](https://help.sap.com/doc/958d4c11261f42e992e8d01a4c0dde25/release/en-US/index.html)
 
 ---
 

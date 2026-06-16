@@ -35,7 +35,7 @@ Use this skill when designing a BTP account model, setting up governance, choosi
 4. Use the relevant implementation skill for detailed execution: `sap-btp-cloud-platform`, `sap-btp-connectivity`, `sap-btp-service-manager`, `sap-cap-capire`, or `sap-fiori-tools`.
 5. Record production-specific gaps in the project plan before changing `last_verified`.
 
-Production-ready SAP BTP implementation guidance based on official SAP documentation.
+Documentation-audited SAP BTP implementation guidance based on official SAP documentation. The `last_verified` date remains stale until the source refresh and any live account checks are completed.
 
 **Quick Links**:
 - **Official Guide**: [https://github.com/SAP-docs/btp-best-practices-guide](https://github.com/SAP-docs/btp-best-practices-guide)
@@ -465,6 +465,6 @@ This skill provides comprehensive reference documentation:
 
 ---
 
-**Last Updated**: 2025-11-27
+**Last Updated**: 2026-06-16
 **Review Progress**: See SAP_SKILLS_REVIEW_PROGRESS.md
-**Next Review**: 2026-02-27 (quarterly)
+**Next Review**: Source refresh pending; do not advance `last_verified` without primary-source evidence.

@@ -3,7 +3,6 @@ name: sqlscript-convert
 description: Converts between standalone SQLScript procedures and AMDP class implementations
 allowed-tools:
   - Read
-  - Write
   - Grep
 argument-hint: "<file_path> --to <amdp|standalone|cds-function>"
 ---
@@ -16,7 +15,7 @@ argument-hint: "<file_path> --to <amdp|standalone|cds-function>"
 
 ## Output Contract
 
-Return a conversion plan, compatibility risks, generated snippet if requested, validation checklist, and confirmation points before writes. Default to read-only conversion guidance.
+Return a conversion plan, compatibility risks, generated snippet if requested, validation checklist, and confirmation points before writes. Default to read-only conversion guidance; write converted files only when the user explicitly confirms the target path.
 
 
 # SQLScript Conversion Command

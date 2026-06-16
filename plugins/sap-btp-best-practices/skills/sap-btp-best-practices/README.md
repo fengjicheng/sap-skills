@@ -4,11 +4,11 @@ Comprehensive best practices for SAP Business Technology Platform (BTP) implemen
 
 ## Overview
 
-This skill provides production-ready guidance for SAP BTP implementations based on the official SAP BTP Administrator's Guide and Best Practices documentation.
+This skill provides documentation-audited guidance for SAP BTP implementations based on the official SAP BTP Administrator's Guide and Best Practices documentation. Its `last_verified` date is intentionally stale until the source refresh and any live account checks are completed.
 
 **Source Documentation**: [https://github.com/SAP-docs/btp-best-practices-guide](https://github.com/SAP-docs/btp-best-practices-guide)
 
-**Version**: 1.1.0
+**Version**: 2.3.0
 **Last Verified**: 2025-11-27
 
 ---
@@ -22,7 +22,7 @@ This skill provides production-ready guidance for SAP BTP implementations based 
 | Hooks | No |
 | MCP | No |
 | LSP | No |
-| Source Freshness | `last_verified`: 2025-11-27; docs-only BTP guidance recheck pending in third-pass audit. |
+| Source Freshness | `last_verified`: 2025-11-27; source refresh is still pending and must not be implied as current. |
 | Verification | `npm run validate`; live BTP account checks pending unless explicitly documented. |
 
 ## Keywords for Discovery

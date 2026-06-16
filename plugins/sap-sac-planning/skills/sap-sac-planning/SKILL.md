@@ -1,7 +1,7 @@
 ---
 name: sap-sac-planning
 description: |
-  This skill should be used when developing SAP Analytics Cloud (SAC) planning applications, including building planning-enabled stories, analytics designer applications with planning functionality, data actions, multi actions, version management, and planning workflows. Use when creating planning models, implementing data entry forms, configuring spreading/distribution/allocation, setting up data locking, building calendar-based planning processes with approval workflows, writing JavaScript scripts for planning automation, using the getPlanning() API, PlanningModel API, or DataSource API for planning scenarios, troubleshooting planning performance issues, integrating predictive forecasting into planning workflows, implementing Seamless Planning with SAP Datasphere, configuring BPC live connections for BW on HANA integration, building value driver trees for what-if analysis, or debugging data actions with tracing.
+  SAP Analytics Cloud (SAC) planning guidance for planning models, planning-enabled stories, data actions, multi actions, version management, data locking, calendar/input workflows, allocations, value driver trees, BPC live planning, and Seamless Planning with SAP Datasphere. Use this for planning design, planning APIs, data action debugging, and planning performance reviews; use sap-sac-scripting for non-planning SAC scripts and sap-datasphere for Datasphere modeling.
 license: GPL-3.0
 metadata:
   version: "2.3.0"
@@ -10,7 +10,7 @@ metadata:
   documentation_source: "https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7"
   api_reference: "https://help.sap.com/doc/958d4c11261f42e992e8d01a4c0dde25/2026.8/en-US/index.html"
   reference_files: 25
-  status: production
+  status: docs_audited_runtime_pending
 ---
 
 # SAP Analytics Cloud Planning Skill
@@ -342,7 +342,11 @@ When using public dimensions, create cross-model parameters to share values acro
 
 ## S/4HANA ACDOCP Export
 
-Export native planning data from SAC to SAP S/4HANA's ACDOCP table (central ERP plan data storage).
+Legacy/deprecated path for exporting native planning data from SAC to SAP
+S/4HANA's ACDOCP table (central ERP plan data storage). As of Q2 2026, SAP
+deprecates exporting model data to SAP S/4HANA and recommends the write-back
+integration scenario instead. Keep this section for maintaining existing
+landscapes, not as the default design for new planning solutions.
 
 ### Architecture
 
@@ -372,7 +376,10 @@ SAC Planning Model → Data Export Service → Cloud Connector → API_PLPACDOCP
 - **Deletions don't propagate**: Set values to 0 and re-export to clear ACDOCP data
 - Filters cannot be changed after export job creation—name jobs descriptively
 
-### Quick Setup
+### Legacy Maintenance Checklist
+
+Do not create this path for new implementations without confirming the
+deprecation impact, SAP Note 3707288 guidance, and a supported migration path.
 
 1. Enable Legacy Mode on planning model
 2. Create S/4HANA connection with Cloud Connector
@@ -381,7 +388,7 @@ SAC Planning Model → Data Export Service → Cloud Connector → API_PLPACDOCP
 5. Define export scope (FiscalYearPeriod + PlanningCategory mandatory)
 6. Schedule or run export
 
-**Reference**: See `references/s4hana-acdocp-export.md` for complete configuration guide, troubleshooting, and SAP documentation links.
+**Reference**: See `references/s4hana-acdocp-export.md` for legacy configuration details and `references/whats-new-2026-planning.md` for the Q2 2026 deprecation note.
 
 ---
 
@@ -870,8 +877,8 @@ console.log("Lock state: " + lockState);
 ## Official Documentation Links
 
 **Essential Resources**:
-- **SAP Analytics Cloud Help (2025.23)**: [https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e](https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e)
-- **API Reference (2025.23)**: [https://help.sap.com/doc/958d4c11261f42e992e8d01a4c0dde25/2025.23/en-US/index.html](https://help.sap.com/doc/958d4c11261f42e992e8d01a4c0dde25/2025.23/en-US/index.html)
+- **SAP Analytics Cloud Help**: [https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e](https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e)
+- **API Reference (2026.8)**: [https://help.sap.com/doc/958d4c11261f42e992e8d01a4c0dde25/2026.8/en-US/index.html](https://help.sap.com/doc/958d4c11261f42e992e8d01a4c0dde25/2026.8/en-US/index.html)
 - **Analytics Designer Overview**: [https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/0798b81f9130425389dec84e19326b93.html](https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/0798b81f9130425389dec84e19326b93.html)
 - **Planning Overview**: [https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/cd897576c3344475a208c2f7a52f151e.html](https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/18850a0e13944f53aa8a8b7c094ea29e/cd897576c3344475a208c2f7a52f151e.html)
 
@@ -939,7 +946,7 @@ This skill includes comprehensive reference documentation (25 files):
 15. **references/version-publishing-notes.md**: Publishing best practices
 
 **Integration & Advanced**:
-16. **references/s4hana-acdocp-export.md**: S/4HANA integration, ACDOCP export, OData setup
+16. **references/s4hana-acdocp-export.md**: Legacy/deprecated S/4HANA ACDOCP export reference for existing landscapes
 17. **references/ai-planning-analytics.md**: AI-powered planning features
 
 **Development**:

@@ -5,21 +5,22 @@ description: |
 license: GPL-3.0
 metadata:
   version: "2.3.0"
-  last_verified: "2026-06-12"
+  last_verified: "2026-06-15"
   sdk_package: "sap-ai-sdk-gen 6.10.0"
+  package_evidence: "docs/project/package-evidence/2026-06-15.json"
   documentation_source: "https://help.sap.com/doc/generative-ai-hub-sdk/CLOUD/en-US/_reference/gen_ai_hub.html"
 ---
 
 # SAP Cloud SDK for AI (Python)
 
 > **Package rename**: The PyPI package `generative-ai-hub-sdk` is **deprecated** (v4.12.4 is the last release).
-> Its successor is **`sap-ai-sdk-gen`** (currently v6.10.0). Code and tutorials referencing
+> Its successor is **`sap-ai-sdk-gen`** (currently v6.10.0 per public PyPI registry evidence from 2026-06-15). Code and tutorials referencing
 > `generative-ai-hub-sdk` should migrate to `sap-ai-sdk-gen`; the import name remains `gen_ai_hub`.
 
 The official Python SDK for SAP Generative AI Hub and Orchestration Service. It wraps
 the native SDKs of model providers (OpenAI, Amazon Bedrock, Google GenAI) and offers
 a harmonised LangChain integration and a full Orchestration client — all routed through
-SAP AI Core with unified authentication.
+SAP AI Core with unified authentication. Package freshness is registry-verified; AI Core runtime behavior and exact model availability still require target-tenant validation.
 
 ## Related Skills
 
@@ -177,16 +178,16 @@ For detailed auth setup and troubleshooting, see `references/getting-started-aut
 
 The Generative AI Hub catalog includes models from multiple providers. Check
 [SAP's model catalog](https://help.sap.com/docs/sap-ai-core/generative-ai-hub/available-models)
-for the authoritative list. Notable families:
+and the target tenant catalog for the authoritative model IDs. Example families:
 
-| Provider | Models |
-|----------|--------|
-| OpenAI | gpt-4o, gpt-4o-mini, gpt-5, gpt-5-nano, o1, o3-mini |
-| Anthropic (via Bedrock) | Claude 4 Sonnet, Claude 3.5 Sonnet |
-| Amazon | Nova Pro, Nova Lite, Nova Micro, Nova Premier |
-| Google | Gemini 2.5 Flash, Gemini 2.0 Flash |
-| Mistral | Medium, Large, Small |
-| SAP | RPT-1 (tabular predictions) |
+| Provider | Example Families |
+|----------|------------------|
+| OpenAI | GPT-family chat, multimodal, reasoning, and embedding models |
+| Anthropic (via Bedrock) | Claude-family models |
+| Amazon | Nova/Titan-family models |
+| Google | Gemini-family models |
+| Mistral | Mistral-family models |
+| SAP | RPT-family tabular prediction models where enabled |
 
 ## Core Features
 

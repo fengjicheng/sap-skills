@@ -63,6 +63,44 @@ function assertNonEmptyObject(name, parsed) {
   }
 }
 
+function assertDenyForBlockingPreToolUse(name, payloadText, parsed) {
+  if (!parsed) return;
+
+  let payload;
+  try {
+    payload = JSON.parse(payloadText);
+  } catch {
+    return;
+  }
+
+  if (payload.hook_event_name !== "PreToolUse" || payload.tool_name === "Bash") {
+    return;
+  }
+
+  const decision = parsed.hookSpecificOutput?.permissionDecision;
+  if (decision !== "deny") {
+    fail(`${name}: blocking PreToolUse fixture must return hookSpecificOutput.permissionDecision=deny`);
+  }
+}
+
+function preToolUseVariants(payloadText) {
+  let payload;
+  try {
+    payload = JSON.parse(payloadText);
+  } catch {
+    return [];
+  }
+
+  if (payload.hook_event_name !== "PreToolUse" || payload.tool_name === "Bash") {
+    return [];
+  }
+
+  return ["Write", "Edit", "MultiEdit"].map((toolName) => [
+    toolName,
+    JSON.stringify({ ...payload, tool_name: toolName }),
+  ]);
+}
+
 const irrelevantPayload = JSON.stringify({
   hook_event_name: "PreToolUse",
   tool_name: "Read",
@@ -93,7 +131,9 @@ for (const dir of hookDirs()) {
       if (!group.matcher || typeof group.matcher !== "string") fail(`${rel}: hook matcher must be a string`);
       for (const hook of group.hooks ?? []) {
         if (hook.type !== "command") fail(`${rel}: hook type must be command`);
-        if (hook.command !== "./hooks/dispatch.sh") fail(`${rel}: hook command must use ./hooks/dispatch.sh`);
+        if (hook.command !== "${CLAUDE_PLUGIN_ROOT}/hooks/dispatch.sh") {
+          fail(`${rel}: hook command must use \${CLAUDE_PLUGIN_ROOT}/hooks/dispatch.sh`);
+        }
         if (!Number.isInteger(hook.timeout) || hook.timeout < 1 || hook.timeout > 60) fail(`${rel}: hook timeout must be 1-60 seconds`);
       }
     }
@@ -118,8 +158,15 @@ for (const dir of hookDirs()) {
   }
 
   if (fs.existsSync(pluginFixtureDir)) {
-    const positive = assertJsonObject(`${plugin} positive fixture`, runHook(dir, fs.readFileSync(path.join(pluginFixtureDir, "positive.json"), "utf8")));
+    const positivePayload = fs.readFileSync(path.join(pluginFixtureDir, "positive.json"), "utf8");
+    const positive = assertJsonObject(`${plugin} positive fixture`, runHook(dir, positivePayload));
     assertNonEmptyObject(`${plugin} positive fixture`, positive);
+    assertDenyForBlockingPreToolUse(`${plugin} positive fixture`, positivePayload, positive);
+    for (const [toolName, variantPayload] of preToolUseVariants(positivePayload)) {
+      const variant = assertJsonObject(`${plugin} positive ${toolName} fixture`, runHook(dir, variantPayload));
+      assertNonEmptyObject(`${plugin} positive ${toolName} fixture`, variant);
+      assertDenyForBlockingPreToolUse(`${plugin} positive ${toolName} fixture`, variantPayload, variant);
+    }
     const negative = assertJsonObject(`${plugin} negative fixture`, runHook(dir, fs.readFileSync(path.join(pluginFixtureDir, "negative.json"), "utf8")));
     assertEmptyObject(`${plugin} negative fixture`, negative);
     assertJsonObject(`${plugin} malformed fixture`, runHook(dir, fs.readFileSync(path.join(pluginFixtureDir, "malformed.json"), "utf8")));

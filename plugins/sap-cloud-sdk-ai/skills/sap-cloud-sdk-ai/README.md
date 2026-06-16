@@ -1,6 +1,6 @@
 # SAP Cloud SDK for AI
 
-Claude Code skill for developing with SAP Cloud SDK for AI - the official SDK for SAP AI Core, SAP Generative AI Hub, and Orchestration Service.
+Portable AI coding assistant skill for developing with SAP Cloud SDK for AI - the official SDK for SAP AI Core, SAP Generative AI Hub, and Orchestration Service. Claude command metadata is packaging support only; the guidance remains usable in Codex, OpenCode, and other Markdown-capable harnesses.
 
 ## Capability Index
 
@@ -11,8 +11,8 @@ Claude Code skill for developing with SAP Cloud SDK for AI - the official SDK fo
 | Hooks | No |
 | MCP | No |
 | LSP | No |
-| Source Freshness | `last_verified`: 2026-05-31; package/source evidence checked in docs-only audit notes. |
-| Verification | `npm run validate`; AI Core tenant execution checks pending. |
+| Source Freshness | `last_verified`: 2026-06-15; package registry evidence captured in `docs/project/package-evidence/2026-06-15.json`. |
+| Verification | `npm run validate`; AI Core tenant execution and exact model availability remain pending. |
 
 ## Auto-Trigger Keywords
 
@@ -99,9 +99,10 @@ sap-cloud-sdk-ai/
 
 ## Version
 
-- **JavaScript SDK**: 2.11.0+ (verified via npm on 2026-05-31)
-- **Java SDK**: 1.19.0+ (verified via Maven Central on 2026-05-31)
-- **Last Updated**: 2026-05-31
+- **JavaScript SDK**: 2.11.0+ (verified via npm on 2026-06-15)
+- **Java SDK**: 1.19.0+ (verified via Maven Central on 2026-06-15)
+- **Evidence Scope**: Package registry freshness only; AI Core runtime/model behavior requires tenant evidence.
+- **Last Updated**: 2026-06-16
 
 ## Documentation Sources
 

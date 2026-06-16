@@ -3,8 +3,6 @@ name: ui5-scaffold
 description: Interactive project scaffolding for UI5 applications and Integration Cards
 allowed-tools:
   - Read
-  - Write
-  - Edit
   - Bash
   - AskUserQuestion
   - mcp__plugin_sapui5_ui5-tooling__create_ui5_app
@@ -34,7 +32,7 @@ arguments:
 
 ## Output Contract
 
-Return project choices, files to create, package/version assumptions, and confirmation points before writes. Scaffold only when the user explicitly requests generation.
+Return project choices, files to create, package/version assumptions, and confirmation points before writes. Scaffold only when the user explicitly requests generation and confirms the target directory.
 
 
 # Scaffold UI5 Project

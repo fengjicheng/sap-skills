@@ -6,7 +6,6 @@ allowed-tools:
   - Grep
   - Glob
   - Bash
-  - Edit
 argument-hint: "<findings-file-or-app-path> [--apply-safe]"
 arguments:
   - name: target
@@ -19,7 +18,7 @@ arguments:
 
 # UI5 Linter Fix Plan
 
-Turn UI5 Linter findings into an ordered remediation plan. Do not edit unless the user explicitly chooses an apply mode.
+Turn UI5 Linter findings into an ordered remediation plan. Do not edit unless the user explicitly chooses an apply mode and confirms the exact target files.
 
 ## Workflow
 

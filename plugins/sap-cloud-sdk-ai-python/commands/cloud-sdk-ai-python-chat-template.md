@@ -3,8 +3,6 @@ name: cloud-sdk-ai-python-chat-template
 description: Generate or review a Python chat template for SAP Cloud SDK for AI with environment-based configuration
 allowed-tools:
   - Read
-  - Write
-  - Edit
   - Grep
   - Glob
 argument-hint: "[langchain|native|orchestration] [target-file]"
@@ -19,7 +17,7 @@ arguments:
 
 # Cloud SDK AI Python Chat Template
 
-Prepare a Python chat client template for SAP Cloud SDK for AI. Default to a snippet and write files only when requested.
+Prepare a Python chat client template for SAP Cloud SDK for AI. Default to a snippet and write files only when the user explicitly requests generation and provides or confirms the target file path.
 
 ## Workflow
 

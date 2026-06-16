@@ -90,7 +90,23 @@
       "status": "current"
     }
   },
+  "maven": {
+    "com.sap.ai.sdk:orchestration": {
+      "latest": "1.19.0",
+      "command": "curl -fsSL https://repo1.maven.org/maven2/com/sap/ai/sdk/orchestration/maven-metadata.xml",
+      "repoDocumentedVersion": "1.19.0",
+      "status": "current",
+      "notes": "Package registry freshness only; SAP AI Core runtime behavior not validated."
+    }
+  },
   "pypi": {
+    "sap-ai-sdk-gen": {
+      "latest": "6.10.0",
+      "command": "python3 -m pip index versions sap-ai-sdk-gen",
+      "repoDocumentedVersion": "6.10.0",
+      "status": "current",
+      "notes": "Package registry freshness only; SAP AI Core runtime behavior not validated."
+    },
     "sap-datasphere-mcp": {
       "latest": "1.4.0",
       "command": "python3 -m pip index versions sap-datasphere-mcp",

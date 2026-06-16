@@ -1,6 +1,6 @@
 # SAP BTP Cloud Integration Automation Service (CIAS) Skill
 
-Production-ready Claude Code skill for SAP BTP Cloud Integration Automation Service.
+Portable, documentation-audited skill for SAP BTP Cloud Integration Automation Service. Claude packaging metadata is optional activation support; CIAS scenario behavior remains tenant-verified only.
 
 ---
 

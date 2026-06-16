@@ -3,8 +3,6 @@ name: datasphere-view-template
 description: Generate SAP Datasphere view templates for different modeling scenarios
 allowed-tools:
   - Read
-  - Write
-  - Edit
   - AskUserQuestion
 argument-hint: "<graphical|sql|sqlscript> [dimension|fact|analytic|staging]"
 arguments:
@@ -24,7 +22,7 @@ arguments:
 
 ## Output Contract
 
-Return a view/modeling template, source assumptions, performance considerations, validation checklist, and pending tenant checks. Default to guidance and avoid modifying Datasphere artifacts unless explicitly requested.
+Return a view/modeling template, source assumptions, performance considerations, validation checklist, and pending tenant checks. Default to guidance and avoid modifying Datasphere artifacts or local files unless the user explicitly confirms the target.
 
 
 Generate a Datasphere view template based on the requested type and purpose.

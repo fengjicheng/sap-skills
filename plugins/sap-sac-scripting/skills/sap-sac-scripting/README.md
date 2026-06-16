@@ -1,14 +1,16 @@
 # SAP SAC Scripting Skill
 
-Comprehensive Claude Code skill for scripting in SAP Analytics Cloud (SAC), including Analytics Designer and Optimized Story Experience.
+Portable SAP Analytics Cloud (SAC) scripting skill for AI coding assistants,
+including Analytics Designer and Optimized Story Experience.
 
 ## Overview
 
 This skill provides guidance, API references, and ready-to-use templates for developing interactive analytics applications and enhanced stories in SAP Analytics Cloud.
 
-**Version**: 1.7.0
-**SAC Version**: 2025.23
-**Last Updated**: 2025-11-27
+**Version**: 2.3.0
+**SAC Version**: Q2 2026 (2026.8)
+**OSE API Version**: 2025.20
+**Last Updated**: 2026-06-16
 
 ## Capability Index
 
@@ -19,16 +21,20 @@ This skill provides guidance, API references, and ready-to-use templates for dev
 | Hooks | Yes: `hooks/hooks.json` |
 | MCP | Yes: `.mcp.json` |
 | LSP | No |
-| Source Freshness | `last_verified`: 2026-06-11; oversized OSE references now require search routing from SKILL.md. |
+| Source Freshness | `last_verified`: 2026-06-11; OSE API references are aligned to 2025.20 and oversized OSE references require search routing from SKILL.md. |
 | Verification | `npm run validate`; live SAC story/runtime checks pending. |
 
 ## Installation
 
-Copy this skill folder to your Claude Code skills directory:
+Install through the supported skills/plugin mechanism for your AI coding
+assistant. In clients without native command, agent, hook, or MCP support, treat
+those files as Markdown guidance, manual validators, and connection recipes.
+
+For a direct local copy:
 
 ```bash
-# Clone or download to your skills folder
-cp -r sap-sac-scripting ~/.claude/skills/
+# Clone or download to your assistant's skills folder
+cp -r sap-sac-scripting <skills-directory>/
 ```
 
 ## When to Use
@@ -81,8 +87,9 @@ This skill triggers when you're working with:
 - `SKILL.md` - Core skill instructions and quick reference
 - `README.md` - This file (keywords and overview)
 
-### Reference Files (11 files)
-**Core APIs**:
+### Reference Files (65 files)
+
+**Starter API routes**:
 - `references/api-datasource.md` - Complete DataSource API (36+ methods)
 - `references/api-widgets.md` - Chart, Table, Input Controls APIs
 - `references/api-planning.md` - Planning API, version management
@@ -101,7 +108,7 @@ This skill triggers when you're working with:
 - `references/best-practices-developer.md` - Naming conventions, layout organization, script annotation
 - `references/best-practices-planning-stories.md` - Multi-story architecture, entry point design, navigation scripting
 
-### Templates (40 patterns)
+### Templates (56 patterns)
 - `templates/common-patterns.js` - 40 scripting patterns (filtering, loops, arrays, R viz, type conversion)
 - `templates/planning-operations.js` - 16 planning-specific patterns
 
@@ -350,8 +357,8 @@ This skill triggers when you're working with:
 
 ## Documentation Sources
 
-- [Analytics Designer API Reference 2025.14](https://help.sap.com/doc/958d4c11261f42e992e8d01a4c0dde25/release/en-US/index.html)
-- [Optimized Story Experience API Reference 2025.14](https://help.sap.com/doc/1639cb9ccaa54b2592224df577abe822/release/en-US/index.html)
+- [Analytics Designer API Reference](https://help.sap.com/doc/958d4c11261f42e992e8d01a4c0dde25/release/en-US/index.html)
+- [Optimized Story Experience API Reference 2025.20](https://help.sap.com/doc/1639cb9ccaa54b2592224df577abe822/release/en-US/index.html)
 - [SAP Analytics Cloud Scripting Documentation](https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/6a4db9a9c8634bcb86cecbf1f1dbbf8e.html)
 - [SAP Community - SAC](https://community.sap.com/topics/cloud-analytics)
 - [Denis Reis Code Snippets](https://www.denisreis.com/sap-analytics-cloud-javascript-api-code-snippets/)

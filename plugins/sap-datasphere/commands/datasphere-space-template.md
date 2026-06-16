@@ -3,8 +3,6 @@ name: datasphere-space-template
 description: Generate SAP Datasphere space configuration templates with best practices
 allowed-tools:
   - Read
-  - Write
-  - Edit
   - AskUserQuestion
 argument-hint: "<development|analytics|integration|sandbox>"
 arguments:
@@ -21,7 +19,7 @@ arguments:
 
 ## Output Contract
 
-Return a space design template, role/quota/data access assumptions, setup sequence, and confirmation points before tenant changes. Default to planning and read-only validation.
+Return a space design template, role/quota/data access assumptions, setup sequence, and confirmation points before tenant changes. Default to planning and read-only validation; do not create tenant spaces or local files unless the user explicitly confirms the target.
 
 
 Generate a Datasphere space configuration template based on the requested type.

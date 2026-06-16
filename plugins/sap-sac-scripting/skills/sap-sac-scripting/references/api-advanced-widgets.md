@@ -2,7 +2,7 @@
 
 Complete reference for Container Widgets, Layout APIs, R Visualizations, Custom Widgets, and Navigation in SAP Analytics Cloud.
 
-**Source**: [Analytics Designer API Reference 2025.14](https://help.sap.com/doc/958d4c11261f42e992e8d01a4c0dde25/release/en-US/index.html)
+**Source**: [Analytics Designer API Reference (current release)](https://help.sap.com/doc/958d4c11261f42e992e8d01a4c0dde25/release/en-US/index.html)
 
 ---
 
@@ -789,5 +789,5 @@ Button_Export.onClick = function() {
 - [Calendar & Bookmarks API](api-calendar-bookmarks.md)
 
 **Official References**:
-- [Analytics Designer API Reference 2025.14](https://help.sap.com/doc/958d4c11261f42e992e8d01a4c0dde25/release/en-US/index.html)
+- [Analytics Designer API Reference (current release)](https://help.sap.com/doc/958d4c11261f42e992e8d01a4c0dde25/release/en-US/index.html)
 - [Custom Widget Developer Guide](https://help.sap.com/doc/c813a28922b54e50bd2a307b099787dc/release/en-US/CustomWidgetDevGuide_en.pdf)

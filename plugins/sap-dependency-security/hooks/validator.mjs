@@ -297,6 +297,8 @@ async function main() {
   return printJson({
     hookSpecificOutput: {
       hookEventName: event,
+      permissionDecision: "deny",
+      permissionDecisionReason: "Dependency or MCP security risk detected; user confirmation is required before this tool call can proceed.",
       additionalContext: context
     }
   });

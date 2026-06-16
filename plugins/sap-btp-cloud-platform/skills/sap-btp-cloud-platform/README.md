@@ -16,7 +16,7 @@ Comprehensive SAP Business Technology Platform reference for cloud development, 
 
 ## Overview
 
-This skill provides production-ready guidance for all aspects of SAP BTP, covering the three runtime environments (Cloud Foundry, Kyma, ABAP), account management, security, connectivity, and operations.
+This skill provides documentation-audited guidance for SAP BTP, covering the three runtime environments (Cloud Foundry, Kyma, ABAP), account management, security, connectivity, and operations. Its `last_verified` date is stale until BTP account, entitlement, and primary-source checks are refreshed.
 
 ## When to Use This Skill
 

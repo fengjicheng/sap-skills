@@ -2,7 +2,6 @@
 name: widget-generate
 description: Interactively generates SAC custom widget scaffold with widget.json and widget.js files based on user requirements
 allowed-tools:
-  - Write
   - Read
   - AskUserQuestion
 argument-hint: [widget-name]
@@ -16,7 +15,7 @@ argument-hint: [widget-name]
 
 ## Output Contract
 
-Return the planned widget structure, files to create or change, security/accessibility notes, and confirmation points before writes. Generate files only when the user explicitly requests generation.
+Return the planned widget structure, file snippets or files to create/change, security/accessibility notes, and confirmation points before writes. Default to snippets/plans; generate files only when the user explicitly requests generation and confirms a target directory.
 
 
 # SAC Custom Widget Generator Command
@@ -278,6 +277,6 @@ When this command is invoked:
 3. Generate widget.json with all selections
 4. Generate widget.js with matching implementation
 5. Generate additional component files if selected
-6. Write all files to specified or current directory
+6. If and only if the user confirmed a target directory, write files there; otherwise return snippets and the proposed file tree
 7. Provide post-generation instructions
 8. Suggest running `/widget-validate` to verify

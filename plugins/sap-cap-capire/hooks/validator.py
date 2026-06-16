@@ -267,6 +267,8 @@ def main() -> None:
             {
                 "hookSpecificOutput": {
                     "hookEventName": "PreToolUse",
+                    "permissionDecision": "deny",
+                    "permissionDecisionReason": "High-risk SAP content detected; user confirmation is required before this write can proceed.",
                     "additionalContext": context,
                 }
             }

@@ -12,6 +12,8 @@ Complete reference for SAP AI Core model providers and available models.
 
 SAP AI Core provides access to models from multiple providers via the Generative AI Hub. All models are accessed through a unified API, allowing easy switching between providers.
 
+**Catalog rule:** This reference describes provider families and common configuration shapes. Exact model IDs, versions, context windows, pricing, regions, and deprecation dates must be verified in the target tenant through SAP AI Launchpad Model Library, `GET /v2/lm/scenarios/foundation-models/models`, and SAP Note 3437766 before implementation.
+
 ---
 
 ## Provider Summary
@@ -33,53 +35,16 @@ SAP AI Core provides access to models from multiple providers via the Generative
 **Executable ID:** `azure-openai`
 **Access Type:** Remote (Azure-hosted)
 
-### Flagship Models (GPT-5 Family)
+### Example Model Families
 
-| Model | Context | Capabilities | Use Case |
-|-------|---------|--------------|----------|
-| gpt-5.5 | 256K | Chat, Vision, Reasoning | Most advanced (available since June 2026) |
-| gpt-5.4 | 256K | Chat, Vision | High performance (available since April 2026) |
-| gpt-5.4-nano | 128K | Chat | Cost-efficient within GPT-5.4 tier |
-| gpt-5.3-codex | 128K | Chat, Code | Code-focused variant |
-| gpt-5 | 128K | Chat, Vision | Base GPT-5 (available since August 2025) |
-| gpt-5-mini | 128K | Chat | Mid-tier GPT-5 |
-| gpt-5-nano | 128K | Chat | Most cost-efficient GPT-5 |
+| Family | Typical Capabilities | Selection Guidance |
+|--------|----------------------|--------------------|
+| GPT chat/multimodal | Chat, vision, structured output | Verify exact model ID, context window, and region in tenant catalog. |
+| Reasoning models | Complex reasoning chains | Use when quality justifies added latency/cost; verify quota. |
+| Realtime models | Low-latency conversational API | Verify endpoint support and streaming/realtime quotas. |
+| Embedding models | Vector embeddings | Match dimensions and language coverage to the target vector store. |
 
-### GPT-4.1 Family
-
-| Model | Context | Capabilities | Use Case |
-|-------|---------|--------------|----------|
-| gpt-4.1 | 128K | Chat, Vision | Replacement for GPT-4 (available since May 2025) |
-| gpt-4.1-mini | 128K | Chat, Vision | Mid-tier |
-| gpt-4.1-nano | 128K | Chat | Lightweight |
-
-### Legacy Models
-
-| Model | Context | Capabilities | Use Case |
-|-------|---------|--------------|----------|
-| gpt-4o | 128K | Chat, Vision | Vision/multimodal |
-
-**Deprecated:** gpt-4 (0613), gpt-4-turbo, gpt-4-32k, gpt-35-turbo — migrate to GPT-4.1 or GPT-5.
-
-### Reasoning Models
-
-| Model | Context | Capabilities | Use Case |
-|-------|---------|--------------|----------|
-| o3 | - | Reasoning | Complex reasoning chains |
-| o4-mini | - | Reasoning | Cost-efficient reasoning |
-
-### Special Models
-
-| Model | Use Case |
-|-------|----------|
-| gpt-realtime | Realtime conversational API (available since May 2026) |
-
-### Embedding Models
-
-| Model | Dimensions | Use Case |
-|-------|------------|----------|
-| text-embedding-3-large | 3072 | High accuracy embeddings |
-| text-embedding-3-small | 1536 | Cost-efficient embeddings |
+**Deprecated/retiring patterns:** older GPT-4, GPT-4 Turbo, GPT-4-32k, and GPT-3.5-era deployments should be checked against SAP Note 3437766 and migrated before retirement dates shown in the tenant catalog.
 
 ### Configuration Example
 
@@ -102,33 +67,13 @@ SAP AI Core provides access to models from multiple providers via the Generative
 **Executable ID:** `aicore-opensource`
 **Access Type:** Local (SAP-hosted)
 
-### Llama Models
+### Example Model Families
 
-| Model | Parameters | Context | Capabilities |
-|-------|------------|---------|--------------|
-| llama-4-maverick | 400B MoE | 1M | Advanced reasoning (available since Q2 2026) |
-| llama-4-scout | 109B MoE | 10M | Long context (available since Q2 2026) |
-| llama-3.3-70b | 70B | 128K | Strong reasoning |
-| llama-3.1-405b | 405B | 128K | Advanced reasoning |
-| llama-3.1-70b | 70B | 128K | Strong reasoning |
-| llama-3.1-8b | 8B | 128K | Fast, efficient |
-| llama-3.2-90b-vision | 90B | 128K | Vision + text |
-| llama-3.2-11b-vision | 11B | 128K | Vision + text |
-| llama-3.2-3b | 3B | 128K | Lightweight |
-| llama-3.2-1b | 1B | 128K | Edge deployment |
-
-### Mistral Models (Open Source)
-
-| Model | Parameters | Context |
-|-------|------------|---------|
-| mistral-7b-instruct | 7B | 32K |
-| mixtral-8x7b | 46.7B | 32K |
-
-### Falcon Models
-
-| Model | Parameters | Context |
-|-------|------------|---------|
-| falcon-40b | 40B | 2K |
+| Family | Typical Capabilities | Selection Guidance |
+|--------|----------------------|--------------------|
+| Llama-family | Chat, reasoning, select vision variants | Verify enabled model IDs and context windows in tenant catalog. |
+| Mistral/Mixtral-family | Instruction following, code, low-latency chat | Check tenant catalog before using exact IDs. |
+| Falcon-family | General text generation | Use only where explicitly enabled. |
 
 ### Configuration Example
 
@@ -151,36 +96,15 @@ SAP AI Core provides access to models from multiple providers via the Generative
 **Executable ID:** `gcp-vertexai`
 **Access Type:** Remote (Google Cloud)
 
-### Gemini 2.5 Family
+### Example Model Families
 
-| Model | Context | Capabilities |
-|-------|---------|--------------|
-| gemini-2.5-pro | 2M | Chat, Vision, Code, Long context, latest preview |
-| gemini-2.5-flash | 1M | Fast, multimodal, image generation |
-| gemini-2.5-flash-lite | 1M | Fast, lower-cost multimodal |
+| Family | Typical Capabilities | Selection Guidance |
+|--------|----------------------|--------------------|
+| Gemini Pro-family | Chat, vision, code, long context | Verify catalog entry, preview/stable status, and token limits. |
+| Gemini Flash-family | Fast multimodal responses | Use for lower-latency use cases when enabled. |
+| Google embedding models | Vector embeddings | Match dimensions and language coverage to the target vector store. |
 
-### Gemini 2.0 Family
-
-| Model | Context | Capabilities |
-|-------|---------|--------------|
-| gemini-2.0-flash | 1M | Flash family, multimodal |
-| gemini-2.0-flash-lite | 1M | Flash family, lower-cost |
-
-### Deprecated Models
-
-| Model | Use Case | Status |
-|-------|----------|--------|
-| gemini-1.5-pro | Long context | **Deprecated** — migrate to gemini-2.0-flash or 2.5 |
-| gemini-1.5-flash | Fast chat | **Deprecated** — migrate to gemini-2.5-flash-lite |
-| text-bison | Text generation | **Retired** — migrate to Gemini |
-| chat-bison | Conversational | **Retired** — migrate to Gemini |
-| code-bison | Code generation | **Retired** — migrate to Gemini |
-
-### Embedding Models
-
-| Model | Dimensions |
-|-------|------------|
-| text-embedding-004 | 768 |
+**Deprecated/retiring patterns:** older Gemini and PaLM-era deployments should be checked against SAP Note 3437766 and migrated before retirement dates shown in the tenant catalog.
 
 ### Configuration Example
 
@@ -203,27 +127,13 @@ SAP AI Core provides access to models from multiple providers via the Generative
 **Executable ID:** `aws-bedrock`
 **Access Type:** Remote (AWS)
 
-### Anthropic Claude Models
+### Example Model Families
 
-| Model | Context | Capabilities |
-|-------|---------|--------------|
-| claude-4.7-opus | 200K | Highest capability (available since May 2026) |
-| claude-4.6-opus | 200K | Advanced reasoning (available since March 2026) |
-| claude-4.5-opus | 200K | High capability (available since January 2026) |
-| claude-4.5-sonnet | 200K | Balanced, high performance |
-| claude-4.5-haiku | 200K | Fast, efficient |
-| claude-3.7-sonnet | 200K | Improved Sonnet |
-| claude-3.5-sonnet | 200K | Advanced reasoning |
-| claude-3-opus | 200K | High capability |
-
-### Amazon Models
-
-| Model | Context | Use Case |
-|-------|---------|----------|
-| amazon-nova-lite-2-0 | - | Cost-efficient |
-| titan-text-express | - | General text |
-| titan-text-lite | - | Lightweight |
-| titan-embed-text | - | Embeddings |
+| Family | Typical Capabilities | Selection Guidance |
+|--------|----------------------|--------------------|
+| Anthropic Claude-family | Chat, reasoning, coding, summarization | Verify exact model ID and Bedrock regional availability in SAP AI Core catalog. |
+| Amazon Nova-family | General chat and multimodal tasks | Use only where enabled in the tenant catalog. |
+| Amazon Titan-family | Text and embeddings | Verify dimensions and cost before vector workloads. |
 
 ### Configuration Example
 
@@ -280,7 +190,7 @@ SAP AI Core provides access to models from multiple providers via the Generative
 
 | Model | Parameters | Use Case |
 |-------|------------|----------|
-| granite-3-0 | Various | Latest Granite generation (available since early 2026) |
+| granite-family entries | Various | Verify exact model ID and generation in the tenant catalog |
 | granite-13b-chat | 13B | Conversational |
 | granite-13b-instruct | 13B | Task completion |
 | granite-code | - | Code generation |
@@ -305,15 +215,14 @@ SAP AI Core provides access to models from multiple providers via the Generative
 
 **Executable ID:** `aicore-perplexity`
 **Access Type:** Remote (Perplexity-hosted)
-**Available since:** Q1 2026
+**Availability:** tenant-dependent; verify in SAP AI Core catalog.
 
-### Models
+### Example Model Families
 
-| Model | Use Case |
-|-------|----------|
-| perplexity-sonar-deep-research | Deep research with comprehensive citations |
-| perplexity-sonar-pro | Advanced web-grounded chat with citations |
-| perplexity-sonar | Web-grounded chat with citations |
+| Family | Use Case |
+|--------|----------|
+| Sonar-family | Web-grounded chat with citations |
+| Deep-research family | Longer research flows with citations where enabled |
 
 **Unique Features:**
 - Returns citation URLs alongside responses
@@ -340,38 +249,38 @@ SAP AI Core provides access to models from multiple providers via the Generative
 
 ### By Use Case
 
-| Use Case | Recommended Models |
-|----------|-------------------|
-| General chat | gpt-5.4, claude-4.5-sonnet, gemini-2.5-pro |
-| Code generation | gpt-5.3-codex, gpt-5.4, claude-4.5-sonnet |
-| Long documents | gemini-2.5-pro (2M), gpt-5.5 (256K), llama-4-scout (10M) |
-| Vision/images | gpt-4o, gemini-2.5-pro, gemini-2.5-flash (image gen) |
-| Embeddings | text-embedding-3-large, text-embedding-004 |
-| Cost-sensitive | gpt-5-nano, gpt-4.1-mini, mistral-small |
-| High throughput | gpt-4.1-mini, claude-4.5-haiku, mistral-small |
-| Reasoning | o3, o4-mini, claude-4.7-opus |
-| Web-grounded / citations | perplexity-sonar, perplexity-sonar-pro |
-| Deep research | perplexity-sonar-deep-research |
-| Realtime | gpt-realtime |
+| Use Case | Selection Guidance |
+|----------|--------------------|
+| General chat | Use the highest-quality tenant-approved chat model that meets cost and data-residency constraints. |
+| Code generation | Use a code-capable catalog entry and validate output with project tests. |
+| Long documents | Select catalog entries with sufficient context and explicit long-context support. |
+| Vision/images | Choose multimodal catalog entries and verify image-input support. |
+| Embeddings | Match embedding dimensions, language coverage, and vector-store requirements. |
+| Cost-sensitive | Prefer smaller or mini/nano variants shown in the tenant catalog. |
+| High throughput | Prefer lower-latency catalog entries and confirm quota. |
+| Reasoning | Use reasoning-capable catalog entries when latency/cost tradeoffs are acceptable. |
+| Web-grounded / citations | Use citation-capable entries and preserve returned source URLs. |
+| Deep research | Use only where deep-research entries are enabled and validate citation quality. |
+| Realtime | Verify realtime endpoint and quota support before implementation. |
 
 ### By Budget
 
-| Budget | Tier | Models |
-|--------|------|--------|
-| Low | Economy | gpt-5-nano, claude-4.5-haiku, mistral-small |
-| Medium | Standard | gpt-5, claude-4.5-sonnet, gemini-2.5-flash |
-| High | Premium | gpt-5.5, claude-4.7-opus, gemini-2.5-pro |
+| Budget | Tier | Guidance |
+|--------|------|----------|
+| Low | Economy | Use smaller variants and strict token limits. |
+| Medium | Standard | Use balanced chat models with predictable latency. |
+| High | Premium | Use top-tier catalog entries after confirming quota and cost. |
 
 ### By Capability
 
-| Capability | Best Models |
-|------------|-------------|
-| Reasoning | o3, claude-4.7-opus, gpt-5.5 |
-| Speed | claude-4.5-haiku, gpt-5-nano, mistral-small |
-| Context length | gemini-2.5-pro (2M), llama-4-scout (10M) |
-| Multimodal | gpt-4o, gemini-2.5-pro, llama-3.2-vision |
-| Code | gpt-5.3-codex, gpt-5.4, claude-4.5-sonnet |
-| Citations | perplexity-sonar, perplexity-sonar-pro, perplexity-sonar-deep-research |
+| Capability | Selection Guidance |
+|------------|--------------------|
+| Reasoning | Choose reasoning-capable entries and measure latency/cost. |
+| Speed | Choose smaller, low-latency variants with sufficient quality. |
+| Context length | Verify the context window reported by the tenant catalog. |
+| Multimodal | Verify input media types and output modality support. |
+| Code | Use code-capable entries and validate against project tests. |
+| Citations | Use citation-capable entries and preserve returned source URLs. |
 
 ---
 

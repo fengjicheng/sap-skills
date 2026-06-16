@@ -1,6 +1,12 @@
-# Exporting SAC Native Planning Data to SAP S/4HANA ACDOCP
+# Legacy Export of SAC Native Planning Data to SAP S/4HANA ACDOCP
 
-Guide for exporting SAP Analytics Cloud native planning data to SAP S/4HANA ACDOCP table using the SAC Data Export Service.
+Legacy guide for exporting SAP Analytics Cloud native planning data to SAP
+S/4HANA ACDOCP table using the SAC Data Export Service.
+
+> As of SAC Q2 2026, exporting model data to SAP S/4HANA is deprecated. SAP
+> recommends the write-back integration scenario instead. Use this reference for
+> existing landscapes and migration analysis, not as the default pattern for new
+> implementations.
 
 **Source**: [ZPARTNER - SAC Export Native Planning to SAP S/4HANA ACDOCP](https://www.zpartner.eu/sac-export-native-planning-to-sap-s-4hana-acdocp/) by Andreas Theodoridis (July 2025)
 
