@@ -75,6 +75,14 @@ function validateHookPaths() {
         continue;
       }
       for (const group of groups) {
+        if (!group || typeof group !== "object" || Array.isArray(group)) {
+          fail(`${relPath(repoRoot, file)}: hooks.${eventName} entries must be objects`);
+          continue;
+        }
+        if (group.hooks !== undefined && !Array.isArray(group.hooks)) {
+          fail(`${relPath(repoRoot, file)}: hooks.${eventName} entries must define hooks as an array`);
+          continue;
+        }
         for (const hook of group.hooks ?? []) {
           if (hook.command !== "${CLAUDE_PLUGIN_ROOT}/hooks/dispatch.sh") {
             fail(`${relPath(repoRoot, file)}: hook commands must use \${CLAUDE_PLUGIN_ROOT}/hooks/dispatch.sh`);

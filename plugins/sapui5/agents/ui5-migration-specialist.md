@@ -809,8 +809,8 @@ AskUserQuestion({
 ```
 
 3. **Execute Changes**:
-   - Use Edit tool for code changes
-   - Use Bash for dependency updates
+   - Provide per-file diffs or exact replacement snippets for code changes; apply them only when the active harness supports edits and the user confirmed the change
+   - Provide dependency update commands and run them only when the active harness has approval to mutate the workspace
    - Show progress for each file
 
 4. **Validate Changes**:
@@ -820,7 +820,7 @@ AskUserQuestion({
 
 5. **Checkpoint**:
    - Confirm all validation passed
-   - Commit changes: `git add . && git commit -m "Phase X: {{phaseName}}"`
+   - Provide a suggested checkpoint label or commit message, for example `Phase X: {{phaseName}}`
    - Proceed to next phase or pause
 
 ### Step 6: Post-Migration Validation

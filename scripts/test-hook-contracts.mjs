@@ -81,6 +81,10 @@ function assertDenyForBlockingPreToolUse(name, payloadText, parsed) {
   if (decision !== "deny") {
     fail(`${name}: blocking PreToolUse fixture must return hookSpecificOutput.permissionDecision=deny`);
   }
+  const reason = parsed.hookSpecificOutput?.permissionDecisionReason;
+  if (typeof reason !== "string" || reason.trim().length === 0) {
+    fail(`${name}: blocking PreToolUse fixture must return a non-empty hookSpecificOutput.permissionDecisionReason`);
+  }
 }
 
 function preToolUseVariants(payloadText) {
@@ -99,6 +103,30 @@ function preToolUseVariants(payloadText) {
     toolName,
     JSON.stringify({ ...payload, tool_name: toolName }),
   ]);
+}
+
+function postToolUseVariant(payloadText) {
+  let payload;
+  try {
+    payload = JSON.parse(payloadText);
+  } catch {
+    return null;
+  }
+
+  if (payload.tool_name === "Bash") {
+    return null;
+  }
+
+  return JSON.stringify({ ...payload, hook_event_name: "PostToolUse" });
+}
+
+function assertNoDenyForPostToolUse(name, parsed) {
+  if (!parsed) return;
+
+  const decision = parsed.hookSpecificOutput?.permissionDecision;
+  if (decision !== undefined) {
+    fail(`${name}: PostToolUse output must not include hookSpecificOutput.permissionDecision`);
+  }
 }
 
 const irrelevantPayload = JSON.stringify({
@@ -166,6 +194,13 @@ for (const dir of hookDirs()) {
       const variant = assertJsonObject(`${plugin} positive ${toolName} fixture`, runHook(dir, variantPayload));
       assertNonEmptyObject(`${plugin} positive ${toolName} fixture`, variant);
       assertDenyForBlockingPreToolUse(`${plugin} positive ${toolName} fixture`, variantPayload, variant);
+    }
+    if (Object.hasOwn(hooksConfig.hooks ?? {}, "PostToolUse")) {
+      const postPayload = postToolUseVariant(positivePayload);
+      if (postPayload) {
+        const post = assertJsonObject(`${plugin} positive PostToolUse fixture`, runHook(dir, postPayload));
+        assertNoDenyForPostToolUse(`${plugin} positive PostToolUse fixture`, post);
+      }
     }
     const negative = assertJsonObject(`${plugin} negative fixture`, runHook(dir, fs.readFileSync(path.join(pluginFixtureDir, "negative.json"), "utf8")));
     assertEmptyObject(`${plugin} negative fixture`, negative);

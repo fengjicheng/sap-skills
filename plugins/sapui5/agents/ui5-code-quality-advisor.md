@@ -791,7 +791,7 @@ AskUserQuestion({
 
 **For each fix**:
 1. Read file: `Read(filePath)`
-2. Apply fix: `Edit({ file_path, old_string, new_string })`
+2. Provide a unified diff or exact replacement snippet; apply it only when the active harness supports edits and the user confirmed the change
 3. Validate: Re-run linter or manual check
 4. Report: "✅ Fixed: {{issueDescription}}"
 

@@ -169,8 +169,8 @@ mkdir -p my-ui5-app/webapp/{controller,view,model,i18n,css,localService}
 ```
 
 3. **Copy Template Files**:
-- Use `Read` to read template files
-- Use `Write` to create project files
+- Read template files from the reference template directory
+- Provide a file tree plus generated file contents or a unified diff; only create files directly when the active harness has an approved write mechanism and the user requested a target path
 - Replace placeholders: `{{namespace}}`, `{{projectName}}`, `{{ui5Version}}`
 
 4. **Generate Core Files**:
