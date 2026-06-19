@@ -13,11 +13,10 @@
 | `https://github.com/SAP-samples/sap-rpt-1-oss` | Primary SAP source repository | Use for installation, local model workflow, requirements, examples, license notes, and issue tracking. |
 | `https://huggingface.co/SAP/sap-rpt-1-oss` | Primary model source | Use for model access, model-card context, library usage, and license/access notes. |
 | `https://www.sap.com/products/artificial-intelligence/sap-rpt.html` | SAP product context | Use only for product positioning, hosted playground URL, and future SAP-RPT-1.5 context. |
-| `https://github.com/amitlals/sap-rpt1-oss-predictor/tree/main/.github/skills/sap-rpt1-oss-predictor` | Secondary implementation inspiration | Do not treat as primary SAP evidence. Attribute copied or adapted content. |
 
 ## Scope Covered
 
-This review covers public source, public model card, public product-page, and upstream community skill review for a local SAP-RPT-1-OSS FI/CO prototype skill.
+This review covers public source, public model-card, and public product-page review for a local SAP-RPT-1-OSS FI/CO prototype skill.
 
 ## Scope Excluded
 
@@ -63,10 +62,8 @@ Reviewed from `https://github.com/SAP-samples/sap-rpt-1-oss/issues` on 2026-06-1
 
 Status: upstream open as of 2026-06-18. Workarounds are unverified in this repository unless separately documented.
 
-## License and Attribution Notes
+## License Notes
 
 - The SAP Skills plugin frontmatter must use `GPL-3.0`.
 - SAP-samples `sap-rpt-1-oss` source repository is Apache-2.0 except as noted in that repository.
-- The upstream community skill is Apache-2.0.
 - This plugin does not imply SAP-RPT-1-OSS model weights are covered by the SAP Skills repository license.
-- If future changes copy or adapt upstream Apache-2.0 code or prose, preserve attribution in `references/third-party-attribution.md` and bundle the Apache-2.0 license text under `assets/` or `references/`, not at the skill root.

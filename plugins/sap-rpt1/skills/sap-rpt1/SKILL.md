@@ -86,7 +86,6 @@ For Windows, macOS, Linux, and managed non-admin workstations, use `references/e
 - `references/fico-use-cases.md`: detailed FI-AR, FI-AP, and FI-GL recipes plus starter matrix rows.
 - `references/data-governance.md`: minimum data governance and model-card checklist.
 - `references/enterprise-portability.md`: Windows, macOS, Linux, non-admin, proxy/cache, and CSV export guidance.
-- `references/third-party-attribution.md`: attribution and license boundary notes.
 - `scripts/fico_data_prep.py`: read-only CSV schema, target, and leakage inspection helper.
 - `scripts/rpt1_oss_predict.py`: opt-in local inference wrapper for SAP-RPT-1-OSS.
 - `assets/*.csv`: synthetic FI/CO sample datasets only.
@@ -99,7 +98,7 @@ Local inference can download gated model artifacts, populate local caches, requi
 
 ## Source and Verification Notes
 
-Sources reviewed: SAP-samples `sap-rpt-1-oss`, Hugging Face `SAP/sap-rpt-1-oss`, SAP product page for SAP-RPT, and the upstream community `amitlals/sap-rpt1-oss-predictor` skill as secondary inspiration.
+Sources reviewed: SAP-samples `sap-rpt-1-oss`, Hugging Face `SAP/sap-rpt-1-oss`, and the SAP product page for SAP-RPT.
 
 Verification scope is public source/model/product-page review only. Live SAP tenant validation, live SAP system validation, hosted SAP-RPT API validation, local inference benchmark validation, and production finance workflow validation were not performed.
 
