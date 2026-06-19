@@ -264,4 +264,6 @@ GPL-3.0 License - See LICENSE file in repository root.
 
 **Last Updated**: 2025-11-27
 **Next Review**: 2026-02-27
-**Maintainer**: SAP Skills Team
+**Maintainer**: Eduard Jiglau
+**Email**: hello@sap-ai-skills.com
+**Website**: https://sap-ai-skills.com

@@ -6,6 +6,9 @@ description: |
   Keywords: SAP Service Manager, BTP, service instances, service bindings, SMCTL, service broker, OSBAPI, Cloud Foundry, Kyma, Kubernetes, service-manager, service-operator-access, subaccount-admin, OAuth2, X.509, service marketplace, service plans, rate limiting, cf create-service, btp create services/instance, ServiceInstance CRD, ServiceBinding CRD
 license: GPL-3.0
 metadata:
+  maintainer: "Eduard Jiglau"
+  maintainer_email: "hello@sap-ai-skills.com"
+  website: "https://sap-ai-skills.com"
   version: "2.3.1"
   last_verified: 2025-11-27
   documentation_source: "https://github.com/SAP-docs/sap-btp-service-manager"
@@ -544,5 +547,7 @@ When troubleshooting:
 
 **License**: GPL-3.0
 **Version**: 1.1.1
-**Maintained by**: E.J.
+**Maintained by**: Eduard Jiglau
+**Email**: hello@sap-ai-skills.com
+**Website**: https://sap-ai-skills.com
 **Repository**: [https://github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills)

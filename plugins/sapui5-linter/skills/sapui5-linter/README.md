@@ -220,7 +220,9 @@ This skill automatically triggers when working with:
 **Version**: 2.3.0
 **Last Updated**: 2026-06-14
 **UI5 Linter Version**: 1.22.0
-**Maintained By**: SAP Skills Repository
+**Maintained By**: Eduard Jiglau
+**Email**: hello@sap-ai-skills.com
+**Website**: https://sap-ai-skills.com
 **License**: GPL-3.0
 
 ## Update Schedule

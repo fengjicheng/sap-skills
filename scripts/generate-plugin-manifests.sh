@@ -499,9 +499,12 @@ generate_plugin_json() {
       description: $description,
       version: $version,
       author: {
-        name: "E.J."
+        name: "Eduard Jiglau",
+        email: "hello@sap-ai-skills.com",
+        url: "https://sap-ai-skills.com"
       },
       license: $license,
+      homepage: "https://sap-ai-skills.com",
       repository: "https://github.com/secondsky/sap-skills",
       keywords: $keywords,
       category: $category

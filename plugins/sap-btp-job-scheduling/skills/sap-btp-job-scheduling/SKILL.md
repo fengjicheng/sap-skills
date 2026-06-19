@@ -12,6 +12,9 @@ description: |
   SAP Cloud ALM, Alert Notification Service, multitenancy, tenant-aware, BC-CP-CF-JBS
 license: GPL-3.0
 metadata:
+  maintainer: "Eduard Jiglau"
+  maintainer_email: "hello@sap-ai-skills.com"
+  website: "https://sap-ai-skills.com"
   version: "2.3.1"
   last_verified: "2025-11-27"
 ---
@@ -400,4 +403,4 @@ Limits stack - both can apply simultaneously.
 ---
 
 **License**: GPL-3.0
-**Maintainer**: SAP Skills Team | [https://github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills)
+**Maintainer**: Eduard Jiglau | [hello@sap-ai-skills.com](mailto:hello@sap-ai-skills.com) | [sap-ai-skills.com](https://sap-ai-skills.com) | [https://github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills)

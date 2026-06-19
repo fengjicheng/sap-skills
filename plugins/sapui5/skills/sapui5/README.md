@@ -248,4 +248,4 @@ GPL-3.0
 
 ---
 
-**Maintained by**: E.J. | [https://github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills)
+**Maintained by**: Eduard Jiglau | [hello@sap-ai-skills.com](mailto:hello@sap-ai-skills.com) | [sap-ai-skills.com](https://sap-ai-skills.com) | [https://github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills)

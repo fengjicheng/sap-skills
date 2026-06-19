@@ -9,6 +9,9 @@ description: |
   ABAP and modern ABAP for Cloud Development patterns.
 license: GPL-3.0
 metadata:
+  maintainer: "Eduard Jiglau"
+  maintainer_email: "hello@sap-ai-skills.com"
+  website: "https://sap-ai-skills.com"
   version: "2.3.1"
   last_verified: "2026-04-02"
   abap_release: "7.40 SP08+ / 7.50+ / ABAP Cloud"

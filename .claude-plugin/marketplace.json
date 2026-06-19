@@ -4,7 +4,8 @@
   "description": "SAP development skills with evidence-tracked public-source and package-registry verification",
   "repository": "https://github.com/secondsky/sap-skills",
   "owner": {
-    "name": "E.J."
+    "name": "Eduard Jiglau",
+    "email": "hello@sap-ai-skills.com"
   },
   "metadata": {
     "version": "2.3.1",

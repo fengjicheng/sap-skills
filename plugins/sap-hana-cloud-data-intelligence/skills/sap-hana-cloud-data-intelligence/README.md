@@ -313,5 +313,7 @@ Contributions welcome! Please follow the skill creation guidelines in the main r
 
 **Last Updated**: 2026-06-16
 **Evidence Status**: Stale docs-only guidance; live graph/runtime checks require tenant access.
-**Maintainer**: E.J.
+**Maintainer**: Eduard Jiglau
+**Email**: hello@sap-ai-skills.com
+**Website**: https://sap-ai-skills.com
 **Repository**: [https://github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills)

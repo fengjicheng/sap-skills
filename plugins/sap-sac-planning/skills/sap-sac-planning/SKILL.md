@@ -4,6 +4,9 @@ description: |
   SAP Analytics Cloud (SAC) planning guidance for planning models, planning-enabled stories, data actions, multi actions, version management, data locking, calendar/input workflows, allocations, value driver trees, BPC live planning, and Seamless Planning with SAP Datasphere. Use this for planning design, planning APIs, data action debugging, and planning performance reviews; use sap-sac-scripting for non-planning SAC scripts and sap-datasphere for Datasphere modeling.
 license: GPL-3.0
 metadata:
+  maintainer: "Eduard Jiglau"
+  maintainer_email: "hello@sap-ai-skills.com"
+  website: "https://sap-ai-skills.com"
   version: "2.3.1"
   last_verified: 2026-06-11
   sac_version: "2026.8"
@@ -1032,5 +1035,7 @@ For troubleshooting:
 
 **License**: GPL-3.0
 **Version**: 1.5.0
-**Maintained by**: E.J.
+**Maintained by**: Eduard Jiglau
+**Email**: hello@sap-ai-skills.com
+**Website**: https://sap-ai-skills.com
 **Repository**: [https://github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills)

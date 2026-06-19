@@ -311,7 +311,8 @@ generate_marketplace() {
     --arg version "$version" \
     --arg description "SAP development skills with evidence-tracked public-source and package-registry verification" \
     --arg repository "https://github.com/secondsky/sap-skills" \
-    --arg owner_name "E.J." \
+    --arg owner_name "Eduard Jiglau" \
+    --arg owner_email "hello@sap-ai-skills.com" \
     --arg last_updated "$current_date" \
     --arg total_skills "$total_skills" \
     --argjson categories "$categories" \
@@ -322,7 +323,8 @@ generate_marketplace() {
       description: $description,
       repository: $repository,
       owner: {
-        name: $owner_name
+        name: $owner_name,
+        email: $owner_email
       },
       metadata: {
         version: $version,

@@ -184,4 +184,6 @@ This enables portfolio-wide skill discovery.
 ---
 
 **Last Updated**: 2026-06-19
-**Maintainer**: SAP Skills Repository Team
+**Maintainer**: Eduard Jiglau
+**Email**: hello@sap-ai-skills.com
+**Website**: https://sap-ai-skills.com

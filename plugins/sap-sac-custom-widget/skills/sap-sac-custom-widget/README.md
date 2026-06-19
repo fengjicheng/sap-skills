@@ -156,4 +156,4 @@ GPL-3.0
 
 ---
 
-**Maintainer**: SAP Skills Team | [Repository](https://github.com/secondsky/sap-skills)
+**Maintainer**: Eduard Jiglau | [hello@sap-ai-skills.com](mailto:hello@sap-ai-skills.com) | [sap-ai-skills.com](https://sap-ai-skills.com) | [Repository](https://github.com/secondsky/sap-skills)
