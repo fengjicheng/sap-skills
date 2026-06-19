@@ -212,5 +212,7 @@ or "the Code CLI" instead.
 
 **Last Updated**: 2026-06-17
 **Next Review**: 2026-08-31 (Quarterly)
-**Maintainer**: E.J.
+**Maintainer**: Eduard Jiglau
+**Email**: hello@sap-ai-skills.com
+**Website**: https://sap-ai-skills.com
 </coding_guidelines>

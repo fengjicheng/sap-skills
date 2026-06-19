@@ -44,4 +44,6 @@ These documents serve as authoritative reference material for developing SAP Ana
 ---
 
 **Last Updated**: 2026-02-06
-**Maintained By**: SAP Skills Repository Team
+**Maintained By**: Eduard Jiglau
+**Email**: hello@sap-ai-skills.com
+**Website**: https://sap-ai-skills.com

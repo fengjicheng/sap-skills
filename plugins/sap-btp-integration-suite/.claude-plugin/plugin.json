@@ -3,9 +3,12 @@
   "description": "Enterprise integration solutions using SAP Integration Suite on BTP. Covers Cloud Integration (iFlows), API Management, Event Mesh, Edge Integration Cell, Integration Advisor, Trading Partner Management, and Migration Assessment. Use for building integration flows, managing API proxies, event-driven architectures, B2B/EDI integrations, hybrid deployments, adapter configuration, Groovy/JavaScript message processing, and troubleshooting.",
   "version": "2.3.1",
   "author": {
-    "name": "E.J."
+    "name": "Eduard Jiglau",
+    "email": "hello@sap-ai-skills.com",
+    "url": "https://sap-ai-skills.com"
   },
   "license": "GPL-3.0",
+  "homepage": "https://sap-ai-skills.com",
   "repository": "https://github.com/secondsky/sap-skills",
   "keywords": [
     "api",

@@ -377,7 +377,7 @@ GPL-3.0 License
 
 ## Maintainer
 
-E.J. | [https://github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills)
+Eduard Jiglau | [hello@sap-ai-skills.com](mailto:hello@sap-ai-skills.com) | [sap-ai-skills.com](https://sap-ai-skills.com) | [https://github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills)
 
 ---
 

@@ -344,5 +344,7 @@ Contributions welcome! Please follow the repository guidelines in CLAUDE.md and 
 
 ---
 
-**Maintained by**: E.J.
+**Maintained by**: Eduard Jiglau
+**Email**: hello@sap-ai-skills.com
+**Website**: https://sap-ai-skills.com
 **Repository**: [https://github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills)

@@ -3,6 +3,9 @@ name: sap-btp-cloud-platform
 description: "Comprehensive SAP Business Technology Platform (BTP) reference for cloud development, deployment, and operations. Use when setting up BTP accounts, working with Cloud Foundry environment, deploying to Kyma (Kubernetes, serverless), developing in ABAP environment (RAP, CDS), managing entitlements and quotas, configuring identity providers (XSUAA), using btp CLI or CF CLI, deploying multi-target applications (MTA), setting up connectivity (destinations, Cloud Connector), implementing CI/CD pipelines, extending SAP solutions, or troubleshooting BTP services. Covers all three runtime environments."
 license: GPL-3.0
 metadata:
+  maintainer: "Eduard Jiglau"
+  maintainer_email: "hello@sap-ai-skills.com"
+  website: "https://sap-ai-skills.com"
   version: "2.3.1"
   last_verified: "2025-11-27"
   source: "https://github.com/SAP-docs/sap-btp-cloud-platform"

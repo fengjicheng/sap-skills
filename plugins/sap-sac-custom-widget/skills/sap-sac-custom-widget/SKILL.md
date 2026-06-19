@@ -4,6 +4,9 @@ description: "SAP Analytics Cloud (SAC) Custom Widget development. Use when buil
 
 license: GPL-3.0
 metadata:
+  maintainer: "Eduard Jiglau"
+  maintainer_email: "hello@sap-ai-skills.com"
+  website: "https://sap-ai-skills.com"
   version: "2.3.1"
   last_verified: 2026-06-12
   sac_version: "2026.8"

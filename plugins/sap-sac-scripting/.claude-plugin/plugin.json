@@ -3,9 +3,12 @@
   "description": "Comprehensive SAC scripting skill for SAP Analytics Cloud Analytics Designer and Optimized Story Experience. This skill should be used when the user asks to \"create SAC script\", \"debug Analytics Designer\", \"optimize SAC performance\", \"planning operations in SAC\", \"filter data in SAC\", \"use DataSource API\", \"chart scripting\", \"table manipulation\", \"SAC event handlers\", \"version management\", \"data locking\", \"Optimized Story Experience API\", \"OSE scripting\", \"OSE widget API\", \"OSE DataSource\", \"story scripting API\", \"OSE planning API\", \"OSE method\", \"optimized story\", \"SAC story scripting\", \"story script\", \"SAC scripting\", or works with SAC widgets, planning models, or analytics applications.",
   "version": "2.3.1",
   "author": {
-    "name": "E.J."
+    "name": "Eduard Jiglau",
+    "email": "hello@sap-ai-skills.com",
+    "url": "https://sap-ai-skills.com"
   },
   "license": "GPL-3.0",
+  "homepage": "https://sap-ai-skills.com",
   "repository": "https://github.com/secondsky/sap-skills",
   "keywords": [
     "analytics",

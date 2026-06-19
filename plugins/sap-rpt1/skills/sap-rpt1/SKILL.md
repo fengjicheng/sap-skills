@@ -9,6 +9,9 @@ allowed-tools:
   - Read
   - Bash
 metadata:
+  maintainer: "Eduard Jiglau"
+  maintainer_email: "hello@sap-ai-skills.com"
+  website: "https://sap-ai-skills.com"
   version: "2.3.1"
   model_source: "SAP/sap-rpt-1-oss"
   python_version: "3.11"

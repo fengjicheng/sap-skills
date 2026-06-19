@@ -4,6 +4,9 @@ description: |
   Develops data processing pipelines, integrations, and machine learning scenarios in SAP Data Intelligence Cloud. Use when building graphs/pipelines with operators, integrating ABAP/S4HANA systems, creating replication flows, developing ML scenarios with JupyterLab, or using Data Transformation Language functions. Covers Gen1/Gen2 operators, subengines (Python, Node.js, C++), structured data operators, and repository objects.
 license: GPL-3.0
 metadata:
+  maintainer: "Eduard Jiglau"
+  maintainer_email: "hello@sap-ai-skills.com"
+  website: "https://sap-ai-skills.com"
   version: "2.3.1"
   last_verified: "2025-11-27"
   evidence_status: "stale_docs_only_pending_refresh"

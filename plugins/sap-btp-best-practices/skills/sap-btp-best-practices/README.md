@@ -320,5 +320,7 @@ GPL-3.0 License - See repository LICENSE file.
 
 ---
 
-*Maintained by: E.J.*
+*Maintained by: Eduard Jiglau*
+*Email: [hello@sap-ai-skills.com](mailto:hello@sap-ai-skills.com)*
+*Website: [sap-ai-skills.com](https://sap-ai-skills.com)*
 *Repository: [https://github.com/secondsky/sap-skills*](https://github.com/secondsky/sap-skills*)

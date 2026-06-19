@@ -3,6 +3,9 @@ name: sapui5-linter
 description: "Use this skill when working with the UI5 Linter (@ui5/linter) for static code analysis of SAPUI5/OpenUI5 applications and libraries. Covers setup, configuring linting rules, running the linter to detect deprecated APIs, global variable usage, CSP violations, and manifest issues. Supports autofix for deprecated API usage, global references, event handlers, and manifest properties. Includes CI/CD integration, pre-commit hooks, and UI5 2.x migration preparation."
 license: GPL-3.0
 metadata:
+  maintainer: "Eduard Jiglau"
+  maintainer_email: "hello@sap-ai-skills.com"
+  website: "https://sap-ai-skills.com"
   version: "2.3.1"
   last_verified: "2026-06-14"
   ui5_linter_version: "1.22.0"

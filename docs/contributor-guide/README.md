@@ -857,4 +857,4 @@ https://github.com/secondsky/sap-skills/issues
 **Last Updated**: 2026-06-19
 **Next Review**: 2026-08-31 (Quarterly)
 **Version**: 2.3.1
-**Maintainer**: SAP Skills Repository Team | [github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills)
+**Maintainer**: Eduard Jiglau | [hello@sap-ai-skills.com](mailto:hello@sap-ai-skills.com) | [sap-ai-skills.com](https://sap-ai-skills.com) | [github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills)

@@ -247,8 +247,8 @@ Open source under **GPL-3.0**. Contributions welcome:
 
 ### Support
 
-- [SAP Developer Center](https://developers.sap.com/) · [SAP Community](https://community.sap.com/) · [SAP Business Accelerator Hub](https://api.sap.com/)
+- [SAP Developer Center](https://developers.sap.com/) · [SAP Community](https://community.sap.com/) · [SAP Business Accelerator Hub](https://api.sap.com/) · [SAP AI Skills](https://sap-ai-skills.com)
 
 ---
 
-**Maintained by**: E.J. · **Repository**: [github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills) · **Last Updated**: 2026-06-19 (v2.3.1)
+**Maintained by**: Eduard Jiglau · **Email**: [hello@sap-ai-skills.com](mailto:hello@sap-ai-skills.com) · **Website**: [sap-ai-skills.com](https://sap-ai-skills.com) · **Repository**: [github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills) · **Last Updated**: 2026-06-19 (v2.3.1)

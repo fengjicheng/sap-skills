@@ -12,6 +12,9 @@ description: |
   time series, ARIMA, gradient boosting, AutoML, SHAP, model storage
 license: GPL-3.0
 metadata:
+  maintainer: "Eduard Jiglau"
+  maintainer_email: "hello@sap-ai-skills.com"
+  website: "https://sap-ai-skills.com"
   version: "2.3.1"
   last_verified: 2025-11-27
   package_version: 2.22.241011

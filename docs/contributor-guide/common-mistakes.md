@@ -543,7 +543,7 @@ license: MIT
 ---
 name: cloudflare-vectorize
 version: 1.0.0  # ← Custom field
-author: Claude Skills Maintainers  # ← Custom field
+author: Eduard Jiglau  # ← Custom field
 tags: [cloudflare, vectorize]  # ← Custom field
 description: Complete guide...
 ---

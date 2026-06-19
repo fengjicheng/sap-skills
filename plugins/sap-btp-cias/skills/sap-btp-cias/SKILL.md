@@ -5,6 +5,9 @@ description: |
   Use when: setting up CIAS subscriptions, configuring destinations, assigning roles (CIASIntegrationAdministrator, CIASIntegrationExpert, CIASIntegrationMonitor), planning integration scenarios, working with My Inbox tasks, monitoring scenario execution, troubleshooting CIAS errors, creating OAuth2 instances, configuring identity providers for CIAS, understanding CIAS security architecture, or integrating SAP products (S/4HANA, SuccessFactors, BTP services, SAP Build, IBP).
 license: GPL-3.0
 metadata:
+  maintainer: "Eduard Jiglau"
+  maintainer_email: "hello@sap-ai-skills.com"
+  website: "https://sap-ai-skills.com"
   version: "2.3.1"
   last_verified: "2025-11-27"
   sap_product: "Cloud Integration Automation Service"

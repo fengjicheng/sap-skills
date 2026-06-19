@@ -441,6 +441,6 @@ GPL-3.0 License - See LICENSE file for details
 
 ---
 
-**Maintainer**: SAP Skills Team | [https://github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills)
+**Maintainer**: Eduard Jiglau | [hello@sap-ai-skills.com](mailto:hello@sap-ai-skills.com) | [sap-ai-skills.com](https://sap-ai-skills.com) | [https://github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills)
 **Skill Version**: 1.1.0
 **Last Verified Against SAP Standards**: 2026-02-25
