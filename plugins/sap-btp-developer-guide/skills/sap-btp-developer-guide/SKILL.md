@@ -11,7 +11,7 @@ metadata:
   maintainer: "Eduard Jiglau"
   maintainer_email: "hello@sap-ai-skills.com"
   website: "https://sap-ai-skills.com"
-  version: "2.3.1"
+  version: "2.3.2"
   last_verified: 2025-11-27
   source_last_updated: 2025-11-21
   review_status: "Complete - Phase 1-14 audit"
