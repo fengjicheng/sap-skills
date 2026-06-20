@@ -7,7 +7,7 @@ metadata:
   maintainer: "Eduard Jiglau"
   maintainer_email: "hello@sap-ai-skills.com"
   website: "https://sap-ai-skills.com"
-  version: "2.3.1"
+  version: "2.3.2"
   last_verified: "2026-06-12"
   documentation_source: https://help.sap.com/docs/cloud-identity-services
   ias_docs: https://github.com/SAP-docs/btp-cloud-identity-services

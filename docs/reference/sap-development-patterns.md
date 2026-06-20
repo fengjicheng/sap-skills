@@ -3,8 +3,8 @@
 > **SAP-specific patterns for Claude Code skills.** For general plugin development,
 > use the official **plugin-dev skills** FIRST.
 
-**Last Updated**: 2026-06-19
-**Version**: 2.3.1
+**Last Updated**: 2026-06-20
+**Version**: 2.3.2
 **Repository**: [github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills)
 
 ---
@@ -117,7 +117,7 @@ npm outdated  # Check for SAP package updates
 ### Overview
 
 The SAP skills repository uses a **marketplace system** to manage 37 production plugins with:
-- Coordinated versioning (all at v2.3.1)
+- Coordinated versioning (all at v2.3.2)
 - Cross-references between related skills
 - Central registry (.claude-plugin/marketplace.json)
 - Single root manifest architecture
@@ -176,8 +176,8 @@ This enables Claude to:
 3. Script propagates version to all plugin.json files
 4. Commit all changes together
 
-**Current Version**: 2.3.1
-**Last Updated**: 2026-06-19
+**Current Version**: 2.3.2
+**Last Updated**: 2026-06-20
 
 ### Single Root Manifest Architecture
 
@@ -218,10 +218,10 @@ plugins/sap-cap-capire/
 ```json
 {
   "name": "sap-skills",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "metadata": {
-    "version": "2.3.1",
-    "last_updated": "2026-06-19",
+    "version": "2.3.2",
+    "last_updated": "2026-06-20",
     "total_skills": 37,
     "categories": [
       "abap", "ai", "btp", "cap",
@@ -233,7 +233,7 @@ plugins/sap-cap-capire/
     {
       "name": "sap-cap-capire",
       "description": "...",
-      "version": "2.3.1",
+      "version": "2.3.2",
       "source": "plugins/sap-cap-capire",
       "license": "GPL-3.0",
       "keywords": [...],
@@ -364,7 +364,7 @@ description: |
   Use when building CAP services, defining CDS models, or implementing
   CAP best practices.
 metadata:
-  version: "2.3.1"
+  version: "2.3.2"
   cap_version: "@sap/cds 9.4.x"
   last_verified: "2025-12-28"
   sap_btp_compatible: true
@@ -720,7 +720,7 @@ hana-cli deploy             # Deploy database artifacts
 
 **Output**:
 ```
-✓ Reading version from marketplace.json: 2.3.1
+✓ Reading version from marketplace.json: 2.3.2
 ✓ Generating plugin manifests...
   - sap-cap-capire: Updated
   - sap-btp-cloud-platform: Updated
@@ -805,9 +805,9 @@ NOT:
 ```json
 {
   "name": "sap-skills",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "metadata": {
-    "version": "2.3.1",
+    "version": "2.3.2",
     "last_updated": "2025-12-28T12:00:00Z",
     "total_skills": 37,
     "categories": ["abap", "ai", "btp", "cap", "data-analytics", "hana", "tooling", "ui-development"]
@@ -856,7 +856,7 @@ jq '.metadata.total_skills' .claude-plugin/marketplace.json  # Should be 37
 3. **Update skill metadata**:
    ```yaml
    metadata:
-     version: "2.3.1"
+     version: "2.3.2"
      cap_version: "@sap/cds 9.5.x"  # Updated
      last_verified: "2026-03-28"     # Updated
    ```
@@ -982,6 +982,6 @@ https://github.com/secondsky/sap-skills/issues
 
 ---
 
-**Last Updated**: 2026-06-19
+**Last Updated**: 2026-06-20
 **Next Review**: 2026-08-31 (Quarterly)
 **Maintainer**: Eduard Jiglau | [hello@sap-ai-skills.com](mailto:hello@sap-ai-skills.com) | [sap-ai-skills.com](https://sap-ai-skills.com) | [github.com/secondsky/sap-skills](https://github.com/secondsky/sap-skills)

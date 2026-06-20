@@ -84,8 +84,15 @@ function validateHookPaths() {
           continue;
         }
         for (const hook of group.hooks ?? []) {
-          if (hook.command !== "${CLAUDE_PLUGIN_ROOT}/hooks/dispatch.sh") {
-            fail(`${relPath(repoRoot, file)}: hook commands must use \${CLAUDE_PLUGIN_ROOT}/hooks/dispatch.sh`);
+          if (!hook || typeof hook !== "object" || Array.isArray(hook)) {
+            fail(`${relPath(repoRoot, file)}: hooks.${eventName} hook entries must be objects`);
+            continue;
+          }
+          if (hook.command !== "node") {
+            fail(`${relPath(repoRoot, file)}: hook commands must use node`);
+          }
+          if (!Array.isArray(hook.args) || hook.args.length !== 1 || hook.args[0] !== "${CLAUDE_PLUGIN_ROOT}/hooks/validator.mjs") {
+            fail(`${relPath(repoRoot, file)}: hook args must use \${CLAUDE_PLUGIN_ROOT}/hooks/validator.mjs`);
           }
         }
       }

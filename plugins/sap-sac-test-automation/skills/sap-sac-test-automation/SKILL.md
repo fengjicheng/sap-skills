@@ -7,7 +7,7 @@ metadata:
   maintainer: "Eduard Jiglau"
   maintainer_email: "hello@sap-ai-skills.com"
   website: "https://sap-ai-skills.com"
-  version: "2.3.1"
+  version: "2.3.2"
   last_verified: 2026-06-17
   sac_version: "2026.8"
   documentation_source: "docs/project/sac-test-automation-source-review-2026-06-17.md"
