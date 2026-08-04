@@ -113,7 +113,7 @@ test("deployer is append-only: source contains no filesystem deletion primitive"
   assert.match(text, /\[System\.IO\.File\]::Exists/);
 });
 
-test("deploy creates two visible-desktop launch shortcuts (password-store opt-in), guarded and non-destructive", () => {
+test("deploy creates two visible-desktop launch shortcuts (opt-in via BW_AUTOMATION_CREATE_SHORTCUTS), guarded and non-destructive", () => {
   const text = fs.readFileSync(deployer, "utf8");
   assert.match(text, /Set-DesktopShortcuts/);
   assert.match(text, /WScript\.Shell/);
@@ -121,8 +121,11 @@ test("deploy creates two visible-desktop launch shortcuts (password-store opt-in
   assert.match(text, /kein Passwortspeicher/);
   assert.match(text, /mit Passwortspeicher/);
   assert.match(text, /-noPwdStore/);
-  // Skipped in CI/test so a deploy never writes onto the real desktop.
-  assert.match(text, /BW_STUDIO_NO_SHORTCUT/);
+  // Shortcuts are now OPT-IN: the primary gate requires BW_AUTOMATION_CREATE_SHORTCUTS=1.
+  // (Finding #9 — previously opt-out via BW_STUDIO_NO_SHORTCUT, which is retained only as a
+  // secondary backward-compat skip and is no longer the primary gate.)
+  assert.match(text, /BW_AUTOMATION_CREATE_SHORTCUTS/);
+  assert.match(text, /BW_AUTOMATION_CREATE_SHORTCUTS\s*-eq\s*"1"/);
   // Shortcut creation must not introduce any deletion primitive (append-only contract).
   assert.doesNotMatch(text, /Remove-Item|Directory\.Delete|DeleteFile/i);
 });
@@ -147,6 +150,44 @@ test("online deployment uses HTTPS-only curl downloads", () => {
   assert.match(text, /--proto\s+"=https"/);
   assert.match(text, /Scheme\s+-ne\s+"https"/i);
   assert.doesNotMatch(text, /Invoke-WebRequest/);
+});
+
+test("release-channel downloads are gated by a release-host SSRF allowlist (finding #6)", () => {
+  const text = fs.readFileSync(deployer, "utf8");
+  // The allowlist helper exists.
+  assert.match(text, /function\s+Test-ReleaseHostAllowed/);
+  // Save-HttpsDownload accepts the restricting switch.
+  assert.match(text, /RestrictToReleaseAllowlist/);
+  // Operator override env var is consulted (strict allowlist mode).
+  assert.match(text, /BW_AUTOMATION_RELEASE_HOST_ALLOWLIST/);
+  // The AWS/cloud metadata IP range (169.254.169.254) must be rejected explicitly.
+  assert.match(text, /169\.254/);
+  // The error must NOT echo the hostname — generic message only (no reflection of attacker input).
+  assert.match(text, /Release download host failed the allow-list check/);
+  // All FOUR release-channel download calls must pass the switch: the channel URL itself plus
+  // the three derived URLs (artifact/manifest/signature) that come from the remote channel JSON.
+  assert.match(text, /Save-HttpsDownload\s+\$ReleaseChannelUrl\s+[^\n]*-RestrictToReleaseAllowlist/);
+  assert.match(text, /Save-HttpsDownload\s+\$channel\.artifactUrl\s+[^\n]*-RestrictToReleaseAllowlist/);
+  assert.match(text, /Save-HttpsDownload\s+\$channel\.manifestUrl\s+[^\n]*-RestrictToReleaseAllowlist/);
+  assert.match(text, /Save-HttpsDownload\s+\$channel\.signatureUrl\s+[^\n]*-RestrictToReleaseAllowlist/);
+  // IP-literal parsing must use [System.Net.IPAddress]::TryParse.
+  assert.match(text, /\[System\.Net\.IPAddress\]::TryParse/);
+  // DNS hostnames must be resolved and checked (fail-closed on private resolution).
+  assert.match(text, /\[System\.Net\.Dns\]::GetHostAddresses/);
+  // Sensitive host suffixes .local and .internal are rejected.
+  assert.match(text, /\.local/);
+  assert.match(text, /\.internal/);
+});
+
+test("release-host allowlist error does not reflect the hostname (no SSRF echo)", () => {
+  const text = fs.readFileSync(deployer, "utf8");
+  // The generic message is present exactly once (in the throw), and the throw must not
+  // interpolate $parsed.Host, $HostName, $host, or similar into the error string.
+  const throwMatches = text.match(/throw\s+"[^"]*allow-list[^"]*"/gi) || [];
+  assert.ok(throwMatches.length > 0, "expected a throw containing 'allow-list'");
+  for (const m of throwMatches) {
+    assert.doesNotMatch(m, /\$(parsed|HostName|host|Host)\b/i, `throw must not echo hostname: ${m}`);
+  }
 });
 
 test("Eclipse launch derives the same local named-pipe identity and disables password storage", () => {
