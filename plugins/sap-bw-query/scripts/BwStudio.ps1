@@ -408,6 +408,13 @@ function Resolve-ManifestTrust($Inputs) {
     $manifest = Get-Content -Raw -LiteralPath $Inputs.manifest | ConvertFrom-Json
     if ($manifest.keyId -eq "LOCAL-UNSIGNED") {
         if ($Inputs.origin -ne "local") { throw "Unsigned bundles are accepted only from a local file" }
+        # Finding #2 PS-side defense-in-depth: even if the Node-side gate (tool-handlers.mjs) is
+        # bypassed (regression or direct studio.run), require the explicit opt-in env var here too
+        # before accepting an unsigned bundle. Unsigned bundles execute arbitrary code as the user,
+        # so this is default-deny unless an operator has consciously opted in.
+        if (-not ($env:BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE -eq "1")) {
+            throw "Unsigned bundles are disabled by default. Set BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE=1 to allow local unsigned deployment; configure a signed key in config/trusted-publishers.json for production."
+        }
         return @{ manifest = $manifest; trustMode = "local-hash-and-inventory" }
     }
     return @{

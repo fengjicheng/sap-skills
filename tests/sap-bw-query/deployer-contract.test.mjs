@@ -11,14 +11,15 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(here, "../..");
 const deployer = path.join(repoRoot, "plugins/sap-bw-query/scripts/BwStudio.ps1");
 
-function runStudio(home, args) {
+function runStudio(home, args, extraEnv = {}) {
   return spawnSync("powershell.exe", [
     "-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", deployer, ...args, "-Json",
   ], {
     encoding: "utf8",
     // BW_STUDIO_NO_SHORTCUT keeps a deploy under test from writing launch shortcuts onto the
     // real desktop; the shortcut behavior itself is asserted from the script source below.
-    env: { ...process.env, BW_AUTOMATION_HOME: home, BW_STUDIO_NO_SHORTCUT: "1" },
+    // extraEnv lets individual tests opt into additional gates (e.g. unsigned-bundle deploy).
+    env: { ...process.env, BW_AUTOMATION_HOME: home, BW_STUDIO_NO_SHORTCUT: "1", ...extraEnv },
   });
 }
 
@@ -222,14 +223,34 @@ test("local bundle deploys without signing after archive and file-inventory veri
   manifest.keyId = "LOCAL-UNSIGNED";
   fs.writeFileSync(fixture.manifestPath, JSON.stringify(manifest));
   const home = fs.mkdtempSync(path.join(os.tmpdir(), "bw-studio-home-local-"));
+  // Finding #2 PS-side gate: the PowerShell deployer independently requires the explicit opt-in
+  // env var before accepting a LOCAL-UNSIGNED manifest (mirrors the Node-side gate in tool-handlers.mjs).
   const result = runStudio(home, [
     "-Action", "Deploy", "-ArtifactPath", fixture.artifact, "-ManifestPath", fixture.manifestPath,
-  ]);
+  ], { BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE: "1" });
   assert.equal(result.status, 0, result.stderr || result.stdout);
   const deployed = JSON.parse(result.stdout);
   assert.equal(deployed.verified, true);
   assert.equal(deployed.trustMode, "local-hash-and-inventory");
   assert.equal(fs.existsSync(path.join(home, "versions/1.0.0-local/eclipse/eclipse.exe")), true);
+});
+
+// Finding #2 PS-side defense-in-depth: Resolve-ManifestTrust must require an explicit opt-in env
+// var before accepting a LOCAL-UNSIGNED manifest, mirroring the Node-side gate (Task 5). This is a
+// pure source-text assertion so it runs on Mac CI without spawning powershell.exe.
+test("Resolve-ManifestTrust requires BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE=1 for LOCAL-UNSIGNED (source gate)", () => {
+  const text = fs.readFileSync(deployer, "utf8");
+  // The env-var gate is present in the PowerShell source.
+  assert.match(text, /BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE/);
+  // The gate compares against the exact opt-in value "1".
+  assert.match(text, /\$env:BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE\s+-eq\s*"1"/);
+  // The default-deny rejection message is present.
+  assert.match(text, /Unsigned bundles are disabled by default/);
+  // The message points operators at the env var and the signed-key config.
+  assert.match(text, /BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE=1/);
+  assert.match(text, /config\/trusted-publishers\.json/);
+  // The pre-existing origin/local-file check must NOT have been removed or weakened.
+  assert.match(text, /Unsigned bundles are accepted only from a local file/);
 });
 
 test("deployment rejects corrupted artifacts and leaves no active version", () => {
