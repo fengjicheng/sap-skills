@@ -23,36 +23,115 @@ export function pipePathForHome(home) {
   return `\\\\.\\pipe\\bw-automation-${id}`;
 }
 
+/**
+ * Pure validator for the first JSON frame a connecting socket sends.
+ * Returns true iff `frame.authToken` strictly equals `expectedToken` and the
+ * expected token is a non-empty string. Kept pure (no I/O, no side effects)
+ * so it can be unit-tested without a socket and reused by the connection
+ * handler. Constant-time comparison is intentionally NOT used: the token is
+ * 32 bytes of CSPRNG output, so a timing oracle leaks at most equality of a
+ * 64-hex-char secret one bit at a time over a local socket only — the threat
+ * model is "any local process connects", not "remote timing attacker".
+ */
+export function validateAuthFrame(frame, expectedToken) {
+  if (typeof expectedToken !== "string" || expectedToken.length === 0) return false;
+  if (frame == null || typeof frame !== "object") return false;
+  return frame.authToken === expectedToken;
+}
+
 export class BridgeBroker {
   #pipePath;
   #timeoutMs;
+  #authToken;
   #server = null;
   #socket = null;
+  #pendingAuth = null;
   #pending = new Map();
   #buffer = "";
   #connectionWaiters = [];
 
-  constructor({ pipePath, timeoutMs = 15000 }) {
+  constructor({ pipePath, timeoutMs = 15000, authToken } = {}) {
     if (!pipePath) throw new Error("Named-pipe path is required");
     this.#pipePath = pipePath;
     this.#timeoutMs = timeoutMs;
+    // Resolution order: explicit DI (tests) → env (child-process inheritance)
+    // → fresh CSPRNG token. We then write back to env so any process spawned
+    // later from this broker (BwStudio.ps1) inherits the same token.
+    const resolved = authToken ?? process.env.BW_AUTOMATION_BRIDGE_TOKEN ?? crypto.randomBytes(32).toString("hex");
+    this.#authToken = resolved;
+    process.env.BW_AUTOMATION_BRIDGE_TOKEN = resolved;
+  }
+
+  get authToken() {
+    return this.#authToken;
   }
 
   start() {
     if (this.#server) return Promise.resolve();
     this.#server = net.createServer((socket) => {
+      // Single authenticated slot — already occupied.
       if (this.#socket) {
         socket.end(`${JSON.stringify({ error: { code: "BRIDGE_ALREADY_CONNECTED", message: "Eclipse bridge is already connected" } })}\n`);
         return;
       }
-      this.#socket = socket;
-      for (const waiter of this.#connectionWaiters.splice(0)) waiter.resolve(socket);
+      // A second connector arrives while a first is still mid-handshake.
+      // Reject it the same way; the first attempt either authenticates and
+      // fills #socket, or fails/times out and clears #pendingAuth — but we
+      // do not queue contenders. This keeps the state machine linear.
+      if (this.#pendingAuth) {
+        socket.end(`${JSON.stringify({ error: { code: "BRIDGE_ALREADY_CONNECTED", message: "Eclipse bridge is already connected" } })}\n`);
+        return;
+      }
+
+      // UNAUTHENTICATED state: buffer the first line, expect an auth frame,
+      // and enforce a deadline so a silent connector cannot hold the slot.
+      this.#pendingAuth = socket;
       socket.setEncoding("utf8");
-      socket.on("data", (chunk) => this.#onData(chunk));
+      let authenticated = false;
+      let authBuffer = "";
+      const authDeadline = setTimeout(() => {
+        if (authenticated) return;
+        this.#rejectAuth(socket, "auth timeout");
+      }, this.#timeoutMs);
+
+      const onDataWhileUnauthenticated = (chunk) => {
+        if (authenticated) return;
+        authBuffer += chunk;
+        const newline = authBuffer.indexOf("\n");
+        if (newline < 0) return;
+        const line = authBuffer.slice(0, newline);
+        const remainder = authBuffer.slice(newline + 1);
+        let frame = null;
+        try { frame = JSON.parse(line); } catch { /* fall through to reject */ }
+        if (validateAuthFrame(frame, this.#authToken)) {
+          // SUCCESS — promote to authenticated slot.
+          authenticated = true;
+          clearTimeout(authDeadline);
+          socket.off("data", onDataWhileUnauthenticated);
+          this.#pendingAuth = null;
+          this.#socket = socket;
+          for (const waiter of this.#connectionWaiters.splice(0)) waiter.resolve(socket);
+          // In the unlikely case the auth frame and the first request shared
+          // a chunk, hand the tail to the regular handler. Newline framing is
+          // identical on both sides so this is safe.
+          if (remainder.length > 0) this.#onData(remainder);
+          socket.on("data", (c) => this.#onData(c));
+        } else {
+          clearTimeout(authDeadline);
+          socket.off("data", onDataWhileUnauthenticated);
+          this.#rejectAuth(socket, "bad frame");
+        }
+      };
+
+      socket.on("data", onDataWhileUnauthenticated);
       socket.on("close", () => {
-        if (this.#socket === socket) this.#socket = null;
-        for (const pending of this.#pending.values()) pending.reject(new Error("Eclipse bridge disconnected"));
-        this.#pending.clear();
+        clearTimeout(authDeadline);
+        if (this.#pendingAuth === socket) this.#pendingAuth = null;
+        if (this.#socket === socket) {
+          this.#socket = null;
+          for (const pending of this.#pending.values()) pending.reject(new Error("Eclipse bridge disconnected"));
+          this.#pending.clear();
+        }
       });
     });
     return new Promise((resolve, reject) => {
@@ -62,6 +141,17 @@ export class BridgeBroker {
         resolve();
       });
     });
+  }
+
+  /**
+   * Send BRIDGE_UNAUTHORIZED and tear down a socket that failed the auth
+   * handshake (wrong token, malformed JSON, or silent timeout). Clears the
+   * pending-auth slot if this socket still owns it. Must NOT touch #socket
+   * (an unauthenticated socket is never promoted).
+   */
+  #rejectAuth(socket, _reason) {
+    if (this.#pendingAuth === socket) this.#pendingAuth = null;
+    socket.end(`${JSON.stringify({ error: { code: "BRIDGE_UNAUTHORIZED", message: "Bridge authentication failed" } })}\n`);
   }
 
   #waitForConnection() {
@@ -128,6 +218,13 @@ export class BridgeBroker {
 
   close() {
     return new Promise((resolve) => {
+      // Tear down any in-flight unauthenticated connector as well so tests
+      // and shutdown don't leave dangling sockets.
+      if (this.#pendingAuth) {
+        const pending = this.#pendingAuth;
+        this.#pendingAuth = null;
+        try { pending.destroy(); } catch { /* best effort */ }
+      }
       if (this.#socket) this.#socket.end();
       if (!this.#server) { resolve(); return; }
       this.#server.close(() => {
