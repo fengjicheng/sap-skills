@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import path from "node:path";
 import test from "node:test";
+import fs from "node:fs";
+import os from "node:os";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -326,4 +328,137 @@ test("untrusted marking does not alter the bridge call surface for read operatio
     fixture.calls.map((call) => call.method),
     ["inspectCapabilities", "describeProvider", "listQueries", "readQuery", "readQueryModel"],
   );
+});
+
+// --- Finding #2: unsigned-bundle deploy gate (Node side) ---
+
+function writeManifest(keyId) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "bw-manifest-"));
+  const manifestPath = path.join(dir, "manifest.json");
+  fs.writeFileSync(manifestPath, JSON.stringify({ keyId, artifact: "bundle.zip", version: "1.0.0" }));
+  return manifestPath;
+}
+
+function writeMalformedManifest() {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "bw-manifest-"));
+  const manifestPath = path.join(dir, "manifest.json");
+  fs.writeFileSync(manifestPath, "{ not valid json");
+  return manifestPath;
+}
+
+function studioSpy() {
+  const calls = [];
+  return {
+    calls,
+    studio: {
+      run: async (action, input) => {
+        calls.push({ action, input });
+        return { deployed: true, action, input };
+      },
+    },
+  };
+}
+
+test("bw_studio_deploy rejects an unsigned manifest when the env opt-in is not set", async () => {
+  const subject = await load(subjectUrl);
+  assert.ok(subject, "tool handlers are not implemented");
+  const manifestPath = writeManifest("LOCAL-UNSIGNED");
+  const prev = process.env.BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE;
+  delete process.env.BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE;
+  try {
+    const spy = studioSpy();
+    const handlers = subject.createToolHandlers({
+      studio: spy.studio,
+      connections: { prepare: () => ({}), importLandscape: () => ({}), status: () => ({}), reachability: async () => ({}) },
+      drafts: { create: () => ({}), get: () => ({}), apply: () => ({}), prepareSave: () => ({}) },
+      bridge: { call: async () => ({}) },
+      steps: { append: () => undefined },
+    });
+    await assert.rejects(
+      () => handlers.bw_studio_deploy({ manifestPath }),
+      (err) => err.code === "UNSIGNED_BUNDLE_NOT_ALLOWED",
+    );
+    assert.equal(spy.calls.length, 0, "studio.run must not be called when the gate rejects");
+  } finally {
+    if (prev === undefined) delete process.env.BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE;
+    else process.env.BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE = prev;
+  }
+});
+
+test("bw_studio_deploy proceeds on an unsigned manifest when BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE=1", async () => {
+  const subject = await load(subjectUrl);
+  assert.ok(subject, "tool handlers are not implemented");
+  const manifestPath = writeManifest("LOCAL-UNSIGNED");
+  const prev = process.env.BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE;
+  process.env.BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE = "1";
+  try {
+    const spy = studioSpy();
+    const handlers = subject.createToolHandlers({
+      studio: spy.studio,
+      connections: { prepare: () => ({}), importLandscape: () => ({}), status: () => ({}), reachability: async () => ({}) },
+      drafts: { create: () => ({}), get: () => ({}), apply: () => ({}), prepareSave: () => ({}) },
+      bridge: { call: async () => ({}) },
+      steps: { append: () => undefined },
+    });
+    const input = { manifestPath, artifactPath: "/tmp/artifact.zip" };
+    const result = await handlers.bw_studio_deploy(input);
+    assert.equal(spy.calls.length, 1);
+    assert.equal(spy.calls[0].action, "Deploy");
+    assert.deepEqual(spy.calls[0].input, input);
+    assert.equal(result.deployed, true);
+  } finally {
+    if (prev === undefined) delete process.env.BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE;
+    else process.env.BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE = prev;
+  }
+});
+
+test("bw_studio_deploy proceeds on a signed manifest without the env opt-in", async () => {
+  const subject = await load(subjectUrl);
+  assert.ok(subject, "tool handlers are not implemented");
+  const manifestPath = writeManifest("sap-skills-release-2026");
+  const prev = process.env.BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE;
+  delete process.env.BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE;
+  try {
+    const spy = studioSpy();
+    const handlers = subject.createToolHandlers({
+      studio: spy.studio,
+      connections: { prepare: () => ({}), importLandscape: () => ({}), status: () => ({}), reachability: async () => ({}) },
+      drafts: { create: () => ({}), get: () => ({}), apply: () => ({}), prepareSave: () => ({}) },
+      bridge: { call: async () => ({}) },
+      steps: { append: () => undefined },
+    });
+    const result = await handlers.bw_studio_deploy({ manifestPath });
+    assert.equal(spy.calls.length, 1);
+    assert.equal(spy.calls[0].action, "Deploy");
+    assert.equal(result.deployed, true);
+  } finally {
+    if (prev === undefined) delete process.env.BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE;
+    else process.env.BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE = prev;
+  }
+});
+
+test("bw_studio_deploy rejects with MANIFEST_UNREADABLE when the manifest cannot be parsed", async () => {
+  const subject = await load(subjectUrl);
+  assert.ok(subject, "tool handlers are not implemented");
+  const manifestPath = writeMalformedManifest();
+  const prev = process.env.BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE;
+  delete process.env.BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE;
+  try {
+    const spy = studioSpy();
+    const handlers = subject.createToolHandlers({
+      studio: spy.studio,
+      connections: { prepare: () => ({}), importLandscape: () => ({}), status: () => ({}), reachability: async () => ({}) },
+      drafts: { create: () => ({}), get: () => ({}), apply: () => ({}), prepareSave: () => ({}) },
+      bridge: { call: async () => ({}) },
+      steps: { append: () => undefined },
+    });
+    await assert.rejects(
+      () => handlers.bw_studio_deploy({ manifestPath }),
+      (err) => err.code === "MANIFEST_UNREADABLE",
+    );
+    assert.equal(spy.calls.length, 0, "studio.run must not be called when the manifest is unreadable");
+  } finally {
+    if (prev === undefined) delete process.env.BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE;
+    else process.env.BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE = prev;
+  }
 });

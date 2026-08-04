@@ -1,3 +1,4 @@
+import fs from "node:fs";
 import { assertNoSecrets, sanitizeForLog, SecretRejectedError } from "./secret-guard.mjs";
 import { resolveAndValidateSpec } from "./query-spec.mjs";
 import { normalizeProviderMetadata } from "./provider-metadata.mjs";
@@ -40,7 +41,30 @@ export function createToolHandlers({
       const status = await studio.run("Status", {});
       return { ...status, provenance };
     },
-    bw_studio_deploy: (input) => studio.run("Deploy", input),
+    bw_studio_deploy: async (input) => {
+      // Finding #2 (Node half): refuse to forward an unsigned-bundle deploy unless the
+      // human has opted in via BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE=1 at launch. Signed
+      // manifests (any keyId other than "LOCAL-UNSIGNED") pass without the opt-in.
+      let keyId;
+      try {
+        if (input?.manifestPath) {
+          const parsed = JSON.parse(fs.readFileSync(input.manifestPath, "utf8"));
+          keyId = parsed?.keyId;
+        }
+      } catch {
+        const err = new Error("The deploy manifest could not be read or parsed. Refusing to forward the deploy.");
+        err.code = "MANIFEST_UNREADABLE";
+        throw err;
+      }
+      if (keyId === "LOCAL-UNSIGNED" && process.env.BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE !== "1") {
+        const err = new Error(
+          "Deploying an unsigned local bundle is disabled by default. To allow it, set BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE=1 in the studio's launch environment AND configure a signed key in config/trusted-publishers.json. Unsigned bundles execute arbitrary code as the user.",
+        );
+        err.code = "UNSIGNED_BUNDLE_NOT_ALLOWED";
+        throw err;
+      }
+      return studio.run("Deploy", input);
+    },
     bw_studio_launch: (input) => studio.run("Launch", input),
     bw_studio_rollback: (input) => studio.run("Rollback", input),
     bw_studio_diagnostics: () => studio.run("Diagnostics", {}),

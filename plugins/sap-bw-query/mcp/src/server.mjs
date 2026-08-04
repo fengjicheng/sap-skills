@@ -70,7 +70,7 @@ export function createMcpServer(handlers) {
       inputSchema: tool.inputSchema,
       annotations: {
         readOnlyHint: tool.operationClass !== "mutating tenant",
-        destructiveHint: false,
+        destructiveHint: tool.operationClass === "destructive",
         idempotentHint: !["bw_studio_deploy", "bw_studio_rollback", "bw_create_local_draft", "bw_apply_spec_to_draft"].includes(tool.name),
         openWorldHint: tool.operationClass === "read-only tenant" || tool.operationClass === "mutating tenant",
       },
