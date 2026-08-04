@@ -138,6 +138,30 @@ test("handler map exactly matches the public tool registry", async () => {
   assert.equal(Object.keys(handlers).length, 22);
 });
 
+test("bw_studio_status surfaces the injected provenance object", async () => {
+  const subject = await load(subjectUrl);
+  const drafts = await load(draftsUrl);
+  assert.ok(subject && drafts, "tool handlers are not implemented");
+  const fixture = dependencies(new drafts.DraftStore());
+  const injected = { commit: "a".repeat(40), source: "env-override", trusted: true };
+  const handlers = subject.createToolHandlers({ ...fixture.deps, provenance: injected });
+  const result = await handlers.bw_studio_status({});
+  assert.deepEqual(result.provenance, injected);
+});
+
+test("bw_studio_status surfaces a default dev-unpinned provenance when none is injected", async () => {
+  const subject = await load(subjectUrl);
+  const drafts = await load(draftsUrl);
+  assert.ok(subject && drafts, "tool handlers are not implemented");
+  const fixture = dependencies(new drafts.DraftStore());
+  const handlers = subject.createToolHandlers(fixture.deps);
+  const result = await handlers.bw_studio_status({});
+  assert.ok(result.provenance, "bw_studio_status must always carry a provenance object");
+  assert.equal(result.provenance.commit, null);
+  assert.equal(result.provenance.trusted, false);
+  assert.notEqual(result.provenance.commit, "source-commit");
+});
+
 test("editor population requires a prepared save and never saves itself", async () => {
   const subject = await load(subjectUrl);
   const drafts = await load(draftsUrl);

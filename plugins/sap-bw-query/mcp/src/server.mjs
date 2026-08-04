@@ -1,5 +1,6 @@
+import fs from "node:fs";
 import path from "node:path";
-import { pathToFileURL } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
@@ -11,6 +12,44 @@ import { BridgeBroker, pipePathForHome } from "./bridge-broker.mjs";
 import { StepStore } from "./step-store.mjs";
 import { StudioService } from "./studio-service.mjs";
 import { SECRET_REJECTION_MESSAGE, SecretRejectedError } from "./secret-guard.mjs";
+
+const HEX40 = /^[0-9a-f]{40}$/;
+const PLACEHOLDER = "source-commit";
+
+// Resolves the build provenance. Same-directory lookup works for both source
+// (mcp/src/server.mjs -> there is no provenance.json next to it in dev) and the
+// bundle (dist/server.mjs -> dist/provenance.json sits beside it).
+// `provenanceDir` is optional and exists for DI in tests; in production the
+// directory of the current module is used.
+export function loadProvenance(provenanceDir) {
+  const dir = provenanceDir ?? path.dirname(fileURLToPath(import.meta.url));
+  const file = path.join(dir, "provenance.json");
+  try {
+    if (fs.existsSync(file)) {
+      const parsed = JSON.parse(fs.readFileSync(file, "utf8"));
+      if (parsed && HEX40.test(parsed.commit)) {
+        return {
+          commit: parsed.commit,
+          source: parsed.source ?? "git-head",
+          builtAt: parsed.builtAt ?? null,
+          trusted: true,
+        };
+      }
+      return { commit: null, source: "parse-error", trusted: false };
+    }
+  } catch {
+    return { commit: null, source: "parse-error", trusted: false };
+  }
+  // Dev fallback: honor an env override, but never the literal placeholder.
+  const envCommit = process.env.BW_AUTOMATION_PLUGIN_COMMIT;
+  if (envCommit && envCommit !== PLACEHOLDER && HEX40.test(envCommit)) {
+    return { commit: envCommit, source: "env-override", trusted: true };
+  }
+  if (envCommit === PLACEHOLDER) {
+    return { commit: null, source: "env-placeholder-ignored", trusted: false };
+  }
+  return { commit: null, source: "dev-unpinned", trusted: false };
+}
 
 function studioHome() {
   if (process.env.BW_AUTOMATION_HOME) return path.resolve(process.env.BW_AUTOMATION_HOME);
@@ -58,12 +97,14 @@ export async function main() {
   const home = studioHome();
   const broker = new BridgeBroker({ pipePath: process.env.BW_AUTOMATION_PIPE ?? pipePathForHome(home) });
   await broker.start();
+  const provenance = loadProvenance();
   const handlers = createToolHandlers({
     studio: new StudioService({ home, script: process.env.BW_STUDIO_SCRIPT }),
     connections: new ConnectionStore({ root: home }),
     drafts: new DraftStore({ root: path.join(home, "drafts") }),
     bridge: broker,
     steps: new StepStore({ root: home }),
+    provenance,
   });
   const server = createMcpServer(handlers);
   const transport = new StdioServerTransport();

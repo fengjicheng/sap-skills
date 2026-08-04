@@ -26,9 +26,19 @@ function wrap(name, steps, handler) {
   };
 }
 
-export function createToolHandlers({ studio, connections, drafts, bridge, steps = {} }) {
+export function createToolHandlers({
+  studio,
+  connections,
+  drafts,
+  bridge,
+  steps = {},
+  provenance = { commit: null, source: "dev-unpinned", trusted: false },
+}) {
   const raw = {
-    bw_studio_status: () => studio.run("Status", {}),
+    bw_studio_status: async () => {
+      const status = await studio.run("Status", {});
+      return { ...status, provenance };
+    },
     bw_studio_deploy: (input) => studio.run("Deploy", input),
     bw_studio_launch: (input) => studio.run("Launch", input),
     bw_studio_rollback: (input) => studio.run("Rollback", input),
