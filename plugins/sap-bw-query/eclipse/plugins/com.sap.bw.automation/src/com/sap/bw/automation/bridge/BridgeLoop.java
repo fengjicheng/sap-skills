@@ -18,7 +18,8 @@ public final class BridgeLoop implements AutoCloseable {
             "inspectCapabilities", "describeProvider", "listQueries", "readQuery", "readQueryModel", "projectCreateOrOpen",
             "createLocalDraft", "applySpecToDraft", "previewDraft", "prepareNewQuerySave", "populateQueryEditor");
     private static final Set<String> SECRET_KEYS = Set.of(
-            "password", "passwd", "pwd", "secret", "token", "apikey", "credential");
+            "password", "passwd", "pwd", "secret", "token", "apikey", "credential",
+            "authorization", "accesstoken", "accesskey", "bearer", "authtoken", "refreshtoken");
     private final AtomicBoolean running = new AtomicBoolean();
     private final StepJournal journal;
     private final BwmtAdapter adapter;
@@ -42,6 +43,14 @@ public final class BridgeLoop implements AutoCloseable {
             try (RandomAccessFile connection = new RandomAccessFile(path, "rw")) {
                 pipe = connection;
                 journal.append("bridge", "COMPLETED", "Local named-pipe bridge connected", VisualClass.GREEN, false);
+                // Finding #1: send the per-session auth token as the first frame so the Node broker
+                // accepts the connection. The token is supplied via the JVM property set by the
+                // launcher (BwStudio.ps1 inherits BW_AUTOMATION_BRIDGE_TOKEN -> -Dbw.automation.bridgeToken).
+                // Use '\n' explicitly: the Node broker splits on '\n'; on Windows
+                // System.lineSeparator() is "\r\n" and the trailing '\r' would corrupt the token.
+                String bridgeToken = System.getProperty("bw.automation.bridgeToken", "");
+                connection.write(("{\"authToken\":\"" + bridgeToken + "\"}\n").getBytes(StandardCharsets.UTF_8));
+                journal.append("bridge", "COMPLETED", "Bridge authenticated", VisualClass.GREEN, false);
                 String line;
                 while (running.get() && (line = connection.readLine()) != null) process(connection, line);
             } catch (IOException exception) {

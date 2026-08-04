@@ -46,6 +46,33 @@ test("Java bridge allow-list contains read, draft, preview, prepare, and populat
   assert.match(bridge, /password|passwd|pwd|secret|token|apikey|credential/i);
 });
 
+test("Java bridge SECRET_KEYS mirrors the widened Node secret-guard keylist (finding #5)", () => {
+  const bridge = read("src/com/sap/bw/automation/bridge/BridgeLoop.java");
+  // 7 original keys + 6 added in Node Task 2: authorization, accesstoken, accesskey, bearer, authtoken, refreshtoken.
+  for (const key of ["password", "passwd", "pwd", "secret", "token", "apikey", "credential",
+    "authorization", "accesstoken", "accesskey", "bearer", "authtoken", "refreshtoken"]) {
+    assert.match(bridge, new RegExp(`"${key}"`), `SECRET_KEYS must include "${key}"`);
+  }
+});
+
+test("Java bridge sends a pipe auth token frame on connect (finding #1)", () => {
+  const bridge = read("src/com/sap/bw/automation/bridge/BridgeLoop.java");
+  // The token is read from the JVM property and written as the first JSON frame.
+  assert.match(bridge, /bw\.automation\.bridgeToken/);
+  assert.match(bridge, /authToken/);
+});
+
+test("Java StepJournal LABELED_SECRET regex mirrors the widened Node keylist (finding #5)", () => {
+  const journal = read("src/com/sap/bw/automation/core/StepJournal.java");
+  // The original api-key character-class alternation (kept verbatim in the Java string literal,
+  // which doubles each backslash on disk) must remain, plus the 6 new labels added in Node Task 2.
+  assert.ok(journal.includes("api[\\\\s_-]*key"), "LABELED_SECRET must retain the api-key alternation");
+  for (const label of ["password", "passwd", "pwd", "secret", "token", "credential",
+    "authorization", "accesstoken", "accesskey", "bearer", "authtoken", "refreshtoken"]) {
+    assert.ok(journal.includes(label), `LABELED_SECRET must include "${label}"`);
+  }
+});
+
 test("query population builds the unsaved model per element and never saves", () => {
   const builder = read("src/com/sap/bw/automation/core/QueryModelBuilder.java");
   assert.match(builder, /applyReport|APPLIED/);
