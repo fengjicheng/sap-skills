@@ -201,6 +201,22 @@ test("Eclipse launch derives the same local named-pipe identity and disables pas
   assert.match(text, /-noPwdStore/);
 });
 
+// Final-review critical fix: BwStudio.ps1 Start-Studio must forward the per-session bridge auth
+// token (BW_AUTOMATION_BRIDGE_TOKEN, set by the Node MCP server and inherited into this spawn)
+// to the Eclipse JVM as -Dbw.automation.bridgeToken, mirroring the connectionAlias pattern.
+// Without this arg the Java BridgeLoop reads an empty token, sends {"authToken":""}, and the
+// Node broker rejects every bridge connection with BRIDGE_UNAUTHORIZED — breaking the entire
+// MCP<->Eclipse wire. Pure source-text assertion so it runs on Mac CI without powershell.exe.
+test("Start-Studio forwards BW_AUTOMATION_BRIDGE_TOKEN to Eclipse as -Dbw.automation.bridgeToken (source gate)", () => {
+  const text = fs.readFileSync(deployer, "utf8");
+  // The JVM property name consumed by the Java BridgeLoop must be present.
+  assert.match(text, /bw\.automation\.bridgeToken/);
+  // The env var (set by the Node server and inherited into the PowerShell spawn) must be referenced.
+  assert.match(text, /\$env:BW_AUTOMATION_BRIDGE_TOKEN/);
+  // The token must be passed as a launch argument (mirrors the connectionAlias conditional pattern).
+  assert.match(text, /\$launchArguments\s*\+=\s*"-Dbw\.automation\.bridgeToken=\$env:BW_AUTOMATION_BRIDGE_TOKEN"/);
+});
+
 test("offline deployment verifies signature, archive hash, and extracted file inventory", () => {
   const fixture = createSignedBundle("1.0.0");
   const home = fs.mkdtempSync(path.join(os.tmpdir(), "bw-studio-home-valid-"));

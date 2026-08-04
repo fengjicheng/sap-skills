@@ -570,6 +570,11 @@ function Start-Studio([string]$StudioRoot) {
     $pipeName = Get-BridgePipeName $StudioRoot
     $launchArguments = @("-vm", $java, "-noPwdStore", "-data", $workspace, "-consoleLog", "-vmargs", "-Dbw.automation.pipe=$pipeName")
     if ($ConnectionAlias) { $launchArguments += "-Dbw.automation.connectionAlias=$ConnectionAlias" }
+    # Forward the per-session bridge auth token (set by the Node MCP server as
+    # process.env.BW_AUTOMATION_BRIDGE_TOKEN and inherited by this PowerShell spawn) to the Eclipse
+    # JVM so BridgeLoop sends a valid first auth frame. Without this the broker reads an empty token
+    # and rejects every bridge connection with BRIDGE_UNAUTHORIZED (final-review critical fix).
+    if ($env:BW_AUTOMATION_BRIDGE_TOKEN) { $launchArguments += "-Dbw.automation.bridgeToken=$env:BW_AUTOMATION_BRIDGE_TOKEN" }
     Start-Process -FilePath $eclipse -ArgumentList $launchArguments | Out-Null
     return @{ launched = $true; version = $status.activeVersion; workspace = $workspace; passwordStorageDisabled = $true }
 }
