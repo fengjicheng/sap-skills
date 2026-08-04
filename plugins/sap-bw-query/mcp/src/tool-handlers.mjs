@@ -4,6 +4,7 @@ import { normalizeProviderMetadata } from "./provider-metadata.mjs";
 import { connectionEndpoint, testReachability } from "./connection-store.mjs";
 import { verifyPopulation, summarizeVerification } from "./populate-verify.mjs";
 import { runRules, normalizeFromSpec, normalizeFromModel } from "./query-rules.mjs";
+import { markResponseUntrusted } from "./untrusted-content.mjs";
 import { TOOL_DEFINITIONS } from "./tool-registry.mjs";
 
 function wrap(name, steps, handler) {
@@ -58,10 +59,10 @@ export function createToolHandlers({
     },
     bw_connection_status: ({ alias }) => connections.status(alias),
     bw_inspect_capabilities: (input) => bridge.call("inspectCapabilities", input),
-    bw_describe_provider: (input) => bridge.call("describeProvider", input),
-    bw_list_queries: (input) => bridge.call("listQueries", input),
-    bw_read_query: (input) => bridge.call("readQuery", input),
-    bw_read_query_model: (input) => bridge.call("readQueryModel", input),
+    bw_describe_provider: async (input) => markResponseUntrusted(await bridge.call("describeProvider", input)),
+    bw_list_queries: async (input) => markResponseUntrusted(await bridge.call("listQueries", input)),
+    bw_read_query: async (input) => markResponseUntrusted(await bridge.call("readQuery", input)),
+    bw_read_query_model: async (input) => markResponseUntrusted(await bridge.call("readQueryModel", input)),
     bw_review_query: async ({ alias, project, technicalName }) => {
       // Read-only best-practices review of an OPEN query. Reuses the Task-A deep-read bridge
       // call (no new bridge method) and runs the shared rule engine over the deep model.
@@ -74,14 +75,16 @@ export function createToolHandlers({
           findings: [],
         };
       }
-      return {
+      // Only mark the final review object when BW content was actually read (found === true).
+      // The early `found !== true` branch above returns unwrapped, since no BW content is surfaced.
+      return markResponseUntrusted({
         found: true,
         technicalName: model.technicalName ?? technicalName ?? null,
         provider: model.provider ?? null,
         findings: runRules(normalizeFromModel(model)),
         serializationIssues: model.serializationIssues ?? [],
         readOnly: true,
-      };
+      });
     },
     bw_resolve_and_validate_spec: async ({ spec, alias }) => {
       let providerMetadata = null;

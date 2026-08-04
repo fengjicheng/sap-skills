@@ -214,3 +214,116 @@ test("editor population requires a prepared save and never saves itself", async 
   assert.equal(result.verification.status, "VERIFIED");
   assert.deepEqual(fixture.calls.map((call) => call.method), ["listQueries", "prepareNewQuerySave", "populateQueryEditor", "readQueryModel"]);
 });
+
+// --- Finding #4: BW-originated responses must be marked as untrusted content ---
+
+function readDependencies() {
+  const calls = [];
+  return {
+    calls,
+    deps: {
+      studio: { run: async (action, input) => ({ action, input }) },
+      connections: {
+        prepare: (input) => input,
+        importLandscape: () => ({}),
+        status: () => ({ ssoEnabled: true }),
+        reachability: async () => ({ reachable: true, authenticated: false }),
+      },
+      drafts: { create: () => ({ id: "d1" }), get: () => ({ id: "d1", spec: {} }), apply: () => ({ id: "d1", spec: {} }), prepareSave: () => ({}) },
+      bridge: {
+        call: async (method, input) => {
+          calls.push({ method, input });
+          if (method === "listQueries") return { technicalNames: ["Z_A"] };
+          return { method, echo: input };
+        },
+      },
+      steps: { append: () => undefined },
+    },
+  };
+}
+
+test("read-only-tenant handlers mark BW-originated responses as untrusted (lossless)", async () => {
+  const subject = await load(subjectUrl);
+  assert.ok(subject, "tool handlers are not implemented");
+  const fixture = readDependencies();
+  const handlers = subject.createToolHandlers(fixture.deps);
+
+  const describe = await handlers.bw_describe_provider({ alias: "BWD", project: "BWD_100", provider: "ZCUBE_SALES" });
+  assert.equal(describe.method, "describeProvider", "original field preserved");
+  assert.ok(describe._untrustedContent, "bw_describe_provider must mark response untrusted");
+  assert.equal(describe._untrustedContent.source, "sap-bw");
+  assert.equal(typeof describe._untrustedContent.warning, "string");
+  assert.ok(describe._untrustedContent.warning.length > 0);
+
+  const list = await handlers.bw_list_queries({ alias: "BWD", project: "BWD_100", provider: "ZCUBE_SALES" });
+  assert.deepEqual(list.technicalNames, ["Z_A"], "original field preserved");
+  assert.ok(list._untrustedContent, "bw_list_queries must mark response untrusted");
+  assert.equal(list._untrustedContent.source, "sap-bw");
+
+  const read = await handlers.bw_read_query({ alias: "BWD", project: "BWD_100", technicalName: "Z_EXISTING" });
+  assert.equal(read.method, "readQuery", "original field preserved");
+  assert.ok(read._untrustedContent, "bw_read_query must mark response untrusted");
+  assert.equal(read._untrustedContent.source, "sap-bw");
+
+  const model = await handlers.bw_read_query_model({ alias: "BWD", project: "BWD_100", technicalName: "Z_EXISTING" });
+  assert.equal(model.method, "readQueryModel", "original field preserved");
+  assert.ok(model._untrustedContent, "bw_read_query_model must mark response untrusted");
+  assert.equal(model._untrustedContent.source, "sap-bw");
+});
+
+test("bw_review_query marks the response untrusted only when found === true", async () => {
+  const subject = await load(subjectUrl);
+  assert.ok(subject, "tool handlers are not implemented");
+
+  // found === true path: bridge returns a full model; the final review object must be marked.
+  const foundFixture = readDependencies();
+  foundFixture.deps.bridge = {
+    call: async (method, input) => {
+      foundFixture.calls.push({ method, input });
+      return {
+        found: true,
+        technicalName: input.technicalName,
+        provider: "ZCUBE_SALES",
+        axes: { rows: [], columns: [], free: [] },
+        filter: { selections: [] },
+        conditions: [],
+        exceptions: [],
+        settings: {},
+        serializationIssues: [],
+      };
+    },
+  };
+  const handlersHit = subject.createToolHandlers(foundFixture.deps);
+  const hit = await handlersHit.bw_review_query({ alias: "BWD", project: "BWD_100", technicalName: "Z_EXISTING" });
+  assert.equal(hit.found, true);
+  assert.ok(hit._untrustedContent, "bw_review_query must mark response untrusted when found === true");
+  assert.equal(hit._untrustedContent.source, "sap-bw");
+  assert.equal(hit.technicalName, "Z_EXISTING", "original field preserved alongside marker");
+
+  // found !== true path: NO _untrustedContent (no BW content was read).
+  const missFixture = readDependencies();
+  missFixture.deps.bridge = {
+    call: async () => ({ found: false, userActionRequired: true, instruction: "open the query" }),
+  };
+  const handlersMiss = subject.createToolHandlers(missFixture.deps);
+  const miss = await handlersMiss.bw_review_query({ alias: "BWD", project: "BWD_100", technicalName: "Z_MISSING" });
+  assert.equal(miss.found, false);
+  assert.equal(miss._untrustedContent, undefined, "must NOT mark response when found !== true");
+});
+
+test("untrusted marking does not alter the bridge call surface for read operations", async () => {
+  const subject = await load(subjectUrl);
+  assert.ok(subject, "tool handlers are not implemented");
+  const fixture = readDependencies();
+  const handlers = subject.createToolHandlers(fixture.deps);
+  await handlers.bw_inspect_capabilities({});
+  await handlers.bw_describe_provider({ alias: "BWD", project: "BWD_100", provider: "ZCUBE_SALES" });
+  await handlers.bw_list_queries({ alias: "BWD", project: "BWD_100", provider: "ZCUBE_SALES" });
+  await handlers.bw_read_query({ alias: "BWD", project: "BWD_100", technicalName: "Z_EXISTING" });
+  await handlers.bw_read_query_model({ alias: "BWD", project: "BWD_100", technicalName: "Z_EXISTING" });
+  // The marker is additive on the response only; bridge call methods must be unchanged.
+  assert.deepEqual(
+    fixture.calls.map((call) => call.method),
+    ["inspectCapabilities", "describeProvider", "listQueries", "readQuery", "readQueryModel"],
+  );
+});
