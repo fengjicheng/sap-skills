@@ -462,3 +462,28 @@ test("bw_studio_deploy rejects with MANIFEST_UNREADABLE when the manifest cannot
     else process.env.BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE = prev;
   }
 });
+
+test("bw_studio_deploy rejects when manifestPath is omitted", async () => {
+  const subject = await load(subjectUrl);
+  assert.ok(subject, "tool handlers are not implemented");
+  const prev = process.env.BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE;
+  delete process.env.BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE;
+  try {
+    const spy = studioSpy();
+    const handlers = subject.createToolHandlers({
+      studio: spy.studio,
+      connections: { prepare: () => ({}), importLandscape: () => ({}), status: () => ({}), reachability: async () => ({}) },
+      drafts: { create: () => ({}), get: () => ({}), apply: () => ({}), prepareSave: () => ({}) },
+      bridge: { call: async () => ({}) },
+      steps: { append: () => undefined },
+    });
+    await assert.rejects(
+      () => handlers.bw_studio_deploy({}),
+      (err) => err.code === "MANIFEST_UNREADABLE",
+    );
+    assert.equal(spy.calls.length, 0, "studio.run must not be called when manifestPath is omitted");
+  } finally {
+    if (prev === undefined) delete process.env.BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE;
+    else process.env.BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE = prev;
+  }
+});

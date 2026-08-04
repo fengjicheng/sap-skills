@@ -45,12 +45,20 @@ export function createToolHandlers({
       // Finding #2 (Node half): refuse to forward an unsigned-bundle deploy unless the
       // human has opted in via BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE=1 at launch. Signed
       // manifests (any keyId other than "LOCAL-UNSIGNED") pass without the opt-in.
+      //
+      // Critical hardening: a manifest path is mandatory. Without it the manifest-read block
+      // below was previously skipped, keyId stayed undefined, and the handler fell through to
+      // studio.run with NO gate applied — letting a prompt-injected caller deploy arbitrary
+      // code by simply omitting manifestPath. Reject hard before any studio.run call.
+      if (!input?.manifestPath) {
+        const err = new Error("A deploy manifest path is required; refusing to forward an unverified deploy.");
+        err.code = "MANIFEST_UNREADABLE";
+        throw err;
+      }
       let keyId;
       try {
-        if (input?.manifestPath) {
-          const parsed = JSON.parse(fs.readFileSync(input.manifestPath, "utf8"));
-          keyId = parsed?.keyId;
-        }
+        const parsed = JSON.parse(fs.readFileSync(input.manifestPath, "utf8"));
+        keyId = parsed?.keyId;
       } catch {
         const err = new Error("The deploy manifest could not be read or parsed. Refusing to forward the deploy.");
         err.code = "MANIFEST_UNREADABLE";
