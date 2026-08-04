@@ -139,7 +139,9 @@ function Test-PrivateOrSpecialAddress([System.Net.IPAddress]$Address) {
     if ($Address.AddressFamily -eq [System.Net.Sockets.AddressFamily]::InterNetworkV6) {
         if ([System.Net.IPAddress]::IsLoopback($Address)) { return $true }
         $bytes = $Address.GetAddressBytes()
-        # fc00::/7 unique-local (fe80::/10 link-local is a subset, also caught here).
+        # fe80::/10 link-local (top 10 bits = 1111111010: byte0 = 0xFE, byte1 top 2 bits = 10)
+        if ($bytes[0] -eq 0xFE -and ($bytes[1] -band 0xC0) -eq 0x80) { return $true }
+        # fc00::/7 unique-local (fc/fd first byte).
         if (($bytes[0] -band 0xFE) -eq 0xFC) { return $true }
         return $false
     }

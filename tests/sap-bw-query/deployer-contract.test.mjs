@@ -162,6 +162,8 @@ test("release-channel downloads are gated by a release-host SSRF allowlist (find
   assert.match(text, /BW_AUTOMATION_RELEASE_HOST_ALLOWLIST/);
   // The AWS/cloud metadata IP range (169.254.169.254) must be rejected explicitly.
   assert.match(text, /169\.254/);
+  // IPv6 link-local fe80::/10 must be rejected explicitly (NOT a subset of fc00::/7).
+  assert.match(text, /fe80/);
   // The error must NOT echo the hostname — generic message only (no reflection of attacker input).
   assert.match(text, /Release download host failed the allow-list check/);
   // All FOUR release-channel download calls must pass the switch: the channel URL itself plus
