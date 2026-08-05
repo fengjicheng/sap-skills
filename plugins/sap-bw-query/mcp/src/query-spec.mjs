@@ -449,5 +449,3 @@ export function resolveAndValidateSpec(input, { providerMetadata = null } = {}) 
     readyForDraft: errors.length === 0 && !gaps.some((gap) => gap.severity === "blocking"),
   };
 }
-
-export const QUERY_SPEC_TOP_LEVEL_FIELDS = Object.freeze([...TOP_LEVEL_FIELDS]);
