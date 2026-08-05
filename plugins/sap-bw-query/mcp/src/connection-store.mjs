@@ -84,8 +84,33 @@ export class ConnectionStore {
     return { configured: true, ...JSON.parse(fs.readFileSync(path.join(directory, files.at(-1)), "utf8")) };
   }
 
+  #resolveConfinedLandscapePath(landscapePath) {
+    const target = path.resolve(landscapePath);
+    const allowedRoots = [path.join(this.#root, "landscapes")];
+    const allowDir = process.env.BW_AUTOMATION_LANDSCAPE_ALLOW_DIR;
+    if (allowDir && allowDir.trim() !== "") {
+      allowedRoots.push(path.resolve(allowDir));
+    }
+    const isWindows = process.platform === "win32";
+    const normalizeForCompare = (value) => (isWindows ? String(value).toLowerCase() : String(value));
+    const confined = allowedRoots.some((allowed) => {
+      const a = normalizeForCompare(allowed);
+      const t = normalizeForCompare(target);
+      return t === a || t.startsWith(a + path.sep);
+    });
+    if (!confined) {
+      const error = new Error(
+        `Landscape path must be inside one of: ${allowedRoots.join(", ")}`,
+      );
+      error.code = "LANDSCAPE_PATH_NOT_CONFINED";
+      throw error;
+    }
+    return target;
+  }
+
   importLandscape(landscapePath, alias) {
-    const xml = fs.readFileSync(path.resolve(landscapePath), "utf8");
+    const confinedPath = this.#resolveConfinedLandscapePath(landscapePath);
+    const xml = fs.readFileSync(confinedPath, "utf8");
     assertNoSecrets({ landscape: xml });
     const serviceTags = [...xml.matchAll(/<Service\b([^>]*)\/?\s*>/giu)];
     if (serviceTags.length === 0) throw new Error("No SAP GUI service entries were found in the landscape");

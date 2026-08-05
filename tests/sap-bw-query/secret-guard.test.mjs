@@ -32,9 +32,46 @@ test("SecretGuard rejects nested password-like keys without echoing values", asy
 test("SecretGuard rejects every prohibited key spelling at any depth", async () => {
   const subject = await loadSubject();
   assert.ok(subject, "SecretGuard module is not implemented");
-  for (const key of ["password", "PASSWD", "pwd", "Secret", "TOKEN", "apiKey", "credential"]) {
+  for (const key of [
+    "password", "PASSWD", "pwd", "Secret", "TOKEN", "apiKey", "credential",
+    "authorization", "ACCESS_TOKEN", "accessKey", "bearer", "authToken", "refresh_token",
+  ]) {
     assert.throws(() => subject.assertNoSecrets({ safe: [{ [key]: "do-not-log" }] }), { code: "SECRET_REJECTED" });
   }
+});
+
+test("SecretGuard rejects bare bearer/basic/token string values", async () => {
+  const subject = await loadSubject();
+  assert.ok(subject, "SecretGuard module is not implemented");
+  for (const value of [
+    { header: "Bearer abc123" },
+    { line: "Basic dXNlcjpwYXNz" },
+    { thing: "token xyz" },
+    { lower: "bearer abc" },
+  ]) {
+    assert.throws(() => subject.assertNoSecrets(value), { code: "SECRET_REJECTED" });
+  }
+});
+
+test("SecretGuard rejects zero-width and fullwidth unicode key bypass attempts", async () => {
+  const subject = await loadSubject();
+  assert.ok(subject, "SecretGuard module is not implemented");
+  assert.throws(
+    () => subject.assertNoSecrets({ ["pass\u200Bword"]: "x" }),
+    { code: "SECRET_REJECTED" },
+  );
+  assert.throws(
+    () => subject.assertNoSecrets({ ["ｐａｓｓｗｏｒｄ"]: "x" }),
+    { code: "SECRET_REJECTED" },
+  );
+});
+
+test("sanitizeForLog redacts bare bearer tokens", async () => {
+  const subject = await loadSubject();
+  assert.ok(subject, "SecretGuard module is not implemented");
+  const sanitized = JSON.stringify(subject.sanitizeForLog({ h: "Bearer secretvalue" }));
+  assert.doesNotMatch(sanitized, /secretvalue/);
+  assert.match(sanitized, /REDACTED/);
 });
 
 test("SecretGuard rejects labeled credential text and permits password-free metadata", async () => {

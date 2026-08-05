@@ -6,7 +6,33 @@ const SECRET_KEY_NAMES = new Set([
   "token",
   "apikey",
   "credential",
+  "authorization",
+  "accesstoken",
+  "accesskey",
+  "bearer",
+  "authtoken",
+  "refreshtoken",
 ]);
+
+const SECRET_SUFFIXES = [
+  "password",
+  "passwd",
+  "secret",
+  "token",
+  "credential",
+  "apikey",
+  "authorization",
+  "accesstoken",
+  "accesskey",
+  "authtoken",
+  "refreshtoken",
+];
+
+// Zero-width and invisible joiner/BOM characters used to bypass key matching.
+const ZERO_WIDTH_CHARS = /[\u200B\u200C\u200D\uFEFF\u2060]/g;
+
+// Catches bare HTTP-auth-scheme string values such as "Bearer abc", "Basic dXN...", "token xyz".
+const BEARER_TOKEN_PATTERN = /^(?:bearer|basic|token)\s+\S+/iu;
 
 const LABELED_SECRET = /\b(?:password|passwd|pwd|secret|token|api[\s_-]*key|credential)\s*[:=]\s*\S+/iu;
 
@@ -24,19 +50,24 @@ export class SecretRejectedError extends Error {
 }
 
 function normalizedKey(key) {
-  return String(key).toLowerCase().replaceAll(/[^a-z0-9]/g, "");
+  // NFKC first (folds fullwidth/compat forms), then drop zero-width chars,
+  // then strip non-alphanumerics, then lowercase.
+  return String(key)
+    .normalize("NFKC")
+    .replaceAll(ZERO_WIDTH_CHARS, "")
+    .replaceAll(/[^a-zA-Z0-9]/g, "")
+    .toLowerCase();
 }
 
 function isSecretKey(key) {
   const normalized = normalizedKey(key);
   if (SECRET_KEY_NAMES.has(normalized)) return true;
-  return ["password", "passwd", "secret", "token", "credential", "apikey"]
-    .some((suffix) => normalized.endsWith(suffix));
+  return SECRET_SUFFIXES.some((suffix) => normalized.endsWith(suffix));
 }
 
 function visit(value, path, findings, seen) {
   if (typeof value === "string") {
-    if (LABELED_SECRET.test(value)) findings.push(path || "$");
+    if (LABELED_SECRET.test(value) || BEARER_TOKEN_PATTERN.test(value)) findings.push(path || "$");
     return;
   }
   if (value === null || typeof value !== "object") return;
@@ -68,7 +99,9 @@ export function assertNoSecrets(value) {
 }
 
 export function sanitizeForLog(value, seen = new WeakSet()) {
-  if (typeof value === "string") return LABELED_SECRET.test(value) ? "[REDACTED]" : value;
+  if (typeof value === "string") {
+    return (LABELED_SECRET.test(value) || BEARER_TOKEN_PATTERN.test(value)) ? "[REDACTED]" : value;
+  }
   if (value === null || typeof value !== "object") return value;
   if (seen.has(value)) return "[CIRCULAR]";
   seen.add(value);

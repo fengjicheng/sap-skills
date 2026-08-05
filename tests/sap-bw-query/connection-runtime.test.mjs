@@ -46,7 +46,10 @@ test("SAP UI landscape import extracts connection metadata without credentials",
   const subject = await loadSubject();
   assert.ok(subject, "connection store is not implemented");
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "bw-landscape-store-"));
-  const landscapePath = path.join(root, "SAPUILandscape.xml");
+  // The landscape file must live under <root>/landscapes/ to be accepted.
+  const landscapesDir = path.join(root, "landscapes");
+  fs.mkdirSync(landscapesDir, { recursive: true });
+  const landscapePath = path.join(landscapesDir, "SAPUILandscape.xml");
   fs.writeFileSync(landscapePath, `<?xml version="1.0"?><Landscape><Services><Service name="BWP Production" systemid="BWP" client="200" server="bw.example.invalid" systemnumber="01" language="EN" sncop="1"/></Services></Landscape>`);
   const store = new subject.ConnectionStore({ root });
   const imported = store.importLandscape(landscapePath, "BWP-200");
@@ -55,6 +58,61 @@ test("SAP UI landscape import extracts connection metadata without credentials",
   assert.equal(imported.applicationServer, "bw.example.invalid");
   assert.equal(imported.sncEnabled, true);
   assert.doesNotMatch(JSON.stringify(imported), /password|secret|token|credential/i);
+});
+
+test("importLandscape rejects absolute paths outside the confined landscapes root (/etc/passwd)", async () => {
+  const subject = await loadSubject();
+  assert.ok(subject, "connection store is not implemented");
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "bw-landscape-confine-"));
+  const store = new subject.ConnectionStore({ root });
+  assert.throws(
+    () => store.importLandscape("/etc/passwd", "BWP-200"),
+    { code: "LANDSCAPE_PATH_NOT_CONFINED" },
+  );
+  // Nothing should have been written for this alias.
+  assert.equal(fs.existsSync(path.join(root, "connections", "BWP-200")), false);
+});
+
+test("importLandscape rejects Windows-style rooted paths outside the confined root", async () => {
+  const subject = await loadSubject();
+  assert.ok(subject, "connection store is not implemented");
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "bw-landscape-confine-"));
+  const store = new subject.ConnectionStore({ root });
+  assert.throws(
+    () => store.importLandscape("C:\\windows\\system32\\drivers\\etc\\hosts", "BWP-200"),
+    { code: "LANDSCAPE_PATH_NOT_CONFINED" },
+  );
+});
+
+test("importLandscape rejects parent-directory escape attempts from the landscapes root", async () => {
+  const subject = await loadSubject();
+  assert.ok(subject, "connection store is not implemented");
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "bw-landscape-confine-"));
+  const store = new subject.ConnectionStore({ root });
+  // A path that textually starts with <root>/landscapes/ but escapes via ..
+  const escapePath = path.join(root, "landscapes", "..", "..", "etc", "passwd");
+  assert.throws(
+    () => store.importLandscape(escapePath, "BWP-200"),
+    { code: "LANDSCAPE_PATH_NOT_CONFINED" },
+  );
+});
+
+test("importLandscape accepts a file under BW_AUTOMATION_LANDSCAPE_ALLOW_DIR when the env var is set", async () => {
+  const subject = await loadSubject();
+  assert.ok(subject, "connection store is not implemented");
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "bw-landscape-confine-"));
+  const allowDir = fs.mkdtempSync(path.join(os.tmpdir(), "bw-landscape-allowdir-"));
+  process.env.BW_AUTOMATION_LANDSCAPE_ALLOW_DIR = allowDir;
+  try {
+    const landscapePath = path.join(allowDir, "SAPUILandscape.xml");
+    fs.writeFileSync(landscapePath, `<?xml version="1.0"?><Landscape><Services><Service name="BWP Production" systemid="BWP" client="200" server="bw.example.invalid" systemnumber="01" language="EN" sncop="1"/></Services></Landscape>`);
+    const store = new subject.ConnectionStore({ root });
+    const imported = store.importLandscape(landscapePath, "BWP-200");
+    assert.equal(imported.alias, "BWP-200");
+    assert.equal(imported.systemId, "BWP");
+  } finally {
+    delete process.env.BW_AUTOMATION_LANDSCAPE_ALLOW_DIR;
+  }
 });
 
 test("reachability performs a TCP check without authentication", async () => {

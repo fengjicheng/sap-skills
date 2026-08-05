@@ -79,10 +79,112 @@ function New-Directory([string]$Path) {
     }
 }
 
-function Save-HttpsDownload([string]$Uri, [string]$Destination) {
+# Release-host SSRF allowlist (finding #6). The release channel JSON is fetched from a remote
+# publisher and carries artifact/manifest/signature URLs; without a host check an attacker who
+# controls (or tampered) the channel could point those fetches at internal/private IPs (SSRF /
+# forced browsing). The signature still gates execution, but we additionally refuse to even dial a
+# host that is not a public address by default. Operators who need a non-public release host set
+# BW_AUTOMATION_RELEASE_HOST_ALLOWLIST to a semicolon-separated list of exact hostnames (strict mode).
+function Test-ReleaseHostAllowed([string]$HostName) {
+    if ([string]::IsNullOrWhiteSpace($HostName)) { return $false }
+
+    # Strict allowlist override: when the operator sets the env var, ONLY listed hosts pass and the
+    # private-IP heuristic below is skipped. Empty value = unset (default heuristic mode).
+    $allowlistRaw = $env:BW_AUTOMATION_RELEASE_HOST_ALLOWLIST
+    if ($allowlistRaw) {
+        foreach ($allowed in ($allowlistRaw -split ';')) {
+            $trim = "$allowed".Trim()
+            if ($trim -and [System.String]::Equals($trim, $HostName, [System.StringComparison]::OrdinalIgnoreCase)) {
+                return $true
+            }
+        }
+        return $false
+    }
+
+    # Reject obvious internal host suffixes regardless of DNS (defense in depth, avoids leaking
+    # internal naming via a DNS lookup too): .local (mDNS/Bonjour) and .internal (RFC8375 home/
+    # small-office networks), including bare "local"/"internal" hostnames.
+    $lowerHost = $HostName.ToLowerInvariant()
+    if ($lowerHost -eq "local" -or $lowerHost -eq "internal") { return $false }
+    if ($lowerHost.EndsWith(".local") -or $lowerHost.EndsWith(".internal")) { return $false }
+
+    # If the host is already an IP literal, evaluate it directly. Otherwise resolve and require
+    # EVERY resolved address to be public (any private resolution = reject).
+    $addresses = @()
+    $ipObj = $null
+    if ([System.Net.IPAddress]::TryParse($HostName, [ref]$ipObj)) {
+        $addresses = @($ipObj)
+    }
+    else {
+        try {
+            # Fail-closed: if DNS resolution throws, treat the host as disallowed.
+            $addresses = @([System.Net.Dns]::GetHostAddresses($HostName))
+        }
+        catch {
+            return $false
+        }
+    }
+    if ($addresses.Count -eq 0) { return $false }
+
+    foreach ($addr in $addresses) {
+        if (Test-PrivateOrSpecialAddress $addr) { return $false }
+    }
+    return $true
+}
+
+# Classifies a single IP address as private/loopback/link-local/metadata/unspecified, i.e. NOT a
+# safe public release target. Covers IPv4 RFC1918/loopback/link-local/metadata and IPv6
+# loopback/unique-local/link-local.
+function Test-PrivateOrSpecialAddress([System.Net.IPAddress]$Address) {
+    if ($Address.AddressFamily -eq [System.Net.Sockets.AddressFamily]::InterNetworkV6) {
+        # IPv4-mapped IPv6 (e.g. ::ffff:169.254.169.254) bypasses the IPv4 checks
+        # below unless unwrapped. Map to the embedded IPv4 and re-evaluate.
+        if ($Address.IsIPv4MappedToIPv6) { return (Test-PrivateOrSpecialAddress $Address.MapToIPv4()) }
+        if ([System.Net.IPAddress]::IsLoopback($Address)) { return $true }
+        $bytes = $Address.GetAddressBytes()
+        # :: (unspecified/IPv6Any) — all zero bytes; reject before range checks.
+        $allZero = $true
+        foreach ($b in $bytes) { if ($b -ne 0) { $allZero = $false; break } }
+        if ($allZero) { return $true }
+        # fe80::/10 link-local (top 10 bits = 1111111010: byte0 = 0xFE, byte1 top 2 bits = 10)
+        if ($bytes[0] -eq 0xFE -and ($bytes[1] -band 0xC0) -eq 0x80) { return $true }
+        # fc00::/7 unique-local (fc/fd first byte).
+        if (($bytes[0] -band 0xFE) -eq 0xFC) { return $true }
+        return $false
+    }
+
+    if ($Address.AddressFamily -ne [System.Net.Sockets.AddressFamily]::InterNetwork) { return $true }
+
+    if ([System.Net.IPAddress]::IsLoopback($Address)) { return $true }
+    $bytes = $Address.GetAddressBytes()
+    $b0 = $bytes[0]; $b1 = $bytes[1]
+    # 0.0.0.0/8 unspecified
+    if ($b0 -eq 0) { return $true }
+    # 10.0.0.0/8 RFC1918
+    if ($b0 -eq 10) { return $true }
+    # 172.16.0.0/12 RFC1918
+    if ($b0 -eq 172 -and ($b1 -band 0xF0) -eq 16) { return $true }
+    # 192.168.0.0/16 RFC1918
+    if ($b0 -eq 192 -and $b1 -eq 168) { return $true }
+    # 169.254.0.0/16 link-local + cloud metadata (169.254.169.254)
+    if ($b0 -eq 169 -and $b1 -eq 254) { return $true }
+    # 127.0.0.0/8 loopback (IsLoopback above already catches this; kept explicit for clarity)
+    if ($b0 -eq 127) { return $true }
+    return $false
+}
+
+function Save-HttpsDownload([string]$Uri, [string]$Destination, [switch]$RestrictToReleaseAllowlist) {
     $parsed = $null
     if (-not [System.Uri]::TryCreate($Uri, [System.UriKind]::Absolute, [ref]$parsed) -or $parsed.Scheme -ne "https") {
         throw "Approved release downloads require HTTPS"
+    }
+    if ($RestrictToReleaseAllowlist) {
+        # Do NOT echo the host in the error: avoid reflecting attacker-controlled input back. Use a
+        # generic message; the host is visible in the caller-provided URL/context if debugging is
+        # legitimately needed.
+        if (-not (Test-ReleaseHostAllowed $parsed.Host)) {
+            throw "Release download host failed the allow-list check"
+        }
     }
     & curl.exe --fail --location --proto "=https" --tlsv1.2 --connect-timeout 30 --max-time 3600 --silent --show-error --output $Destination $parsed.AbsoluteUri
     if ($LASTEXITCODE -ne 0 -or -not (Test-Path -LiteralPath $Destination -PathType Leaf)) {
@@ -288,7 +390,7 @@ function Resolve-ReleaseInputs([string]$StudioRoot) {
     $downloadRoot = Join-Path (Join-Path $StudioRoot "downloads") ([Guid]::NewGuid().ToString("N"))
     New-Directory $downloadRoot
     $channelPath = Join-Path $downloadRoot "channel.json"
-    Save-HttpsDownload $ReleaseChannelUrl $channelPath
+    Save-HttpsDownload $ReleaseChannelUrl $channelPath -RestrictToReleaseAllowlist
     $channel = Get-Content -Raw -LiteralPath $channelPath | ConvertFrom-Json
     foreach ($field in @("artifactUrl", "manifestUrl", "signatureUrl")) {
         if (-not $channel.$field) { throw "Release channel is incomplete" }
@@ -296,9 +398,9 @@ function Resolve-ReleaseInputs([string]$StudioRoot) {
     $downloadArtifact = Join-Path $downloadRoot "bundle.zip"
     $downloadManifest = Join-Path $downloadRoot "bundle.manifest.json"
     $downloadSignature = Join-Path $downloadRoot "bundle.manifest.sig"
-    Save-HttpsDownload $channel.artifactUrl $downloadArtifact
-    Save-HttpsDownload $channel.manifestUrl $downloadManifest
-    Save-HttpsDownload $channel.signatureUrl $downloadSignature
+    Save-HttpsDownload $channel.artifactUrl $downloadArtifact -RestrictToReleaseAllowlist
+    Save-HttpsDownload $channel.manifestUrl $downloadManifest -RestrictToReleaseAllowlist
+    Save-HttpsDownload $channel.signatureUrl $downloadSignature -RestrictToReleaseAllowlist
     return @{
         artifact = $downloadArtifact
         manifest = $downloadManifest
@@ -313,6 +415,13 @@ function Resolve-ManifestTrust($Inputs) {
     $manifest = Get-Content -Raw -LiteralPath $Inputs.manifest | ConvertFrom-Json
     if ($manifest.keyId -eq "LOCAL-UNSIGNED") {
         if ($Inputs.origin -ne "local") { throw "Unsigned bundles are accepted only from a local file" }
+        # Finding #2 PS-side defense-in-depth: even if the Node-side gate (tool-handlers.mjs) is
+        # bypassed (regression or direct studio.run), require the explicit opt-in env var here too
+        # before accepting an unsigned bundle. Unsigned bundles execute arbitrary code as the user,
+        # so this is default-deny unless an operator has consciously opted in.
+        if (-not ($env:BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE -eq "1")) {
+            throw "Unsigned bundles are disabled by default. Set BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE=1 to allow local unsigned deployment; configure a signed key in config/trusted-publishers.json for production."
+        }
         return @{ manifest = $manifest; trustMode = "local-hash-and-inventory" }
     }
     return @{
@@ -326,11 +435,15 @@ function Resolve-ManifestTrust($Inputs) {
 # at the bundle's eclipse.exe; one passes -noPwdStore (no password storage, recommended), the other
 # leaves it off so Eclipse's own secure store may remember credentials (optional, user choice).
 # Only the manual, human launch is affected — the automation/MCP surface never handles passwords.
-# Writes only (COM WScript.Shell); never deletes. Non-fatal and skipped in CI/test via
-# BW_STUDIO_NO_SHORTCUT so `node --test` deploys never touch the real desktop.
+# Writes only (COM WScript.Shell); never deletes. Non-fatal.
+#
+# Finding #9: shortcuts are now OPT-IN. They are created only when BW_AUTOMATION_CREATE_SHORTCUTS=1
+# (manual users who want launchers on the desktop). An AI/automation-driven deploy no longer writes
+# .lnk files onto the visible (possibly OneDrive-synced) desktop as a side effect. CI never creates
+# them. BW_STUDIO_NO_SHORTCUT is retained as a secondary backward-compat skip.
 function Set-DesktopShortcuts([string]$VersionRoot) {
     $created = @()
-    if ($env:BW_STUDIO_NO_SHORTCUT -or $env:CI) { return $created }
+    if (-not ($env:BW_AUTOMATION_CREATE_SHORTCUTS -eq "1") -or $env:CI -or $env:BW_STUDIO_NO_SHORTCUT) { return $created }
     try {
         $desktop = [Environment]::GetFolderPath("Desktop")
         if ([string]::IsNullOrWhiteSpace($desktop)) { return $created }
@@ -464,6 +577,11 @@ function Start-Studio([string]$StudioRoot) {
     $pipeName = Get-BridgePipeName $StudioRoot
     $launchArguments = @("-vm", $java, "-noPwdStore", "-data", $workspace, "-consoleLog", "-vmargs", "-Dbw.automation.pipe=$pipeName")
     if ($ConnectionAlias) { $launchArguments += "-Dbw.automation.connectionAlias=$ConnectionAlias" }
+    # Forward the per-session bridge auth token (set by the Node MCP server as
+    # process.env.BW_AUTOMATION_BRIDGE_TOKEN and inherited by this PowerShell spawn) to the Eclipse
+    # JVM so BridgeLoop sends a valid first auth frame. Without this the broker reads an empty token
+    # and rejects every bridge connection with BRIDGE_UNAUTHORIZED (final-review critical fix).
+    if ($env:BW_AUTOMATION_BRIDGE_TOKEN) { $launchArguments += "-Dbw.automation.bridgeToken=$env:BW_AUTOMATION_BRIDGE_TOKEN" }
     Start-Process -FilePath $eclipse -ArgumentList $launchArguments | Out-Null
     return @{ launched = $true; version = $status.activeVersion; workspace = $workspace; passwordStorageDisabled = $true }
 }

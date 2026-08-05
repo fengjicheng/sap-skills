@@ -40,15 +40,30 @@ test("every public schema is closed and contains no credential fields", async ()
   }
 });
 
-test("only prepare-new-save is classified as tenant mutation and requires approval", async () => {
+test("prepare-new-save is a tenant mutation and deploy/rollback are destructive; each requires approval", async () => {
   const subject = await loadRegistry();
   assert.ok(subject, "tool registry is not implemented");
   for (const tool of subject.TOOL_DEFINITIONS) {
     if (tool.name === "bw_prepare_new_query_save") {
       assert.equal(tool.operationClass, "mutating tenant");
       assert.equal(tool.approvalRequired, true);
+    } else if (tool.name === "bw_studio_deploy" || tool.name === "bw_studio_rollback") {
+      assert.equal(tool.operationClass, "destructive", tool.name);
+      assert.equal(tool.approvalRequired, true, tool.name);
     } else {
-      assert.notEqual(tool.operationClass, "destructive");
+      assert.notEqual(tool.operationClass, "destructive", `${tool.name} must not be destructive`);
+      assert.notEqual(tool.operationClass, "mutating tenant", `${tool.name} must not be a tenant mutation`);
     }
   }
+});
+
+test("bw_studio_deploy and bw_studio_rollback are classified destructive with approval required", async () => {
+  const subject = await loadRegistry();
+  assert.ok(subject, "tool registry is not implemented");
+  const deploy = subject.TOOL_DEFINITIONS.find((t) => t.name === "bw_studio_deploy");
+  const rollback = subject.TOOL_DEFINITIONS.find((t) => t.name === "bw_studio_rollback");
+  assert.equal(deploy.operationClass, "destructive");
+  assert.equal(deploy.approvalRequired, true);
+  assert.equal(rollback.operationClass, "destructive");
+  assert.equal(rollback.approvalRequired, true);
 });

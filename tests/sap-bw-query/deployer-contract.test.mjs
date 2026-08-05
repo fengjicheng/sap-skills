@@ -11,14 +11,22 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(here, "../..");
 const deployer = path.join(repoRoot, "plugins/sap-bw-query/scripts/BwStudio.ps1");
 
-function runStudio(home, args) {
+function runStudio(home, args, extraEnv = {}) {
   return spawnSync("powershell.exe", [
     "-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", deployer, ...args, "-Json",
   ], {
     encoding: "utf8",
-    // BW_STUDIO_NO_SHORTCUT keeps a deploy under test from writing launch shortcuts onto the
-    // real desktop; the shortcut behavior itself is asserted from the script source below.
-    env: { ...process.env, BW_AUTOMATION_HOME: home, BW_STUDIO_NO_SHORTCUT: "1" },
+    // Clear security/plugin opt-in vars inherited from the host environment so
+    // tests are deterministic; individual tests opt in explicitly via extraEnv.
+    env: {
+      ...process.env,
+      BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE: undefined,
+      BW_AUTOMATION_RELEASE_HOST_ALLOWLIST: undefined,
+      BW_AUTOMATION_CREATE_SHORTCUTS: undefined,
+      BW_AUTOMATION_HOME: home,
+      BW_STUDIO_NO_SHORTCUT: "1",
+      ...extraEnv,
+    },
   });
 }
 
@@ -113,7 +121,7 @@ test("deployer is append-only: source contains no filesystem deletion primitive"
   assert.match(text, /\[System\.IO\.File\]::Exists/);
 });
 
-test("deploy creates two visible-desktop launch shortcuts (password-store opt-in), guarded and non-destructive", () => {
+test("deploy creates two visible-desktop launch shortcuts (opt-in via BW_AUTOMATION_CREATE_SHORTCUTS), guarded and non-destructive", () => {
   const text = fs.readFileSync(deployer, "utf8");
   assert.match(text, /Set-DesktopShortcuts/);
   assert.match(text, /WScript\.Shell/);
@@ -121,8 +129,11 @@ test("deploy creates two visible-desktop launch shortcuts (password-store opt-in
   assert.match(text, /kein Passwortspeicher/);
   assert.match(text, /mit Passwortspeicher/);
   assert.match(text, /-noPwdStore/);
-  // Skipped in CI/test so a deploy never writes onto the real desktop.
-  assert.match(text, /BW_STUDIO_NO_SHORTCUT/);
+  // Shortcuts are now OPT-IN: the primary gate requires BW_AUTOMATION_CREATE_SHORTCUTS=1.
+  // (Finding #9 — previously opt-out via BW_STUDIO_NO_SHORTCUT, which is retained only as a
+  // secondary backward-compat skip and is no longer the primary gate.)
+  assert.match(text, /BW_AUTOMATION_CREATE_SHORTCUTS/);
+  assert.match(text, /BW_AUTOMATION_CREATE_SHORTCUTS\s*-eq\s*"1"/);
   // Shortcut creation must not introduce any deletion primitive (append-only contract).
   assert.doesNotMatch(text, /Remove-Item|Directory\.Delete|DeleteFile/i);
 });
@@ -149,12 +160,72 @@ test("online deployment uses HTTPS-only curl downloads", () => {
   assert.doesNotMatch(text, /Invoke-WebRequest/);
 });
 
+test("release-channel downloads are gated by a release-host SSRF allowlist (finding #6)", () => {
+  const text = fs.readFileSync(deployer, "utf8");
+  // The allowlist helper exists.
+  assert.match(text, /function\s+Test-ReleaseHostAllowed/);
+  // Save-HttpsDownload accepts the restricting switch.
+  assert.match(text, /RestrictToReleaseAllowlist/);
+  // Operator override env var is consulted (strict allowlist mode).
+  assert.match(text, /BW_AUTOMATION_RELEASE_HOST_ALLOWLIST/);
+  // The AWS/cloud metadata IP range (169.254.169.254) must be rejected explicitly.
+  assert.match(text, /169\.254/);
+  // IPv6 link-local fe80::/10 must be rejected explicitly (NOT a subset of fc00::/7).
+  assert.match(text, /fe80/);
+  // The error must NOT echo the hostname — generic message only (no reflection of attacker input).
+  assert.match(text, /Release download host failed the allow-list check/);
+  // All FOUR release-channel download calls must pass the switch: the channel URL itself plus
+  // the three derived URLs (artifact/manifest/signature) that come from the remote channel JSON.
+  assert.match(text, /Save-HttpsDownload\s+\$ReleaseChannelUrl\s+[^\n]*-RestrictToReleaseAllowlist/);
+  assert.match(text, /Save-HttpsDownload\s+\$channel\.artifactUrl\s+[^\n]*-RestrictToReleaseAllowlist/);
+  assert.match(text, /Save-HttpsDownload\s+\$channel\.manifestUrl\s+[^\n]*-RestrictToReleaseAllowlist/);
+  assert.match(text, /Save-HttpsDownload\s+\$channel\.signatureUrl\s+[^\n]*-RestrictToReleaseAllowlist/);
+  // IP-literal parsing must use [System.Net.IPAddress]::TryParse.
+  assert.match(text, /\[System\.Net\.IPAddress\]::TryParse/);
+  // DNS hostnames must be resolved and checked (fail-closed on private resolution).
+  assert.match(text, /\[System\.Net\.Dns\]::GetHostAddresses/);
+  // Sensitive host suffixes .local and .internal are rejected.
+  assert.match(text, /\.local/);
+  assert.match(text, /\.internal/);
+  // IPv4-mapped IPv6 (e.g. ::ffff:169.254.169.254) must be unwrapped via MapToIPv4
+  // so it cannot bypass the IPv4 private/metadata checks.
+  assert.match(text, /IsIPv4MappedToIPv6/);
+  assert.match(text, /MapToIPv4/);
+});
+
+test("release-host allowlist error does not reflect the hostname (no SSRF echo)", () => {
+  const text = fs.readFileSync(deployer, "utf8");
+  // The generic message is present exactly once (in the throw), and the throw must not
+  // interpolate $parsed.Host, $HostName, $host, or similar into the error string.
+  const throwMatches = text.match(/throw\s+"[^"]*allow-list[^"]*"/gi) || [];
+  assert.ok(throwMatches.length > 0, "expected a throw containing 'allow-list'");
+  for (const m of throwMatches) {
+    assert.doesNotMatch(m, /\$(parsed|HostName|host|Host)\b/i, `throw must not echo hostname: ${m}`);
+  }
+});
+
 test("Eclipse launch derives the same local named-pipe identity and disables password storage", () => {
   const text = fs.readFileSync(deployer, "utf8");
   assert.match(text, /SHA256/);
   assert.match(text, /bw-automation-/);
   assert.match(text, /-Dbw\.automation\.pipe=/);
   assert.match(text, /-noPwdStore/);
+});
+
+// Final-review critical fix: BwStudio.ps1 Start-Studio must forward the per-session bridge auth
+// token (BW_AUTOMATION_BRIDGE_TOKEN, set by the Node MCP server and inherited into this spawn)
+// to the Eclipse JVM as -Dbw.automation.bridgeToken, mirroring the connectionAlias pattern.
+// Without this arg the Java BridgeLoop reads an empty token, sends {"authToken":""}, and the
+// Node broker rejects every bridge connection with BRIDGE_UNAUTHORIZED — breaking the entire
+// MCP<->Eclipse wire. Pure source-text assertion so it runs on Mac CI without powershell.exe.
+test("Start-Studio forwards BW_AUTOMATION_BRIDGE_TOKEN to Eclipse as -Dbw.automation.bridgeToken (source gate)", () => {
+  const text = fs.readFileSync(deployer, "utf8");
+  // The JVM property name consumed by the Java BridgeLoop must be present.
+  assert.match(text, /bw\.automation\.bridgeToken/);
+  // The env var (set by the Node server and inherited into the PowerShell spawn) must be referenced.
+  assert.match(text, /\$env:BW_AUTOMATION_BRIDGE_TOKEN/);
+  // The token must be passed as a launch argument (mirrors the connectionAlias conditional pattern).
+  assert.match(text, /\$launchArguments\s*\+=\s*"-Dbw\.automation\.bridgeToken=\$env:BW_AUTOMATION_BRIDGE_TOKEN"/);
 });
 
 test("offline deployment verifies signature, archive hash, and extracted file inventory", () => {
@@ -179,14 +250,34 @@ test("local bundle deploys without signing after archive and file-inventory veri
   manifest.keyId = "LOCAL-UNSIGNED";
   fs.writeFileSync(fixture.manifestPath, JSON.stringify(manifest));
   const home = fs.mkdtempSync(path.join(os.tmpdir(), "bw-studio-home-local-"));
+  // Finding #2 PS-side gate: the PowerShell deployer independently requires the explicit opt-in
+  // env var before accepting a LOCAL-UNSIGNED manifest (mirrors the Node-side gate in tool-handlers.mjs).
   const result = runStudio(home, [
     "-Action", "Deploy", "-ArtifactPath", fixture.artifact, "-ManifestPath", fixture.manifestPath,
-  ]);
+  ], { BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE: "1" });
   assert.equal(result.status, 0, result.stderr || result.stdout);
   const deployed = JSON.parse(result.stdout);
   assert.equal(deployed.verified, true);
   assert.equal(deployed.trustMode, "local-hash-and-inventory");
   assert.equal(fs.existsSync(path.join(home, "versions/1.0.0-local/eclipse/eclipse.exe")), true);
+});
+
+// Finding #2 PS-side defense-in-depth: Resolve-ManifestTrust must require an explicit opt-in env
+// var before accepting a LOCAL-UNSIGNED manifest, mirroring the Node-side gate (Task 5). This is a
+// pure source-text assertion so it runs on Mac CI without spawning powershell.exe.
+test("Resolve-ManifestTrust requires BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE=1 for LOCAL-UNSIGNED (source gate)", () => {
+  const text = fs.readFileSync(deployer, "utf8");
+  // The env-var gate is present in the PowerShell source.
+  assert.match(text, /BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE/);
+  // The gate compares against the exact opt-in value "1".
+  assert.match(text, /\$env:BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE\s+-eq\s*"1"/);
+  // The default-deny rejection message is present.
+  assert.match(text, /Unsigned bundles are disabled by default/);
+  // The message points operators at the env var and the signed-key config.
+  assert.match(text, /BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE=1/);
+  assert.match(text, /config\/trusted-publishers\.json/);
+  // The pre-existing origin/local-file check must NOT have been removed or weakened.
+  assert.match(text, /Unsigned bundles are accepted only from a local file/);
 });
 
 test("deployment rejects corrupted artifacts and leaves no active version", () => {

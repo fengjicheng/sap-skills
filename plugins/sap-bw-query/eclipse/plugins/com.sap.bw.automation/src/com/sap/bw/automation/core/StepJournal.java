@@ -23,7 +23,7 @@ import com.google.gson.JsonParser;
 
 public final class StepJournal {
     private static final Pattern LABELED_SECRET = Pattern.compile(
-            "(?i)\\b(password|passwd|pwd|secret|token|api[\\s_-]*key|credential)\\s*[:=]\\s*\\S+");
+            "(?i)\\b(password|passwd|pwd|secret|token|api[\\s_-]*key|credential|authorization|accesstoken|accesskey|bearer|authtoken|refreshtoken)\\s*[:=]\\s*\\S+");
     private final Gson gson = new Gson();
     private final Path stepRoot;
 

@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import path from "node:path";
 import test from "node:test";
+import fs from "node:fs";
+import os from "node:os";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -138,6 +140,30 @@ test("handler map exactly matches the public tool registry", async () => {
   assert.equal(Object.keys(handlers).length, 22);
 });
 
+test("bw_studio_status surfaces the injected provenance object", async () => {
+  const subject = await load(subjectUrl);
+  const drafts = await load(draftsUrl);
+  assert.ok(subject && drafts, "tool handlers are not implemented");
+  const fixture = dependencies(new drafts.DraftStore());
+  const injected = { commit: "a".repeat(40), source: "env-override", trusted: true };
+  const handlers = subject.createToolHandlers({ ...fixture.deps, provenance: injected });
+  const result = await handlers.bw_studio_status({});
+  assert.deepEqual(result.provenance, injected);
+});
+
+test("bw_studio_status surfaces a default dev-unpinned provenance when none is injected", async () => {
+  const subject = await load(subjectUrl);
+  const drafts = await load(draftsUrl);
+  assert.ok(subject && drafts, "tool handlers are not implemented");
+  const fixture = dependencies(new drafts.DraftStore());
+  const handlers = subject.createToolHandlers(fixture.deps);
+  const result = await handlers.bw_studio_status({});
+  assert.ok(result.provenance, "bw_studio_status must always carry a provenance object");
+  assert.equal(result.provenance.commit, null);
+  assert.equal(result.provenance.trusted, false);
+  assert.notEqual(result.provenance.commit, "source-commit");
+});
+
 test("editor population requires a prepared save and never saves itself", async () => {
   const subject = await load(subjectUrl);
   const drafts = await load(draftsUrl);
@@ -189,4 +215,255 @@ test("editor population requires a prepared save and never saves itself", async 
   assert.equal(result.applyReport.length, 1);
   assert.equal(result.verification.status, "VERIFIED");
   assert.deepEqual(fixture.calls.map((call) => call.method), ["listQueries", "prepareNewQuerySave", "populateQueryEditor", "readQueryModel"]);
+});
+
+// --- Finding #4: BW-originated responses must be marked as untrusted content ---
+
+function readDependencies() {
+  const calls = [];
+  return {
+    calls,
+    deps: {
+      studio: { run: async (action, input) => ({ action, input }) },
+      connections: {
+        prepare: (input) => input,
+        importLandscape: () => ({}),
+        status: () => ({ ssoEnabled: true }),
+        reachability: async () => ({ reachable: true, authenticated: false }),
+      },
+      drafts: { create: () => ({ id: "d1" }), get: () => ({ id: "d1", spec: {} }), apply: () => ({ id: "d1", spec: {} }), prepareSave: () => ({}) },
+      bridge: {
+        call: async (method, input) => {
+          calls.push({ method, input });
+          if (method === "listQueries") return { technicalNames: ["Z_A"] };
+          return { method, echo: input };
+        },
+      },
+      steps: { append: () => undefined },
+    },
+  };
+}
+
+test("read-only-tenant handlers mark BW-originated responses as untrusted (lossless)", async () => {
+  const subject = await load(subjectUrl);
+  assert.ok(subject, "tool handlers are not implemented");
+  const fixture = readDependencies();
+  const handlers = subject.createToolHandlers(fixture.deps);
+
+  const describe = await handlers.bw_describe_provider({ alias: "BWD", project: "BWD_100", provider: "ZCUBE_SALES" });
+  assert.equal(describe.method, "describeProvider", "original field preserved");
+  assert.ok(describe._untrustedContent, "bw_describe_provider must mark response untrusted");
+  assert.equal(describe._untrustedContent.source, "sap-bw");
+  assert.equal(typeof describe._untrustedContent.warning, "string");
+  assert.ok(describe._untrustedContent.warning.length > 0);
+
+  const list = await handlers.bw_list_queries({ alias: "BWD", project: "BWD_100", provider: "ZCUBE_SALES" });
+  assert.deepEqual(list.technicalNames, ["Z_A"], "original field preserved");
+  assert.ok(list._untrustedContent, "bw_list_queries must mark response untrusted");
+  assert.equal(list._untrustedContent.source, "sap-bw");
+
+  const read = await handlers.bw_read_query({ alias: "BWD", project: "BWD_100", technicalName: "Z_EXISTING" });
+  assert.equal(read.method, "readQuery", "original field preserved");
+  assert.ok(read._untrustedContent, "bw_read_query must mark response untrusted");
+  assert.equal(read._untrustedContent.source, "sap-bw");
+
+  const model = await handlers.bw_read_query_model({ alias: "BWD", project: "BWD_100", technicalName: "Z_EXISTING" });
+  assert.equal(model.method, "readQueryModel", "original field preserved");
+  assert.ok(model._untrustedContent, "bw_read_query_model must mark response untrusted");
+  assert.equal(model._untrustedContent.source, "sap-bw");
+});
+
+test("bw_review_query marks the response untrusted only when found === true", async () => {
+  const subject = await load(subjectUrl);
+  assert.ok(subject, "tool handlers are not implemented");
+
+  // found === true path: bridge returns a full model; the final review object must be marked.
+  const foundFixture = readDependencies();
+  foundFixture.deps.bridge = {
+    call: async (method, input) => {
+      foundFixture.calls.push({ method, input });
+      return {
+        found: true,
+        technicalName: input.technicalName,
+        provider: "ZCUBE_SALES",
+        axes: { rows: [], columns: [], free: [] },
+        filter: { selections: [] },
+        conditions: [],
+        exceptions: [],
+        settings: {},
+        serializationIssues: [],
+      };
+    },
+  };
+  const handlersHit = subject.createToolHandlers(foundFixture.deps);
+  const hit = await handlersHit.bw_review_query({ alias: "BWD", project: "BWD_100", technicalName: "Z_EXISTING" });
+  assert.equal(hit.found, true);
+  assert.ok(hit._untrustedContent, "bw_review_query must mark response untrusted when found === true");
+  assert.equal(hit._untrustedContent.source, "sap-bw");
+  assert.equal(hit.technicalName, "Z_EXISTING", "original field preserved alongside marker");
+
+  // found !== true path: NO _untrustedContent (no BW content was read).
+  const missFixture = readDependencies();
+  missFixture.deps.bridge = {
+    call: async () => ({ found: false, userActionRequired: true, instruction: "open the query" }),
+  };
+  const handlersMiss = subject.createToolHandlers(missFixture.deps);
+  const miss = await handlersMiss.bw_review_query({ alias: "BWD", project: "BWD_100", technicalName: "Z_MISSING" });
+  assert.equal(miss.found, false);
+  assert.equal(miss._untrustedContent, undefined, "must NOT mark response when found !== true");
+});
+
+test("untrusted marking does not alter the bridge call surface for read operations", async () => {
+  const subject = await load(subjectUrl);
+  assert.ok(subject, "tool handlers are not implemented");
+  const fixture = readDependencies();
+  const handlers = subject.createToolHandlers(fixture.deps);
+  await handlers.bw_inspect_capabilities({});
+  await handlers.bw_describe_provider({ alias: "BWD", project: "BWD_100", provider: "ZCUBE_SALES" });
+  await handlers.bw_list_queries({ alias: "BWD", project: "BWD_100", provider: "ZCUBE_SALES" });
+  await handlers.bw_read_query({ alias: "BWD", project: "BWD_100", technicalName: "Z_EXISTING" });
+  await handlers.bw_read_query_model({ alias: "BWD", project: "BWD_100", technicalName: "Z_EXISTING" });
+  // The marker is additive on the response only; bridge call methods must be unchanged.
+  assert.deepEqual(
+    fixture.calls.map((call) => call.method),
+    ["inspectCapabilities", "describeProvider", "listQueries", "readQuery", "readQueryModel"],
+  );
+});
+
+// --- Finding #2: unsigned-bundle deploy gate (Node side) ---
+
+const manifestDirs = [];
+
+function writeManifest(keyId) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "bw-manifest-"));
+  manifestDirs.push(dir);
+  const manifestPath = path.join(dir, "manifest.json");
+  fs.writeFileSync(manifestPath, JSON.stringify({ keyId, artifact: "bundle.zip", version: "1.0.0" }));
+  return manifestPath;
+}
+
+function writeMalformedManifest() {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "bw-manifest-"));
+  manifestDirs.push(dir);
+  const manifestPath = path.join(dir, "manifest.json");
+  fs.writeFileSync(manifestPath, "{ not valid json");
+  return manifestPath;
+}
+
+// Best-effort cleanup of temp dirs on process exit so the helpers never leak.
+process.on("exit", () => {
+  for (const dir of manifestDirs) {
+    try { fs.rmSync(dir, { recursive: true, force: true }); } catch { /* best effort */ }
+  }
+});
+
+function studioSpy() {
+  const calls = [];
+  return {
+    calls,
+    studio: {
+      run: async (action, input) => {
+        calls.push({ action, input });
+        return { deployed: true, action, input };
+      },
+    },
+  };
+}
+
+// Shared minimal deps for the deploy-gate tests, so the four tests cannot drift.
+function deployDeps(studio) {
+  return {
+    studio,
+    connections: { prepare: () => ({}), importLandscape: () => ({}), status: () => ({}), reachability: async () => ({}) },
+    drafts: { create: () => ({}), get: () => ({}), apply: () => ({}), prepareSave: () => ({}) },
+    bridge: { call: async () => ({}) },
+    steps: { append: () => undefined },
+  };
+}
+
+// Save/clear/restore BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE around a test body.
+async function withUnsignedOptIn(value, body) {
+  const prev = process.env.BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE;
+  if (value === undefined) delete process.env.BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE;
+  else process.env.BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE = value;
+  try {
+    await body();
+  } finally {
+    if (prev === undefined) delete process.env.BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE;
+    else process.env.BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE = prev;
+  }
+}
+
+test("bw_studio_deploy rejects an unsigned manifest when the env opt-in is not set", async () => {
+  const subject = await load(subjectUrl);
+  assert.ok(subject, "tool handlers are not implemented");
+  const manifestPath = writeManifest("LOCAL-UNSIGNED");
+  await withUnsignedOptIn(undefined, async () => {
+    const spy = studioSpy();
+    const handlers = subject.createToolHandlers(deployDeps(spy.studio));
+    await assert.rejects(
+      () => handlers.bw_studio_deploy({ manifestPath }),
+      (err) => err.code === "UNSIGNED_BUNDLE_NOT_ALLOWED",
+    );
+    assert.equal(spy.calls.length, 0, "studio.run must not be called when the gate rejects");
+  });
+});
+
+test("bw_studio_deploy proceeds on an unsigned manifest when BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE=1", async () => {
+  const subject = await load(subjectUrl);
+  assert.ok(subject, "tool handlers are not implemented");
+  const manifestPath = writeManifest("LOCAL-UNSIGNED");
+  await withUnsignedOptIn("1", async () => {
+    const spy = studioSpy();
+    const handlers = subject.createToolHandlers(deployDeps(spy.studio));
+    const input = { manifestPath, artifactPath: "/tmp/artifact.zip" };
+    const result = await handlers.bw_studio_deploy(input);
+    assert.equal(spy.calls.length, 1);
+    assert.equal(spy.calls[0].action, "Deploy");
+    assert.deepEqual(spy.calls[0].input, input);
+    assert.equal(result.deployed, true);
+  });
+});
+
+test("bw_studio_deploy proceeds on a signed manifest without the env opt-in", async () => {
+  const subject = await load(subjectUrl);
+  assert.ok(subject, "tool handlers are not implemented");
+  const manifestPath = writeManifest("sap-skills-release-2026");
+  await withUnsignedOptIn(undefined, async () => {
+    const spy = studioSpy();
+    const handlers = subject.createToolHandlers(deployDeps(spy.studio));
+    const result = await handlers.bw_studio_deploy({ manifestPath });
+    assert.equal(spy.calls.length, 1);
+    assert.equal(spy.calls[0].action, "Deploy");
+    assert.equal(result.deployed, true);
+  });
+});
+
+test("bw_studio_deploy rejects with MANIFEST_UNREADABLE when the manifest cannot be parsed", async () => {
+  const subject = await load(subjectUrl);
+  assert.ok(subject, "tool handlers are not implemented");
+  const manifestPath = writeMalformedManifest();
+  await withUnsignedOptIn(undefined, async () => {
+    const spy = studioSpy();
+    const handlers = subject.createToolHandlers(deployDeps(spy.studio));
+    await assert.rejects(
+      () => handlers.bw_studio_deploy({ manifestPath }),
+      (err) => err.code === "MANIFEST_UNREADABLE",
+    );
+    assert.equal(spy.calls.length, 0, "studio.run must not be called when the manifest is unreadable");
+  });
+});
+
+test("bw_studio_deploy rejects when manifestPath is omitted", async () => {
+  const subject = await load(subjectUrl);
+  assert.ok(subject, "tool handlers are not implemented");
+  await withUnsignedOptIn(undefined, async () => {
+    const spy = studioSpy();
+    const handlers = subject.createToolHandlers(deployDeps(spy.studio));
+    await assert.rejects(
+      () => handlers.bw_studio_deploy({}),
+      (err) => err.code === "MANIFEST_UNREADABLE",
+    );
+    assert.equal(spy.calls.length, 0, "studio.run must not be called when manifestPath is omitted");
+  });
 });

@@ -18,7 +18,8 @@ public final class BridgeLoop implements AutoCloseable {
             "inspectCapabilities", "describeProvider", "listQueries", "readQuery", "readQueryModel", "projectCreateOrOpen",
             "createLocalDraft", "applySpecToDraft", "previewDraft", "prepareNewQuerySave", "populateQueryEditor");
     private static final Set<String> SECRET_KEYS = Set.of(
-            "password", "passwd", "pwd", "secret", "token", "apikey", "credential");
+            "password", "passwd", "pwd", "secret", "token", "apikey", "credential",
+            "authorization", "accesstoken", "accesskey", "bearer", "authtoken", "refreshtoken");
     private final AtomicBoolean running = new AtomicBoolean();
     private final StepJournal journal;
     private final BwmtAdapter adapter;
@@ -42,6 +43,24 @@ public final class BridgeLoop implements AutoCloseable {
             try (RandomAccessFile connection = new RandomAccessFile(path, "rw")) {
                 pipe = connection;
                 journal.append("bridge", "COMPLETED", "Local named-pipe bridge connected", VisualClass.GREEN, false);
+                // Finding #1: send the per-session auth token as the first frame so the Node broker
+                // accepts the connection. The token is supplied via the JVM property set by the
+                // launcher (BwStudio.ps1 inherits BW_AUTOMATION_BRIDGE_TOKEN -> -Dbw.automation.bridgeToken).
+                // Build the frame with JsonObject so the token is JSON-escaped (a '"' or '\' in the
+                // token cannot break the frame). Use '\n' explicitly: the Node broker splits on '\n';
+                // on Windows System.lineSeparator() is "\r\n" and the trailing '\r' would corrupt it.
+                String bridgeToken = System.getProperty("bw.automation.bridgeToken", "");
+                JsonObject authFrame = new JsonObject();
+                authFrame.addProperty("authToken", bridgeToken);
+                connection.write((authFrame + "\n").getBytes(StandardCharsets.UTF_8));
+                // Record an accurate status: the frame was SENT, not yet accepted by the broker.
+                // An empty token means the broker will reject this session — flag it so the operator
+                // reading the sidebar is not misled into thinking the bridge is healthy.
+                journal.append("bridge", bridgeToken.isEmpty() ? "BLOCKED" : "RUNNING",
+                        bridgeToken.isEmpty()
+                                ? "No bridge token was supplied; the broker will reject this session."
+                                : "Bridge authentication frame sent",
+                        bridgeToken.isEmpty() ? VisualClass.RED : VisualClass.GREEN, false);
                 String line;
                 while (running.get() && (line = connection.readLine()) != null) process(connection, line);
             } catch (IOException exception) {
