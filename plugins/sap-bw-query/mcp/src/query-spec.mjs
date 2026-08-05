@@ -1,4 +1,5 @@
 import { findSecretPaths } from "./secret-guard.mjs";
+import { FREE_AXIS_CARDINALITY_THRESHOLD } from "./query-rules.mjs";
 import {
   ALERT_LEVELS, COMPARISON_OPERATORS, CONDITION_OPERATORS, EXCEPTION_OPERATORS, ZERO_SUPPRESSION_MODES,
 } from "./tool-registry.mjs";
@@ -338,7 +339,7 @@ function analyzeGaps(spec) {
 function suggestOptimizations(spec, providerMetadata = null) {
   const optimizations = [];
   const rowCount = spec.axes?.rows?.length ?? 0;
-  if (rowCount > 8) {
+  if (rowCount > FREE_AXIS_CARDINALITY_THRESHOLD) {
     optimizations.push({ code: "HIGH_AXIS_CARDINALITY", message: "Review row characteristics and move optional drilldowns to the free axis.", changesBusinessSemantics: false });
   }
   if ((spec.filters ?? []).length === 0) {

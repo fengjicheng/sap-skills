@@ -4,7 +4,6 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 import org.osgi.framework.Bundle;
-import org.osgi.framework.Version;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -29,7 +28,6 @@ import com.sap.bw.qd.model.query.QueryFactory;
  * gate returns before any {@code com.sap.bw.qd.model} class is loaded when BWMT is absent.
  */
 public final class SmokeApplication implements IApplication {
-    private static final Version EXPECTED = new Version(1, 27, 36);
     private static final String MODEL_BUNDLE = "com.sap.bw.qd.model";
     private static final String QUERY_FACTORY = "com.sap.bw.qd.model.query.QueryFactory";
 
@@ -74,7 +72,7 @@ public final class SmokeApplication implements IApplication {
         if (bundle == null) {
             return MODEL_BUNDLE + " bundle is not present";
         }
-        if (!EXPECTED.equals(bundle.getVersion())) {
+        if (!CapabilityProbe.EXPECTED.equals(bundle.getVersion())) {
             return MODEL_BUNDLE + " must be exactly 1.27.36 but was " + bundle.getVersion();
         }
         try {

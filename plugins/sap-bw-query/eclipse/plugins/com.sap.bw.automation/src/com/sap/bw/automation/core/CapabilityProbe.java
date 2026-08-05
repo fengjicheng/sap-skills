@@ -9,7 +9,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 public final class CapabilityProbe {
-    private static final Version EXPECTED = new Version(1, 27, 36);
+    // Authoritative BWMT version this automation targets. SmokeApplication and the OSGi
+    // MANIFEST.MF (which must stay literal) reference this; update all three together.
+    static final Version EXPECTED = new Version(1, 27, 36);
     private static final String QUERY_WIZARD_ID = "com.sap.bw.qd.QueryNewWizard";
     private static final String QUERY_FACTORY = "com.sap.bw.qd.model.query.QueryFactory";
     private static final String QUERY_PACKAGE = "com.sap.bw.qd.model.query.QueryPackage";
