@@ -1,0 +1,18 @@
+# CodeQL runtime configuration — controls what gets *analyzed* (distinct from the
+# paths-ignore on the workflow triggers, which only controls whether the run starts).
+# Docs: https://docs.github.com/code-security/code-scanning/creating-an-advanced-setup-for-code-scanning/customizing-your-advanced-setup-for-code-scanning
+
+name: "sap-skills CodeQL config"
+
+# Exclude generated, vendored, and fixture content from analysis.
+# node_modules is already gitignored, but listing it is defense-in-depth for local
+# builds that may leave artifacts behind. dist/ is the esbuild bundle output of
+# the sap-bw-query MCP server (a generated copy of mcp/src/, not source).
+paths-ignore:
+  - node_modules
+  - "plugins/sap-bw-query/mcp/dist"
+  - "tests/fixtures"
+  - "**/*.min.js"
+  - "**/*.min.css"
+  - "**/vendor"
+  - "**/third_party"
