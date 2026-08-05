@@ -46,6 +46,23 @@ If you discover a security vulnerability in any skill, please report it by:
 - ✅ Use latest stable package versions
 - ✅ Document known security considerations
 
+## Automated Security Scanning
+
+This repository is covered by two free GitHub features for public repos (no paid Advanced Security license required):
+
+### CodeQL (Static Analysis)
+- Workflow: [`.github/workflows/codeql.yml`](workflows/codeql.yml) · Config: [`.github/codeql/codeql-config.yml`](codeql/codeql-config.yml)
+- Languages analyzed: **JavaScript/TypeScript**, **Python**, and **Java**.
+- Runs on every push/PR to `main` that touches source code (content-only changes are ignored), plus a **weekly scheduled** scan to catch newly-released queries.
+- Results appear in the repository's **Security → Code scanning alerts** tab.
+- Note: Java analysis runs without a build (`build-mode: none`) because the repo has no Maven/Gradle build, so results are best-effort for the Eclipse plugin source.
+
+### Dependabot (Dependency + Action Updates)
+- Config: [`.github/dependabot.yml`](dependabot.yml)
+- Surfaces vulnerability advisories and opens PRs for outdated dependencies (npm) and pinned GitHub Actions, grouped weekly to reduce review load.
+
+Findings from either tool are triaged like any other reported vulnerability (see *Reporting a Vulnerability* above).
+
 ## Known Security Considerations
 
 ### API Keys & Credentials

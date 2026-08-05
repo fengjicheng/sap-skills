@@ -1,0 +1,68 @@
+# Dependabot keeps dependencies and pinned GitHub Actions current.
+# Combined with CodeQL (see .github/workflows/codeql.yml) this gives the repo
+# both dependency-vulnerability alerting and static analysis.
+#
+# main is protected (requires @secondsky review on every PR), so updates are
+# grouped to minimize PR noise while still surfacing security advisories
+# individually when they occur.
+# Docs: https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+
+updates:
+  # GitHub Actions used in workflows. Keeps checkout/codeql-action/setup-node
+  # (and the rest) patched — security-relevant since these run with secrets.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore(deps)"
+      include: scope
+    labels:
+      - dependencies
+      - github-actions
+    groups:
+      actions:
+        patterns:
+          - "actions/*"
+          - "github/*"
+          - "github/codeql-action"
+
+  # Root devDependencies — validation/audit tooling only (no runtime deps here).
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore(deps)"
+      include: scope
+    labels:
+      - dependencies
+      - npm
+    groups:
+      npm-dev:
+        update-types:
+          - minor
+          - patch
+
+  # The sap-bw-query MCP server — the only real runtime dependency
+  # (@modelcontextprotocol/sdk). Kept separate from root so its updates are
+  # reviewed independently.
+  - package-ecosystem: npm
+    directory: /plugins/sap-bw-query/mcp
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore(deps)"
+      include: scope
+    labels:
+      - dependencies
+      - npm
+      - sap-bw-query
