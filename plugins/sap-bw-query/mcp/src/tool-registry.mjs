@@ -17,6 +17,9 @@ const targetSchema = closedObject({
 const axisElementSchema = closedObject({
   technicalName: string(),
   kind: string({ enum: ["characteristic", "keyFigure", "structure", "formula"] }),
+  // hierarchy is consumed by the builder; label/display/structure are accepted for
+  // forward-compatibility but not currently read from an axis element (the builder
+  // resolves structure via kind+technicalName, and display lives on keyFigures[]).
   label: string(), hierarchy: string(), display: string(), structure: string(),
 }, ["technicalName"]);
 
