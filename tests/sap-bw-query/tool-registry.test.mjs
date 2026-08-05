@@ -40,7 +40,7 @@ test("every public schema is closed and contains no credential fields", async ()
   }
 });
 
-test("prepare-new-save is a tenant mutation; deploy/rollback are destructive; all require approval", async () => {
+test("prepare-new-save is a tenant mutation and deploy/rollback are destructive; each requires approval", async () => {
   const subject = await loadRegistry();
   assert.ok(subject, "tool registry is not implemented");
   for (const tool of subject.TOOL_DEFINITIONS) {
@@ -52,6 +52,7 @@ test("prepare-new-save is a tenant mutation; deploy/rollback are destructive; al
       assert.equal(tool.approvalRequired, true, tool.name);
     } else {
       assert.notEqual(tool.operationClass, "destructive", `${tool.name} must not be destructive`);
+      assert.notEqual(tool.operationClass, "mutating tenant", `${tool.name} must not be a tenant mutation`);
     }
   }
 });

@@ -16,10 +16,17 @@ function runStudio(home, args, extraEnv = {}) {
     "-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", deployer, ...args, "-Json",
   ], {
     encoding: "utf8",
-    // BW_STUDIO_NO_SHORTCUT keeps a deploy under test from writing launch shortcuts onto the
-    // real desktop; the shortcut behavior itself is asserted from the script source below.
-    // extraEnv lets individual tests opt into additional gates (e.g. unsigned-bundle deploy).
-    env: { ...process.env, BW_AUTOMATION_HOME: home, BW_STUDIO_NO_SHORTCUT: "1", ...extraEnv },
+    // Clear security/plugin opt-in vars inherited from the host environment so
+    // tests are deterministic; individual tests opt in explicitly via extraEnv.
+    env: {
+      ...process.env,
+      BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE: undefined,
+      BW_AUTOMATION_RELEASE_HOST_ALLOWLIST: undefined,
+      BW_AUTOMATION_CREATE_SHORTCUTS: undefined,
+      BW_AUTOMATION_HOME: home,
+      BW_STUDIO_NO_SHORTCUT: "1",
+      ...extraEnv,
+    },
   });
 }
 
@@ -180,6 +187,10 @@ test("release-channel downloads are gated by a release-host SSRF allowlist (find
   // Sensitive host suffixes .local and .internal are rejected.
   assert.match(text, /\.local/);
   assert.match(text, /\.internal/);
+  // IPv4-mapped IPv6 (e.g. ::ffff:169.254.169.254) must be unwrapped via MapToIPv4
+  // so it cannot bypass the IPv4 private/metadata checks.
+  assert.match(text, /IsIPv4MappedToIPv6/);
+  assert.match(text, /MapToIPv4/);
 });
 
 test("release-host allowlist error does not reflect the hostname (no SSRF echo)", () => {

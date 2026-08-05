@@ -32,16 +32,27 @@ fs.writeFileSync(path.join(dist, "build-meta.json"), JSON.stringify(result.metaf
 //        (c) throw — never silently fall through to a placeholder.
 function resolveProvenance() {
   const envCommit = process.env.BW_AUTOMATION_PLUGIN_COMMIT;
-  if (envCommit && envCommit !== PLACEHOLDER && HEX40.test(envCommit)) {
-    return { commit: envCommit, source: "env-override" };
+  // Normalize to lowercase so an uppercase override is not silently rejected.
+  const normalized = envCommit ? envCommit.toLowerCase() : envCommit;
+  if (normalized && normalized !== PLACEHOLDER && HEX40.test(normalized)) {
+    return { commit: normalized, source: "env-override", dirty: null };
   }
+  // Resolve git metadata from the plugin/mcp directory (this file's location),
+  // not process.cwd(), so a build started from a parent workspace records the
+  // plugin's own commit and worktree state.
+  const gitCwd = root;
   const git = spawnSync("git", ["rev-parse", "--verify", "HEAD"], {
-    cwd: process.cwd(),
+    cwd: gitCwd,
     encoding: "utf8",
   });
   const head = (git.stdout ?? "").trim();
   if (git.status === 0 && HEX40.test(head)) {
-    return { commit: head, source: "git-head" };
+    // Capture worktree cleanliness. A dirty worktree means the built artifact
+    // does not exactly match the recorded commit, so provenance is still
+    // emitted but marked dirty for downstream trust decisions.
+    const status = spawnSync("git", ["status", "--porcelain"], { cwd: gitCwd, encoding: "utf8" });
+    const dirty = status.status === 0 ? (status.stdout ?? "").trim() !== "" : null;
+    return { commit: head, source: "git-head", dirty };
   }
   throw new Error(
     "cannot establish provenance; refusing to build without a verifiable commit. " +
@@ -50,10 +61,13 @@ function resolveProvenance() {
   );
 }
 
-const { commit, source } = resolveProvenance();
+const { commit, source, dirty } = resolveProvenance();
 const provenance = {
   commit,
   source,
+  // dirty: true = worktree had uncommitted changes; false = clean; null = unknown
+  // (only set for git-head source). trusted=true requires a clean worktree.
+  ...(dirty !== null ? { dirty } : {}),
   builtAt: new Date().toISOString(),
   note: "emit only from a clean build; never hand-edit",
 };

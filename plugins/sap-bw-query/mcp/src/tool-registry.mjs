@@ -125,7 +125,7 @@ function tool(name, inputSchema, operationClass = "local-only", approvalRequired
 
 export const TOOL_DEFINITIONS = Object.freeze([
   tool("bw_studio_status", closedObject()),
-  tool("bw_studio_deploy", closedObject({ artifactPath: string(), manifestPath: string(), signaturePath: string(), trustPolicyPath: string(), releaseChannelUrl: string() }), "destructive", true),
+  tool("bw_studio_deploy", closedObject({ artifactPath: string(), manifestPath: string(), signaturePath: string(), trustPolicyPath: string(), releaseChannelUrl: string() }, ["manifestPath"]), "destructive", true),
   tool("bw_studio_launch", closedObject({ workspacePath: string(), connectionAlias: string() })),
   tool("bw_studio_rollback", closedObject({ targetVersion: string() }, ["targetVersion"]), "destructive", true),
   tool("bw_studio_diagnostics", closedObject()),

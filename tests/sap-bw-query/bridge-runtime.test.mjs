@@ -98,7 +98,7 @@ test("BridgeBroker constructor honors pre-set BW_AUTOMATION_BRIDGE_TOKEN env var
   const savedEnv = process.env.BW_AUTOMATION_BRIDGE_TOKEN;
   try {
     process.env.BW_AUTOMATION_BRIDGE_TOKEN = "env-token";
-    const broker = new subject.BridgeBroker({ pipePath: `/tmp/bw-test-envtok-${process.pid}-${Date.now()}` });
+    const broker = new subject.BridgeBroker({ pipePath: path.join(os.tmpdir(), `bw-test-envtok-${process.pid}-${Date.now()}`) });
     assert.equal(broker.authToken, "env-token");
   } finally {
     if (savedEnv === undefined) delete process.env.BW_AUTOMATION_BRIDGE_TOKEN;
@@ -106,10 +106,10 @@ test("BridgeBroker constructor honors pre-set BW_AUTOMATION_BRIDGE_TOKEN env var
   }
 });
 
-test("UNIX-socket bridge rejects wrong auth token then accepts correct one (handshake)", async () => {
+test("UNIX-socket bridge rejects wrong auth token then accepts correct one (handshake)", { skip: process.platform === "win32" }, async () => {
   const subject = await load(bridgeUrl);
   assert.ok(subject, "bridge broker is not implemented");
-  const socketPath = `/tmp/bw-test-auth-${process.pid}-${Date.now()}`;
+  const socketPath = path.join(os.tmpdir(), `bw-test-auth-${process.pid}-${Date.now()}`);
   const broker = new subject.BridgeBroker({ pipePath: socketPath, timeoutMs: 500 });
   await broker.start();
   try {
@@ -149,10 +149,10 @@ test("UNIX-socket bridge rejects wrong auth token then accepts correct one (hand
   }
 });
 
-test("UNIX-socket bridge rejects a connector that sends no auth frame within timeout", async () => {
+test("UNIX-socket bridge rejects a connector that sends no auth frame within timeout", { skip: process.platform === "win32" }, async () => {
   const subject = await load(bridgeUrl);
   assert.ok(subject, "bridge broker is not implemented");
-  const socketPath = `/tmp/bw-test-noauth-${process.pid}-${Date.now()}`;
+  const socketPath = path.join(os.tmpdir(), `bw-test-noauth-${process.pid}-${Date.now()}`);
   const broker = new subject.BridgeBroker({ pipePath: socketPath, timeoutMs: 300 });
   await broker.start();
   try {

@@ -52,7 +52,7 @@ The 7 pre-existing macOS test failures + 2 skips are exactly these — they spaw
 
 ## Exact Windows validation steps (CI or manual)
 
-### 1. Full test suite (must be 159 pass / 0 fail / 0 skip on Windows)
+### 1. Full test suite (must be 160 pass / 0 fail / 0 skip on Windows)
 ```powershell
 cd <repo>
 npm ci --ignore-scripts        # or: bun install

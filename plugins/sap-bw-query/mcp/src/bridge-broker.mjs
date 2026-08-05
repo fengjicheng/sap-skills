@@ -54,10 +54,15 @@ export class BridgeBroker {
     if (!pipePath) throw new Error("Named-pipe path is required");
     this.#pipePath = pipePath;
     this.#timeoutMs = timeoutMs;
-    // Resolution order: explicit DI (tests) → env (child-process inheritance)
-    // → fresh CSPRNG token. We then write back to env so any process spawned
-    // later from this broker (BwStudio.ps1) inherits the same token.
-    const resolved = authToken ?? process.env.BW_AUTOMATION_BRIDGE_TOKEN ?? crypto.randomBytes(32).toString("hex");
+    // Resolution order: explicit DI (tests) → non-empty env (child-process
+    // inheritance) → fresh CSPRNG token. A blank env value is treated as
+    // unset so a misconfigured BW_AUTOMATION_BRIDGE_TOKEN="" cannot make
+    // every connector fail auth silently. We then write back to env so any
+    // process spawned later from this broker (BwStudio.ps1) inherits it.
+    const inherited = process.env.BW_AUTOMATION_BRIDGE_TOKEN;
+    const resolved = authToken
+      || (typeof inherited === "string" && inherited.trim() !== "" ? inherited : null)
+      || crypto.randomBytes(32).toString("hex");
     this.#authToken = resolved;
     process.env.BW_AUTOMATION_BRIDGE_TOKEN = resolved;
   }
@@ -91,12 +96,25 @@ export class BridgeBroker {
       let authBuffer = "";
       const authDeadline = setTimeout(() => {
         if (authenticated) return;
+        // Mark terminal + detach the listener so a late frame cannot promote
+        // this socket after the deadline. #rejectAuth destroys the socket.
+        authenticated = "timed-out";
+        socket.off("data", onDataWhileUnauthenticated);
         this.#rejectAuth(socket, "auth timeout");
       }, this.#timeoutMs);
 
       const onDataWhileUnauthenticated = (chunk) => {
         if (authenticated) return;
         authBuffer += chunk;
+        // Cap the pre-auth buffer: an auth frame is tiny (~80 bytes). A
+        // connector streaming garbage with no newline could otherwise hold
+        // memory until the deadline; reject early.
+        if (authBuffer.length > 8192) {
+          clearTimeout(authDeadline);
+          socket.off("data", onDataWhileUnauthenticated);
+          this.#rejectAuth(socket, "oversized auth frame");
+          return;
+        }
         const newline = authBuffer.indexOf("\n");
         if (newline < 0) return;
         const line = authBuffer.slice(0, newline);
@@ -151,7 +169,13 @@ export class BridgeBroker {
    */
   #rejectAuth(socket, _reason) {
     if (this.#pendingAuth === socket) this.#pendingAuth = null;
-    socket.end(`${JSON.stringify({ error: { code: "BRIDGE_UNAUTHORIZED", message: "Bridge authentication failed" } })}\n`);
+    // Half-close the write side with the error frame, then fully destroy the
+    // socket once the frame is flushed so the peer cannot keep sending data
+    // and a late frame cannot promote a rejected socket.
+    socket.end(
+      `${JSON.stringify({ error: { code: "BRIDGE_UNAUTHORIZED", message: "Bridge authentication failed" } })}\n`,
+      () => { try { socket.destroy(); } catch { /* best effort */ } },
+    );
   }
 
   #waitForConnection() {

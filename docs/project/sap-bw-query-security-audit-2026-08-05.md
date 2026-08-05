@@ -46,9 +46,9 @@ The MCP↔Eclipse link is a **Windows named pipe** whose name both sides derive 
 ## Test results
 
 **Baseline (before):** `node --test tests/sap-bw-query/*.test.mjs` → 114 tests / 105 pass / 7 fail / 2 skip
-**Final (after):** 159 tests / 150 pass / 7 fail / 2 skip
+**Final (after):** 160 tests / 151 pass / 7 fail / 2 skip
 
-- **+45 tests, +45 passing, 0 new failures.**
+- **+46 tests, +46 passing, 0 new failures.**
 - The 7 failures + 2 skips are unchanged and are all Windows-only (`powershell.exe` ENOENT on macOS — they spawn PowerShell for the deploy/rollback/signature flows). They run on the `windows-2025` CI leg.
 
 ### Known pre-existing flake (not introduced by this branch)

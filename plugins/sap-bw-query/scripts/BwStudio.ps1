@@ -137,8 +137,15 @@ function Test-ReleaseHostAllowed([string]$HostName) {
 # loopback/unique-local/link-local.
 function Test-PrivateOrSpecialAddress([System.Net.IPAddress]$Address) {
     if ($Address.AddressFamily -eq [System.Net.Sockets.AddressFamily]::InterNetworkV6) {
+        # IPv4-mapped IPv6 (e.g. ::ffff:169.254.169.254) bypasses the IPv4 checks
+        # below unless unwrapped. Map to the embedded IPv4 and re-evaluate.
+        if ($Address.IsIPv4MappedToIPv6) { return (Test-PrivateOrSpecialAddress $Address.MapToIPv4()) }
         if ([System.Net.IPAddress]::IsLoopback($Address)) { return $true }
         $bytes = $Address.GetAddressBytes()
+        # :: (unspecified/IPv6Any) — all zero bytes; reject before range checks.
+        $allZero = $true
+        foreach ($b in $bytes) { if ($b -ne 0) { $allZero = $false; break } }
+        if ($allZero) { return $true }
         # fe80::/10 link-local (top 10 bits = 1111111010: byte0 = 0xFE, byte1 top 2 bits = 10)
         if ($bytes[0] -eq 0xFE -and ($bytes[1] -band 0xC0) -eq 0x80) { return $true }
         # fc00::/7 unique-local (fc/fd first byte).

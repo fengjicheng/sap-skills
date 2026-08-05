@@ -134,8 +134,30 @@ test("loadProvenance rejects a provenance.json whose commit is not 40-hex (treat
   }
 });
 
-test("build.mjs emits dist/provenance.json from env override", () => {
+// Snapshot and restore the real mcp/dist so build tests never wipe a prior
+// build output. Each test builds into the real dist (build.mjs is hardcoded to
+// it), asserts, then restores the snapshot.
+function snapshotDist() {
+  if (!fs.existsSync(distDir)) return null;
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "prov-dist-snapshot-"));
+  for (const entry of fs.readdirSync(distDir)) {
+    fs.renameSync(path.join(distDir, entry), path.join(tmp, entry));
+  }
+  return tmp;
+}
+function restoreDist(snapshot) {
   fs.rmSync(distDir, { recursive: true, force: true });
+  if (snapshot && fs.existsSync(snapshot)) {
+    fs.mkdirSync(distDir, { recursive: true });
+    for (const entry of fs.readdirSync(snapshot)) {
+      fs.renameSync(path.join(snapshot, entry), path.join(distDir, entry));
+    }
+    fs.rmSync(snapshot, { recursive: true, force: true });
+  }
+}
+
+test("build.mjs emits dist/provenance.json from env override", () => {
+  const snapshot = snapshotDist();
   try {
     const res = spawnSync(process.execPath, ["build.mjs"], {
       cwd: mcpDir,
@@ -157,31 +179,32 @@ test("build.mjs emits dist/provenance.json from env override", () => {
     assert.equal(Number.isNaN(Date.parse(prov.builtAt)), false, "builtAt must be a valid ISO date");
     assert.equal(typeof prov.note, "string");
   } finally {
-    fs.rmSync(distDir, { recursive: true, force: true });
+    restoreDist(snapshot);
   }
 });
 
 test("build.mjs fails loudly when env is the placeholder and git is unavailable", () => {
-  const nonGitTmp = fs.mkdtempSync(path.join(os.tmpdir(), "prov-no-git-"));
-  try {
-    // build.mjs uses process.cwd() for the git call; run from a NON-git temp dir
-    // so `git rev-parse --verify HEAD` fails. The build's entrypoint path is given
-    // absolutely so it can still find src/server.mjs to bundle.
-    const buildScript = path.join(mcpDir, "build.mjs");
-    const res = spawnSync(process.execPath, [buildScript], {
-      cwd: nonGitTmp,
-      env: { ...process.env, BW_AUTOMATION_PLUGIN_COMMIT: "source-commit" },
-      encoding: "utf8",
-    });
-    assert.notEqual(res.status, 0, "build must exit non-zero when provenance cannot be established");
-    const stderr = res.stderr ?? "";
-    assert.match(stderr, /provenance/i, "stderr must mention provenance");
-  } finally {
-    fs.rmSync(nonGitTmp, { recursive: true, force: true });
-  }
+  // build.mjs resolves git from the plugin/mcp dir (always a git repo here), so
+  // force git failure by pointing GIT_DIR at a non-existent path + disabling
+  // discovery. This simulates "git unavailable / not a repo" without moving cwd.
+  const buildScript = path.join(mcpDir, "build.mjs");
+  const res = spawnSync(process.execPath, [buildScript], {
+    cwd: mcpDir,
+    env: {
+      ...process.env,
+      BW_AUTOMATION_PLUGIN_COMMIT: "source-commit",
+      GIT_DIR: path.join(os.tmpdir(), `prov-no-git-${process.pid}-${Date.now()}`),
+      GIT_DISCOVERY_ACROSS_FILESYSTEM: "0",
+      GIT_CEILING_DIRECTORIES: os.tmpdir(),
+    },
+    encoding: "utf8",
+  });
+  assert.notEqual(res.status, 0, "build must exit non-zero when provenance cannot be established");
+  const stderr = res.stderr ?? "";
+  assert.match(stderr, /provenance/i, "stderr must mention provenance");
 });
 
-test("build.mjs uses git HEAD when env is unset in a real git repo", function () {
+test("build.mjs uses git HEAD when env is unset in a real git repo", (t) => {
   // The sap-skills repo IS a git repo; running build from the plugin mcp dir
   // without an env override should resolve HEAD via `git rev-parse`.
   // Skip if HEAD cannot be resolved for any reason (CI shallow clones, etc).
@@ -194,11 +217,11 @@ test("build.mjs uses git HEAD when env is unset in a real git repo", function ()
     if (gitCheck.status === 0 && HEX40.test(gitCheck.stdout.trim())) headSha = gitCheck.stdout.trim();
   } catch { /* fall through to skip */ }
   if (!headSha) {
-    this.skip();
+    t.skip();
     return;
   }
 
-  fs.rmSync(distDir, { recursive: true, force: true });
+  const snapshot = snapshotDist();
   const envWithoutCommit = { ...process.env };
   delete envWithoutCommit.BW_AUTOMATION_PLUGIN_COMMIT;
   // Ensure the placeholder is not inherited from any wrapper env
@@ -220,7 +243,10 @@ test("build.mjs uses git HEAD when env is unset in a real git repo", function ()
     assert.match(prov.commit, HEX40);
     assert.equal(prov.commit, headSha);
     assert.equal(prov.source, "git-head");
+    // dirty is a boolean when git status succeeds; the worktree state is
+    // whatever it is at test time, so just assert the field is present.
+    assert.equal(typeof prov.dirty, "boolean");
   } finally {
-    fs.rmSync(distDir, { recursive: true, force: true });
+    restoreDist(snapshot);
   }
 });

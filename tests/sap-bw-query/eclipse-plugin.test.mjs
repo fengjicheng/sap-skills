@@ -64,12 +64,16 @@ test("Java bridge sends a pipe auth token frame on connect (finding #1)", () => 
 
 test("Java StepJournal LABELED_SECRET regex mirrors the widened Node keylist (finding #5)", () => {
   const journal = read("src/com/sap/bw/automation/core/StepJournal.java");
+  // Extract the LABELED_SECRET pattern literal so assertions are scoped to the
+  // regex, not the whole file (a comment mentioning "bearer" must not satisfy).
+  const pattern = journal.match(/LABELED_SECRET\s*=\s*Pattern\.compile\(\s*"([\s\S]*?)"\s*\)/)?.[1];
+  assert.ok(pattern, "LABELED_SECRET pattern literal not found");
   // The original api-key character-class alternation (kept verbatim in the Java string literal,
   // which doubles each backslash on disk) must remain, plus the 6 new labels added in Node Task 2.
-  assert.ok(journal.includes("api[\\\\s_-]*key"), "LABELED_SECRET must retain the api-key alternation");
+  assert.ok(pattern.includes("api[\\\\s_-]*key"), "LABELED_SECRET must retain the api-key alternation");
   for (const label of ["password", "passwd", "pwd", "secret", "token", "credential",
     "authorization", "accesstoken", "accesskey", "bearer", "authtoken", "refreshtoken"]) {
-    assert.ok(journal.includes(label), `LABELED_SECRET must include "${label}"`);
+    assert.ok(pattern.includes(label), `LABELED_SECRET must include "${label}"`);
   }
 });
 

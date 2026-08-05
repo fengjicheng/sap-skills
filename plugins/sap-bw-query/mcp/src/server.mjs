@@ -32,7 +32,11 @@ export function loadProvenance(provenanceDir) {
           commit: parsed.commit,
           source: parsed.source ?? "git-head",
           builtAt: parsed.builtAt ?? null,
-          trusted: true,
+          // trusted requires a verifiable commit AND a clean worktree. A dirty
+          // worktree (uncommitted changes) downgrades trust so consumers know the
+          // artifact does not exactly match the recorded commit.
+          dirty: parsed.dirty ?? null,
+          trusted: parsed.dirty !== true,
         };
       }
       return { commit: null, source: "parse-error", trusted: false };
@@ -69,7 +73,7 @@ export function createMcpServer(handlers) {
       description: `${tool.operationClass}; ${tool.approvalRequired ? "explicit approval required" : "no backend save approval implied"}`,
       inputSchema: tool.inputSchema,
       annotations: {
-        readOnlyHint: tool.operationClass !== "mutating tenant",
+        readOnlyHint: tool.operationClass !== "mutating tenant" && tool.operationClass !== "destructive",
         destructiveHint: tool.operationClass === "destructive",
         idempotentHint: !["bw_studio_deploy", "bw_studio_rollback", "bw_create_local_draft", "bw_apply_spec_to_draft"].includes(tool.name),
         openWorldHint: tool.operationClass === "read-only tenant" || tool.operationClass === "mutating tenant",
