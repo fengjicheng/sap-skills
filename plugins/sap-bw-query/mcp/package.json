@@ -11,5 +11,8 @@
   },
   "devDependencies": {
     "esbuild": "0.28.1"
+  },
+  "overrides": {
+    "ip-address": "10.3.1"
   }
 }
