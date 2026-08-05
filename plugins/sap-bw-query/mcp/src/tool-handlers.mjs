@@ -80,6 +80,8 @@ export function createToolHandlers({
     bw_connection_import_landscape: ({ landscapePath, alias }) => connections.importLandscape(landscapePath, alias),
     bw_connection_test_reachability: async ({ alias, timeoutMs }) => {
       const endpoint = connectionEndpoint(connections.status(alias));
+      // Test seam: ConnectionStore does not implement reachability; tests inject a fake.
+      // Falls through to the real TCP testReachability in production.
       return connections.reachability ? connections.reachability({ ...endpoint, timeoutMs }) : testReachability({ ...endpoint, timeoutMs });
     },
     bw_project_create_or_open: async (input) => {
@@ -91,6 +93,11 @@ export function createToolHandlers({
     },
     bw_connection_status: ({ alias }) => connections.status(alias),
     bw_inspect_capabilities: (input) => bridge.call("inspectCapabilities", input),
+    // TODO(security): these four return BW-controlled free-text (descriptions, formulas).
+    // markResponseUntrusted is the mandatory whole-payload layer. The per-field
+    // wrapUntrustedValue helper (untrusted-content.mjs) is bundled for these call sites
+    // and should be applied to the high-risk free-text fields once the harness
+    // convention for unwrapping is settled. See finding #4.
     bw_describe_provider: async (input) => markResponseUntrusted(await bridge.call("describeProvider", input)),
     bw_list_queries: async (input) => markResponseUntrusted(await bridge.call("listQueries", input)),
     bw_read_query: async (input) => markResponseUntrusted(await bridge.call("readQuery", input)),

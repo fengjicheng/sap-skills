@@ -17,6 +17,10 @@ public final class BridgeLoop implements AutoCloseable {
     private static final Set<String> ALLOWED_METHODS = Set.of(
             "inspectCapabilities", "describeProvider", "listQueries", "readQuery", "readQueryModel", "projectCreateOrOpen",
             "createLocalDraft", "applySpecToDraft", "previewDraft", "prepareNewQuerySave", "populateQueryEditor");
+    // Secret key-name blocklist. Defense-in-depth across two runtimes: this set, the
+    // StepJournal.LABELED_SECRET regex, and the Node-side mcp/src/secret-guard.mjs all
+    // reject the same secret shapes. The Node-side secret-guard.mjs is the canonical
+    // source; update all three together when widening coverage.
     private static final Set<String> SECRET_KEYS = Set.of(
             "password", "passwd", "pwd", "secret", "token", "apikey", "credential",
             "authorization", "accesstoken", "accesskey", "bearer", "authtoken", "refreshtoken");

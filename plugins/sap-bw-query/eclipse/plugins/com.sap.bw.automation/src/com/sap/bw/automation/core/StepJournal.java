@@ -77,6 +77,14 @@ public final class StepJournal {
         return steps.stream().sorted(Comparator.comparing(AutomationStep::timestamp).reversed()).limit(maximum).toList();
     }
 
+    /**
+     * Reports whether a widget is a masked (password) input. Reserved for future
+     * journaling of UI widget state so a password field is never captured. Not dead
+     * code — a deliberately-bundled safety guard; {@code eclipse-plugin.test.mjs}
+     * asserts its presence. The canonical secret-detector list lives in
+     * {@code secret-guard.mjs}; this method, {@link #LABELED_SECRET}, and the
+     * {@code BridgeLoop.SECRET_KEYS} set must be updated together.
+     */
     public static boolean isSecureControl(Widget widget) {
         return widget != null && (widget.getStyle() & SWT.PASSWORD) != 0;
     }

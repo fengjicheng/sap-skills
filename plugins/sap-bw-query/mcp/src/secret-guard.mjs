@@ -1,3 +1,7 @@
+// Canonical secret detector for the Node/MCP side. This key set, SECRET_SUFFIXES,
+// and LABELED_SECRET are mirrored (defense-in-depth) by two Java detectors in the
+// Eclipse plugin: BridgeLoop.SECRET_KEYS and StepJournal.LABELED_SECRET. When
+// widening coverage here, update both Java mirrors too.
 const SECRET_KEY_NAMES = new Set([
   "password",
   "passwd",
