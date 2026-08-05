@@ -1,7 +1,12 @@
-// Canonical secret detector for the Node/MCP side. This key set, SECRET_SUFFIXES,
-// and LABELED_SECRET are mirrored (defense-in-depth) by two Java detectors in the
-// Eclipse plugin: BridgeLoop.SECRET_KEYS and StepJournal.LABELED_SECRET. When
-// widening coverage here, update both Java mirrors too.
+// Canonical secret detector for the Node/MCP side. Defense-in-depth mirrors
+// exist in the Eclipse plugin, but the coverage is NOT identical across layers:
+//   - JSON-key layer: SECRET_KEY_NAMES (below) is mirrored exactly by
+//     BridgeLoop.SECRET_KEYS in Java (same 13 keys).
+//   - Labeled-text layer: JS LABELED_SECRET is intentionally NARROWER than the
+//     Java StepJournal.LABELED_SECRET (JS matches 7 labels; Java also matches
+//     authorization/accesstoken/accesskey/bearer/authtoken/refreshtoken). The
+//     Java side scans untrusted journal text and so keeps the broader regex.
+// When widening SECRET_KEY_NAMES here, update BridgeLoop.SECRET_KEYS too.
 const SECRET_KEY_NAMES = new Set([
   "password",
   "passwd",
