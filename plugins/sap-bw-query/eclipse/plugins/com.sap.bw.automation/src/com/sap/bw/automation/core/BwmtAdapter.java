@@ -3,9 +3,6 @@ package com.sap.bw.automation.core;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.wizard.IWizard;
@@ -27,7 +24,6 @@ public final class BwmtAdapter {
     private final CapabilityProbe probe = new CapabilityProbe();
     private final ProviderMetadataGateway metadataGateway = new ProviderMetadataGateway();
     private final StepJournal journal;
-    private final Map<String, JsonObject> localDrafts = new ConcurrentHashMap<>();
 
     public BwmtAdapter(StepJournal journal) {
         this.journal = journal;
@@ -180,13 +176,11 @@ public final class BwmtAdapter {
     }
 
     private JsonObject createLocalDraft(JsonObject payload) {
-        localDrafts.put(string(payload, "id"), payload.deepCopy());
         journal.append("createLocalDraft", "LOCAL_DRAFT", "Unsaved local draft created", VisualClass.VIOLET, false);
         return payload;
     }
 
     private JsonObject applySpecToDraft(JsonObject payload) {
-        localDrafts.put(string(payload, "id"), payload.deepCopy());
         journal.append("applySpecToDraft", "LOCAL_DRAFT", "Unsaved local draft updated", VisualClass.VIOLET, false);
         return payload;
     }

@@ -54,6 +54,12 @@ const AXES = Object.freeze(["rows", "columns", "free"]);
 const TIME_CHARACTERISTIC = /^0(CAL|FISC)/i;
 const KEY_FIGURE_SELECTORS = new Set(["1KYFNM", "4KYFNM"]);
 
+// Cardinality thresholds shared with query-spec.mjs#suggestOptimizations so the two
+// engines cannot drift on the "how many is too many" cutoff. Exported below.
+export const FREE_AXIS_CARDINALITY_THRESHOLD = 8;   // BWQ002 rows / HIGH_AXIS_CARDINALITY
+const FREE_AXIS_NAV_THRESHOLD = 15;                  // BWQ003 free-axis navigation limit
+const STRUCTURE_MEMBER_THRESHOLD = 15;               // BWQ012 key-figure structure width
+
 const upper = (value) => String(value ?? "").trim().toUpperCase();
 const isFilled = (value) => value !== undefined && value !== null && String(value).trim() !== "";
 const asArray = (value) => (Array.isArray(value) ? value : []);
@@ -491,7 +497,7 @@ const RULES = [
     rationale: "More than 8 characteristics in the rows drilldown multiplies the result set and slows the initial render; optional drilldowns belong on the free axis.",
     evaluate(normalized) {
       const rows = characteristicsOn(normalized, "rows");
-      if (rows.length <= 8) return [];
+      if (rows.length <= FREE_AXIS_CARDINALITY_THRESHOLD) return [];
       return [{
         path: "axes.rows",
         message: `Rows carry ${rows.length} characteristics (${rows.map((element) => element.name).join(", ")}); more than 8 in the default drilldown is a performance risk.`,
@@ -506,7 +512,7 @@ const RULES = [
     rationale: "More than 15 free characteristics make the navigation pane hard to use even though they do not all render at once; grouping or trimming keeps the query approachable.",
     evaluate(normalized) {
       const free = characteristicsOn(normalized, "free");
-      if (free.length <= 15) return [];
+      if (free.length <= FREE_AXIS_NAV_THRESHOLD) return [];
       return [{
         path: "axes.free",
         message: `The free axis carries ${free.length} characteristics; more than 15 makes navigation hard to use.`,
@@ -678,7 +684,7 @@ const RULES = [
       const findings = [];
       for (const structure of keyFigureStructures(normalized)) {
         const count = asArray(structure.members).length;
-        if (count <= 15) continue;
+        if (count <= STRUCTURE_MEMBER_THRESHOLD) continue;
         findings.push({
           path: structure.path,
           message: `Structure ${structure.name || "(unnamed)"} has ${count} members; more than 15 key-figure members is a width/performance risk.`,

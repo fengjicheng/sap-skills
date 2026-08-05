@@ -151,6 +151,7 @@ Read `references/connection-metadata.md` before accepting connection data.
 
 ## Bundled Resources
 
+- `references/architecture-and-security.md` — end-to-end architecture, 22-tool classification, query-creation sequence, and the security-hardening reference (links the commit-anchored audit doc).
 - `references/deployment-and-trust.md` — no-install local deployment and optional remote release trust.
 - `references/connection-metadata.md` — password-free connection schema and login boundaries.
 - `references/query-spec-v1.md` — specification fields, validation, gap analysis, and example.

@@ -1,5 +1,13 @@
 # SAP BW Query Automation Source Review
 
+> **Version note:** this review was performed against the **0.1.0** bundle build
+> (artifacts named `bw-automation-studio-0.1.0-*`, `com.sap.bw.automation_0.1.0.jar`).
+> The current bundle track is **0.3.0** per `bundle/bundle-source-lock.json` and the
+> [2026-08-05 security audit](sap-bw-query-security-audit-2026-08-05.md). The component
+> hashes and download URLs below remain the pinned inputs for the locked distribution;
+> only the assembled-artifact version stamp is behind. Treat this as the source-evidence
+> baseline that the 0.3.0 track inherits.
+
 Review date: 2026-07-13
 
 Scope: public source/package evidence, a complete Windows x64 bundle build, Eclipse plug-in compilation, signed local deployment, and automated safety tests. No live SAP BW system or enterprise SSO connection was used.

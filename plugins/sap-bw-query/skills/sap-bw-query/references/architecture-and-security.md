@@ -160,17 +160,14 @@ The realistic attackers are: (a) a **prompt-injected AI** tricked by malicious B
 | **Hash-pinned downloads** + zip-slip protection + bundle inventory SHA-512 | `Build-BwStudio.ps1`, `BwStudio.ps1` `Test-ArchivePaths` |
 
 ### Security hardening applied (2026-08-05, 9 findings closed)
-| # | Severity | What was fixed |
-|---|----------|----------------|
-| 1 | High | **Named-pipe auth** — per-session 32-byte token required as the first frame; no token ⇒ connection rejected. Wired end-to-end (Node generates → env → BwStudio.ps1 → Eclipse JVM property). |
-| 2 | High | **Unsigned-bundle deploy gated** — 3 layers (Node handler + manifestPath-presence + PowerShell) now require `BW_AUTOMATION_ALLOW_UNSIGNED_BUNDLE=1`. Was the only working deploy path before (signed keys shipped empty). |
-| 3 | High | **`importLandscape` confined** — can only read files under `<home>/landscapes` or an opt-in allow dir. Was an arbitrary local-file read. |
-| 4 | Med | **BW content marked untrusted** — all read-only-tenant responses carry a `_untrustedContent` marker so the AI treats BW object names/descriptions as data, not instructions (prompt-injection defense). |
-| 5 | Med | **Secret-guard widened** — keylist now catches `authorization`, `accesstoken`, `bearer`, etc.; bare `Bearer …`/`Basic …` values; zero-width-unicode bypasses. Mirrored on the Java side. |
-| 6 | Med | **Release-channel SSRF blocked** — download hosts must pass `Test-ReleaseHostAllowed` (default-denies RFC1918/loopback/link-local/metadata/`fe80::/10`); opt-in strict allowlist. |
-| 7 | Med | **Real provenance pin** — build now emits a real git commit into `dist/provenance.json`; surfaced via `bw_studio_status`. The old `"source-commit"` placeholder was inert. |
-| 8 | Low | **`-ExecutionPolicy Bypass`** — documented as safe (array args, no shell) and required for locked-down Windows policies. No code change. |
-| 9 | Low | **Desktop shortcuts opt-in** — `.lnk` files created only if `BW_AUTOMATION_CREATE_SHORTCUTS=1` (was opt-out). No more surprise desktop clutter from AI-driven deploys. |
+
+The plugin was adversarially audited and hardened on 2026-08-05, closing 9 findings
+(3 High: named-pipe auth, unsigned-bundle deploy gating, `importLandscape` file
+confinement; 4 Med: untrusted-content marking, secret-guard widening, release-channel
+SSRF blocking, real build provenance; 2 Low: execution-policy documentation, opt-in
+desktop shortcuts). The full findings table with severity, evidence, fix detail, and
+commit mapping lives in the **[security audit doc](../../../../../docs/project/sap-bw-query-security-audit-2026-08-05.md)** —
+this reference intentionally does not duplicate it.
 
 ### Environment variables (the human-facing opt-ins)
 | Variable | Purpose | Default |

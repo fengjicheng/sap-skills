@@ -2,7 +2,7 @@ import crypto from "node:crypto";
 import net from "node:net";
 import { assertNoSecrets } from "./secret-guard.mjs";
 
-export const ECLIPSE_METHODS = Object.freeze([
+const ECLIPSE_METHODS = Object.freeze([
   "inspectCapabilities",
   "describeProvider",
   "listQueries",

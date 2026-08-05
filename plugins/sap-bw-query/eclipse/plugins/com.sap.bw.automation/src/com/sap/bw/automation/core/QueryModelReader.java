@@ -265,13 +265,11 @@ public final class QueryModelReader {
             issue(prefix + ".token: unrecognized token type " + eClassName(token));
         }
         out.addProperty("type", type);
-        JsonElement operator = JsonNull.INSTANCE;
-        try {
-            if (token instanceof SelectionRange range) operator = strOrNull(enumName(range.getOperator()));
-            else if (token instanceof SelectionVariable variable) operator = strOrNull(enumName(variable.getOperator()));
-        } catch (Throwable failure) {
-            issue(prefix + ".token.operator: " + exc(failure));
-        }
+        JsonElement operator = tryJson(prefix + ".token.operator", () -> {
+            if (token instanceof SelectionRange range) return strOrNull(enumName(range.getOperator()));
+            if (token instanceof SelectionVariable variable) return strOrNull(enumName(variable.getOperator()));
+            return null;
+        });
         out.add("operator", operator);
         boolean exclude = false;
         try {
@@ -288,26 +286,20 @@ public final class QueryModelReader {
         }
         out.add("from", from);
         out.add("to", to);
-        JsonElement selectionType = JsonNull.INSTANCE;
-        try {
-            if (token instanceof SelectionSet set) selectionType = strOrNull(enumName(set.getSelectionType()));
-        } catch (Throwable failure) {
-            issue(prefix + ".token.selectionType: " + exc(failure));
-        }
+        JsonElement selectionType = tryJson(prefix + ".token.selectionType", () ->
+                token instanceof SelectionSet set ? strOrNull(enumName(set.getSelectionType())) : null);
         out.add("selectionType", selectionType);
-        JsonElement variable = JsonNull.INSTANCE;
-        try {
+        JsonElement variable = tryJson(prefix + ".token.variable", () -> {
             if (token instanceof SelectionVariable selectionVariable) {
                 Variable bound = selectionVariable.getVariable();
                 if (bound != null) {
                     JsonObject serialized = new JsonObject();
                     serialized.add("technicalName", strOrNull(bound.getTechnicalName()));
-                    variable = serialized;
+                    return serialized;
                 }
             }
-        } catch (Throwable failure) {
-            issue(prefix + ".token.variable: " + exc(failure));
-        }
+            return null;
+        });
         out.add("variable", variable);
         return out;
     }
@@ -323,21 +315,11 @@ public final class QueryModelReader {
         if (value == null) return JsonNull.INSTANCE;
         JsonObject out = new JsonObject();
         out.add("value", tryString(prefix + ".value", () -> value.getValue()));
-        JsonElement type = JsonNull.INSTANCE;
-        try {
-            type = strOrNull(enumName(value.getType()));
-        } catch (Throwable failure) {
-            issue(prefix + ".type: " + exc(failure));
-        }
-        out.add("type", type);
-        JsonElement variable = JsonNull.INSTANCE;
-        try {
+        out.add("type", tryJson(prefix + ".type", () -> strOrNull(enumName(value.getType()))));
+        out.add("variable", tryJson(prefix + ".variable", () -> {
             Variable bound = value.getVariable();
-            if (bound != null) variable = strOrNull(bound.getTechnicalName());
-        } catch (Throwable failure) {
-            issue(prefix + ".variable: " + exc(failure));
-        }
-        out.add("variable", variable);
+            return bound != null ? strOrNull(bound.getTechnicalName()) : null;
+        }));
         return out;
     }
 
@@ -566,6 +548,21 @@ public final class QueryModelReader {
         try {
             Boolean value = supplier.get();
             return value == null ? JsonNull.INSTANCE : new JsonPrimitive(value);
+        } catch (Throwable failure) {
+            issue(area + ": " + exc(failure));
+            return JsonNull.INSTANCE;
+        }
+    }
+
+    /**
+     * Runs a reflective read that returns a JSON element (or null), recording an issue
+     * instead of throwing on failure. Use this for enum/object reads that do not fit
+     * {@link #tryString} or {@link #tryBoolean}.
+     */
+    private JsonElement tryJson(String area, Throwing<JsonElement> supplier) {
+        try {
+            JsonElement value = supplier.get();
+            return value == null ? JsonNull.INSTANCE : value;
         } catch (Throwable failure) {
             issue(area + ": " + exc(failure));
             return JsonNull.INSTANCE;
