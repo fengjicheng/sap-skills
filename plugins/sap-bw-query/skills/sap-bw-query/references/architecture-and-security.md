@@ -219,7 +219,7 @@ graph TB
 ### Key source files (for maintainers)
 - **MCP entry & transport:** `mcp/src/server.mjs`, `mcp/src/bridge-broker.mjs`
 - **Tools & guards:** `mcp/src/tool-registry.mjs`, `mcp/src/tool-handlers.mjs`, `mcp/src/secret-guard.mjs`, `mcp/src/untrusted-content.mjs`, `mcp/src/connection-store.mjs`, `mcp/src/draft-state.mjs`
-- **Launchers:** `scripts/Start-BwMcp.ps1`, `scripts/BwStudio.ps1`, `bundle/Build-BwStudio.ps1`
+- **Launchers:** `Start-BwMcp.ps1` and `BwStudio.ps1` (in the plugin `scripts/` dir), plus `bundle/Build-BwStudio.ps1`
 - **Eclipse bridge & adapter:** `eclipse/plugins/com.sap.bw.automation/src/com/sap/bw/automation/bridge/BridgeLoop.java`, `core/BwmtAdapter.java`, `core/QueryEditorGateway.java`, `core/QueryModelBuilder.java`, `core/QueryModelReader.java`, `core/ProviderMetadataGateway.java`, `core/CapabilityProbe.java`, `core/StepJournal.java`, `ui/NewQueryConfirmationDialog.java`
 
 ---
