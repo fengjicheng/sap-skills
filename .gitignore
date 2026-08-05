@@ -41,6 +41,10 @@ bun-debug.log*
 *.token
 *.credentials
 
+# SDD/harness scratch (process artifacts, never shipped)
+.superpowers/
+.zcode/
+
 # Oracle local artifacts
 .oracle/*
 !.oracle/config.json
