@@ -12,8 +12,8 @@ jobs:
   build:
     runs-on: windows-2025
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 24.18.0
           cache: npm
@@ -95,7 +95,7 @@ jobs:
           if (($output -join "`n") -match '"smoke"\s*:\s*"FAIL"') { throw "Standalone round-trip smoke reported FAIL" }
           Write-Host "Standalone round-trip smoke passed."
       - name: Upload signed release artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: bw-automation-studio-${{ steps.bundle.outputs.version }}-windows-x64.zip
           path: |
