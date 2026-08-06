@@ -8,7 +8,7 @@ metadata:
   maintainer: "Eduard Jiglau"
   maintainer_email: "hello@sap-ai-skills.com"
   website: "https://sap-ai-skills.com"
-  version: "2.4.0"
+  version: "2.4.1"
   last_verified: 2025-11-27
   documentation_source: "https://github.com/SAP-docs/sap-btp-integration-suite"
   sap_help_portal: "https://help.sap.com/docs/integration-suite"

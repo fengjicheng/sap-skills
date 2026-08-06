@@ -25,10 +25,10 @@ Require explicit user approval before any `mutating tenant` or `destructive` MCP
 | Plugin | MCP Package / Source | Approved Pin |
 |--------|----------------------|--------------|
 | `sap-cap-capire` | `@cap-js/mcp-server` | `0.0.5` |
-| `sapui5` | `@ui5/mcp-server` | `0.2.11` |
-| `sap-fiori-tools` | `@sap-ux/fiori-mcp-server` | `1.4.0` |
-| `sap-hana-cli` | `hana-mcp-server` | `0.3.1` |
-| `sap-datasphere` | `@mariodefe/sap-datasphere-mcp` | `1.2.1` |
+| `sapui5` | `@ui5/mcp-server` | `0.2.17` |
+| `sap-fiori-tools` | `@sap-ux/fiori-mcp-server` | `1.11.7` |
+| `sap-hana-cli` | `hana-mcp-server` | `0.3.4` |
+| `sap-datasphere` | `@mariodefe/sap-datasphere-mcp` | `1.5.2` |
 | `sap-sac-scripting` | `secondsky/sap_analytics_cloud_mcp` | `2020235505d98111c2889598ab2217c1619b6943` |
 
 ## SAC Source MCP

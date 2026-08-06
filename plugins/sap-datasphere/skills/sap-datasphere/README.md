@@ -67,9 +67,9 @@ their harness.
 | Item | Value |
 |------|-------|
 | Command | `npx` |
-| Args | `-y @mariodefe/sap-datasphere-mcp@1.2.1` |
-| Approved pin | `1.2.1` |
-| Latest observed | `1.4.0` in `docs/project/package-evidence/2026-06-15.json` |
+| Args | `-y @mariodefe/sap-datasphere-mcp@1.5.2` |
+| Approved pin | `1.5.2` |
+| Tool profile | Defaults to `lean` since v1.3.0; set `DATASPHERE_TOOL_PROFILE=full` for the complete tool set |
 | Operation safety | Read-only, mutating tenant, and destructive tools; require confirmation before create/update/delete/reset/deploy/publish/trigger actions |
 | Fallback | Use CLI/reference guidance and mark live tenant checks pending |
 
@@ -77,7 +77,7 @@ their harness.
 
 1. **Install MCP Server:**
    ```bash
-   npm install -g @mariodefe/sap-datasphere-mcp@1.2.1
+   npm install -g @mariodefe/sap-datasphere-mcp@1.5.2
    ```
 
 2. **Configure Environment Variables:**

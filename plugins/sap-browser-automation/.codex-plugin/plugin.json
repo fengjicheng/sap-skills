@@ -1,6 +1,6 @@
 {
   "name": "sap-browser-automation",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "description": "Use when an agent must inspect or operate an authenticated SAP web UI through an in-app Browser, Microsoft Edge CDP, or an existing Playwright client, especially when SAP SSO reuse, isolated Edge profiles, deterministic target selection, screenshots, or browser bootstrap recovery is required.",
   "author": {
     "name": "Eduard Jiglau",

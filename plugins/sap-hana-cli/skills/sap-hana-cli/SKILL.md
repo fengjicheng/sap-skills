@@ -12,7 +12,7 @@ metadata:
   maintainer: "Eduard Jiglau"
   maintainer_email: "hello@sap-ai-skills.com"
   website: "https://sap-ai-skills.com"
-  version: "2.4.0"
+  version: "2.4.1"
   last_verified: "2025-11-26"
 ---
 
@@ -77,7 +77,7 @@ The hana-mcp-server integration enables natural language database operations thr
 
 ### Setup
 
-The bundled MCP config pins `hana-mcp-server@0.3.1`. Use **sap-dependency-security** before changing this pin because the server receives HANA tenant connection environment variables.
+The bundled MCP config pins `hana-mcp-server@0.3.4`. Use **sap-dependency-security** before changing this pin because the server receives HANA tenant connection environment variables.
 
 #### 1. Environment Variables
 Required configuration (add to ~/.zshrc, ~/.bashrc, or project .env):

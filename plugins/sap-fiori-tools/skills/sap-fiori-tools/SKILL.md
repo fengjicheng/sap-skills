@@ -12,7 +12,7 @@ metadata:
   maintainer: "Eduard Jiglau"
   maintainer_email: "hello@sap-ai-skills.com"
   website: "https://sap-ai-skills.com"
-  version: "2.4.0"
+  version: "2.4.1"
   last_verified: "2026-02-26"
 ---
 
@@ -416,7 +416,7 @@ The `fiori-tools` MCP server (`@sap-ux/fiori-mcp-server`) integrates AI coding a
 directly with Fiori development, providing semantic documentation search and programmatic
 app generation.
 
-**Prerequisite**: Node.js 20+. No authentication required. The bundled MCP config pins `@sap-ux/fiori-mcp-server@1.4.0`; MCP package pins are governed by **sap-dependency-security** and validated by `npm run validate:mcp-security`.
+**Prerequisite**: Node.js 20+. No authentication required. The bundled MCP config pins `@sap-ux/fiori-mcp-server@1.11.7`; MCP package pins are governed by **sap-dependency-security** and validated by `npm run validate:mcp-security`.
 
 ### Available Tools
 

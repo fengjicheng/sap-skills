@@ -7,7 +7,7 @@ metadata:
   maintainer: "Eduard Jiglau"
   maintainer_email: "hello@sap-ai-skills.com"
   website: "https://sap-ai-skills.com"
-  version: "2.4.0"
+  version: "2.4.1"
   last_verified: "2026-06-12"
   production_tested: "No; documentation-audited only, no live tenant/runtime evidence"
   runtime_verification: "pending tenant evidence"

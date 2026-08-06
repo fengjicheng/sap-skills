@@ -46,7 +46,7 @@ try {
   run("UI5 CLI help", "npx", ["ui5", "--help"], { cwd: ui5Fixture });
   run("UI5 build", "npx", ["ui5", "build", "--all"], { cwd: ui5Fixture });
   run("UI5 linter help", "npx", ["ui5lint", "--help"], { cwd: ui5Fixture });
-  run("UI5 MCP package discovery", "npm", ["view", "@ui5/mcp-server@0.2.11", "version", "bin", "--json"]);
+  run("UI5 MCP package discovery", "npm", ["view", "@ui5/mcp-server@0.2.17", "version", "bin", "--json"]);
 } finally {
   fs.rmSync(tmpRoot, { recursive: true, force: true });
 }

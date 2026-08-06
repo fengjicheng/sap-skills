@@ -24,7 +24,7 @@ on:
     # analyzes the default branch even when no PRs touch source code.
     - cron: "30 5 * * 1"
   # Manual trigger — useful to run analysis on demand (e.g. after enabling,
-  # before the first scheduled run, or after a config change).
+  # before the first run, or after a config change).
   workflow_dispatch:
 
 # Cancel superseded runs on the same ref to save runner minutes.
