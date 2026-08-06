@@ -1,0 +1,44 @@
+name: MCP Freshness Audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "plugins/sap-dependency-security/skills/sap-dependency-security/references/sap-mcp-inventory.json"
+      - "scripts/audit-mcp-freshness.mjs"
+      - ".github/workflows/mcp-freshness.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "plugins/sap-dependency-security/skills/sap-dependency-security/references/sap-mcp-inventory.json"
+      - "scripts/audit-mcp-freshness.mjs"
+      - ".github/workflows/mcp-freshness.yml"
+
+# Cancel superseded runs on the same ref to save runner minutes.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    name: MCP version drift audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '20'
+
+      # --enforce fails the job when any pinned MCP package has drifted from
+      # its approvedVersion. The default (no flag) is print-only for local use
+      # via `bun run audit:mcp-freshness`.
+      - name: Run MCP freshness audit
+        run: node ./scripts/audit-mcp-freshness.mjs --enforce

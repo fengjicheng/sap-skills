@@ -13,8 +13,8 @@ This document provides comprehensive technical reference for all 45 MCP tools pr
 
 **MCP Server Details:**
 - **Package:** @mariodefe/sap-datasphere-mcp
-- **Approved Pin:** 1.2.1
-- **Latest Observed:** 1.4.0 in `docs/project/package-evidence/2026-06-15.json` (upgrade candidate, not automatically approved)
+- **Approved Pin:** 1.5.2
+- **Tool Profile:** Defaults to `lean` since v1.3.0 (reduced diagnostic surface); set `DATASPHERE_TOOL_PROFILE=full` for the complete tool set
 - **GitHub:** https://github.com/MarioDeFelipe/sap-datasphere-mcp
 - **Authentication:** OAuth 2.0 Client Credentials
 - **Protocol:** Model Context Protocol (MCP)
@@ -24,10 +24,10 @@ This document provides comprehensive technical reference for all 45 MCP tools pr
 
 ```bash
 # Global installation with the approved pin
-npm install -g @mariodefe/sap-datasphere-mcp@1.2.1
+npm install -g @mariodefe/sap-datasphere-mcp@1.5.2
 
 # Verify installation
-npx @mariodefe/sap-datasphere-mcp@1.2.1 --version
+npx @mariodefe/sap-datasphere-mcp@1.5.2 --version
 ```
 
 ## Configuration
@@ -1416,7 +1416,7 @@ Quick find: "fact_sal*"
 
 ```bash
 # Test connection
-npx @mariodefe/sap-datasphere-mcp@1.2.1 --test
+npx @mariodefe/sap-datasphere-mcp@1.5.2 --test
 
 # Enable debug logging
 export LOG_LEVEL=debug

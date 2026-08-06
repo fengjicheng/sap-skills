@@ -16,7 +16,7 @@ metadata:
   maintainer: "Eduard Jiglau"
   maintainer_email: "hello@sap-ai-skills.com"
   website: "https://sap-ai-skills.com"
-  version: "2.4.0"
+  version: "2.4.1"
   last_verified: "2025-11-27"
   status: "ARCHIVED"
   deprecation_date: "2025-09-24"
@@ -358,7 +358,7 @@ For any questions or concerns about the deprecation:
 
 ---
 
-**Skill Version**: 2.4.0
+**Skill Version**: 2.4.1
 **Status**: ARCHIVED / DEPRECATED
 **Last Updated**: 2026-05-31
 **License**: GPL-3.0

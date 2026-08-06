@@ -11,7 +11,7 @@ metadata:
   maintainer: "Eduard Jiglau"
   maintainer_email: "hello@sap-ai-skills.com"
   website: "https://sap-ai-skills.com"
-  version: "2.4.0"
+  version: "2.4.1"
   last_verified: "2026-07-17"
   eclipse_version: "4.40"
   bwmt_version: "1.27.36"

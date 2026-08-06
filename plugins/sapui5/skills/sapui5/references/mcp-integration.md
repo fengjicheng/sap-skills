@@ -69,7 +69,7 @@ The sapui5 plugin automatically configures the MCP server via `.mcp.json`. No ma
 When you invoke an agent or command that requires MCP tools, the server will be automatically started via:
 
 ```bash
-npx -y @ui5/mcp-server@0.2.11
+npx -y @ui5/mcp-server@0.2.17
 ```
 
 ### Method 2: Manual Installation
@@ -78,10 +78,10 @@ To test the MCP server independently:
 
 ```bash
 # Install globally
-npm install -g @ui5/mcp-server@0.2.11
+npm install -g @ui5/mcp-server@0.2.17
 
 # Or use npx (no installation)
-npx @ui5/mcp-server@0.2.11
+npx @ui5/mcp-server@0.2.17
 ```
 
 ### Verification
@@ -89,7 +89,7 @@ npx @ui5/mcp-server@0.2.11
 Check that the server is accessible:
 
 ```bash
-npx @ui5/mcp-server@0.2.11 --help
+npx @ui5/mcp-server@0.2.17 --help
 ```
 
 ---
@@ -104,7 +104,7 @@ The sapui5 plugin includes `.mcp.json` at the plugin root:
 {
   "ui5-tooling": {
     "command": "npx",
-    "args": ["-y", "@ui5/mcp-server@0.2.11"],
+    "args": ["-y", "@ui5/mcp-server@0.2.17"],
     "env": {
       "UI5_MCP_SERVER_RESPONSE_NO_RESOURCES": "true"
     }
@@ -120,7 +120,7 @@ The MCP config uses `npx` directly, which works on macOS and Linux. On **native 
 {
   "ui5-tooling": {
     "command": "cmd",
-    "args": ["/c", "npx", "-y", "@ui5/mcp-server@0.2.11"],
+    "args": ["/c", "npx", "-y", "@ui5/mcp-server@0.2.17"],
     "env": {
       "UI5_MCP_SERVER_RESPONSE_NO_RESOURCES": "true"
     }
@@ -606,7 +606,7 @@ If specific tools fail but MCP server is running:
 **Solutions**:
 1. Check Node.js version: `node --version` (need v20.17+)
 2. Check npm: `npm --version` (need v8.0+)
-3. Test manual start: `npx @ui5/mcp-server@0.2.11`
+3. Test manual start: `npx @ui5/mcp-server@0.2.17`
 4. Check Claude Code logs for MCP errors
 
 ### Issue: "EACCES: permission denied" errors
@@ -682,10 +682,11 @@ run_ui5_linter({ projectPath: "/path/to/project" })
 
 | MCP Server | Release Date | UI5 Support | Status |
 |------------|--------------|-------------|--------|
-| v0.2.11 | 2025-12-12 | 1.84.0+ | **Current** |
+| v0.2.17 | 2026 | 1.84.0+ | **Current** |
+| v0.2.11 | 2025-12-12 | 1.84.0+ | Superseded |
 | v0.1.0 | 2025-09-03 | 1.84.0+ | Deprecated |
 
-**Recommended**: Use pinned version `v0.2.11`
+**Recommended**: Use pinned version `v0.2.17`
 
 ### UI5 Framework Versions
 
@@ -701,7 +702,7 @@ MCP server supports UI5 versions:
 
 | Plugin Version | MCP Server | Breaking Changes |
 |----------------|------------|------------------|
-| v3.0.0 | v0.2.11 | Initial MCP integration |
+| v3.0.0 | v0.2.17 | Initial MCP integration |
 | v2.1.0 | N/A | No MCP (reference files only) |
 
 ---
@@ -794,5 +795,5 @@ Catch error:
 ---
 
 **Last Updated**: 2025-12-28
-**MCP Server Version**: 0.2.11
+**MCP Server Version**: 0.2.17
 **Plugin Version**: 3.0.0

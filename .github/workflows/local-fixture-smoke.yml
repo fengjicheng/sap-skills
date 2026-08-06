@@ -1,0 +1,45 @@
+name: Local Fixture Smoke Tests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "tests/fixtures/**"
+      - "scripts/smoke-local-fixtures.mjs"
+      - ".github/workflows/local-fixture-smoke.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "tests/fixtures/**"
+      - "scripts/smoke-local-fixtures.mjs"
+      - ".github/workflows/local-fixture-smoke.yml"
+
+# Cancel superseded runs on the same ref to save runner minutes.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    name: Pinned toolchain smoke (CDS + UI5 + MCP)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '20'
+
+      # Compiles the CDS fixture, builds + lints the UI5 fixture, and verifies
+      # the MCP server packages are installable at their pinned versions.
+      # The script self-cleans its temp directory and fails nonzero on any
+      # sub-step failure. Also runnable locally via `bun run smoke:local-fixtures`.
+      - name: Run local fixture smoke tests
+        run: node ./scripts/smoke-local-fixtures.mjs

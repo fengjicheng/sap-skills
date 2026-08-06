@@ -1,6 +1,6 @@
 {
   "name": "sap-btp-integration-suite",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "description": "Enterprise integration solutions using SAP Integration Suite on BTP. Covers Cloud Integration (iFlows), API Management, Event Mesh, Edge Integration Cell, Integration Advisor, Trading Partner Management, and Migration Assessment. Use for building integration flows, managing API proxies, event-driven architectures, B2B/EDI integrations, hybrid deployments, adapter configuration, Groovy/JavaScript message processing, and troubleshooting.",
   "author": {
     "name": "Eduard Jiglau",

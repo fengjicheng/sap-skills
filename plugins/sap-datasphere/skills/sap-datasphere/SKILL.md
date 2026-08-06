@@ -6,7 +6,7 @@ metadata:
   maintainer: "Eduard Jiglau"
   maintainer_email: "hello@sap-ai-skills.com"
   website: "https://sap-ai-skills.com"
-  version: "2.4.0"
+  version: "2.4.1"
   last_verified: 2026-06-11
   keywords: [sap datasphere, data warehouse cloud, dwc, data builder, business builder, analytic model, graphical view, sql view, transformation flow, replication flow, data flow, task chain, remote table, local table, datasphere connection, datasphere space, data access control, elastic compute node, datasphere cli, data products, data marketplace, catalog, governance, business data cloud, bdc, sap databricks]
 ---
@@ -643,12 +643,12 @@ This plugin includes 3 specialized agents, 5 slash commands, and validation hook
 
 ## MCP Integration
 
-This skill includes a connection recipe for the **SAP Datasphere MCP Server** (`@mariodefe/sap-datasphere-mcp`). The bundled MCP config uses the approved exact pin `1.2.1`, governed by **sap-dependency-security** and validated by `npm run validate:mcp-security`; package evidence records `1.4.0` as an upgrade candidate. Treat MCP behavior and live tenant tool counts as pending until your harness loads the server and verifies the available tools.
+This skill includes a connection recipe for the **SAP Datasphere MCP Server** (`@mariodefe/sap-datasphere-mcp`). The bundled MCP config uses the approved exact pin `1.5.2`, governed by **sap-dependency-security** and validated by `npm run validate:mcp-security`. Since v1.3.0 the server defaults to a **lean** tool profile (a reduced diagnostic surface); set `DATASPHERE_TOOL_PROFILE=full` in the MCP env to expose the complete tool set. Treat MCP behavior and live tenant tool counts as pending until your harness loads the server and verifies the available tools.
 
 | MCP detail | Value |
 |------------|-------|
 | Command | `npx` |
-| Args | `-y @mariodefe/sap-datasphere-mcp@1.2.1` |
+| Args | `-y @mariodefe/sap-datasphere-mcp@1.5.2` |
 | Required env | `DATASPHERE_BASE_URL`, `DATASPHERE_CLIENT_ID`, `DATASPHERE_CLIENT_SECRET`, `DATASPHERE_TOKEN_URL` |
 | Operation safety | Tenant read tools plus mutating/destructive tools; ask before create, update, delete, reset, deploy, publish, or trigger operations |
 | Fallback | Use Datasphere CLI/reference guidance and mark live checks pending |

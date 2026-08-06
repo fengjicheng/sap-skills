@@ -97,13 +97,13 @@ If the agent is unavailable, run these manual commands:
 
 ```bash
 # Lint entire project
-npx @ui5/mcp-server@0.2.11 run_ui5_linter --config=ui5-linter.config.js
+npx @ui5/mcp-server@0.2.17 run_ui5_linter --config=ui5-linter.config.js
 
 # Lint specific file
-npx @ui5/mcp-server@0.2.11 run_ui5_linter --files={{file}}
+npx @ui5/mcp-server@0.2.17 run_ui5_linter --files={{file}}
 
 # Lint with auto-fix
-npx @ui5/mcp-server@0.2.11 run_ui5_linter --fix
+npx @ui5/mcp-server@0.2.17 run_ui5_linter --fix
 ```
 
 ### Using @ui5/linter CLI

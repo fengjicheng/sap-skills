@@ -6,10 +6,8 @@ import { repoRootFrom } from "./lib/validation-utils.mjs";
 
 const repoRoot = repoRootFrom(import.meta.url);
 const inventoryPath = path.join(repoRoot, "plugins/sap-dependency-security/skills/sap-dependency-security/references/sap-mcp-inventory.json");
-const writeIndex = process.argv.indexOf("--write-evidence");
-const writePath = writeIndex === -1 ? null : process.argv[writeIndex + 1];
+const enforce = process.argv.includes("--enforce");
 const inventory = JSON.parse(fs.readFileSync(inventoryPath, "utf8"));
-const observedAt = new Date().toISOString().slice(0, 10);
 
 function npmLatest(name) {
   const output = execFileSync("npm", ["view", name, "version", "--json"], { encoding: "utf8" }).trim();
@@ -17,23 +15,13 @@ function npmLatest(name) {
 }
 
 const rows = [];
-const evidence = {
-  schemaVersion: 1,
-  observedAt,
-  collectionMethod: "npm view <package> version --json",
-  npm: {},
-};
+const drifted = [];
 
 for (const [name, policy] of Object.entries(inventory.npmPackages ?? {})) {
-  const latest = writePath ? npmLatest(name) : policy.observedLatest;
+  const latest = npmLatest(name);
   const status = latest === policy.approvedVersion ? "current" : "upgrade_candidate";
   rows.push({ name, approved: policy.approvedVersion, latest, status });
-  evidence.npm[name] = {
-    latest,
-    command: `npm view ${name} version --json`,
-    repoApprovedPin: policy.approvedVersion,
-    status,
-  };
+  if (status !== "current") drifted.push({ name, approved: policy.approvedVersion, latest });
 }
 
 console.log("SAP MCP freshness audit");
@@ -42,9 +30,11 @@ for (const row of rows) {
   console.log(`${row.name}\tapproved=${row.approved}\tlatest=${row.latest}\t${row.status}`);
 }
 
-if (writePath) {
-  const target = path.resolve(repoRoot, writePath);
-  fs.mkdirSync(path.dirname(target), { recursive: true });
-  fs.writeFileSync(target, `${JSON.stringify(evidence, null, 2)}\n`);
-  console.log(`Wrote evidence to ${path.relative(repoRoot, target)}`);
+if (drifted.length > 0) {
+  console.error(`\n${drifted.length} pinned MCP package(s) have drifted from their approved version:`);
+  for (const entry of drifted) {
+    console.error(`- ${entry.name}: approved=${entry.approved}, latest=${entry.latest}`);
+  }
+  console.error("\nReview tenant-safe masking and tool compatibility before advancing approvedVersion in sap-mcp-inventory.json.");
+  if (enforce) process.exit(1);
 }

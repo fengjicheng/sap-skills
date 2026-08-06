@@ -1,6 +1,6 @@
 {
   "name": "sap-bw-query",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "description": "Use when automating SAP BW query inspection, InfoProvider metadata reads (characteristics, key figures), metadata-verified specification review, unsaved draft preparation, or human-confirmed query draft population through Eclipse or HANA Studio with BW Modeling Tools.",
   "author": {
     "name": "Eduard Jiglau",

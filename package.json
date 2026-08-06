@@ -29,7 +29,6 @@
     "validate:command-contracts": "./scripts/validate-command-contracts.mjs",
     "validate:agent-contracts": "./scripts/validate-agent-contracts.mjs",
     "validate:skill-quality": "./scripts/validate-skill-quality.mjs",
-    "audit:skills": "./scripts/audit-skills.mjs",
     "audit:effectiveness": "./scripts/audit-effectiveness.mjs",
     "audit:effectiveness:json": "./scripts/audit-effectiveness.mjs --json",
     "audit:mcp-freshness": "./scripts/audit-mcp-freshness.mjs",

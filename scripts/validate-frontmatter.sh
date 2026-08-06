@@ -26,6 +26,16 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
+# Resolve the real GNU/BSD head binary. On macOS, a Perl/LWP HTTP client named
+# `head` (from libwww-perl) can shadow the system `head` in PATH, which breaks
+# the `head -1` calls below. Prefer /usr/bin/head when the PATH `head` is not a
+# real coreutils binary. On Linux, PATH `head` is already correct.
+if command -v head >/dev/null 2>&1 && ! head --version >/dev/null 2>&1; then
+  HEAD_BIN="/usr/bin/head"
+else
+  HEAD_BIN="head"
+fi
+
 GREEN='\033[0;32m'
 RED='\033[0;31m'
 YELLOW='\033[1;33m'
@@ -54,7 +64,7 @@ validate_skill() {
   local has_warning=false
 
   local first_line
-  first_line=$(head -1 "$skill_file")
+  first_line=$("$HEAD_BIN" -1 "$skill_file")
 
   if [ "$first_line" != "---" ]; then
     if [ "$QUIET" = false ]; then
@@ -96,7 +106,7 @@ validate_skill() {
     errors="${errors}  missing required field 'license'\n"
   else
     local license_val
-    license_val=$(echo "$frontmatter" | grep "^license:" | head -1 | sed 's/^license:[[:space:]]*//' | sed 's/^"//' | sed 's/"$//')
+    license_val=$(echo "$frontmatter" | grep "^license:" | "$HEAD_BIN" -1 | sed 's/^license:[[:space:]]*//' | sed 's/^"//' | sed 's/"$//')
     if [ "$license_val" != "GPL-3.0" ]; then
       errors="${errors}  license must be 'GPL-3.0' (got '$license_val')\n"
     fi
@@ -104,7 +114,7 @@ validate_skill() {
 
   # --- Extract name value ---
   local yaml_name
-  yaml_name=$(echo "$frontmatter" | grep "^name:" | head -1 | sed 's/^name:[[:space:]]*//' | sed 's/^"//' | sed 's/"$//')
+  yaml_name=$(echo "$frontmatter" | grep "^name:" | "$HEAD_BIN" -1 | sed 's/^name:[[:space:]]*//' | sed 's/^"//' | sed 's/"$//')
 
   # --- Name format checks ---
   if [ -n "$yaml_name" ]; then
