@@ -320,6 +320,19 @@
     return null;
   }
 
+  // Per the Custom Elements spec: ASCII lowercase letters, digits, and hyphens;
+  // must start with a letter and contain at least one hyphen. Validating the tag
+  // before createElement defends against config-sourced values being reinterpreted
+  // as HTML element names (e.g. "script", "img").
+  var CUSTOM_ELEMENT_TAG_PATTERN = /^[a-z][a-z0-9]*(?:-[a-z0-9]+)+$/;
+
+  function validateCustomElementTag(tag) {
+    if (!tag || !CUSTOM_ELEMENT_TAG_PATTERN.test(tag)) {
+      throw new Error("Refusing to create element with invalid custom element tag: " + (tag || "(missing)"));
+    }
+    return tag;
+  }
+
   function componentTag(prepared, kind) {
     var component = kind === "styling" ? prepared.stylingComponent : prepared.mainComponent;
     if (component && component.tag) {
@@ -434,7 +447,7 @@
     prepareWidget(widget)
       .then(function(prepared) {
         return loadScripts(scriptUrlsFor(prepared, "main")).then(function() {
-          var tag = componentTag(prepared, "main");
+          var tag = validateCustomElementTag(componentTag(prepared, "main"));
           var tagError = registerTagOwner(tag, widget.id);
           if (tagError) {
             throw new Error(tagError);
@@ -684,7 +697,7 @@
           if (requestId !== app.stylingRequestId || app.selectedWidgetId !== widget.id) {
             return;
           }
-          var tag = componentTag(prepared, "styling");
+          var tag = validateCustomElementTag(componentTag(prepared, "styling"));
           if (!tag || !window.customElements.get(tag)) {
             host.textContent = "No styling panel component registered.";
             return;

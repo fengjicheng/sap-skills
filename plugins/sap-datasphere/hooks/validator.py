@@ -301,7 +301,7 @@ def looks_like_custom_widget_content(text_lower: str, file_path_lower: str) -> b
 
 def has_global_style_injection(text: str) -> bool:
     return bool(
-        re.search(r"document\.head\.appendChild\s*\(\s*(?:style|[A-Za-z_$][\w$]*(?:Style|Css|CSS)[A-Za-z_$\w]*)\s*\)", text)
+        re.search(r"document\.head\.appendChild\s*\(\s*(?:style|[A-Za-z_$][\w$]*(?:Style|Css|CSS)[\w$]*)\s*\)", text)
         or re.search(r"document\.head\.insertAdjacentHTML\s*\([^)]*<style", text, flags=re.IGNORECASE)
     )
 

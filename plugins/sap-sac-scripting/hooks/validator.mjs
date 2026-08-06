@@ -350,7 +350,7 @@ function looksLikeCustomWidgetContent(textLower, filePathLower) {
 }
 
 function hasGlobalStyleInjection(text) {
-  return /document\.head\.appendChild\s*\(\s*(?:style|[A-Za-z_$][\w$]*(?:Style|Css|CSS)[A-Za-z_$\w]*)\s*\)/.test(text)
+  return /document\.head\.appendChild\s*\(\s*(?:style|[A-Za-z_$][\w$]*(?:Style|Css|CSS)[\w$]*)\s*\)/.test(text)
     || /document\.head\.insertAdjacentHTML\s*\([^)]*<style/i.test(text);
 }
 
