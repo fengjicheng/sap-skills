@@ -117,15 +117,6 @@ jobs:
       - name: Run full validation pipeline
         run: npm run validate
 
-      - name: Debug manifest drift (on failure)
-        if: failure()
-        run: |
-          echo "=== Attempting to reproduce drift ==="
-          ./scripts/sync-plugins.sh 2>&1 | tail -5
-          git diff --stat
-          git diff .claude-plugin/marketplace.json | head -30
-          git diff plugins/sap-datasphere/.claude-plugin/plugin.json | head -20
-
   hook-tests:
     name: hook-tests (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
