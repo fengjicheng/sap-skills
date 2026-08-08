@@ -22,8 +22,8 @@
       "scan": "npm view @cap-js/mcp-server@0.0.5 version dist.integrity && npm audit --package-lock-only"
     },
     "@mariodefe/sap-datasphere-mcp": {
-      "approvedVersion": "1.6.0",
-      "observedLatest": "1.6.0",
+      "approvedVersion": "1.7.0",
+      "observedLatest": "1.7.0",
       "observedAt": "2026-08-08",
       "source": "npm view @mariodefe/sap-datasphere-mcp version dist-tags --json",
       "cooldownUntil": "2026-08-22",
@@ -39,7 +39,7 @@
         {"name": "DATASPHERE_CLIENT_SECRET", "secret": true, "required": true, "format": "environment placeholder only", "access": "tenant OAuth secret"},
         {"name": "DATASPHERE_TOKEN_URL", "secret": false, "required": true, "format": "https OAuth token URL", "access": "tenant OAuth endpoint"}
       ],
-      "scan": "npm view @mariodefe/sap-datasphere-mcp@1.6.0 version dist.integrity && npm audit --package-lock-only"
+      "scan": "npm view @mariodefe/sap-datasphere-mcp@1.7.0 version dist.integrity && npm audit --package-lock-only"
     },
     "@sap-ux/fiori-mcp-server": {
       "approvedVersion": "1.11.7",
