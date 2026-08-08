@@ -36,10 +36,11 @@ jobs:
       - name: Make validation script executable
         run: chmod +x scripts/validate-json-schemas.sh
 
+      - name: Add local bin to PATH
+        run: echo "$PWD/node_modules/.bin" >> "$GITHUB_PATH"
+
       - name: Run JSON schema validation
-        run: |
-          echo "$PWD/node_modules/.bin" >> "$GITHUB_PATH"
-          ./scripts/validate-json-schemas.sh
+        run: ./scripts/validate-json-schemas.sh
 
       - name: Validate inventory consistency
         run: ./scripts/validate-inventory.sh
