@@ -82,3 +82,20 @@ test("local drafts can be recovered from an append-only journal", async () => {
   assert.equal(recovered.spec.description, "Second local revision");
   assert.equal(fs.readdirSync(path.join(root, created.id)).length, 2);
 });
+
+test("apply() and prepareSave() recover a persisted draft without a prior get()", async () => {
+  const subject = await load("../../plugins/sap-bw-query/mcp/src/draft-state.mjs");
+  assert.ok(subject, "draft state module is not implemented");
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "bw-draft-recover-"));
+  // First store creates and persists the draft, mimicking a prior MCP session.
+  const firstStore = new subject.DraftStore({ root });
+  const created = firstStore.create(minimalSpec);
+  // Fresh store from the same root simulates a server restart: the in-memory
+  // map is empty, so apply()/prepareSave() must hit #recover() or throw.
+  const secondStore = new subject.DraftStore({ root });
+  const applied = secondStore.apply(created.id, { ...minimalSpec, description: "Recovered apply" });
+  assert.equal(applied.spec.description, "Recovered apply");
+  const prepared = secondStore.prepareSave(created.id, { existingTechnicalNames: [] });
+  assert.equal(prepared.state, "SAVE_PENDING_HUMAN");
+  assert.equal(prepared.requiresEclipseHumanConfirmation, true);
+});

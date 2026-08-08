@@ -129,3 +129,40 @@ test("reachability performs a TCP check without authentication", async () => {
     await new Promise((resolve) => server.close(resolve));
   }
 });
+
+test("connectionEndpoint derives the dispatcher port from systemNumber for messageServer mode", async () => {
+  const subject = await loadSubject();
+  assert.ok(subject, "connection store is not implemented");
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "bw-msg-endpoint-"));
+  const store = new subject.ConnectionStore({ root, now: () => "2026-07-13T12:00:00.000Z" });
+  const stored = store.status(
+    store.prepare({
+      alias: "BWP-MS",
+      systemId: "BWP",
+      client: "200",
+      mode: "messageServer",
+      messageServer: "msg.bw.example.invalid",
+      logonGroup: "PUBLIC",
+      systemNumber: "07",
+    }).alias,
+  );
+  const endpoint = subject.connectionEndpoint(stored);
+  // messageServer host is preserved; port 36NN uses the persisted systemNumber.
+  assert.equal(endpoint.host, "msg.bw.example.invalid");
+  assert.equal(endpoint.port, 3607);
+});
+
+test("connectionEndpoint falls back to port 3600 when systemNumber is absent for messageServer mode", async () => {
+  const subject = await loadSubject();
+  assert.ok(subject, "connection store is not implemented");
+  const stored = {
+    configured: true,
+    alias: "BWP-MS",
+    mode: "messageServer",
+    messageServer: "msg.bw.example.invalid",
+    logonGroup: "PUBLIC",
+  };
+  const endpoint = subject.connectionEndpoint(stored);
+  assert.equal(endpoint.host, "msg.bw.example.invalid");
+  assert.equal(endpoint.port, 3600);
+});

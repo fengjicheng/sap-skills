@@ -14,7 +14,15 @@ function fail(message) {
   errors.push(message);
 }
 
-const packageJson = JSON.parse(read("package.json"));
+let packageJson;
+try {
+  packageJson = JSON.parse(read("package.json"));
+} catch (error) {
+  fail(`package.json is invalid JSON: ${error.message}`);
+  console.error("Oracle browser safety validation failed:");
+  for (const error of errors) console.error(`- ${error}`);
+  process.exit(1);
+}
 for (const [name, command] of Object.entries(packageJson.scripts ?? {})) {
   if (!/^\s*oracle(\s|$)/.test(command)) continue;
   if (name === "oracle:status" || name === "oracle:mcp") continue;

@@ -197,6 +197,25 @@ export class BridgeBroker {
 
   #onData(chunk) {
     this.#buffer += chunk;
+    // Cap the post-auth buffer: a misbehaving peer that streams data with no
+    // newline framing could otherwise grow #buffer without bound and OOM the
+    // process. 10 MiB is far above any legitimate bridge response (each frame
+    // is one newline-terminated JSON line), so hitting the cap indicates a
+    // buggy or hostile peer. Emit an error and destroy the socket.
+    const MAX_BUFFER_BYTES = 10 * 1024 * 1024;
+    if (this.#buffer.length > MAX_BUFFER_BYTES) {
+      this.#buffer = "";
+      for (const pending of this.#pending.values()) {
+        clearTimeout(pending.timer);
+        pending.reject(new Error("Eclipse bridge buffer overflow"));
+      }
+      this.#pending.clear();
+      if (this.#socket) {
+        try { this.#socket.destroy(); } catch { /* best effort */ }
+        this.#socket = null;
+      }
+      return;
+    }
     while (true) {
       const newline = this.#buffer.indexOf("\n");
       if (newline < 0) return;

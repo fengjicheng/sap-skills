@@ -1,5 +1,6 @@
 {
   "name": "sap-skills",
+  "version": "2.4.1",
   "interface": {
     "displayName": "SAP Skills"
   },

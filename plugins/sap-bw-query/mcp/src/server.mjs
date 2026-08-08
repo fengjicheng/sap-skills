@@ -88,9 +88,13 @@ export function createMcpServer(handlers) {
       const result = await handler(request.params.arguments ?? {});
       return { content: [{ type: "text", text: JSON.stringify(result) }] };
     } catch (error) {
+      // Secret rejections are deliberately vague so the caller cannot learn
+      // whether a value matched. For every other error, surface the real
+      // message so operators can diagnose failures instead of seeing a generic
+      // "Operation blocked" for unrelated bugs (network, validation, etc.).
       const text = error instanceof SecretRejectedError
         ? SECRET_REJECTION_MESSAGE
-        : "Operation blocked. Inspect password-free local diagnostics for details.";
+        : (error?.message ?? "Operation blocked. Inspect password-free local diagnostics for details.");
       return { isError: true, content: [{ type: "text", text }] };
     }
   });

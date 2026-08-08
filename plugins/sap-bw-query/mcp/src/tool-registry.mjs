@@ -103,7 +103,7 @@ const querySpecSchema = closedObject({
   }, ["rows", "columns"]),
   keyFigures: { type: "array", items: keyFigureSchema },
   structures: { type: "array", items: structureSchema },
-  filters: { type: "array", items: closedObject({ characteristic: string(), operator: string(), value: {}, high: {}, excluding: { type: "boolean" } }, ["characteristic", "operator"]) },
+  filters: { type: "array", items: closedObject({ characteristic: string(), operator: string({ enum: COMPARISON_OPERATORS }), value: {}, high: {}, excluding: { type: "boolean" } }, ["characteristic", "operator"]) },
   variables: { type: "array", items: closedObject({ technicalName: string(), value: {}, defaultValue: {}, binding: string(), characteristic: string(), processingType: string(), representation: string(), readyForInput: { type: "boolean" } }, ["technicalName"]) },
   hierarchies: { type: "array", items: hierarchySchema },
   formulas: { type: "array", items: formulaSchema },

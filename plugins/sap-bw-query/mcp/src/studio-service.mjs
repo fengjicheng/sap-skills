@@ -45,11 +45,35 @@ export class StudioService {
       });
       let stdout = "";
       let stderr = "";
-      child.stdout.setEncoding("utf8").on("data", (chunk) => { stdout += chunk; });
-      child.stderr.setEncoding("utf8").on("data", (chunk) => { stderr += chunk; });
+      // Cap stdout/stderr so a runaway child cannot OOM the process. 5 MiB is
+      // well above any legitimate JSON response from BwStudio.ps1; if a stream
+      // exceeds the cap we stop accumulating and note the truncation so the
+      // error surface stays informative instead of crashing the host.
+      const MAX_OUTPUT_BYTES = 5 * 1024 * 1024;
+      let stdoutTruncated = false;
+      let stderrTruncated = false;
+      child.stdout.setEncoding("utf8").on("data", (chunk) => {
+        if (stdoutTruncated) return;
+        if (stdout.length + chunk.length > MAX_OUTPUT_BYTES) {
+          stdout += chunk.slice(0, Math.max(0, MAX_OUTPUT_BYTES - stdout.length));
+          stdoutTruncated = true;
+          return;
+        }
+        stdout += chunk;
+      });
+      child.stderr.setEncoding("utf8").on("data", (chunk) => {
+        if (stderrTruncated) return;
+        if (stderr.length + chunk.length > MAX_OUTPUT_BYTES) {
+          stderr += chunk.slice(0, Math.max(0, MAX_OUTPUT_BYTES - stderr.length));
+          stderrTruncated = true;
+          return;
+        }
+        stderr += chunk;
+      });
       child.once("error", reject);
       child.once("close", (code) => {
         if (code !== 0) { reject(new Error("Portable studio action failed; inspect bw_studio_diagnostics locally.")); return; }
+        if (stdoutTruncated) { reject(new Error("Portable studio response exceeded 5 MiB and was truncated; inspect bw_studio_diagnostics locally.")); return; }
         try { resolve(JSON.parse(stdout)); }
         catch { reject(new Error("Portable studio returned an invalid response")); }
       });

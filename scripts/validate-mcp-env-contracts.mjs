@@ -24,6 +24,7 @@ function readJson(file) {
 function npmSpecParts(spec) {
   if (spec.startsWith("@")) {
     const slashIndex = spec.indexOf("/");
+    if (slashIndex === -1) return { name: spec, version: null };
     const versionIndex = spec.indexOf("@", slashIndex + 1);
     return versionIndex === -1 ? { name: spec, version: null } : { name: spec.slice(0, versionIndex), version: spec.slice(versionIndex + 1) };
   }
@@ -44,7 +45,7 @@ function listMcpFiles() {
 
 function literalSecret(value) {
   if (typeof value !== "string") return false;
-  if (/^\$\{[A-Z0-9_]+(?::-[^}]*)?\}$/.test(value)) return false;
+  if (/^\$\{[A-Z0-9_]+(?::[^}]*)?\}$/.test(value)) return false;
   if (/^(true|false|source-commit)$/i.test(value)) return false;
   return value.length > 0;
 }

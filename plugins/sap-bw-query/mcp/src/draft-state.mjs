@@ -67,7 +67,7 @@ export class DraftStore {
   }
 
   apply(id, spec) {
-    const existing = this.#drafts.get(id);
+    const existing = this.#drafts.get(id) ?? this.#recover(id);
     if (!existing) throw new Error(`Unknown local draft ${id}`);
     if (existing.state !== "LOCAL_DRAFT") throw new Error("Only a local unsaved draft can be changed");
     const result = resolveAndValidateSpec(spec);
@@ -80,7 +80,7 @@ export class DraftStore {
   }
 
   prepareSave(id, { existingTechnicalNames = [] } = {}) {
-    const existing = this.#drafts.get(id);
+    const existing = this.#drafts.get(id) ?? this.#recover(id);
     if (!existing) throw new Error(`Unknown local draft ${id}`);
     const technicalName = existing.spec.technicalName.toLowerCase();
     if (existingTechnicalNames.some((name) => String(name).toLowerCase() === technicalName)) {

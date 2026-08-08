@@ -5,6 +5,18 @@ All notable changes to SAP Skills will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.1] - 2026-08-07
+
+### Changed
+- Bumped the coordinated repository, marketplace, plugin manifest, and skill metadata versions to 2.4.1.
+- Updated 4 drifted MCP packages to their latest versions: `@ui5/mcp-server` 0.2.11 → 0.2.17, `hana-mcp-server` 0.3.1 → 0.3.4, `@sap-ux/fiori-mcp-server` 1.4.0 → 1.11.7, and `@mariodefe/sap-datasphere-mcp` 1.2.1 → 1.5.2 (targets the first non-deprecated release since 1.3.0, lean tool profile default documented). Refreshed `sap-mcp-inventory.json` and `sap-mcp-security.md` evidence so all 5 MCP packages now report `status=current`.
+
+### Added
+- Wired CI audit jobs for `audit-mcp-freshness.mjs` (`--enforce` flag) and `smoke-local-fixtures.mjs` as PR/push-triggered workflows (`mcp-freshness.yml`, `local-fixture-smoke.yml`), and restored the CodeQL weekly schedule.
+
+### Fixed
+- Removed dead scripts that were strict subsets of other tooling: `report-plugin-inventory.sh`, `skills-lock.json`, and `audit-skills.mjs` (covered by `audit-effectiveness.mjs`).
+
 ## [2.4.0] - 2026-07-17
 
 ### Added
@@ -30,6 +42,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - sap-bw-query: `QueryModelBuilder` resolved BWMT EEnums via `getByName(javaConstantName)`, but the model enums expose CamelCase names/literals (e.g. `EQUAL`→`Equal`, `TOP_N`→`TopN`, `BAD1`→`Bad1`, `FOR_ALL_VALUES`→`forAllValues`), so every lookup returned null — comparison/condition/exception operators, alert levels, sign presentation, and zero-suppression mode would all have failed to apply on a live populate. Replaced all six sites with a normalization-based resolver that matches the Java constant name, EMF name, or literal; verified end-to-end by the round-trip smoke on real EMF objects (found via the live smoke; offline JS tests never exercised the real enums).
 - sap-bw-query: the Activator no longer starts the interactive named-pipe bridge (and no longer subclasses `AbstractUIPlugin`) when `-Dbw.automation.headless=true`, so headless entry points do not drag in the workbench/bridge machinery.
+
+## [2.3.2] - 2026-06-20
 
 ### Changed
 - Bumped the coordinated repository, marketplace, plugin manifest, and skill metadata versions to 2.3.2.

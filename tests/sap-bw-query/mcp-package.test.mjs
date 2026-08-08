@@ -12,7 +12,7 @@ test("MCP package uses exact runtime and build pins", () => {
   const packagePath = path.join(pluginRoot, "mcp/package.json");
   assert.equal(fs.existsSync(packagePath), true, `missing ${packagePath}`);
   const pkg = JSON.parse(fs.readFileSync(packagePath, "utf8"));
-  assert.equal(pkg.dependencies["@modelcontextprotocol/sdk"], "1.29.0");
+  assert.equal(pkg.dependencies["@modelcontextprotocol/sdk"], "1.30.0");
   assert.equal(pkg.devDependencies.esbuild, "0.28.1");
   assert.equal(pkg.scripts.build, "node ./build.mjs");
 });

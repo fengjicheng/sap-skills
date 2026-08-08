@@ -6,6 +6,13 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-frontmatter-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   validate-frontmatter:
     name: Validate SKILL.md Frontmatter

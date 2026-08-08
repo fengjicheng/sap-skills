@@ -126,8 +126,8 @@ function validateHttpsToSftpIflowTemplate() {
   }
 
   const iflowWithoutNamespaces = iflow
-    .replace(/\s+xmlns(?::\w+)?="[^"]+"/g, "")
-    .replace(/\s+targetNamespace="[^"]+"/g, "");
+    .replace(/\s+xmlns(?::\w+)?=(?:"[^"]*"|'[^']*')/g, "")
+    .replace(/\s+targetNamespace=(?:"[^"]*"|'[^']*')/g, "");
   if (/https?:\/\/|sftp:\/\/|[A-Za-z0-9-]+\.(?:com|net|org|io|de|cloud|local)\b/i.test(iflowWithoutNamespaces)) {
     errors.push("sap-btp-integration-suite HTTPS-to-SFTP iFlow template must not contain real hostnames or URLs");
   }

@@ -7,6 +7,34 @@ import { fileURLToPath } from 'node:url';
 const DEFAULT_TIMEOUT_MS = 15_000;
 const REPEATABLE_OPTIONS = new Set(['origin', 'cookieDomain']);
 
+// Options shared by every command (connection + target selection + help).
+const COMMON_OPTIONS = new Set([
+  'help',
+  'userDataDir',
+  'port',
+  'endpoint',
+  'targetId',
+  'host',
+  'pathContains',
+  'titleContains',
+]);
+
+// Per-command additional options beyond the common set.
+const COMMAND_OPTIONS = {
+  targets: new Set(),
+  inspect: new Set(),
+  snapshot: new Set(),
+  navigate: new Set(['url', 'timeout']),
+  evaluate: new Set(['expression', 'expressionFile']),
+  click: new Set(['selector']),
+  'click-point': new Set(['x', 'y']),
+  type: new Set(['selector', 'text']),
+  key: new Set(['key']),
+  screenshot: new Set(['output', 'fullPage']),
+  'export-auth': new Set(['origin', 'cookieDomain', 'stateFile']),
+  'import-auth': new Set(['stateFile', 'timeout']),
+};
+
 function optionName(name) {
   return name.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
 }
@@ -39,6 +67,15 @@ export function parseCliArguments(argv) {
       options[name] = [...(options[name] ?? []), value];
     } else {
       options[name] = value;
+    }
+  }
+
+  const allowed = COMMAND_OPTIONS[command];
+  if (allowed) {
+    const known = new Set([...COMMON_OPTIONS, ...allowed]);
+    const unknown = Object.keys(options).filter((key) => !known.has(key));
+    if (unknown.length > 0) {
+      throw new Error(`Unknown option(s) for "${command}": ${unknown.map((n) => `--${n.replace(/([A-Z])/g, '-$1').toLowerCase()}`).join(', ')}`);
     }
   }
 
@@ -113,10 +150,18 @@ function normalizeAllowedHosts(origins) {
   });
 }
 
+const PUBLIC_SUFFIXES = new Set([
+  'com', 'net', 'org', 'io', 'de', 'co.uk', 'co.jp', 'com.au', 'co.kr',
+  'cloud', 'local', 'gov', 'edu', 'mil', 'info', 'biz', 'me', 'app',
+]);
+
 export function filterCookiesForOrigins(cookies, origins) {
   const hosts = normalizeAllowedHosts(origins);
   return cookies.filter((cookie) => {
     const domain = String(cookie.domain ?? '').replace(/^\./, '').toLowerCase();
+    if (!domain || PUBLIC_SUFFIXES.has(domain)) return false;
+    // Require at least 2 dot-separated labels so bare TLDs cannot match.
+    if (domain.split('.').length < 2) return false;
     return hosts.some((host) => host === domain || host.endsWith(`.${domain}`));
   });
 }
@@ -239,16 +284,18 @@ async function connectionInfo(options) {
     browserWebSocketUrl = `ws://127.0.0.1:${port}${lines[1]}`;
   }
 
+  let endpointHost = '127.0.0.1';
   if (!port && browserWebSocketUrl) {
     const endpoint = new URL(browserWebSocketUrl);
     port = Number(endpoint.port);
+    endpointHost = endpoint.hostname || endpointHost;
   }
 
   if (!port) {
     throw new Error('Provide --user-data-dir, --port, or --endpoint.');
   }
 
-  const baseUrl = `http://127.0.0.1:${port}`;
+  const baseUrl = `http://${endpointHost}:${port}`;
   if (!browserWebSocketUrl) {
     const response = await fetch(`${baseUrl}/json/version`);
     if (!response.ok) throw new Error(`CDP version endpoint returned ${response.status}.`);
@@ -472,13 +519,29 @@ async function commandType(info, options) {
   }
 }
 
+const SPECIAL_KEY_CODES = new Set([
+  'Enter', 'Tab', 'Escape', 'Space', 'Backspace', 'Delete', 'Insert', 'Home',
+  'End', 'PageUp', 'PageDown', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight',
+]);
+
+function keyToCode(key) {
+  if (SPECIAL_KEY_CODES.has(key)) return key;
+  // Single lowercase letter: a -> KeyA
+  if (/^[a-z]$/i.test(key)) return `Key${key.toUpperCase()}`;
+  // Single digit: 1 -> Digit1
+  if (/^[0-9]$/.test(key)) return `Digit${key}`;
+  // Function keys and other known multi-name codes pass through.
+  return key;
+}
+
 async function commandKey(info, options) {
   if (!options.key || options.key === true) throw new Error('key requires --key.');
   const { connection } = await openPage(info, options);
   try {
     const key = String(options.key);
-    await connection.send('Input.dispatchKeyEvent', { type: 'rawKeyDown', key, code: key });
-    await connection.send('Input.dispatchKeyEvent', { type: 'keyUp', key, code: key });
+    const code = keyToCode(key);
+    await connection.send('Input.dispatchKeyEvent', { type: 'rawKeyDown', key, code });
+    await connection.send('Input.dispatchKeyEvent', { type: 'keyUp', key, code });
     return { key };
   } finally {
     connection.close();
@@ -510,8 +573,10 @@ async function commandExportAuth(info, options) {
   if (origins.length === 0) throw new Error('export-auth requires at least one --origin.');
   const allowedCookieScopes = [...origins, ...(options.cookieDomain ?? [])];
   const browser = await new CdpConnection(info.browserWebSocketUrl).connect();
-  const { connection, target } = await openPage(info, options);
+  let connection;
+  let target;
   try {
+    ({ connection, target } = await openPage(info, options));
     const cookieResult = await browser.send('Storage.getCookies');
     const cookies = filterCookiesForOrigins(cookieResult.cookies ?? [], allowedCookieScopes);
     const storage = await evaluate(connection, storageExpression());
@@ -536,8 +601,8 @@ async function commandExportAuth(info, options) {
       sessionStorageEntries: Object.keys(storage.sessionStorage).length,
     };
   } finally {
+    connection?.close();
     browser.close();
-    connection.close();
   }
 }
 
@@ -549,8 +614,9 @@ async function commandImportAuth(info, options) {
     throw new Error(`Unsupported auth-state file: ${stateFile}`);
   }
   const browser = await new CdpConnection(info.browserWebSocketUrl).connect();
-  const { connection } = await openPage(info, options);
+  let connection;
   try {
+    ({ connection } = await openPage(info, options));
     const cookies = toCookieParams(state.cookies);
     if (cookies.length > 0) await browser.send('Storage.setCookies', { cookies });
     const bootstrap = storageBootstrapSource(state.origins);
@@ -566,8 +632,8 @@ async function commandImportAuth(info, options) {
       url: await evaluate(connection, 'location.href'),
     };
   } finally {
+    connection?.close();
     browser.close();
-    connection.close();
   }
 }
 

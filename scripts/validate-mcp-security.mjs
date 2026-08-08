@@ -219,10 +219,6 @@ for (const sourceKey of Object.keys(inventory.sourceServers ?? {})) {
   }
 }
 
-for (const file of listMcpDocs()) {
-  validateMcpDoc(file);
-}
-
 function listMcpDocs() {
   return walk(pluginsDir).filter((file) => {
     const rel = relPath(repoRoot, file);
@@ -247,6 +243,10 @@ function validateMcpDoc(file) {
   if (/\b(tenant|credential|token|secret|destination|OAuth)\b/i.test(text) && !/\b(live tenant|tenant-affecting|credentials?|tokens?|secrets?|environment variables?)\b/i.test(text)) {
     fail(`${rel}: MCP docs mentioning tenant or credentials must state tenant/credential safety boundaries`);
   }
+}
+
+for (const file of listMcpDocs()) {
+  validateMcpDoc(file);
 }
 
 if (errors.length > 0) {

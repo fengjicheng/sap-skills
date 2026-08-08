@@ -6,6 +6,13 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-json-schemas-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   validate-json-schemas:
     name: Validate JSON Schemas
@@ -20,17 +27,19 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install ajv-cli and ajv-formats
-        run: |
-          npm install -g ajv-cli ajv-formats
-          echo "Verifying ajv-cli installation..."
-          ajv help
+      - name: Install pinned devDependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Verify ajv-cli installation
+        run: npx ajv help
 
       - name: Make validation script executable
         run: chmod +x scripts/validate-json-schemas.sh
 
       - name: Run JSON schema validation
-        run: ./scripts/validate-json-schemas.sh
+        run: |
+          echo "$PWD/node_modules/.bin" >> "$GITHUB_PATH"
+          ./scripts/validate-json-schemas.sh
 
       - name: Validate inventory consistency
         run: ./scripts/validate-inventory.sh
