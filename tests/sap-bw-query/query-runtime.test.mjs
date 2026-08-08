@@ -91,11 +91,14 @@ test("apply() and prepareSave() recover a persisted draft without a prior get()"
   const firstStore = new subject.DraftStore({ root });
   const created = firstStore.create(minimalSpec);
   // Fresh store from the same root simulates a server restart: the in-memory
-  // map is empty, so apply()/prepareSave() must hit #recover() or throw.
+  // map is empty, so apply() must hit #recover() or throw.
   const secondStore = new subject.DraftStore({ root });
   const applied = secondStore.apply(created.id, { ...minimalSpec, description: "Recovered apply" });
   assert.equal(applied.spec.description, "Recovered apply");
-  const prepared = secondStore.prepareSave(created.id, { existingTechnicalNames: [] });
+  // Use a third fresh store so prepareSave() exercises its own #recover()
+  // path instead of reusing the in-memory cache populated by apply() above.
+  const thirdStore = new subject.DraftStore({ root });
+  const prepared = thirdStore.prepareSave(created.id, { existingTechnicalNames: [] });
   assert.equal(prepared.state, "SAVE_PENDING_HUMAN");
   assert.equal(prepared.requiresEclipseHumanConfirmation, true);
 });

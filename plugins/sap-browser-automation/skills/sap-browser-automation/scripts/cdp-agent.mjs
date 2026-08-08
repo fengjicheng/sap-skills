@@ -70,7 +70,7 @@ export function parseCliArguments(argv) {
     }
   }
 
-  const allowed = COMMAND_OPTIONS[command];
+  const allowed = Object.hasOwn(COMMAND_OPTIONS, command) ? COMMAND_OPTIONS[command] : null;
   if (allowed) {
     const known = new Set([...COMMON_OPTIONS, ...allowed]);
     const unknown = Object.keys(options).filter((key) => !known.has(key));

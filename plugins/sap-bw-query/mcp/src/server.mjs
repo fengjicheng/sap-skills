@@ -94,7 +94,9 @@ export function createMcpServer(handlers) {
       // "Operation blocked" for unrelated bugs (network, validation, etc.).
       const text = error instanceof SecretRejectedError
         ? SECRET_REJECTION_MESSAGE
-        : (error?.message ?? "Operation blocked. Inspect password-free local diagnostics for details.");
+        : (typeof error?.message === "string" && error.message.length > 0
+          ? error.message
+          : "Operation blocked. Inspect password-free local diagnostics for details.");
       return { isError: true, content: [{ type: "text", text }] };
     }
   });

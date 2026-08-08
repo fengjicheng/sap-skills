@@ -15,6 +15,12 @@ export function hashSpec(spec) {
   return crypto.createHash("sha256").update(canonical(spec)).digest("hex");
 }
 
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+function isUuid(value) {
+  return typeof value === "string" && UUID_RE.test(value);
+}
+
 export class DraftStore {
   #drafts = new Map();
   #now;
@@ -27,6 +33,7 @@ export class DraftStore {
 
   #persist(draft) {
     if (!this.#root) return;
+    if (!isUuid(draft.id)) return;
     const directory = path.join(this.#root, draft.id);
     fs.mkdirSync(directory, { recursive: true });
     const timestamp = this.#now().replaceAll(/[^0-9A-Za-z]/g, "");
@@ -35,11 +42,15 @@ export class DraftStore {
 
   #recover(id) {
     if (!this.#root) return null;
+    if (!isUuid(id)) return null;
     const directory = path.join(this.#root, id);
     if (!fs.existsSync(directory)) return null;
     const files = fs.readdirSync(directory).filter((file) => file.endsWith(".json")).sort();
     if (files.length === 0) return null;
     const draft = JSON.parse(fs.readFileSync(path.join(directory, files.at(-1)), "utf8"));
+    // Defend against tampered journals that write an unrelated ID into a draft
+    // file; reject the recovery unless the stored ID matches the requested one.
+    if (draft?.id !== id) return null;
     this.#drafts.set(id, draft);
     return draft;
   }
