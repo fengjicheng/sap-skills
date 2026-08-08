@@ -16,6 +16,11 @@ REPO_ROOT="$(git rev-parse --show-toplevel)"
 remote="$1"
 url="$2"
 
+if ! git rev-parse --verify origin/main >/dev/null 2>&1; then
+  echo "pre-push: origin/main is unavailable; cannot determine changed skills. Run 'git fetch' and retry." >&2
+  exit 1
+fi
+
 CHANGED_SKILLS=$(git diff --name-only origin/main...HEAD 2>/dev/null | grep -E '^plugins/[^/]+/skills/[^/]+/SKILL\.md$' || true)
 
 if [ -z "$CHANGED_SKILLS" ]; then
@@ -41,7 +46,7 @@ while IFS= read -r skill_file; do
 
   skill_dir="$(dirname "$full_path")"
 
-  if echo "$validated_dirs" | grep -qF "$skill_dir"; then
+  if printf '%s\n' "$validated_dirs" | grep -qx "$skill_dir"; then
     continue
   fi
   validated_dirs="$validated_dirs $skill_dir"

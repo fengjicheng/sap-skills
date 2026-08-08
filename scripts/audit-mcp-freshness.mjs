@@ -42,6 +42,11 @@ for (const warning of warnings) {
   console.warn(`WARNING: ${warning}`);
 }
 
+if (enforce && warnings.length > 0) {
+  console.error(`\n${warnings.length} package(s) could not be checked. Failing in --enforce mode.`);
+  process.exit(1);
+}
+
 if (drifted.length > 0) {
   console.error(`\n${drifted.length} pinned MCP package(s) have drifted from their approved version:`);
   for (const entry of drifted) {

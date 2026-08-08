@@ -45,7 +45,10 @@ function listMcpFiles() {
 
 function literalSecret(value) {
   if (typeof value !== "string") return false;
-  if (/^\$\{[A-Z0-9_]+(?::[^}]*)?\}$/.test(value)) return false;
+  // Accept placeholder forms whose default (if any) is empty, a known-safe
+  // boolean, or a nested ${VAR} reference. A non-empty literal default like
+  // ${API_KEY:real-secret} must be treated as a literal secret.
+  if (/^\$\{[A-Z0-9_]+(?::(?:-?(?:true|false)?|\$\{[^}]+\}))?\}$/.test(value)) return false;
   if (/^(true|false|source-commit)$/i.test(value)) return false;
   return value.length > 0;
 }
