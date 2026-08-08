@@ -5,6 +5,10 @@ on:
   release:
     types: [published]
 
+concurrency:
+  group: sap-bw-query-bundle-${{ github.ref }}
+  cancel-in-progress: false
+
 permissions:
   contents: read
 
@@ -104,3 +108,10 @@ jobs:
             ${{ runner.temp }}/bw-release/bw-automation-studio-${{ steps.bundle.outputs.version }}-windows-x64.zip.manifest.json.sig
             ${{ runner.temp }}/bw-release/trusted-publishers.release.json
           if-no-files-found: error
+
+      - name: Clean up signing key
+        if: always()
+        shell: pwsh
+        run: |
+          $pemPath = Join-Path $env:RUNNER_TEMP "bw-studio-signing.pem"
+          if (Test-Path $pemPath) { Remove-Item $pemPath -Force }

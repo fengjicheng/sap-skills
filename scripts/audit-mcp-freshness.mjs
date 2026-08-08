@@ -17,8 +17,16 @@ function npmLatest(name) {
 const rows = [];
 const drifted = [];
 
+const warnings = [];
+
 for (const [name, policy] of Object.entries(inventory.npmPackages ?? {})) {
-  const latest = npmLatest(name);
+  let latest;
+  try {
+    latest = npmLatest(name);
+  } catch (error) {
+    warnings.push(`could not fetch latest version for ${name}: ${error.message}`);
+    continue;
+  }
   const status = latest === policy.approvedVersion ? "current" : "upgrade_candidate";
   rows.push({ name, approved: policy.approvedVersion, latest, status });
   if (status !== "current") drifted.push({ name, approved: policy.approvedVersion, latest });
@@ -28,6 +36,10 @@ console.log("SAP MCP freshness audit");
 console.log("=======================");
 for (const row of rows) {
   console.log(`${row.name}\tapproved=${row.approved}\tlatest=${row.latest}\t${row.status}`);
+}
+
+for (const warning of warnings) {
+  console.warn(`WARNING: ${warning}`);
 }
 
 if (drifted.length > 0) {

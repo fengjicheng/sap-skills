@@ -22,12 +22,12 @@
       "scan": "npm view @cap-js/mcp-server@0.0.5 version dist.integrity && npm audit --package-lock-only"
     },
     "@mariodefe/sap-datasphere-mcp": {
-      "approvedVersion": "1.5.2",
-      "observedLatest": "1.5.2",
-      "observedAt": "2026-08-07",
+      "approvedVersion": "1.6.0",
+      "observedLatest": "1.6.0",
+      "observedAt": "2026-08-08",
       "source": "npm view @mariodefe/sap-datasphere-mcp version dist-tags --json",
-      "cooldownUntil": "2026-08-21",
-      "approvalReason": "Pinned to 1.5.2, the first non-deprecated release since 1.3.0 (versions 1.3.0-1.5.1 are yanked with startup/metadata bugs). OAuth env contract unchanged; v1.3.0+ defaults to a lean tool profile (set DATASPHERE_TOOL_PROFILE=full for the complete set).",
+      "cooldownUntil": "2026-08-22",
+      "approvalReason": "Bumped to 1.6.0 (latest upstream). Previous pin 1.5.2 was the first non-deprecated release since 1.3.0; 1.6.0 is a minor bump with no breaking changes reported. OAuth env contract unchanged; v1.3.0+ defaults to a lean tool profile (set DATASPHERE_TOOL_PROFILE=full for the complete set).",
       "owner": "Community package",
       "usedBy": "plugins/sap-datasphere/.mcp.json",
       "operationClasses": ["read-only tenant", "mutating tenant", "destructive"],
@@ -39,7 +39,7 @@
         {"name": "DATASPHERE_CLIENT_SECRET", "secret": true, "required": true, "format": "environment placeholder only", "access": "tenant OAuth secret"},
         {"name": "DATASPHERE_TOKEN_URL", "secret": false, "required": true, "format": "https OAuth token URL", "access": "tenant OAuth endpoint"}
       ],
-      "scan": "npm view @mariodefe/sap-datasphere-mcp@1.5.2 version dist.integrity && npm audit --package-lock-only"
+      "scan": "npm view @mariodefe/sap-datasphere-mcp@1.6.0 version dist.integrity && npm audit --package-lock-only"
     },
     "@sap-ux/fiori-mcp-server": {
       "approvedVersion": "1.11.7",

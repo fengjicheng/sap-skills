@@ -8,6 +8,10 @@ on:
     branches:
       - main
 
+concurrency:
+  group: dependency-security-checks-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   enforce-dependency-hardening:
     name: Enforce dependency hardening policy

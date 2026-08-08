@@ -47,6 +47,20 @@ function validDate(value) {
 const ledger = readJson(ledgerPath);
 if (!ledger) process.exit(1);
 
+// Assert the ledger's generatedForRepositoryVersion matches the marketplace version.
+const marketplacePath = path.join(repoRoot, ".claude-plugin/marketplace.json");
+const marketplace = readJson(marketplacePath);
+if (ledger && marketplace) {
+  const marketplaceVersion = marketplace?.metadata?.version ?? marketplace?.version;
+  if (!marketplaceVersion) {
+    fail(".claude-plugin/marketplace.json: missing metadata.version (or top-level version)");
+  } else if (ledger.generatedForRepositoryVersion !== marketplaceVersion) {
+    fail(
+      `docs/project/source-verification-ledger.json: generatedForRepositoryVersion ${ledger.generatedForRepositoryVersion} does not match marketplace version ${marketplaceVersion}`,
+    );
+  }
+}
+
 const entries = new Map();
 for (const entry of ledger.entries ?? []) {
   if (!entry.plugin) {

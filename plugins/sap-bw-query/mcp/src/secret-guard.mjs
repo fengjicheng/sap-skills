@@ -41,7 +41,10 @@ const SECRET_SUFFIXES = [
 const ZERO_WIDTH_CHARS = /[\u200B\u200C\u200D\uFEFF\u2060]/g;
 
 // Catches bare HTTP-auth-scheme string values such as "Bearer abc", "Basic dXN...", "token xyz".
-const BEARER_TOKEN_PATTERN = /^(?:bearer|basic|token)\s+\S+/iu;
+// Accepts whitespace, colon, or equals as the scheme/token separator (some
+// tooling emits "Bearer=abc" or "token:xyz"). A mandatory non-alphanumeric
+// separator prevents false positives on words like "tokenizer" or "basicConfig".
+const BEARER_TOKEN_PATTERN = /^(?:bearer|basic|token)(?:\s+|\s*[:=]\s*)\S+/iu;
 
 const LABELED_SECRET = /\b(?:password|passwd|pwd|secret|token|api[\s_-]*key|credential)\s*[:=]\s*\S+/iu;
 

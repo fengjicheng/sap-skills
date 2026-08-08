@@ -23,11 +23,11 @@
   ],
   "category": "data-analytics",
   "commands": [
-    "./commands/bw-studio-deploy.md",
-    "./commands/bw-query-spec-review.md",
     "./commands/bw-query-draft.md",
+    "./commands/bw-query-explain.md",
     "./commands/bw-query-review.md",
-    "./commands/bw-query-explain.md"
+    "./commands/bw-query-spec-review.md",
+    "./commands/bw-studio-deploy.md"
   ],
   "mcpServers": "./.mcp.json"
 }

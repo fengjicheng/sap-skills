@@ -32,6 +32,12 @@ function validateConnection(input) {
     }
   } else if (input.mode === "messageServer") {
     if (!input.messageServer || !input.logonGroup) throw new Error("messageServer and logonGroup are required");
+    // systemNumber is optional for messageServer mode but, when present, lets
+    // connectionEndpoint() probe a concrete dispatcher port instead of the
+    // generic sapms service name. Accept and validate it if supplied.
+    if (input.systemNumber !== undefined && !/^[0-9]{2}$/.test(input.systemNumber)) {
+      throw new Error("systemNumber, when provided, must be two digits");
+    }
   } else throw new Error("mode must be applicationServer or messageServer");
 }
 
@@ -64,7 +70,7 @@ export class ConnectionStore {
       mode: input.mode,
       ...(input.mode === "applicationServer"
         ? { applicationServer: input.applicationServer, systemNumber: input.systemNumber }
-        : { messageServer: input.messageServer, logonGroup: input.logonGroup }),
+        : { messageServer: input.messageServer, logonGroup: input.logonGroup, systemNumber: input.systemNumber ?? "00" }),
       sncEnabled: input.sncEnabled === true,
       ssoEnabled: input.ssoEnabled === true,
       recordedAt: this.#now(),
@@ -81,7 +87,18 @@ export class ConnectionStore {
     if (!fs.existsSync(directory)) return { configured: false, alias };
     const files = fs.readdirSync(directory).filter((file) => file.endsWith(".json")).sort();
     if (files.length === 0) return { configured: false, alias };
-    return { configured: true, ...JSON.parse(fs.readFileSync(path.join(directory, files.at(-1)), "utf8")) };
+    // The latest file may be truncated/corrupt (partial write, disk error).
+    // Walk backward from the newest until a parseable one is found so a single
+    // bad frame cannot crash status(); if nothing parses, report a corrupt alias.
+    for (let i = files.length - 1; i >= 0; i -= 1) {
+      try {
+        const parsed = JSON.parse(fs.readFileSync(path.join(directory, files[i]), "utf8"));
+        return { configured: true, ...parsed };
+      } catch {
+        // try the previous file
+      }
+    }
+    return { configured: false, alias, error: "corrupt" };
   }
 
   #resolveConfinedLandscapePath(landscapePath) {
@@ -93,19 +110,44 @@ export class ConnectionStore {
     }
     const isWindows = process.platform === "win32";
     const normalizeForCompare = (value) => (isWindows ? String(value).toLowerCase() : String(value));
-    const confined = allowedRoots.some((allowed) => {
+    // First line of defense: reject paths that escape lexically. This preserves
+    // the LANDSCAPE_PATH_NOT_CONFINED contract for ../etc/passwd and foreign
+    // absolute paths (which resolve to non-existent locations on disk).
+    const lexicallyConfined = allowedRoots.some((allowed) => {
       const a = normalizeForCompare(allowed);
       const t = normalizeForCompare(target);
       return t === a || t.startsWith(a + path.sep);
     });
-    if (!confined) {
+    if (!lexicallyConfined) {
       const error = new Error(
         `Landscape path must be inside one of: ${allowedRoots.join(", ")}`,
       );
       error.code = "LANDSCAPE_PATH_NOT_CONFINED";
       throw error;
     }
-    return target;
+    // Second line of defense: a path can pass the lexical check yet resolve,
+    // via a symlink inside the root, to somewhere outside. Resolve real paths
+    // for both target and allowed roots and re-check the prefix. If the target
+    // does not exist yet, realpathSync throws ENOENT — let it propagate so the
+    // caller sees a clear "no such file" error rather than a silent success.
+    const realTarget = fs.realpathSync(target);
+    const realRoots = allowedRoots.map((allowed) => {
+      try { return fs.realpathSync(allowed); }
+      catch { return allowed; /* allowed root may not exist yet */ }
+    });
+    const reallyConfined = realRoots.some((allowed) => {
+      const a = normalizeForCompare(allowed);
+      const t = normalizeForCompare(realTarget);
+      return t === a || t.startsWith(a + path.sep);
+    });
+    if (!reallyConfined) {
+      const error = new Error(
+        `Landscape path must be inside one of: ${allowedRoots.join(", ")}`,
+      );
+      error.code = "LANDSCAPE_PATH_NOT_CONFINED";
+      throw error;
+    }
+    return realTarget;
   }
 
   importLandscape(landscapePath, alias) {
@@ -130,7 +172,7 @@ export class ConnectionStore {
       language: selected.language ?? "EN",
       mode: messageServer ? "messageServer" : "applicationServer",
       ...(messageServer
-        ? { messageServer, logonGroup: selected.logongroup ?? selected.group ?? "PUBLIC" }
+        ? { messageServer, logonGroup: selected.logongroup ?? selected.group ?? "PUBLIC", systemNumber: selected.systemnumber ?? selected.sysnr ?? "00" }
         : { applicationServer: selected.server ?? selected.applicationserver, systemNumber: selected.systemnumber ?? selected.sysnr ?? "00" }),
       sncEnabled: truthy(selected.sncop ?? selected.snc),
       ssoEnabled: truthy(selected.sncop ?? selected.snc),

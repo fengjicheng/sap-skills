@@ -6,18 +6,12 @@ on:
     paths-ignore:
       - "**/*.md"
       - "docs/**"
-      - "**/*.json"
-      - "**/*.yaml"
-      - "**/*.yml"
       - "**/*.txt"
   pull_request:
     branches: [main]
     paths-ignore:
       - "**/*.md"
       - "docs/**"
-      - "**/*.json"
-      - "**/*.yaml"
-      - "**/*.yml"
       - "**/*.txt"
   schedule:
     # Weekly — Monday 05:30 UTC. Catches newly-published CodeQL queries and

@@ -62,8 +62,11 @@ function Get-EdgeProcessesForRoot {
 
   $fullRoot = Get-FullPath $Root
   $escapedRoot = [Regex]::Escape($fullRoot)
+  # Anchor on the closing quote (or whitespace/end) immediately after the path
+  # so a profile root that is a prefix of another cannot match the wrong process.
+  $pattern = "$escapedRoot[`"'](?:\s|$)"
   return @(Get-CimInstance Win32_Process -Filter "Name = 'msedge.exe'" -ErrorAction SilentlyContinue |
-    Where-Object { $_.CommandLine -and $_.CommandLine -match $escapedRoot })
+    Where-Object { $_.CommandLine -and $_.CommandLine -match $pattern })
 }
 
 function Assert-SourceProfileClosed {
@@ -186,7 +189,9 @@ function Get-ProfileStatus {
   }
 
   $owner = Get-CimInstance Win32_Process -Filter "ProcessId = $($listener[0].OwningProcess)" -ErrorAction SilentlyContinue
-  $belongsToProfile = $owner -and $owner.CommandLine -and $owner.CommandLine -match [Regex]::Escape($fullRoot)
+  $statusEscapedRoot = [Regex]::Escape($fullRoot)
+  $statusPattern = "$statusEscapedRoot[`"'](?:\s|$)"
+  $belongsToProfile = $owner -and $owner.CommandLine -and $owner.CommandLine -match $statusPattern
   return [pscustomobject]@{
     running = [bool]$belongsToProfile
     loopback = [bool]$belongsToProfile

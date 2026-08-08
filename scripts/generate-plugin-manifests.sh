@@ -188,7 +188,7 @@ scan_agents() {
     local relative_path
     relative_path="./agents/$(basename "$agent_file")"
     agents+=("$relative_path")
-  done < <(find "$agents_dir" -maxdepth 1 -name "*.md" -print0 2>/dev/null || true)
+  done < <(find "$agents_dir" -maxdepth 1 -name "*.md" | sort | tr '\n' '\0')
 
   if [ ${#agents[@]} -eq 0 ]; then
     echo "[]"
@@ -212,7 +212,7 @@ scan_commands() {
     local relative_path
     relative_path="./commands/$(basename "$command_file")"
     commands+=("$relative_path")
-  done < <(find "$commands_dir" -maxdepth 1 -name "*.md" -print0 2>/dev/null || true)
+  done < <(find "$commands_dir" -maxdepth 1 -name "*.md" | sort | tr '\n' '\0')
 
   if [ ${#commands[@]} -eq 0 ]; then
     echo "[]"
