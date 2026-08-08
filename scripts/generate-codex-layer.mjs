@@ -295,6 +295,7 @@ function main() {
 
   writeJson(path.join(".agents", "plugins", "marketplace.json"), {
     name: claudeMarketplace.name ?? "sap-skills",
+    version: claudeMarketplace.version ?? claudeMarketplace.metadata?.version,
     interface: {
       displayName: "SAP Skills",
     },
