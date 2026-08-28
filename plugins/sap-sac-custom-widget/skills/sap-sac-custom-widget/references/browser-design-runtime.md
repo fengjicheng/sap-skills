@@ -147,6 +147,15 @@ The runtime exports JSON with schema `sap-sac-widget-agent-iteration/v1` plus a 
 
 Do not export patch files from the browser. The agent should inspect the payload, decide which changes belong in widget source, and then edit files through normal repo workflows.
 
+If the in-app browser cannot attach because its webview is unavailable, retry once at most. Then
+keep the local server running and provide its loopback URL for manual inspection. Do not report a
+browser result that was not observed.
+
+For layout changes, inspect wide and narrow viewports with asymmetric content in a visible browser.
+Wait for fonts before measuring. A DOM-only runner or hidden preview cannot prove layout, hit
+testing, `ResizeObserver`, or animation behavior. If a preview cannot reach a lifecycle branch,
+move that check to a source assertion or a real-browser scenario instead of counting it as green.
+
 ## Usage Workflow
 
 1. Generate the widget package with `/widget-generate`.

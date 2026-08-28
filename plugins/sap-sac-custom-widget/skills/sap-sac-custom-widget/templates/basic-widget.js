@@ -84,6 +84,8 @@
       // Cache DOM references for performance
       this._titleEl = this._shadowRoot.getElementById("title");
       this._contentEl = this._shadowRoot.getElementById("content");
+      this._resizeObserver = null;
+      this._lastResizeWidth = null;
     }
 
     /**
@@ -91,7 +93,19 @@
      * Use for initial setup that requires DOM presence.
      */
     connectedCallback() {
-      // Optional: Initial setup when added to DOM
+      // SAC's resize hook may fire before the widget becomes visible. Observe
+      // the host as a fallback, but react to width only to avoid height loops.
+      if (typeof ResizeObserver === "function") {
+        this._resizeObserver = new ResizeObserver((entries) => {
+          const entry = entries[0];
+          const width = entry && entry.contentRect ? entry.contentRect.width : null;
+          if (width !== null && width !== this._lastResizeWidth) {
+            this._lastResizeWidth = width;
+            this.onCustomWidgetResize();
+          }
+        });
+        this._resizeObserver.observe(this);
+      }
     }
 
     /**
@@ -131,6 +145,10 @@
     onCustomWidgetDestroy() {
       // Cleanup resources
       // Example: Clear intervals, remove event listeners, dispose charts
+      if (this._resizeObserver) {
+        this._resizeObserver.disconnect();
+        this._resizeObserver = null;
+      }
     }
 
     // ========== Property Getters/Setters ==========

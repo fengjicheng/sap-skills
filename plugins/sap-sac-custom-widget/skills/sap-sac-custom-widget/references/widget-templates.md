@@ -1337,6 +1337,11 @@ For each template:
 5. [ ] Test in SAC story/application
 6. [ ] Generate integrity hashes for production
 7. [ ] Set `ignoreIntegrity: false` for production
+8. [ ] Confirm every manifest property changes observable runtime behavior
+9. [ ] Test the final component files, not only shared source helpers
+10. [ ] Test property updates, touch input, focus retention, and cleanup
+11. [ ] Use a visible browser for layout, fonts, resize, and hit testing
+12. [ ] Keep `widget.json` and the Resource-ZIP as separate upload artifacts
 
 ---
 

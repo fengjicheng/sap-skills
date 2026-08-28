@@ -55,8 +55,17 @@
 
   function setValue(root, id, value) {
     var input = root.getElementById(id);
-    if (input && root.activeElement !== input) {
-      input.value = value === undefined || value === null ? "" : value;
+    if (input) {
+      var active = root.activeElement === input;
+      var start = input.selectionStart;
+      var end = input.selectionEnd;
+      var next = value === undefined || value === null ? "" : String(value);
+      if (input.value !== next) {
+        input.value = next;
+      }
+      if (active && start !== null && end !== null && input.setSelectionRange) {
+        input.setSelectionRange(Math.min(start, next.length), Math.min(end, next.length));
+      }
     }
   }
 

@@ -56,6 +56,9 @@ this.dispatchEvent(new CustomEvent("propertiesChanged", {
 }));
 ```
 
+A declared method with an empty body is not a useful implementation. Give every method a body that
+uses the declared property bridge, or do not declare the method.
+
 Rules:
 
 - Declare a property for every value a script must read or write.

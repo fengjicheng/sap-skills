@@ -3,6 +3,15 @@
 Use this reference before SAC import, after a build change, or when local preview and tenant
 behavior disagree.
 
+## Test the public seam
+
+Drive the interface SAC will use, not only private helpers:
+
+- set properties through public setters or an SAC-shaped update path;
+- dispatch real DOM events and use `element.click()` where native disabled behavior matters;
+- inspect rendered text, attributes, events, and serialized output; and
+- test the final bundled `widget.js`, `builder.js`, and `styling.js` independently.
+
 ## Test the delivered component
 
 The unit under test is the component JavaScript that SAC will load, not only a source helper.
@@ -16,7 +25,8 @@ For every build:
 5. Mount the final `widget.js`, `builder.js`, and `styling.js` independently in preview tests.
 
 If a validation tool is optional, distinguish "not installed" from "ran and passed". Every emitted
-probe must still be parsed before it is treated as upload evidence.
+probe must still be parsed before it is treated as upload evidence. An absent optional tool must
+produce a clear skip or blocked result, never a passing result.
 
 Do not claim SAC importability from a Node suite, `node --check`, a valid ZIP, or a local preview.
 Those are useful gates, not tenant evidence.
@@ -37,6 +47,8 @@ Prefer behavior checks over markup checks:
 - Test that a full-cover pseudo-element cannot intercept clicks when it is decorative.
 - Test output/import round trips with gaps, reordered items, duplicate-like names, and data that is
   present only in a non-default language.
+- Test a property received before builder initialization, a structural edit after a text edit, and
+  an open popover followed by rerender or focus departure.
 
 Use a small control sweep for panels instead of one test per current button. Keep the sweep honest:
 record the handler or observe the public effect, and do not count a control as covered merely because
