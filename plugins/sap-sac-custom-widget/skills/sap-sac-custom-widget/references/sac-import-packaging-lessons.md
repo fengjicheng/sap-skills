@@ -155,7 +155,8 @@ Also inspect the final `widget.json` and ZIP:
 - Resource-ZIP contains only permitted root-level files.
 - ZIP was rebuilt after the last fix.
 - Manifest integrity values match the exact bytes inside the ZIP.
-- The manifest is pure ASCII and source/bundled JavaScript contains no raw control characters below `U+0020`.
+- The manifest is pure ASCII and source/bundled JavaScript contains no raw control characters,
+  C1 controls, BOM, zero-width characters, or `U+2028`/`U+2029` line separators.
 - Every generated probe or artifact is syntax-checked before it is used as upload evidence.
 - `design-runtime/index.html` does not depend on preview-only shared source scripts.
 - Bundled `widget.js`, `builder.js`, and `styling.js` include required fallback behavior when loaded standalone.

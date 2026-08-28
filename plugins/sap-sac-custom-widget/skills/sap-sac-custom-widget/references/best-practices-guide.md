@@ -568,7 +568,7 @@ app.listen(3000, () => {
 
 - [ ] Unique ID (reverse domain notation)
 - [ ] Correct version number
-- [ ] All URLs are absolute HTTPS
+- [ ] URLs match the hosting mode: root-relative for SAC Resource-ZIP or HTTPS for external hosting
 - [ ] Integrity hashes set
 - [ ] Properties have descriptions
 - [ ] Methods documented

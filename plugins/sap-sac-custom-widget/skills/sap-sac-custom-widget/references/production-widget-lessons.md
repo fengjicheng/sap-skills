@@ -24,7 +24,7 @@ var option = "\u0000new";
 var option = "action:new";
 ```
 
-Node syntax checks, tests, ZIP integrity checks, and browser previews do not catch this reliably. The manifest should remain pure ASCII. Non-ASCII characters above `U+007F` are allowed in JavaScript bundles.
+Node syntax checks, tests, ZIP integrity checks, and browser previews do not catch this reliably. The manifest should remain pure ASCII. Ordinary non-ASCII characters were accepted in a controlled probe, but still reject `U+007F`, C1 controls, `U+2028`, `U+2029`, `U+FEFF`, and zero-width characters in bundles.
 
 ### Script method bodies
 
@@ -101,7 +101,7 @@ The Resource-ZIP limit is 5 MB **[DOCUMENTED]**. A tenant can hold up to 50 SAC-
 
 ### Confirmed non-causes
 
-**[VERIFIED]** The following passed controlled probes and should not be the first suspect for an opaque upload failure: a 272 KB ZIP, a 208 KB file, three web components in one ZIP, non-ASCII characters above `U+007F` in JavaScript, comments, `localStorage`, absolute HTTPS strings, the text `iframe`, the text `http://`, the `draggable` DOM property, and root-relative `"/widget.js"` URLs.
+**[VERIFIED]** The following passed controlled probes and should not be the first suspect for an opaque upload failure: a 272 KB ZIP, a 208 KB file, three web components in one ZIP, ordinary non-ASCII characters in JavaScript, comments, `localStorage`, absolute HTTPS strings, the text `iframe`, the text `http://`, the `draggable` DOM property, and root-relative `"/widget.js"` URLs. This does not clear the dangerous code points listed above.
 
 ## Icons and fonts
 
@@ -178,7 +178,11 @@ test("no source or bundle contains a control character", () => {
     const source = fs.readFileSync(path.join(ROOT, relative), "utf8");
     for (let i = 0; i < source.length; i++) {
       const code = source.codePointAt(i);
-      if (code >= 0x20 || code === 0x09 || code === 0x0a || code === 0x0d) continue;
+      const allowedControl = code === 0x09 || code === 0x0a || code === 0x0d;
+      const dangerous = (!allowedControl && code < 0x20) || code === 0x7f ||
+        (code >= 0x80 && code <= 0x9f) || code === 0x2028 || code === 0x2029 ||
+        code === 0x200b || code === 0xfeff;
+      if (!dangerous) continue;
       const line = source.slice(0, i).split("\n").length;
       assert.fail(relative + " line " + line + " contains U+" +
         code.toString(16).padStart(4, "0").toUpperCase());

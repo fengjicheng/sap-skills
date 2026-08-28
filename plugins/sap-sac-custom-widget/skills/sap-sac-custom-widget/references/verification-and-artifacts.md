@@ -15,6 +15,9 @@ For every build:
 4. Check syntax, permitted ZIP contents, root-relative URLs for ZIP mode, and exact integrity bytes.
 5. Mount the final `widget.js`, `builder.js`, and `styling.js` independently in preview tests.
 
+If a validation tool is optional, distinguish "not installed" from "ran and passed". Every emitted
+probe must still be parsed before it is treated as upload evidence.
+
 Do not claim SAC importability from a Node suite, `node --check`, a valid ZIP, or a local preview.
 Those are useful gates, not tenant evidence.
 
@@ -73,7 +76,8 @@ the assertion is not vacuous.
 ## Upload failure triage
 
 For an opaque `CUSTOM_WIDGET_SERVICE_EXCEPTION` or HTTP 500, first scan source and bundles for raw
-control characters and confirm the manifest and ZIP are a matching pair. Then create complete,
+control or ambiguous code points, including BOM, zero-width characters, and line separators, and
+confirm the manifest and ZIP are a matching pair. Then create complete,
 uploadable probes that change one variable at a time. Keep probes disposable and use unique ids and
 versions. Record confirmed non-causes so later debugging does not repeat them.
 

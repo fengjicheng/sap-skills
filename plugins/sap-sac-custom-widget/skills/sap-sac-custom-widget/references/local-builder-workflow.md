@@ -139,6 +139,8 @@ Before delivering a package generated through the local builder:
 - Resource-ZIP contains only allowed root-level files.
 - Resource-ZIP does not include builder UI files, preview runtime files, docs, or nested folders.
 - `node --check widget.js`, `node --check builder.js`, and `node --check styling.js` pass for generated component files.
+- Every generated manifest property is read by runtime code, not only stored by a panel or exporter.
+- Numeric controls reject partial or non-finite input and preserve legal zero values.
 - Local preview uses the final component files, not preview-only shared helpers.
 - Live SAC import/runtime validation is not claimed unless performed in a tenant.
 

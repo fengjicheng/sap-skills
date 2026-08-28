@@ -408,7 +408,7 @@ openssl dgst -sha256 -binary widget.js | openssl base64 -A
 | Widget not appearing | Missing connectedCallback render | Call render in onCustomWidgetAfterUpdate |
 | Properties not updating | Missing propertiesChanged dispatch | Use dispatchEvent with propertiesChanged |
 | Data not displaying | Data binding misconfigured | Verify feeds in JSON match usage |
-| `CUSTOM_WIDGET_SERVICE_EXCEPTION` or opaque HTTP 500 | Raw control character, malformed method body, manifest/ZIP pair, or another upload constraint | Scan source and bundles for characters below `U+0020`, then use one-variable JSON and ZIP probes |
+| `CUSTOM_WIDGET_SERVICE_EXCEPTION` or opaque HTTP 500 | Raw control or ambiguous code point, malformed method body, manifest/ZIP pair, or another upload constraint | Scan source and bundles for control code points, BOM, zero-width characters, and line separators, then use one-variable JSON and ZIP probes |
 | Method body rejected with unknown function or type errors | Body calls component internals instead of using declared properties | Declare the state as a property and have the body read or write that property |
 | Manifest rejected for missing `integrity` | `webcomponents[]` omitted the required field | Add `integrity` and use either development `""` plus `ignoreIntegrity: true` or a real `sha256-...` digest plus `false` |
 | Icons render blank | Icon name is not bundled or was guessed | Generate and search a committed icon map; do not depend on `IconPool` inside the widget |
@@ -523,6 +523,7 @@ See **`references/widget-addon-guide.md`** for complete implementation.
 
 **Unreleased**
 - Added property lifecycle and artifact verification guidance from the consolidated custom-widget lessons, including canonical coercion, stateful panel editing, runtime-use checks, real-browser boundaries, and deterministic final-package checks
+- Clarified hosting-mode URL validation, dangerous Unicode/control-code-point scanning, declared-locale handling, and missing-tool verification outcomes
 - Added production audit lessons for control-character upload failures, property-only Analytics Designer method bodies, required integrity states, opaque-error bisection, isolated icons/fonts, bookmark risks, and behavioral preflight checks
 - Corrected JSON method guidance so manifest method bodies do not call web component internals
 - Added an enterprise-safe `templates/local-builder/` scaffold for local widget metadata, property/feed configuration, and SAC two-file artifact export
