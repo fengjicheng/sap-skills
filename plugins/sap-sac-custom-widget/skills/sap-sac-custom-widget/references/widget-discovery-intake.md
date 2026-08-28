@@ -69,6 +69,9 @@ Before code generation, return a concise brief containing:
 - Evidence received, intended use, source, and sensitivity classification.
 - Data contract, or an explicit no-data declaration.
 - Properties, methods, events, interactions, permissions, and responsive/accessibility requirements.
+- For visible layout choices, capture a small acceptance sketch or mockup and verify the chosen
+  geometry in a real browser at wide and narrow supported sizes. Do not treat a DOM-only preview as
+  evidence for spacing, alignment, clipping, or overflow.
 - Brand rules and confirmed asset hosting/license status.
 - Assumptions, missing technical IDs, feed mappings, and confirmation questions.
 

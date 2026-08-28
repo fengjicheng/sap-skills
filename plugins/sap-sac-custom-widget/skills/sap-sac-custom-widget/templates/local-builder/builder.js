@@ -136,10 +136,12 @@
       return value === true || value === "true";
     }
     if (type === "integer") {
-      return parseInt(value, 10) || 0;
+      var integer = Number(value);
+      return Number.isInteger(integer) ? integer : 0;
     }
     if (type === "number") {
-      return parseFloat(value) || 0;
+      var number = Number(value);
+      return Number.isFinite(number) ? number : 0;
     }
     return value === undefined || value === null ? "" : String(value);
   }
@@ -766,7 +768,7 @@
       "  var template = document.createElement(\"template\");",
       "  template.innerHTML = " + JSON.stringify([
         "<style>",
-        ":host{display:block;font-family:var(--sapFontFamily,Arial,sans-serif);font-size:12px;color:var(--sapTextColor,#32363a);}",
+        ":host{display:block;font-size:12px;color:var(--sapTextColor,#32363a);}",
         ".panel{box-sizing:border-box;padding:12px;width:100%;}",
         ".section{border-bottom:1px solid #d9d9d9;margin-bottom:14px;padding-bottom:12px;}",
         ".section:last-child{border-bottom:0;margin-bottom:0;}",
@@ -789,6 +791,10 @@
       "  }",
       "  function fire(element, properties) {",
       "    element.dispatchEvent(new CustomEvent(\"propertiesChanged\", { detail: { properties: properties } }));",
+      "  }",
+      "  function setValue(root, id, value) {",
+      "    var input = root.getElementById(id);",
+      "    if (input && root.activeElement !== input) { input.value = value === undefined || value === null ? \"\" : value; }",
       "  }",
       "",
       "  class " + className + " extends HTMLElement {",
@@ -844,9 +850,9 @@
     if (property.type === "boolean" || property.control === "boolean" || property.control === "divider") {
       readValue = "event.target.checked";
     } else if (property.type === "integer") {
-      readValue = "parseInt(event.target.value, 10) || 0";
+      readValue = "(Number.isInteger(Number(event.target.value)) ? Number(event.target.value) : " + JSON.stringify(property.default === undefined ? 0 : property.default) + ")";
     } else if (property.type === "number") {
-      readValue = "parseFloat(event.target.value) || 0";
+      readValue = "(Number.isFinite(Number(event.target.value)) ? Number(event.target.value) : " + JSON.stringify(property.default === undefined ? 0 : property.default) + ")";
     }
     return [
       "      this._shadowRoot.getElementById(" + JSON.stringify(id) + ").addEventListener(" + JSON.stringify(eventName) + ", function(event) {",
@@ -864,7 +870,7 @@
     if (property.type === "boolean" || property.control === "boolean" || property.control === "divider") {
       return "      this._shadowRoot.getElementById(" + JSON.stringify(id) + ").checked = Boolean(this._props[" + name + "]);";
     }
-    return "      this._shadowRoot.getElementById(" + JSON.stringify(id) + ").value = this._props[" + name + "] === undefined ? \"\" : this._props[" + name + "];";
+    return "      setValue(this._shadowRoot, " + JSON.stringify(id) + ", this._props[" + name + "]);";
   }
 
   function escapeHtml(value) {

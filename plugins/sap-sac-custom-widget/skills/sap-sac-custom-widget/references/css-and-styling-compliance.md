@@ -39,6 +39,8 @@ Optimized story theme CSS is a separate SAC feature for story, page, popup, and 
 - Keep focus states visible, maintain readable contrast, and respect reduced-motion expectations for decorative animation.
 - Load brand images, icons, fonts, and chart libraries only from SAC-hosted files, local package assets, or deployment-approved HTTPS origins.
 - Use styling and builder panels as Web Components when users need design-time controls. Dispatch `propertiesChanged` from setters and keep visual state driven by manifest properties.
+- Let design-time panels inherit the SAC shell font. Reset `font-family: inherit` on panel form controls because browser controls may otherwise use their user-agent font.
+- Wait for `document.fonts.ready` and handle later font-loading cycles before caching measurements. Pair `onCustomWidgetResize` with a `ResizeObserver` on the widget box when visibility changes can bypass the SAC resize hook.
 
 ## Restricted or Avoid
 
@@ -50,6 +52,7 @@ Optimized story theme CSS is a separate SAC feature for story, page, popup, and 
 - Do not add tracking pixels, analytics beacons, credentials, or user-specific URLs for visual polish.
 - Do not use fixed-only layouts that ignore SAC resize events or responsive story containers.
 - Do not hide labels, focus outlines, legends, or data values only to achieve a decorative look.
+- Decorative full-cover pseudo-elements must use `pointer-events: none` so they cannot block the control below them.
 
 ## Hosting and Packaging Matrix
 
@@ -60,6 +63,21 @@ Optimized story theme CSS is a separate SAC feature for story, page, popup, and 
 | SAC ZIP resource upload | SAP documents the ZIP as limited to Web Component JavaScript for main/styling/builder plus PNG/JPG icon; no subfolders; CSS and HTML files are not supported in the ZIP. | Embed CSS inside the Web Component JavaScript template. Do not generate separate `.css` or `.html` files for ZIP upload packages. |
 
 `webcomponents[].url` should point to the Web Component JavaScript file for `main`, `styling`, or `builder` components. Do not point a webcomponent URL directly at `.css` or `.html`.
+
+For responsive grids, test the smallest supported host frame. Use `minmax(0, ...)` tracks and cap
+long children so min-content sizing does not overflow. A layout variant must explicitly reset
+shared declarations such as `align-items` and `justify-content` when their meaning changes.
+Measure popup max-height against the host element, not a content-sized shell, and scroll inside the
+popup when the story frame is shorter than the content.
+
+For close-on-blur popovers, keep focus while selecting non-focusable rows and require a meaningful
+`relatedTarget` before closing. DOM emulation cannot reproduce browser focus movement, so verify the
+real click and focus path in a browser.
+
+Keep emitted `data-*` values and CSS selectors in one reviewable contract. When a new value is
+feature-gated, do not write its CSS variable for old configurations, and add a deliberate no-op rule
+when the base style is the intended result. This keeps default-off rendering stable and makes a
+missing selector visible in review.
 
 ## LLM Generation Checklist
 

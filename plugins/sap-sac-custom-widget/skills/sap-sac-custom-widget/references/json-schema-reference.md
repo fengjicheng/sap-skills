@@ -346,7 +346,11 @@ Each widget can have up to three web components:
 | `type` | string | **Yes** | Data type |
 | `default` | varies | **Yes** | Default value matching type |
 | `description` | string | No | Description for documentation |
-| `includeInBookmarks` | boolean | No | Whether this property is saved in bookmarks (default: true). Set to `false` to exclude from bookmark serialization. |
+| `includeInBookmarks` | boolean | No | Whether this property is saved in bookmarks. Confirm the target SAC experience's default and restore order; set to `false` for script-set or reader-specific state that must not travel between users. |
+
+Review `includeInBookmarks` together with export and restore behavior. A property that is written by
+story script or carries permission-sensitive state should not be assumed safe to restore from a
+shared bookmark until the target tenant behavior is verified.
 
 ---
 
@@ -420,7 +424,7 @@ Methods allow scripts to call functions on the widget.
 | `description` | string | No | Method description |
 | `parameters` | array | No | Array of parameter definitions |
 | `returnType` | string | No | Return type (if method returns value) |
-| `body` | string | **Yes** | JavaScript code to execute |
+| `body` | string | **Yes** | Analytics Designer script that reads or writes declared manifest properties |
 
 ---
 

@@ -76,11 +76,14 @@ Keep CSS inside Web Component templates or Shadow DOM styles in the JavaScript f
 
 ## Upload Flow
 
-1. Select `widget.json` and let the browser validate it.
-2. Wait for SAC to validate the manifest and enable the Resource File upload.
-3. Submit the manifest and Resource-ZIP together when the dialog provides that second step.
-4. Insert the widget in a story or application.
-5. Check SAC errors, browser console, and network requests.
+1. If the tenant has already seen the same `id` and `version`, use a new version for a new import
+   attempt. Treat this as a tenant-observed diagnostic rule, not a substitute for fixing the
+   artifact.
+2. Select `widget.json` and let the browser validate it.
+3. Wait for SAC to validate the manifest and enable the Resource File upload.
+4. Submit the manifest and Resource-ZIP together when the dialog provides that second step.
+5. Insert the widget in a story or application.
+6. Check SAC errors, browser console, and network requests.
 
 Do not package `widget.json` and component JavaScript together as one generic upload ZIP when the SAC dialog separates JSON and Resource File upload.
 
@@ -116,6 +119,8 @@ Do not package `widget.json` and component JavaScript together as one generic up
 ## Output and Artifact Hygiene
 
 - Do not copy over an existing output folder. Perform safe output cleanup first: resolve the target, verify it is inside the intended output package directory, then remove and recreate it.
+- Assemble and validate every output before writing any output. A failure in the last bundle must
+  not leave a mixed set of earlier artifacts on disk.
 - Validate final artifacts from `outputs/`, not only `work/` or source directories.
 - Rebuild the Resource-ZIP after every manifest or JavaScript fix.
 - Name artifacts to mirror the SAC dialog. Use a separate JSON artifact such as `outputs/sac-menu-widget.json` and a Resource-ZIP such as `outputs/sac-menu-widget-resources.zip`.
@@ -151,6 +156,7 @@ Also inspect the final `widget.json` and ZIP:
 - ZIP was rebuilt after the last fix.
 - Manifest integrity values match the exact bytes inside the ZIP.
 - The manifest is pure ASCII and source/bundled JavaScript contains no raw control characters below `U+0020`.
+- Every generated probe or artifact is syntax-checked before it is used as upload evidence.
 - `design-runtime/index.html` does not depend on preview-only shared source scripts.
 - Bundled `widget.js`, `builder.js`, and `styling.js` include required fallback behavior when loaded standalone.
 - Builder textinput edits preserve focus and collapse state.

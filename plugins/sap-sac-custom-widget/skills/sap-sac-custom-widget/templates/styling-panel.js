@@ -17,7 +17,6 @@
     <style>
       :host {
         display: block;
-        font-family: var(--sapFontFamily, "72", Arial, sans-serif);
         font-size: 13px;
         color: var(--sapTextColor, #333);
         padding: 12px;
@@ -54,6 +53,7 @@
         border: 1px solid var(--sapField_BorderColor, #bfbfbf);
         border-radius: 3px;
         box-sizing: border-box;
+        font-family: inherit;
         background-color: var(--sapField_Background, #fff);
         color: var(--sapTextColor, #333);
       }
@@ -69,6 +69,7 @@
         font-size: 13px;
         border: 1px solid var(--sapField_BorderColor, #bfbfbf);
         border-radius: 3px;
+        font-family: inherit;
         background-color: var(--sapField_Background, #fff);
         color: var(--sapTextColor, #333);
       }
