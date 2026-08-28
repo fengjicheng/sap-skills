@@ -48,6 +48,8 @@ Do not use Windows backslashes in manifest URLs.
 - For simple configurable colors, prefer `string` properties with hex defaults such as `"#f4f7fa"`.
 - Use `Color` only after the target SAC tenant and the exact panel flow accept that type.
 - Keep `methods` and `events` as objects.
+- Every `webcomponents[]` entry must declare `integrity`. Use `""` with `ignoreIntegrity: true` only for development, or a digest of the exact served bytes with `ignoreIntegrity: false` for production.
+- Method bodies are Analytics Designer script. They may read and write declared manifest properties, but must not call private web component methods.
 
 ## Resource-ZIP Rules
 
@@ -74,9 +76,9 @@ Keep CSS inside Web Component templates or Shadow DOM styles in the JavaScript f
 
 ## Upload Flow
 
-1. Upload `widget.json`.
+1. Select `widget.json` and let the browser validate it.
 2. Wait for SAC to validate the manifest and enable the Resource File upload.
-3. Upload the Resource-ZIP.
+3. Submit the manifest and Resource-ZIP together when the dialog provides that second step.
 4. Insert the widget in a story or application.
 5. Check SAC errors, browser console, and network requests.
 
@@ -147,6 +149,8 @@ Also inspect the final `widget.json` and ZIP:
 - URLs contain `/`, not Windows `\`.
 - Resource-ZIP contains only permitted root-level files.
 - ZIP was rebuilt after the last fix.
+- Manifest integrity values match the exact bytes inside the ZIP.
+- The manifest is pure ASCII and source/bundled JavaScript contains no raw control characters below `U+0020`.
 - `design-runtime/index.html` does not depend on preview-only shared source scripts.
 - Bundled `widget.js`, `builder.js`, and `styling.js` include required fallback behavior when loaded standalone.
 - Builder textinput edits preserve focus and collapse state.
@@ -189,6 +193,9 @@ When SAC reports that the custom widget or `main` component cannot be loaded:
 | Old submenu panels remain visible | Render path did not remove stale overlays before rebuilding |
 | Output ZIP contains old or nested files | Output folder was copied over instead of safely cleaned and rebuilt |
 | User uploads one ZIP instead of JSON plus Resource-ZIP | Artifact naming does not match the SAC dialog |
+| `CUSTOM_WIDGET_SERVICE_EXCEPTION` with HTTP 500 | Raw control character or another opaque upload constraint | Scan all bundles, then bisect complete JSON and ZIP probes one variable at a time |
+| Missing `integrity` property | Component entry omitted a required field | Add the field and choose one valid development or production integrity state |
+| Method body reports unknown function | Body calls component internals | Use declared properties as the script contract |
 
 ## Generation Checklist
 

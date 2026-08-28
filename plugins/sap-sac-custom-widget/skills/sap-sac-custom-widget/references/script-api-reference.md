@@ -216,12 +216,12 @@ var hierarchySelection = {
           "description": "Selection to apply"
         }
       ],
-      "body": "this._setSelection(selection);"
+      "body": "this.currentSelection = selection;"
     },
     "getSelection": {
       "description": "Get current selection",
       "returnType": "Selection",
-      "body": "return this._getSelection();"
+      "body": "return this.currentSelection;"
     }
   }
 }

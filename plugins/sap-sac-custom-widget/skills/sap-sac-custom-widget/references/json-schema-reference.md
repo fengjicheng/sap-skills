@@ -65,6 +65,14 @@ Complete reference for the JSON metadata file that defines custom widgets.
       "default": 0,
       "description": "Numeric value"
     },
+    "refreshToken": {
+      "type": "integer",
+      "default": 0,
+      "description": "Increment to request a refresh"
+    },
+    "width": { "type": "integer", "default": 0 },
+    "height": { "type": "integer", "default": 0 },
+    "total": { "type": "number", "default": 0 },
     "enabled": {
       "type": "boolean",
       "default": true,
@@ -89,7 +97,7 @@ Complete reference for the JSON metadata file that defines custom widgets.
   "methods": {
     "refresh": {
       "description": "Refresh widget data",
-      "body": "this._refresh();"
+      "body": "this.refreshToken = this.refreshToken + 1;"
     },
     "setValue": {
       "description": "Set the widget value",
@@ -100,12 +108,12 @@ Complete reference for the JSON metadata file that defines custom widgets.
           "description": "The new value"
         }
       ],
-      "body": "this._setValue(newValue);"
+      "body": "this.value = newValue;"
     },
     "getValue": {
       "description": "Get the current value",
       "returnType": "number",
-      "body": "return this._getValue();"
+      "body": "return this.value;"
     }
   },
   "events": {
@@ -223,8 +231,8 @@ Each widget can have up to three web components:
 | `kind` | string | **Yes** | "main", "styling", or "builder" |
 | `tag` | string | **Yes** | Custom element tag name (lowercase, hyphenated, must contain hyphen) |
 | `url` | string | **Yes** | URL to JavaScript file (HTTPS required for external hosting) |
-| `integrity` | string | No | SHA256 hash for subresource integrity |
-| `ignoreIntegrity` | boolean | No | Skip integrity check (development only, default: false) |
+| `integrity` | string | **Yes** | Empty string for development or SHA256 hash for production |
+| `ignoreIntegrity` | boolean | **Yes** | `true` only with empty `integrity` for development, `false` with a real digest for production |
 | `type` | string | No | Set to `"module"` to load as ES module (maps to `<script type="module">`) |
 
 ### Tag Naming Rules
@@ -352,12 +360,12 @@ Methods allow scripts to call functions on the widget.
 {
   "refresh": {
     "description": "Refresh the widget",
-    "body": "this._refresh();"
+      "body": "this.refreshToken = this.refreshToken + 1;"
   }
 }
 ```
 
-> **⚠️ Important**: The `body` must call an internal method (prefixed with `_`) to avoid infinite recursion. When SAC invokes `Widget.refresh()`, it executes the body code. If the body calls `this.refresh()`, it would recursively call itself. Always use `this._refresh()` pattern.
+> **Important**: The `body` is Analytics Designer script. It can read and write properties declared in this manifest, but it cannot call private web component methods or access component internals. Model a refresh request as a declared property such as `refreshToken`.
 
 ### Method With Parameters
 
@@ -372,7 +380,7 @@ Methods allow scripts to call functions on the widget.
         "description": "The new title text"
       }
     ],
-    "body": "this._setTitle(newTitle);"
+    "body": "this.title = newTitle;"
   }
 }
 ```
@@ -384,7 +392,7 @@ Methods allow scripts to call functions on the widget.
   "getTotal": {
     "description": "Get the total value",
     "returnType": "number",
-    "body": "return this._getTotal();"
+    "body": "return this.total;"
   }
 }
 ```
@@ -400,7 +408,7 @@ Methods allow scripts to call functions on the widget.
       { "name": "height", "type": "integer", "description": "Height in pixels" },
       { "name": "title", "type": "string", "description": "Title text" }
     ],
-    "body": "this._configure(width, height, title);"
+    "body": "this.width = width; this.height = height; this.title = title;"
   }
 }
 ```
@@ -586,8 +594,9 @@ Before deploying, verify your JSON:
 - [ ] All `webcomponents` have valid `tag` names (lowercase, hyphenated)
 - [ ] All URLs are HTTPS (for external hosting)
 - [ ] All `properties` have `type` and `default`
-- [ ] All `methods` have `body`
-- [ ] `integrity` is set for production (or explicitly `ignoreIntegrity: true` for dev)
+- [ ] All `methods` have a body that only reads or writes declared properties
+- [ ] Every `webcomponents` entry declares `integrity`
+- [ ] Development uses `integrity: ""` with `ignoreIntegrity: true`, or production uses a digest with `ignoreIntegrity: false`
 - [ ] `dataBindings` feeds have unique `id` values
 
 ---

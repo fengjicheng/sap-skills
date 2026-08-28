@@ -429,12 +429,16 @@ Widget that receives data from SAC models.
     "title": {
       "type": "string",
       "default": "Data Table"
+    },
+    "refreshToken": {
+      "type": "integer",
+      "default": 0
     }
   },
   "methods": {
     "refresh": {
       "description": "Refresh the data display",
-      "body": "this._refresh();"
+      "body": "this.refreshToken = this.refreshToken + 1;"
     }
   },
   "events": {
@@ -667,19 +671,23 @@ Widget with click events for script interaction.
     "disabled": {
       "type": "boolean",
       "default": false
+    },
+    "clickRequest": {
+      "type": "integer",
+      "default": 0
     }
   },
   "methods": {
     "click": {
       "description": "Programmatically click the button",
-      "body": "this._click();"
+      "body": "this.clickRequest = this.clickRequest + 1;"
     },
     "setDisabled": {
       "description": "Enable or disable the button",
       "parameters": [
         { "name": "isDisabled", "type": "boolean", "description": "Disabled state" }
       ],
-      "body": "this._setDisabled(isDisabled);"
+      "body": "this.disabled = isDisabled;"
     }
   },
   "events": {
@@ -842,7 +850,7 @@ Professional KPI display widget.
     "setValue": {
       "description": "Set the KPI value",
       "parameters": [{ "name": "val", "type": "number" }],
-      "body": "this._setValue(val);"
+      "body": "this.value = val;"
     }
   },
   "events": {

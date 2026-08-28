@@ -37,7 +37,7 @@ Apply the core rule: **discovery proposes, humans approve, Playwright executes, 
 - **sap-browser-automation**: Use for in-app manual authentication, consent-gated Edge profile reuse, fresh Edge/CDP startup, auth-state bootstrap, and browser recovery.
 - **agent-browser**: Optionally load when the Vercel Labs agent-browser CLI is available and exact command syntax, snapshot/ref usage, screenshots, console, or network inspection is needed.
 - **playwright**: Optionally load for CLI-based browser driving and debugging. For durable `@playwright/test` suites, use this SAC skill as the test architecture guide and follow the local project's Playwright conventions.
-- **chrome-devtools**: Optionally load when Chrome DevTools MCP is installed and approved for read-only browser discovery, console/network inspection, screenshots, Lighthouse, or performance traces. Use `references/chrome-devtools-mcp.md` for SAC-safe defaults and Edge boundaries.
+- **chrome-devtools**: Optionally load when Chrome DevTools MCP is installed and approved for read-only browser discovery, console/network inspection, screenshots, Lighthouse, or performance traces. An explicit Chrome, Edge, CDP, or Chrome DevTools MCP request is binding. Use `references/chrome-devtools-mcp.md` for SAC-safe defaults and Edge boundaries.
 
 ## Initial Guidance
 
@@ -66,7 +66,7 @@ Do not use this skill as the main guide for generic web applications. Use genera
 
 1. Classify the SAC story: production read-only, QA clone, planning/writeback, comments, permission-sensitive, or exploratory.
 2. Establish the automation policy: allowed tenants, allowed users, auth storage handling, writeback approval, baseline approval, and CI triggers.
-3. Run the capability and policy gate: choose manual discovery, Firecrawl public research, Chrome DevTools MCP with supported Chrome, Microsoft Edge/CDP, Chrome DevTools MCP with Edge best-effort, Playwright, agent-browser, or an approved enterprise browser lab based on what is installed and allowed.
+3. Run the capability and policy gate. If the user named a browser or connection method, check only that requested surface. Otherwise choose manual discovery, Firecrawl public research, Chrome DevTools MCP with supported Chrome, Microsoft Edge/CDP, Chrome DevTools MCP with Edge best-effort, Playwright, agent-browser, or an approved enterprise browser lab based on what is installed and allowed.
 4. Run read-only discovery with the selected backend: capture snapshots, annotated screenshots, console/page errors, network clues, and candidate component maps without sending private SAC content to unapproved external services.
 5. Convert discovery into a human-reviewed dashboard profile: pages, widgets, locators, readiness markers, roles, data baselines, visual baselines, and known restrictions.
 6. Implement deterministic Playwright tests through reusable adapters. Keep scenario files selector-free; route interactions through component IDs from the profile.
@@ -103,10 +103,11 @@ Apply this contract to reporting-only SAC stories and dashboards. It complements
 Browser access is an execution prerequisite, not evidence that the story exists. If browser initialization or discovery fails, including runtime errors such as `agent is not defined`:
 
 1. Read the selected browser troubleshooting guidance and retry discovery without bypassing authentication or tenant permissions.
-2. If the normal browser path remains unavailable, use `sap-browser-automation` and the approved Microsoft Edge/CDP recovery guidance in `references/edge-cdp-enterprise.md`.
-3. If Edge/CDP is unavailable or blocked by policy, use approved desktop/manual assistance when available; ask the user to sign in interactively and never automate MFA.
-4. If authenticated tenant control still cannot be established, mark execution as blocked. Do not claim that the story was created or verified.
-5. Hand off an implementation-ready specification containing the story purpose and audience, confirmed model metadata, page-by-page widgets and filters, interactions, omitted or unresolved fields, read-only constraints, and the verification evidence still required.
+2. If the user explicitly named a browser or connection method, do not switch to another browser surface. If its tools are not in the active registry, ask for a Codex restart or a new task.
+3. Require a live `list_pages` or equivalent handshake and verify that the returned pages belong to the requested browser. Configuration, package startup, or `DevToolsActivePort` alone is not enough.
+4. If no explicit browser or connection was requested, use `sap-browser-automation` and the approved Microsoft Edge/CDP recovery guidance in `references/edge-cdp-enterprise.md`.
+5. If authenticated tenant control still cannot be established, mark execution as blocked. Do not claim that the story was created or verified.
+6. Hand off an implementation-ready specification containing the story purpose and audience, confirmed model metadata, page-by-page widgets and filters, interactions, omitted or unresolved fields, read-only constraints, and the verification evidence still required.
 
 ## Operating Model
 
@@ -149,6 +150,8 @@ When implementing against a live project, also inspect the project's existing Pl
 - Do not assume agent-browser, Playwright CLI, Chrome DevTools MCP, Firecrawl MCP, public npm, browser downloads, or remote debugging are available in company environments. Use the capability gate and document fallbacks.
 - Do not use Chrome DevTools MCP as the audited CI release gate. Use it for discovery/debugging; convert approved findings into profile-driven Playwright tests.
 - Do not run Chrome DevTools MCP against private SAC without disabling usage statistics, update checks, and CrUX field-data lookups, and without applying profile, URL, screenshot, and network-output controls.
+- Do not treat MCP configuration as active availability. Confirm the tools in the current task registry and complete a live page-list handshake before using the requested browser.
+- Do not silently replace an explicitly requested Chrome, Edge, CDP, or Chrome DevTools MCP surface with the In-app Browser, an extension, Playwright, Computer Use, another browser, or shell automation.
 - Do not expose CDP beyond loopback, publish `webSocketDebuggerUrl`, or bypass Edge `RemoteDebuggingAllowed` policy. Attaching to or copying a daily user profile requires explicit approval and the shared skill's isolated-profile procedure.
 - Do not treat `/json/version` or `/json/list` returning `404` as proof that Edge CDP is unusable; read `DevToolsActivePort` and use the direct browser WebSocket only when the harness supports it.
 - Do not send authenticated SAC tenant pages, screenshots, HARs, cookies, storage state, internal URLs, customer data, or private company docs to Firecrawl unless the exact deployment and retention mode are approved.
