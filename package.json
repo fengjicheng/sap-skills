@@ -38,7 +38,8 @@
     "test:hook-contracts": "node ./scripts/test-hook-contracts.mjs",
     "test:codex": "node ./tests/codex-layer.test.mjs",
     "validate:manifest-drift": "./scripts/validate-manifest-drift.mjs",
-    "smoke:local-fixtures": "./scripts/smoke-local-fixtures.mjs"
+    "smoke:local-fixtures": "./scripts/smoke-local-fixtures.mjs",
+    "lint:workflows": "actionlint && zizmor .github/workflows/"
   },
   "devDependencies": {
     "@steipete/oracle": "0.16.1",
