@@ -100,7 +100,7 @@ Every push and pull request to `main` now runs a workflow lint gate as part of `
 npm run lint:workflows
 ```
 
-This runs `actionlint && zizmor .github/workflows/`. Any finding fails the command, and the CI job fails with it.
+This runs actionlint and zizmor over `.github/workflows/` and fails if either tool reports a finding. Both tools always run, so one pass shows every finding. The CI job runs the same script, so a finding fails the job too.
 
 **Current result.** The gate is green: actionlint reports no findings, and zizmor reports no findings. Zero suppression annotations (`#! ignore`) exist in the repository. Dependabot keeps the pinned SHAs current with grouped weekly pull requests (`.github/dependabot.yml`), so pinning does not freeze the actions in time.
 
