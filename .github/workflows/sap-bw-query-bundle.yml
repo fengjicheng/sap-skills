@@ -23,8 +23,8 @@ jobs:
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: 24.18.0
-          cache: npm
-          cache-dependency-path: plugins/sap-bw-query/mcp/package-lock.json
+          # Cache disabled: release signing job; a poisoned npm cache is not worth the speed gain.
+          package-manager-cache: false
       - name: Install and test MCP
         shell: pwsh
         run: |
