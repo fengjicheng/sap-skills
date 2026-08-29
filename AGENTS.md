@@ -2,6 +2,12 @@
 
 Read `CLAUDE.md` for the full repository context before making project changes.
 
+## Most Important Rule: Plain Language
+
+- Talk to the user in clear, easy, short end-user language.
+- Do not use jargon. If a technical term cannot be avoided, explain it in one short sentence.
+- This rule is the most important one in this file and in `CLAUDE.md`.
+
 ## Oracle Shared Reviews
 
 - Use Oracle for a second opinion when stuck, when reviewing architecture, before risky refactors, or when validating a plan with another model.
