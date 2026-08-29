@@ -39,7 +39,7 @@
     "test:codex": "node ./tests/codex-layer.test.mjs",
     "validate:manifest-drift": "./scripts/validate-manifest-drift.mjs",
     "smoke:local-fixtures": "./scripts/smoke-local-fixtures.mjs",
-    "lint:workflows": "actionlint && zizmor .github/workflows/"
+    "lint:workflows": "actionlint .github/workflows/*.y*ml; a=$?; zizmor .github/workflows/; z=$?; [ \"$a\" -eq 0 ] && [ \"$z\" -eq 0 ]"
   },
   "devDependencies": {
     "@steipete/oracle": "0.16.1",

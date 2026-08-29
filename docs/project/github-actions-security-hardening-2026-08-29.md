@@ -2,7 +2,7 @@
 
 **Scope:** all 8 workflow files under `.github/workflows/`
 **Branch:** `chore/gh-actions-security-hardening` (off `main`)
-**Commits:** `3af29a7`, `f4958a5`, `7a70e07`, `f97880f`, plus the final cache fix
+**Commits:** `3af29a7`, `f4958a5`, `7a70e07`, `f97880f`, plus the final cache fix (`78e4ca2`)
 **Result:** `npm run lint:workflows` exits 0 with zero findings and zero suppression annotations.
 
 ---
@@ -19,7 +19,7 @@
 
 ## Why: what happened to other projects in 2025–2026
 
-Attackers stopped attacking only application code. They now attack the CI setup itself. These incidents shaped the fixes in this repository.
+Attackers no longer attack only application code; they now also attack the CI setup itself. These incidents shaped the fixes in this repository.
 
 ### tj-actions/changed-files (March 2025) — CVE-2025-30066
 
@@ -92,7 +92,7 @@ Every push and pull request to `main` now runs a workflow lint gate as part of `
 - **actionlint** v1.7.12 checks workflow syntax, correctness, and embedded shell scripts (with shellcheck). https://github.com/rhysd/actionlint
 - **zizmor** v1.29.0 checks GitHub Actions security rules, for example unpinned actions, over-broad token scopes, template injection, and cache poisoning. https://zizmor.sh/
 
-**How the binaries are verified.** The install step downloads both release archives over HTTPS from their official GitHub releases. It checks each archive against a SHA-256 digest literal written inside the workflow step with `sha256sum -c -`. A mismatch fails the job. The actionlint digest is also matched against the official checksum file published with that release. zizmor publishes no checksum file, so its digest was computed once from the official release asset and recorded here. The step adds no new third-party actions; the repository deliberately does not use `zizmor-action` for this reason.
+**How the binaries are verified.** The install step downloads both release archives over HTTPS from their official GitHub releases. It checks each archive against a SHA-256 digest literal written inside the workflow step with `sha256sum -c -`. A mismatch fails the job. The actionlint digest was cross-checked against the official checksum file published with that release when the digest was added; CI itself checks only the embedded digest literal. zizmor publishes no checksum file, so its digest was computed once from the official release asset and recorded here. The step adds no new third-party actions; the repository deliberately does not use `zizmor-action` for this reason.
 
 **How to run locally.** Install both tools (for example with Homebrew) and run:
 
