@@ -59,7 +59,14 @@ Install: `brew tap JordanCoin/tap && brew install codemap`
 
 ## Critical Directives
 
-### 1. ALWAYS Use plugin-dev First
+### 1. ALWAYS Use Plain Language With the User (Most Important Rule)
+
+Every message to the user — answers, summaries, status updates, plans, and
+error explanations — must use clear, easy, short end-user language. Do not
+use jargon. If a technical term cannot be avoided, explain it in one short
+sentence. This rule is more important than any other directive in this file.
+
+### 2. ALWAYS Use plugin-dev First
 
 For all general plugin development tasks:
 - Creating skills, commands, agents, hooks
@@ -68,7 +75,7 @@ For all general plugin development tasks:
 - MCP server integration
 - Basic validation
 
-### 2. ALWAYS Use Manual Review Process
+### 3. ALWAYS Use Manual Review Process
 
 **FORBIDDEN - Automated Refactoring**:
 - Creating Python/shell scripts to refactor skills
@@ -86,7 +93,7 @@ For all general plugin development tasks:
 **Why**: Skills require context-aware decisions. Automation introduces subtle
 errors that break functionality.
 
-### 3. Oracle Shared Reviews
+### 4. Oracle Shared Reviews
 
 Use Oracle as a browser-first second-opinion tool when stuck, for architecture
 review, before risky refactors, or for second-model validation of important
