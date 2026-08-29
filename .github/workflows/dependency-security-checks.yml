@@ -12,10 +12,14 @@ concurrency:
   group: dependency-security-checks-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
   enforce-dependency-hardening:
     name: Enforce dependency hardening policy
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       contents: read
 

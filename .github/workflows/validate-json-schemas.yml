@@ -17,6 +17,7 @@ jobs:
   validate-json-schemas:
     name: Validate JSON Schemas
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Checkout repository
