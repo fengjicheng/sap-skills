@@ -48,11 +48,13 @@ jobs:
           [System.IO.File]::WriteAllText((Join-Path $env:RUNNER_TEMP "bw-studio-signing.pem"), $env:BW_STUDIO_SIGNING_PRIVATE_KEY)
       - name: Build and sign portable bundle
         shell: pwsh
+        env:
+          SIGNING_KEY_ID: ${{ vars.BW_STUDIO_SIGNING_KEY_ID }}
         run: |
           & plugins/sap-bw-query/bundle/Build-BwStudio.ps1 `
             -OutputDirectory (Join-Path $env:RUNNER_TEMP "bw-release") `
             -SigningPrivateKeyPath (Join-Path $env:RUNNER_TEMP "bw-studio-signing.pem") `
-            -SigningKeyId "${{ vars.BW_STUDIO_SIGNING_KEY_ID }}"
+            -SigningKeyId "$env:SIGNING_KEY_ID"
       - name: Deploy bundle and run standalone round-trip smoke
         shell: pwsh
         env:

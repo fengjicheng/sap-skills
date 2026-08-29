@@ -31,8 +31,10 @@ jobs:
 
       - name: Validate changed SKILL.md files
         if: github.event_name == 'pull_request'
+        env:
+          BASE_REF: ${{ github.base_ref }}
         run: |
-          CHANGED=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | grep '^plugins/[^/]*/skills/[^/]*/SKILL\.md$' || true)
+          CHANGED=$(git diff --name-only "origin/$BASE_REF...HEAD" | grep '^plugins/[^/]*/skills/[^/]*/SKILL\.md$' || true)
           if [ -z "$CHANGED" ]; then
             echo "No plugin SKILL.md files changed, skipping validation"
             exit 0
@@ -59,7 +61,9 @@ jobs:
       - name: Summary
         if: always()
         run: |
-          echo "### Frontmatter Validation" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "Validated installable plugin \`SKILL.md\` files in \`plugins/*/skills/*/\`" >> $GITHUB_STEP_SUMMARY
-          echo "Run \`./scripts/validate-frontmatter.sh\` locally to check before pushing." >> $GITHUB_STEP_SUMMARY
+          {
+            echo "### Frontmatter Validation"
+            echo ""
+            echo "Validated installable plugin \`SKILL.md\` files in \`plugins/*/skills/*/\`"
+            echo "Run \`./scripts/validate-frontmatter.sh\` locally to check before pushing."
+          } >> "$GITHUB_STEP_SUMMARY"
