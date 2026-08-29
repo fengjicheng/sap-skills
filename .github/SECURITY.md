@@ -61,7 +61,14 @@ This repository is covered by two free GitHub features for public repos (no paid
 - Config: [`.github/dependabot.yml`](dependabot.yml)
 - Surfaces vulnerability advisories and opens PRs for outdated dependencies (npm) and pinned GitHub Actions, grouped weekly to reduce review load.
 
-Findings from either tool are triaged like any other reported vulnerability (see *Reporting a Vulnerability* above).
+### Workflow Lint Gate (actionlint + zizmor)
+- Script: `npm run lint:workflows`, run inside [`quality-checks.yml`](workflows/quality-checks.yml) on every push/PR to `main`. The binaries are downloaded from their official releases at pinned versions (actionlint v1.7.12, zizmor v1.29.0) and verified against embedded SHA-256 digests before use.
+- **actionlint** checks workflow syntax, correctness, and embedded shell scripts. **zizmor** checks Actions security rules: unpinned action references, over-broad token scopes, template injection, and cache poisoning.
+- **Pinning policy:** every `uses:` reference is pinned to a full commit SHA (`owner/action@<40-char-sha> # vX.Y.Z`), Dependabot keeps the SHAs current, and all checkouts run with `persist-credentials: false`.
+- **Hardening policy:** every workflow declares least-privilege `permissions:`, a `timeout-minutes` on every job, and a concurrency group; no `${{ }}` template expressions appear inside `run:` shell bodies (values arrive through step `env:`).
+- Any finding fails the build. Suppression annotations are not used. Background and incident research: [`docs/project/github-actions-security-hardening-2026-08-29.md`](../docs/project/github-actions-security-hardening-2026-08-29.md).
+
+Findings from any of these tools are triaged like any other reported vulnerability (see *Reporting a Vulnerability* above).
 
 ## Known Security Considerations
 

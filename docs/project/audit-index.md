@@ -11,6 +11,7 @@ agent, hook, template, and reference resources only.
 - `plugin-skills-third-pass-audit-2026-06-14.md` - effectiveness audit, capability indexes, output contracts, and oversized-reference routing.
 - `source-verification-ledger.json` - current fourth-pass freshness ledger that guards `metadata.last_verified`.
 - `package-evidence/2026-06-15.json` - public registry evidence for MCP/package freshness candidates.
+- `github-actions-security-hardening-2026-08-29.md` - workflow supply-chain hardening: SHA pinning, least-privilege tokens, timeouts, expression hygiene, and the actionlint + zizmor CI gate.
 
 ## Policy
 
