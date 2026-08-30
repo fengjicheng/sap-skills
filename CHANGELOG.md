@@ -5,6 +5,13 @@ All notable changes to SAP Skills will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Security
+
+- Hardened all 8 GitHub Actions workflows against supply-chain attacks: pinned all 20 action references to verified commit SHAs with `persist-credentials: false` on all 9 checkout steps, declared least-privilege `permissions:` plus per-job `timeout-minutes` and concurrency groups in every workflow, removed all `${{ }}` template expressions from `run:` shell bodies (values now arrive through step `env:` mappings), and disabled npm package-manager caching in the release-signing workflow (`package-manager-cache: false`) to close the cache-poisoning exposure.
+- Added a workflow lint gate to `quality-checks.yml` (`npm run lint:workflows`: actionlint v1.7.12 + zizmor v1.29.0, installed in CI from pinned releases verified against embedded SHA-256 digests) that fails on any finding; the gate is green with zero suppression annotations. Background, incident research, and watch items: `docs/project/github-actions-security-hardening-2026-08-29.md`.
+
 ## [2.4.1] - 2026-08-07
 
 ### Changed
