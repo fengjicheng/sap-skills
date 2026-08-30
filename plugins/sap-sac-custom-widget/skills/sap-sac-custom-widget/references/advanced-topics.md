@@ -228,7 +228,7 @@ Represents a data selection in SAC:
           "description": "Selection to apply"
         }
       ],
-      "body": "this._setSelection(selection);"
+      "body": "this.currentSelection = selection;"
     }
   }
 }
@@ -603,13 +603,19 @@ class MyWidget extends HTMLElement {
     this._shadowRoot.getElementById("title").textContent = this._t(this._props.titleKey);
   }
 
-  // Set locale from SAC context
-  setLocale(locale) {
-    this._locale = locale.substring(0, 2); // "en-US" -> "en"
+  // The story script writes a declared string property such as `locale`.
+  set locale(locale) {
+    this._locale = String(locale || "en").substring(0, 2); // "en-US" -> "en"
     this._render();
   }
 }
 ```
+
+The widget cannot reliably discover the SAC user's identity or the SAC UI language. Treat
+`navigator.language` as browser context only. Pass a locale or translated viewer content through a
+declared property or story script. A custom `locale` property should be documented in `widget.json`
+and written by story script when the viewer language matters. Keep authored empty strings distinct
+from missing values when seeding localized configuration, and validate every language slot.
 
 ---
 

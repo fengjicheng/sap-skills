@@ -10,7 +10,7 @@
   var template = document.createElement("template");
   template.innerHTML = [
     "<style>",
-    ":host{display:block;font-family:var(--sapFontFamily,Arial,sans-serif);font-size:12px;color:var(--sapTextColor,#32363a);}",
+    ":host{display:block;font-size:12px;color:var(--sapTextColor,#32363a);}",
     ".panel{box-sizing:border-box;padding:12px;width:100%;}",
     ".section{border-bottom:1px solid #d9d9d9;margin-bottom:14px;padding-bottom:12px;}",
     ".section:last-child{border-bottom:0;margin-bottom:0;}",
@@ -56,7 +56,16 @@
   function setValue(root, id, value) {
     var input = root.getElementById(id);
     if (input) {
-      input.value = value === undefined || value === null ? "" : value;
+      var active = root.activeElement === input;
+      var start = input.selectionStart;
+      var end = input.selectionEnd;
+      var next = value === undefined || value === null ? "" : String(value);
+      if (input.value !== next) {
+        input.value = next;
+      }
+      if (active && start !== null && end !== null && input.setSelectionRange) {
+        input.setSelectionRange(Math.min(start, next.length), Math.min(end, next.length));
+      }
     }
   }
 

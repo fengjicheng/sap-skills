@@ -17,7 +17,6 @@
     <style>
       :host {
         display: block;
-        font-family: var(--sapFontFamily, "72", Arial, sans-serif);
         font-size: 13px;
         color: var(--sapTextColor, #333);
         padding: 12px;
@@ -54,6 +53,7 @@
         border: 1px solid var(--sapField_BorderColor, #bfbfbf);
         border-radius: 3px;
         box-sizing: border-box;
+        font-family: inherit;
         background-color: var(--sapField_Background, #fff);
         color: var(--sapTextColor, #333);
       }
@@ -69,6 +69,7 @@
         font-size: 13px;
         border: 1px solid var(--sapField_BorderColor, #bfbfbf);
         border-radius: 3px;
+        font-family: inherit;
         background-color: var(--sapField_Background, #fff);
         color: var(--sapTextColor, #333);
       }
@@ -287,10 +288,22 @@
     _syncFormWithProperties() {
       const props = this._props;
 
+      const setValue = (input, value) => {
+        if (!input) return;
+        const focused = this._shadowRoot.activeElement === input;
+        const start = input.selectionStart;
+        const end = input.selectionEnd;
+        const next = value === undefined || value === null ? "" : String(value);
+        if (input.value !== next) input.value = next;
+        if (focused && start !== null && end !== null && input.setSelectionRange) {
+          input.setSelectionRange(Math.min(start, next.length), Math.min(end, next.length));
+        }
+      };
+
       // Title
       const titleInput = this._shadowRoot.getElementById("title");
       if (props.title !== undefined) {
-        titleInput.value = props.title;
+        setValue(titleInput, props.title);
       }
 
       // Show title
@@ -303,7 +316,7 @@
       if (props.primaryColor) {
         const primaryColorInput = this._shadowRoot.getElementById("primaryColor");
         const primaryColorValue = this._shadowRoot.getElementById("primaryColorValue");
-        primaryColorInput.value = props.primaryColor;
+        setValue(primaryColorInput, props.primaryColor);
         primaryColorValue.textContent = props.primaryColor;
       }
 
@@ -311,26 +324,26 @@
       if (props.backgroundColor) {
         const bgColorInput = this._shadowRoot.getElementById("backgroundColor");
         const bgColorValue = this._shadowRoot.getElementById("backgroundColorValue");
-        bgColorInput.value = props.backgroundColor;
+        setValue(bgColorInput, props.backgroundColor);
         bgColorValue.textContent = props.backgroundColor;
       }
 
       // Font size
       if (props.fontSize) {
         const fontSizeSelect = this._shadowRoot.getElementById("fontSize");
-        fontSizeSelect.value = props.fontSize;
+        setValue(fontSizeSelect, props.fontSize);
       }
 
       // Padding
       if (props.padding !== undefined) {
         const paddingInput = this._shadowRoot.getElementById("padding");
-        paddingInput.value = props.padding;
+        setValue(paddingInput, props.padding);
       }
 
       // Border radius
       if (props.borderRadius !== undefined) {
         const borderRadiusInput = this._shadowRoot.getElementById("borderRadius");
-        borderRadiusInput.value = props.borderRadius;
+        setValue(borderRadiusInput, props.borderRadius);
       }
     }
 

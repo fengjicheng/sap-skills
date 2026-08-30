@@ -16,6 +16,48 @@ Classify normal SAC use as `read-only tenant` discovery plus `local-only` browse
 - Edge/WebView2 usage belongs in `edge-cdp-enterprise.md`: use `--executablePath`, `--browser-url`, or `--autoConnect` when policy allows it; do not depend on `--browser=edge`.
 - Node.js LTS, npm/npx, and an approved Chrome installation are prerequisites unless the organization provides a pinned/internal package path.
 
+## Explicit surface and live connection gate
+
+If the user names Chrome, Edge, Chrome DevTools MCP, CDP, or a local DevTools bridge, that choice is
+binding. Use only the requested browser and connection. Do not fall back to the In-app Browser, a
+ChatGPT browser extension, Playwright, Computer Use, another browser, or shell automation.
+
+Treat setup and availability as separate checks:
+
+1. Confirm the MCP server is present in Codex configuration.
+2. Confirm its tools are present in the active task tool registry. `codex mcp get` alone is not enough.
+3. If the tools are missing after configuration, restart Codex or open a new task.
+4. Run a real `list_pages` or equivalent call and verify the returned titles and URLs belong to the
+   requested browser.
+
+Package startup, a successful `--help` call, a `DevToolsActivePort` file, or a browser window alone is
+not proof of a working MCP connection. Stop and report the blocker if the live handshake fails.
+
+## Chrome and Edge setup notes
+
+For Chrome 144 and newer, open `chrome://inspect/#remote-debugging`, enable remote debugging, and
+accept the browser permission dialog when the MCP connects. Use `--auto-connect` only after the active
+tools and browser target are confirmed. If the checkbox is disabled, inspect the Chrome
+`RemoteDebuggingAllowed` policy. If its value is `0`, stop and ask the administrator to enable it. Do not
+bypass an enterprise policy.
+
+For Edge, pass the Edge user-data directory explicitly when using Chrome DevTools MCP, for example:
+
+```text
+--auto-connect --user-data-dir=C:\Users\<user>\AppData\Local\Microsoft\Edge\User Data
+```
+
+Open `edge://inspect`, enable remote debugging for the browser instance, accept the permission dialog,
+restart Codex or open a new task after MCP configuration, and then run the live page-list check. If
+Edge `RemoteDebuggingAllowed` is disabled, stop and involve the administrator.
+
+Use the full MCP feature set by default. Do not add `--slim` unless the user explicitly requests the
+reduced surface. Keep experimental tools disabled unless they are separately approved.
+
+On Windows, verify the actual package with `npx -y chrome-devtools-mcp@<approved-version> --help`. If
+npm cannot write its default cache, configure a known writable `NPM_CONFIG_CACHE` for the MCP process
+and repeat the package check.
+
 ## SAC-Safe Server Configuration
 
 For private SAC tenants, start from a conservative configuration:

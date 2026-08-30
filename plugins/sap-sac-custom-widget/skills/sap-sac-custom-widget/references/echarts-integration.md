@@ -67,12 +67,16 @@ For `/widget-generate` enterprise/offline packages and browser design runtime pr
     "colorScheme": {
       "type": "string",
       "default": "#5470c6,#91cc75,#fac858,#ee6666,#73c0de"
+    },
+    "refreshToken": {
+      "type": "integer",
+      "default": 0
     }
   },
   "methods": {
     "refresh": {
       "description": "Refresh the chart",
-      "body": "this._refresh();"
+      "body": "this.refreshToken = this.refreshToken + 1;"
     }
   },
   "events": {

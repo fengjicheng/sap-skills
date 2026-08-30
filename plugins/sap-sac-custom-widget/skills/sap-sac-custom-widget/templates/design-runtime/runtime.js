@@ -210,11 +210,13 @@
       renderTokenControls();
     });
     $("viewportWidth").addEventListener("input", function(event) {
-      getScenarioState(app.activeScenarioId).viewport.width = parseInt(event.target.value, 10) || 720;
+      var width = Number(event.target.value);
+      getScenarioState(app.activeScenarioId).viewport.width = Number.isFinite(width) && width > 0 ? width : 720;
       renderAll();
     });
     $("viewportHeight").addEventListener("input", function(event) {
-      getScenarioState(app.activeScenarioId).viewport.height = parseInt(event.target.value, 10) || 420;
+      var height = Number(event.target.value);
+      getScenarioState(app.activeScenarioId).viewport.height = Number.isFinite(height) && height > 0 ? height : 420;
       renderAll();
     });
     $("themeSelect").addEventListener("change", function(event) {

@@ -429,12 +429,16 @@ Widget that receives data from SAC models.
     "title": {
       "type": "string",
       "default": "Data Table"
+    },
+    "refreshToken": {
+      "type": "integer",
+      "default": 0
     }
   },
   "methods": {
     "refresh": {
       "description": "Refresh the data display",
-      "body": "this._refresh();"
+      "body": "this.refreshToken = this.refreshToken + 1;"
     }
   },
   "events": {
@@ -667,19 +671,23 @@ Widget with click events for script interaction.
     "disabled": {
       "type": "boolean",
       "default": false
+    },
+    "clickRequest": {
+      "type": "integer",
+      "default": 0
     }
   },
   "methods": {
     "click": {
       "description": "Programmatically click the button",
-      "body": "this._click();"
+      "body": "this.clickRequest = this.clickRequest + 1;"
     },
     "setDisabled": {
       "description": "Enable or disable the button",
       "parameters": [
         { "name": "isDisabled", "type": "boolean", "description": "Disabled state" }
       ],
-      "body": "this._setDisabled(isDisabled);"
+      "body": "this.disabled = isDisabled;"
     }
   },
   "events": {
@@ -842,7 +850,7 @@ Professional KPI display widget.
     "setValue": {
       "description": "Set the KPI value",
       "parameters": [{ "name": "val", "type": "number" }],
-      "body": "this._setValue(val);"
+      "body": "this.value = val;"
     }
   },
   "events": {
@@ -1329,6 +1337,11 @@ For each template:
 5. [ ] Test in SAC story/application
 6. [ ] Generate integrity hashes for production
 7. [ ] Set `ignoreIntegrity: false` for production
+8. [ ] Confirm every manifest property changes observable runtime behavior
+9. [ ] Test the final component files, not only shared source helpers
+10. [ ] Test property updates, touch input, focus retention, and cleanup
+11. [ ] Use a visible browser for layout, fonts, resize, and hit testing
+12. [ ] Keep `widget.json` and the Resource-ZIP as separate upload artifacts
 
 ---
 

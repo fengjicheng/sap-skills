@@ -47,12 +47,21 @@ visible browser state.
 | Independent compatible browser context | Existing Playwright plus scoped `storageState` or CDP state transfer |
 | Missing auth or failed browser bootstrap | User-assisted login, recovery, or specification-only handoff |
 
+## Requested browser and connection are binding
+
+If the user names Chrome, Edge, Chrome DevTools MCP, CDP, or a local DevTools bridge, use only that
+browser and connection method. Do not silently switch to the In-app Browser, a ChatGPT browser
+extension, Playwright, Computer Use, another browser, or shell automation. If the requested surface is
+not available, report the exact blocker and stop at that boundary.
+
 ## Operating contract
 
 - Prefer a connector, API, CLI, or database-native check when it can answer the request without a browser.
-- Try the in-app Browser first when it is available and the task needs authenticated visible UI.
+- Use the in-app Browser first only when the user has not named a different browser or connection method.
 - Ask the user to authenticate manually in the in-app Browser when its target redirects to SSO. Use its secure authentication capability; never ask for passwords or OTPs in chat.
 - After in-app verification, use the fresh Edge path for reliable automation when the task needs CDP, enterprise extensions, or a reusable profile.
+- Treat MCP configuration and MCP availability as separate checks. After configuration, verify that the server tools are present in the active tool registry. A successful `codex mcp get` check alone does not make the MCP usable.
+- Require a live handshake, such as `list_pages`, and verify that the returned pages belong to the requested browser. If the tools are missing after configuration, ask the user to restart Codex or open a new task before continuing.
 - Ask explicit permission before reusing the user's authenticated normal Edge profile or closing Edge.
 - Copy only after Edge is closed, and copy to an isolated profile path. Treat the copy, cookies, tokens, local storage, and storage-state files as credentials.
 - Bind CDP to `127.0.0.1`; never expose the port, WebSocket endpoint, profile, or auth state to a network, repository, log, screenshot, or Oracle review.
@@ -76,10 +85,11 @@ Record the target application, tenant/host, requested URL, read/write intent, ev
 whether the user approved profile reuse. Use this order:
 
 1. Existing non-browser tool if sufficient.
-2. In-app Browser for visible authenticated UI and manual SSO.
-3. Fresh isolated Edge with loopback CDP for enterprise browser behavior and reusable authentication.
-4. Already-installed Playwright connected over CDP or using local storage state.
-5. Approved desktop/manual assistance or a specification-only handoff.
+2. The explicitly requested browser and connection method, after active-tool and live-handshake checks.
+3. In-app Browser for visible authenticated UI and manual SSO when no other browser or connection was requested.
+4. Fresh isolated Edge with loopback CDP for enterprise browser behavior and reusable authentication.
+5. Already-installed Playwright connected over CDP or using local storage state.
+6. Approved desktop/manual assistance or a specification-only handoff.
 
 Do not install Playwright, browser binaries, MCP servers, or extensions in an enterprise environment
 unless the user explicitly requests and approves that change. If Playwright is unavailable, Edge/CDP
@@ -87,10 +97,10 @@ remains the primary automation surface.
 
 ### 2. Authenticate in the in-app Browser
 
-Open the target using the installed Browser skill. Inspect visible state. If the page requires SSO,
-pause for the user to complete the login manually through the supported secure auth flow. Verify a
-positive signed-in signal on the target domain and retain a screenshot or equivalent evidence when
-allowed.
+When no other browser or connection was requested, open the target using the installed Browser skill.
+Inspect visible state. If the page requires SSO, pause for the user to complete the login manually
+through the supported secure auth flow. Verify a positive signed-in signal on the target domain and
+retain a screenshot or equivalent evidence when allowed.
 
 Do not extract cookies, local storage, session storage, profile databases, passwords, or tokens from the
 in-app Browser. Its session is independent from Edge. If it cannot expose an authenticated page after
@@ -162,6 +172,9 @@ Use the following fallback sequence:
 3. Ask for one-time manual authentication in the isolated Edge profile.
 4. Use approved desktop/manual assistance if the environment supports it.
 5. If no authenticated target can be verified, stop and provide an implementation-ready specification, the exact missing evidence, and the next manual action.
+
+When the user explicitly named a browser or connection method, do not use this sequence to switch to a
+different surface. Stop when the requested surface is unavailable or its live handshake fails.
 
 Report authentication as `verified`, `missing`, `expired`, `blocked`, or `unknown`; never infer success
 from browser bootstrap alone.

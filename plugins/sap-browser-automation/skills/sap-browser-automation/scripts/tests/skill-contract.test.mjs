@@ -52,3 +52,31 @@ test('in-app validation is explicitly deferred to desktop runtime', async () => 
   assert.match(inApp, /Codex or Claude Desktop/i);
   assert.match(inApp, /runtime validation is deferred/i);
 });
+
+test('explicit browser requests stay on the requested surface and require a live MCP check', async () => {
+  const skill = await read('SKILL.md');
+
+  assert.match(skill, /use only that\s+browser and connection method/i);
+  assert.match(skill, /active tool registry/i);
+  assert.match(skill, /live .*handshake/i);
+  assert.match(skill, /restart Codex|open a new task/i);
+  assert.match(skill, /Do not silently switch to the In-app Browser/i);
+});
+
+test('SAC test automation preserves the same browser routing contract', async () => {
+  const skill = await readFile(
+    new URL('../../../../../../plugins/sap-sac-test-automation/skills/sap-sac-test-automation/SKILL.md', import.meta.url),
+    'utf8',
+  );
+  const chromeReference = await readFile(
+    new URL('../../../../../../plugins/sap-sac-test-automation/skills/sap-sac-test-automation/references/chrome-devtools-mcp.md', import.meta.url),
+    'utf8',
+  );
+
+  assert.match(skill, /explicitly named.*do not switch to another browser surface/i);
+  assert.match(skill, /active registry/i);
+  assert.match(skill, /live `list_pages`.*handshake/i);
+  assert.match(chromeReference, /DevToolsActivePort.*browser window alone is\s+not proof/i);
+  assert.match(chromeReference, /NPM_CONFIG_CACHE/);
+  assert.match(chromeReference, /RemoteDebuggingAllowed/);
+});

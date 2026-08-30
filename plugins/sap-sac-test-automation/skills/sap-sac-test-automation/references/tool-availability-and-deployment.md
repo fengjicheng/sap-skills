@@ -4,6 +4,12 @@ Source: Derived summary from incorporated SAC automated-suite planning content, 
 
 Treat browser tooling as optional. Restricted company laptops, Windows desktops, locked-down CI images, private npm registries, and enterprise browser policies can remove tools that are convenient in open development environments.
 
+An explicit browser or connection request overrides the backend order below. If the user names Chrome,
+Edge, Chrome DevTools MCP, CDP, or a local DevTools bridge, check only that requested surface. Do not
+silently fall back to another browser or connection. Confirm both configured-server state and active task
+tool availability, then complete a live page-list handshake before proceeding. If the tools are missing,
+ask for a Codex restart or a new task. If the handshake fails, report the blocker and stop.
+
 ## Capability Gate
 
 Before recommending a workflow, record:
@@ -93,6 +99,10 @@ When Firecrawl is approved for sensitive work, still minimize data:
 - Stop interact sessions when finished and record the approval, mode, and retention assumptions in the discovery notes.
 
 ## No-Tool Fallback
+
+Use the manual observation packet only when no browser or connection method was explicitly required, or
+when the user approves that alternative. A named but unavailable browser surface is a blocker, not a
+reason to switch tools silently.
 
 When automation tools are unavailable, produce a manual observation packet:
 

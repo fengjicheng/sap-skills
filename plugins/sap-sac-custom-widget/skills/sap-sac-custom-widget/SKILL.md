@@ -40,6 +40,9 @@ allowed-tools:
 - [Browser Design Runtime](#browser-design-runtime)
 - [CSS and Styling Compliance](#css-and-styling-compliance)
 - [SAC Import and Packaging](#sac-import-and-packaging)
+- [Production Audit Lessons](#production-audit-lessons)
+- [Property Lifecycle](#property-lifecycle)
+- [Verification and Artifact Discipline](#verification-and-artifact-discipline)
 - [Plugin Components](#plugin-components)
 - [Quick Start](#quick-start)
 - [Community Sample Widgets](#community-sample-widgets)
@@ -110,6 +113,34 @@ Style custom widgets inside their Web Component/Shadow DOM boundary. Do not rely
 Decide the delivery mode before generating `widget.json`: SAC Resource-ZIP upload and external HTTPS hosting use different URL rules. For SAC Resource-ZIP upload, deliver `widget.json` separately, upload it first, and only then upload a Resource-ZIP containing root-level component JavaScript files such as `widget.js`, `builder.js`, and `styling.js`. Do not include `widget.json`, subfolders, tests, README files, CSS, or HTML in that Resource-ZIP.
 
 For Resource-ZIP manifests, use root-relative component URLs such as `"/widget.js"`; for external hosting, use complete HTTPS URLs. Keep local-preview paths like `"widget.js"` in preview-only configs unless the target SAC flow explicitly documents that resolution mode. Model simple configurable colors as `string` properties with hex defaults such as `"#f4f7fa"`; use the `Color` type only after the exact SAC tenant and target panel flow accepts it. Browser preview and Node tests are useful, but they are not proof of SAC importability. For widgets with builder/styling panels, preserve focus and collapse state during text edits, keep component JS self-contained, and validate final `outputs/` artifacts rather than source-only previews. When the widget is done, the final chat response must offer both completed upload artifacts for download: the `widget.json` manifest and the Resource-ZIP. See **`references/sac-import-packaging-lessons.md`** for upload sequence, ZIP content checks, final-artifact tests, builder/tree rules, final download handoff, and SAC error triage.
+
+---
+
+## Production Audit Lessons
+
+When a widget is rejected by SAC despite passing local tests, consult **`references/production-widget-lessons.md`**. It covers raw control characters in bundles, Analytics Designer method-body limits, required integrity states, client-side-only manifest validation, icon and font isolation, user and language boundaries, bookmark risk, opaque-error bisection, behavioral preflight guards, and browser-preview limits. Treat its evidence labels as part of the guidance: tenant observations, SAP-documented behavior, and unconfirmed hypotheses must not be presented as equivalent.
+
+## Property Lifecycle
+
+Treat SAC properties as an external state stream. SAC may deliver properties one at a time, echo
+values written by the widget, and change their representation. Merge updates, normalize through one
+read path, and render from the merged state. Do not assume property order or consume builder
+initialization flags on an empty first render. Manifest method bodies are Analytics Designer script:
+they may read or write declared properties, but they cannot call private component methods.
+
+Builder and styling panels are stateful editors. Keep text edits targeted so focus, caret, selection,
+search, and collapse state survive. Preserve unknown configuration keys when two editors share a
+document, and keep one user action to one property dispatch and one undo step. For structured import
+or export, preserve stable ids, deep-copy nested templates, use null-prototype maps for
+user-authored names, and test every language slot. See **`references/property-lifecycle.md`**.
+
+## Verification and Artifact Discipline
+
+Validate the built component files and final Resource-ZIP, not only source helpers or a browser
+preview. Generate all outputs first, validate them, then write them. Test the final bundles
+standalone, verify exact SRI bytes, scan for raw control characters, and use a real browser for
+layout, focus, font, pointer, and lifecycle behavior that DOM emulation cannot represent. See
+**`references/verification-and-artifacts.md`**.
 
 ---
 
@@ -377,6 +408,12 @@ openssl dgst -sha256 -binary widget.js | openssl base64 -A
 | Widget not appearing | Missing connectedCallback render | Call render in onCustomWidgetAfterUpdate |
 | Properties not updating | Missing propertiesChanged dispatch | Use dispatchEvent with propertiesChanged |
 | Data not displaying | Data binding misconfigured | Verify feeds in JSON match usage |
+| `CUSTOM_WIDGET_SERVICE_EXCEPTION` or opaque HTTP 500 | Raw control or ambiguous code point, malformed method body, manifest/ZIP pair, or another upload constraint | Scan source and bundles for control code points, BOM, zero-width characters, and line separators, then use one-variable JSON and ZIP probes |
+| Method body rejected with unknown function or type errors | Body calls component internals instead of using declared properties | Declare the state as a property and have the body read or write that property |
+| Manifest rejected for missing `integrity` | `webcomponents[]` omitted the required field | Add `integrity` and use either development `""` plus `ignoreIntegrity: true` or a real `sha256-...` digest plus `false` |
+| Icons render blank | Icon name is not bundled or was guessed | Generate and search a committed icon map; do not depend on `IconPool` inside the widget |
+| Widget has the wrong font | Form controls use their UA font or panel CSS overrides SAC | Inherit the font on controls and avoid custom font stacks in design-time panels |
+| Personal or language value is empty or wrong | Widget tried to discover user or SAC locale context | Pass it through a declared property from story script |
 | `"Color" is not a valid type` or default expected as Color | Tenant/import flow rejected simple color properties | Use `string` plus hex defaults for simple configurable colors |
 | Main component could not be loaded | Resource URL, ZIP content, or JS syntax problem | Check root-relative `webcomponents[].url`, Resource-ZIP root contents, then `node --check` |
 | Resource File upload is disabled | `widget.json` has not validated yet | Upload and validate `widget.json` first, then upload the Resource-ZIP |
@@ -384,6 +421,12 @@ openssl dgst -sha256 -binary widget.js | openssl base64 -A
 | Builder input loses focus or collapse state | Text edits trigger full render | Update field/row/JSON text directly; reserve full render for structural changes |
 | Preview works but SAC component fails standalone | Preview depends on a shared source helper not present in bundled JS | Test final `widget.js`, `builder.js`, and `styling.js` without preview-only helper scripts |
 | Duplicate menu items collide | Subtree duplicate rewrote only root ID | Rewrite descendant IDs and test uniqueness across the whole tree |
+| Panel shows a value that runtime ignores | Property is stored or exported but never read by the runtime | Add a runtime-use check and a behavior test for every manifest property |
+| Valid zero becomes a default | Numeric coercion uses `Number(value) || fallback` | Use an explicit finite-value check |
+| Builder loses typed text or search state | Every update rebuilds the panel | Patch fields in place and restore focus, selection, and caret when structural rendering is required |
+| Rename or duplicate leaves stale state | Identity is positional or a shallow copy aliases nested data | Preserve stable ids, deep-copy templates, and enumerate every reference holder |
+| Layout passes DOM tests but fails in SAC | Test environment has no layout or font metrics | Verify geometry and font-dependent behavior in a real browser |
+| A user-authored name behaves inconsistently by case | Membership checks use exact comparisons in multiple sites | Centralize the matching rule and test a case-only rename |
 
 ---
 
@@ -457,6 +500,9 @@ See **`references/widget-addon-guide.md`** for complete implementation.
 13. **`references/css-and-styling-compliance.md`** - SAP Help-backed CSS, theme, Shadow DOM, and packaging guidance for generated widgets
 14. **`references/sac-import-packaging-lessons.md`** - SAC-hosted Resource-ZIP upload sequence, URL rules, ZIP hygiene, builder/tree state rules, self-contained component checks, final-artifact tests, and SAC error triage
 15. **`references/widget-discovery-intake.md`** - Widget role/data-source selection, attachment intake, Widget Brief, and hosted-tool safeguards
+16. **`references/production-widget-lessons.md`** - Tenant-observed upload failures, script method limits, integrity, isolation, bisection, and preflight guards
+17. **`references/property-lifecycle.md`** - SAC property normalization, script method boundaries, stateful editors, persistence, and structured data rules
+18. **`references/verification-and-artifacts.md`** - Built-bundle verification, test blind spots, mutation evidence, upload triage, and deterministic artifact checks
 
 ---
 
@@ -476,6 +522,10 @@ See **`references/widget-addon-guide.md`** for complete implementation.
 ## Version History
 
 **Unreleased**
+- Added property lifecycle and artifact verification guidance from the consolidated custom-widget lessons, including canonical coercion, stateful panel editing, runtime-use checks, real-browser boundaries, and deterministic final-package checks
+- Clarified hosting-mode URL validation, dangerous Unicode/control-code-point scanning, declared-locale handling, and missing-tool verification outcomes
+- Added production audit lessons for control-character upload failures, property-only Analytics Designer method bodies, required integrity states, opaque-error bisection, isolated icons/fonts, bookmark risks, and behavioral preflight checks
+- Corrected JSON method guidance so manifest method bodies do not call web component internals
 - Added an enterprise-safe `templates/local-builder/` scaffold for local widget metadata, property/feed configuration, and SAC two-file artifact export
 - Added `templates/builder-panel.js` so builder panel generation has a bundled self-contained template
 - Added local builder validation coverage without advancing `last_verified`; live SAC upload/runtime validation remains pending
