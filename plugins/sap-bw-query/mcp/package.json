@@ -10,7 +10,7 @@
     "@modelcontextprotocol/sdk": "1.30.0"
   },
   "devDependencies": {
-    "esbuild": "0.28.1"
+    "esbuild": "0.28.2"
   },
   "overrides": {
     "ip-address": "10.3.1"
