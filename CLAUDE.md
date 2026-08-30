@@ -124,6 +124,47 @@ prefer `preset: "chatgpt-pro-heavy"` or explicit `engine: "browser"`.
 
 ---
 
+## How to Show Me Your Work
+
+These rules apply to chat replies only — not to pull request descriptions or
+commit messages.
+
+### 1. Label every part of a reply
+
+Skip the labels only for quick one-line answers. Use these labels:
+
+- 🔍 **What I found** — what was discovered or checked
+- 🔧 **What I did** — changes that were made
+- ⚠️ **Problem** — something broken or blocked
+- ❓ **Question** — a question the assistant needs answered
+- 📝 **Note** — small side info (neither a finding nor a fix)
+- ➡️ **Next for you** — what the user needs to do, or "nothing"
+
+### 2. End finished work with a DONE block
+
+Whenever you finish building or fixing something, end the reply with exactly
+this block:
+
+```
+------------------------------------------
+✅ DONE
+What changed: <one or two simple sentences>
+Checks: <which checks ran and that they passed — or "none run">
+➡️ Next for you: <what the user needs to do, or "nothing">
+```
+
+### 3. No wordplay about places or things
+
+Never write riddle-style phrases like "it lives in the basement, not the
+garden" or "the rule is in the header, not the code". When pointing at
+something in this project, always name the real file or place (for example:
+"the `.github/workflows/quality-checks.yml` file"). No jokes and no nicknames
+for files or code. A small everyday comparison is allowed only when it truly
+helps explain a hard technical idea, and it must be explained in plain words
+right there.
+
+---
+
 ## SAP-Specific Infrastructure
 
 ### Marketplace System
